@@ -7,7 +7,7 @@ cd B-CPP-500-LYN-5-1-rtype-keziah.picq
 
 sudo pacman -Syu cmake
 
-mkdir client/build server/build
+mkdir client/build server/build engine/build
 
 ##### Build client:
 
@@ -22,3 +22,10 @@ cd server/build
 cmake ..
 make
 ./r-type_server
+
+##### Build engine:
+
+cd engine/build
+cmake ..
+make
+./r-type_engine
