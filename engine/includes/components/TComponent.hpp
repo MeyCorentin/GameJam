@@ -11,7 +11,7 @@ class TComponent: public TComponentBase {
     public:
         TComponent(T n) : value(n) {}
 
-        T getValue() {
+        T &getValue() {
             return value;
         }
 
