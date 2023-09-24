@@ -23,9 +23,19 @@ cmake ..
 make
 ./r-type_server
 
-##### Build engine:
+##### [Build engine](engine/README.md):
 
 cd engine/build
 cmake ..
 make
 ./r-type_engine
+
+##### INSTALL DOXYGENE
+
+git clone https://github.com/doxygen/doxygen.git
+cd doxygen
+mkdir build
+cd build
+cmake -G "Unix Makefiles" ..
+make
+make install
