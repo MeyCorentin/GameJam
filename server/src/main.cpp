@@ -1,7 +1,28 @@
+#include <iostream>
+
 #include "../include/UDPserver.hpp"
+#include "../includes/main.hpp"
 
 int main(int ac, char **av)
 {
+    BinaryProtocole proto;
+
+    unsigned int i = 1;
+    char *c = (char*)&i;
+
+    if (proto.isLittleEndian(c))
+        std::cout << "Little Endian" << std::endl;
+    else
+        std::cout << "Big Endian" << std::endl;
+
+    i = proto.bigToLittleEndian(i);
+    char *b = (char*)&i;
+
+    if (proto.isLittleEndian(b))
+        std::cout << "Little Endian" << std::endl;
+    else
+        std::cout << "Big Endian" << std::endl;
+
     if (ac != 2) {
         std::cerr << "Usage: server <port>\n";
         return 1;

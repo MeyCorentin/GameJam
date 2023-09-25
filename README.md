@@ -14,11 +14,15 @@ mkdir client/build server/build
 cd client/build
 cmake ..
 make
-./r-type_client
+./r-type_client <host> <port>
+
+EXEMPLE : ./r-type_client 127.0.0.1 8001
 
 ##### Build server:
 
 cd server/build
 cmake ..
 make
-./r-type_server
+./r-type_server <port>
+
+EXEMPLE : ./r-type_server 8001
