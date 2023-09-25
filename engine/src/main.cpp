@@ -8,7 +8,7 @@
 #include "../includes/components/Player.hpp"
 #include "../includes/components/Sprite.hpp"
 #include "../includes/components/Position.hpp"
-#include "../includes/scene/TScene.hpp"
+#include "../includes/scene/SceneBuilder.hpp"
 #include "../includes/components/TComponentBase.hpp"
 #include "../includes/main.hpp"
 
@@ -24,17 +24,28 @@ int main(int argc, char **argv)
     std::shared_ptr<TSystem> SDisplay = std::make_shared<DisplaySystem>();
     std::shared_ptr<TSystem> SInput = std::make_shared<InputSystem>();
 
-
     std::shared_ptr<Player<bool>> CPlayer = std::make_shared<Player<bool>>(true);
     std::shared_ptr<Sprite<sf::Sprite>> CSprite = std::make_shared<Sprite<sf::Sprite>>(sprite);
     std::shared_ptr<Life<int>> CLife = std::make_shared<Life<int>>(100);
     std::shared_ptr<Position<std::pair<int, int>>> CPosition = std::make_shared<Position<std::pair<int, int>>>(std::pair(50, 50));
 
 
-    std::shared_ptr<TEntity> EPlayer = std::make_shared<TEntity>(1, std::vector<std::shared_ptr<TComponentBase>>{
-        CSprite, CLife, CPosition, CPlayer
-    });
-    TScene scene({SHit, SPosition, SDisplay, SInput}, {EPlayer});
+    EntityBuilder entityBuilder(1);
+    entityBuilder.addComponent(CSprite)
+        .addComponent(CLife)
+        .addComponent(CPosition)
+        .addComponent(CPlayer);
+
+    std::shared_ptr<TEntity> EPlayer = entityBuilder.build();
+
+    SceneBuilder sceneBuilder;
+    sceneBuilder.addSystem(SHit)
+                .addSystem(SPosition)
+                .addSystem(SDisplay)
+                .addSystem(SInput)
+                .addEntity(EPlayer);
+
+    TScene scene = sceneBuilder.build();
     scene.run();
     return 0;
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../main.hpp"
-#include "../entity/TEntity.hpp"
+#include "../entity/EntityBuilder.hpp"
 #include "../system/TSystem.hpp"
 
 class TScene {
@@ -14,7 +14,7 @@ class TScene {
         double targetFrameTime = (1.0 / 60);
 
     public:
-        TScene(std::initializer_list<std::shared_ptr<TSystem>> systemList, std::initializer_list<std::shared_ptr<TEntity>> entityList)
+        TScene(std::vector<std::shared_ptr<TSystem>> systemList, std::vector<std::shared_ptr<TEntity>> entityList)
             : systems(systemList), entities(entityList) {
                 for (int i = 0; i < sf::Keyboard::KeyCount; ++i) {
                     keyStates[static_cast<sf::Keyboard::Key>(i)] = false;
@@ -34,12 +34,10 @@ class TScene {
                 {
                     if (event.type == sf::Event::Closed)
                         window.close();
-                    if (event.type == sf::Event::KeyPressed) {
+                    if (event.type == sf::Event::KeyPressed)
                         keyStates[event.key.code] = true;
-                    }
-                    if (event.type == sf::Event::KeyReleased) {
+                    if (event.type == sf::Event::KeyReleased)
                         keyStates[event.key.code] = false;
-                    }
                 }
                 auto startTime = std::chrono::high_resolution_clock::now();
                 inputs[0] = keyStates[sf::Keyboard::Z];
