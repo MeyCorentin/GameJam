@@ -1,4 +1,4 @@
-#include "../include/UDPclient.hpp"
+#include "../includes/UDPclient.hpp"
 
 int main(int ac, char **av)
 {
@@ -12,13 +12,9 @@ int main(int ac, char **av)
 
         UDPClient client(io_context, av[1], std::stoi(av[2]));
         std::cout << "Client running" << std::endl;
+        client.start_listening();
+        client.update_datas();
 
-        std::string message;
-        while (true) {
-            io_context.poll();
-            std::getline(std::cin, message);
-            client.send(message);
-        }
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }

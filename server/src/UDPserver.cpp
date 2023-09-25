@@ -1,4 +1,4 @@
-#include "../include/UDPserver.hpp"
+#include "../includes/UDPserver.hpp"
 
 UDPServer::UDPServer(boost::asio::io_context& io_context, unsigned short port)
     : io_context_(io_context), socket_(io_context, udp::endpoint(udp::v4(), port))
@@ -27,7 +27,8 @@ void UDPServer::read_data()
                 this->clients_[this->remote_endpoint_] = true;
                 std::string receivedData(this->recv_buffer_.data(), bytes_recvd);
                 std::cout << "Received: " << receivedData << std::endl;
-                this->socket_.send_to(boost::asio::buffer("ok"), this->remote_endpoint_);
+                this->send_to_all(receivedData);
+
             }
             read_data();
         });

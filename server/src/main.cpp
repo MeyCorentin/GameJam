@@ -1,6 +1,3 @@
-#include <iostream>
-
-#include "../include/UDPserver.hpp"
 #include "../includes/main.hpp"
 
 int main(int ac, char **av)

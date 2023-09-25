@@ -14,9 +14,10 @@ public:
 
     void send(const std::string& message);
     void start_listening();
+    void read_data();
+    void update_datas();
 
 private:
-    void read_data();
 
     boost::asio::io_context& io_context_;
     udp::socket socket_;
