@@ -31,3 +31,19 @@ uint32_t BinaryProtocole::bigToLittleEndian(uint32_t value)
     res = b0 | b1 | b2 | b3;
     return res;
 }
+
+uint32_t BinaryProtocole::IntToBinary(int value)
+{
+    uint32_t res;
+
+    return res;
+}
+
+int BinaryProtocole::BinaryToInt(uint32_t value)
+{
+    int res;
+
+
+
+    return res;
+}
