@@ -15,7 +15,7 @@
 int main(int argc, char **argv)
 {
     sf::Texture texture;
-    texture.loadFromFile("../../sprites/test.gif");
+    texture.loadFromFile("../sprites/test.gif");
     sf::Sprite sprite;
     sprite.setTexture(texture);
 
@@ -28,7 +28,8 @@ int main(int argc, char **argv)
     std::shared_ptr<Player<bool>> CPlayer = std::make_shared<Player<bool>>(true);
     std::shared_ptr<Sprite<sf::Sprite>> CSprite = std::make_shared<Sprite<sf::Sprite>>(sprite);
     std::shared_ptr<Life<int>> CLife = std::make_shared<Life<int>>(100);
-    std::shared_ptr<Position<std::pair<int, int>>> CPosition = std::make_shared<Position<std::pair<int, int>>>(std::pair(50, 50));
+    auto CPosition = std::make_shared<Position<std::pair<int, int>>>(std::pair<int, int>(50, 50));
+
 
 
     std::shared_ptr<TEntity> EPlayer = std::make_shared<TEntity>(1, std::vector<std::shared_ptr<TComponentBase>>{
