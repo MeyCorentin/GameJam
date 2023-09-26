@@ -12,3 +12,4 @@ target_compile_features(r-type_engine PRIVATE cxx_std_11)
 
 # Link SFML libraries
 target_link_libraries(r-type_engine sfml-graphics sfml-window sfml-system)
+
