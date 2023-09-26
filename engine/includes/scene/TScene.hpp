@@ -46,6 +46,7 @@ class TScene {
                 inputs[3] = keyStates[sf::Keyboard::D];
                 for (const auto& system : systems)
                     system->compute(entities, window, inputs);
+        
                 auto endTime =  std::chrono::high_resolution_clock::now();
                 auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
                 if (elapsedTime < targetFrameTime) {

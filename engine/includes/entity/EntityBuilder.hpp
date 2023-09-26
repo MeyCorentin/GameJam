@@ -13,9 +13,13 @@ public:
         entity = std::make_shared<TEntity>(id , std::vector<std::shared_ptr<TComponentBase>>());
     }
 
-    template <typename ComponentType>
-    EntityBuilder& addComponent(std::shared_ptr<ComponentType> component) {
-        entity->components.push_back(component);
+    template <typename T>
+    EntityBuilder& addComponent(std::shared_ptr<TComponentBase> component, T value) {
+        auto concreteComponent = std::dynamic_pointer_cast<TComponent<T>>(component);
+        if (concreteComponent) {
+            concreteComponent->setValue(value);
+            entity->components.push_back(component);
+        }
         return *this;
     }
 

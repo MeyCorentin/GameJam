@@ -20,6 +20,7 @@ public:
      * @param n The initial life value.
      */
     Life(T n) : TComponent<T>(n) {}
+    Life() : TComponent<T>() {}
 
     /**
      * @brief Get the type information of the Life component.
@@ -30,5 +31,9 @@ public:
      */
     const std::type_info& getType() const override {
         return typeid(Life);
+    }
+
+    std::shared_ptr<TComponentBase> clone() const override {
+        return std::make_shared<Life>(*this);
     }
 };
