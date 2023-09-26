@@ -33,7 +33,6 @@ public:
             std::shared_ptr<Life<int>> lifeComp = entity->template getComponent<Life<int>>();
             int currentLife = lifeComp->getValue();
             lifeComp->setValue(currentLife - 1);
-            std::cout << "Entity :" << entity->getId() << " a " << lifeComp->getValue() << " hp restant" << std::endl;
         }
     }
 };

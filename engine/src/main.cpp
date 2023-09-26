@@ -8,8 +8,11 @@
 #include "../includes/components/Player.hpp"
 #include "../includes/components/Sprite.hpp"
 #include "../includes/components/Position.hpp"
-#include "../includes/scene/SceneBuilder.hpp"
 #include "../includes/components/TComponentBase.hpp"
+
+
+#include "../includes/scene/SceneBuilder.hpp"
+#include "../includes/scene/SceneDirector.hpp"
 #include "../includes/main.hpp"
 
 int main(int argc, char **argv)
@@ -52,6 +55,8 @@ int main(int argc, char **argv)
                 .addSystem(SInput)
                 .addEntity(EPlayer)
                 .addEntity(EPlayer2);
+
+    SceneDirector SceneDirector("../scene_test.json");
 
     TScene scene = sceneBuilder.build();
     scene.run();

@@ -11,3 +11,8 @@
 - google-chrome html/index.html
 - firefox html/index.html
 - ...
+
+
+##### INSTALL NLOHMANN
+
+sudo pacman -S nlohmann-json

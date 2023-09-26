@@ -1,0 +1,44 @@
+{
+    "systems": [
+        {
+            "id": 1,
+            "type": "HitSystem"
+        },
+        {
+            "id": 2,
+            "type": "PositionSystem"
+        },
+        {
+            "id": 3,
+            "type": "DisplaySystem"
+        },
+        {
+            "id": 4,
+            "type": "InputSystem"
+        }
+    ],
+    "components": [
+        {
+            "id": 1,
+            "type": "Sprite"
+        },
+        {
+            "id": 2,
+            "type": "Life"
+        },
+        {
+            "id": 3,
+            "type": "Position"
+        },
+        {
+            "id": 4,
+            "type": "Player"
+        }
+    ],
+    "entities": [
+        {
+            "id": 1,
+            "components": [1, 2, 3, 4]
+        }
+    ]
+}
