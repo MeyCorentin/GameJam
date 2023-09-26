@@ -1,2 +1,4 @@
 build
 .vscode
+Dockerfile
+launch_shell.sh
