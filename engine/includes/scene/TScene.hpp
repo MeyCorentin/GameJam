@@ -1,11 +1,7 @@
 #pragma once
 
 #include "../main.hpp"
-<<<<<<< HEAD
 #include "../entity/EntityBuilder.hpp"
-=======
-#include "../entity/TEntity.hpp"
->>>>>>> a5a4786374f43f10e1597baecd486ba09e0e679c
 #include "../system/TSystem.hpp"
 
 class TScene {
@@ -18,11 +14,7 @@ class TScene {
         double targetFrameTime = (1.0 / 60);
 
     public:
-<<<<<<< HEAD
         TScene(std::vector<std::shared_ptr<TSystem>> systemList, std::vector<std::shared_ptr<TEntity>> entityList)
-=======
-        TScene(std::initializer_list<std::shared_ptr<TSystem>> systemList, std::initializer_list<std::shared_ptr<TEntity>> entityList)
->>>>>>> a5a4786374f43f10e1597baecd486ba09e0e679c
             : systems(systemList), entities(entityList) {
                 for (int i = 0; i < sf::Keyboard::KeyCount; ++i) {
                     keyStates[static_cast<sf::Keyboard::Key>(i)] = false;
@@ -42,19 +34,10 @@ class TScene {
                 {
                     if (event.type == sf::Event::Closed)
                         window.close();
-<<<<<<< HEAD
                     if (event.type == sf::Event::KeyPressed)
                         keyStates[event.key.code] = true;
                     if (event.type == sf::Event::KeyReleased)
                         keyStates[event.key.code] = false;
-=======
-                    if (event.type == sf::Event::KeyPressed) {
-                        keyStates[event.key.code] = true;
-                    }
-                    if (event.type == sf::Event::KeyReleased) {
-                        keyStates[event.key.code] = false;
-                    }
->>>>>>> a5a4786374f43f10e1597baecd486ba09e0e679c
                 }
                 auto startTime = std::chrono::high_resolution_clock::now();
                 inputs[0] = keyStates[sf::Keyboard::Z];
@@ -63,10 +46,6 @@ class TScene {
                 inputs[3] = keyStates[sf::Keyboard::D];
                 for (const auto& system : systems)
                     system->compute(entities, window, inputs);
-<<<<<<< HEAD
-        
-=======
->>>>>>> a5a4786374f43f10e1597baecd486ba09e0e679c
                 auto endTime =  std::chrono::high_resolution_clock::now();
                 auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
                 if (elapsedTime < targetFrameTime) {
