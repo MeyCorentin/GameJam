@@ -14,7 +14,7 @@ class SceneDirector {
         std::shared_ptr<TSystem> createSystemFromConfig(const json& _systemConfig)
         {
             std::string type = _systemConfig["type"];
-            std::cout << "Load System: " << type << std::endl;
+            std::cout << type << std::endl;
             return SystemRegistry::instance().createSystem(type);
         }
 
@@ -39,6 +39,8 @@ class SceneDirector {
 
             if (!component)
                 return false;
+
+            std::cout << " - " << componentName << std::endl;
             if (value_type == "Sprite") {
                 auto allPtr = std::get<std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>>(value);
                 sceneBuilder.addSprite( allPtr.second);
@@ -84,8 +86,10 @@ class SceneDirector {
 
             file >> data;
             file.close();
+            std::cout << "------[LOAD SYSTEMS]-------" << std::endl;
             for (const auto& systemConfig : data["systems"])
                 sceneBuilder.addSystem(createSystemFromConfig(systemConfig));
+            std::cout << "------[LOAD ENTITIES]-------" << std::endl;
             for (const auto& entityConfig : data["entities"])
                 sceneBuilder.addEntity(createEntityFromConfig(entityConfig, data["components"]));
         }
