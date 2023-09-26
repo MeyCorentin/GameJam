@@ -20,25 +20,46 @@
     "components": [
         {
             "id": 1,
-            "type": "Sprite"
+            "type": "Sprite",
+            "value_type": "Sprite"
         },
         {
             "id": 2,
-            "type": "Life"
+            "type": "Life",
+            "value_type": "Int"
         },
         {
             "id": 3,
-            "type": "Position"
+            "type": "Position",
+            "value_type": "Pair"
         },
         {
             "id": 4,
-            "type": "Player"
+            "type": "Player",
+            "value_type": "Bool"
         }
     ],
     "entities": [
         {
             "id": 1,
-            "components": [1, 2, 3, 4]
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/test.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 50, "y": 50 }
+                },
+                {
+                    "component_id": 4,
+                    "value": true
+                }
+            ]
         }
     ]
 }

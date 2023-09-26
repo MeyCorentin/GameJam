@@ -6,26 +6,40 @@
 
 class TScene {
     private:
-        std::vector<std::shared_ptr<TEntity>>  entities;
+        std::vector<std::shared_ptr<TEntity>> entities;
         std::vector<std::shared_ptr<TSystem>> systems;
+        std::vector<std::shared_ptr<sf::Sprite>> sprites;
+        std::vector<std::shared_ptr<sf::Texture>> textures;
 
         std::unordered_map<sf::Keyboard::Key, bool> keyStates;
         bool running = true;
         double targetFrameTime = (1.0 / 60);
 
     public:
-        TScene(std::vector<std::shared_ptr<TSystem>> systemList, std::vector<std::shared_ptr<TEntity>> entityList)
-            : systems(systemList), entities(entityList) {
+        TScene( std::vector<std::shared_ptr<TSystem>> _systemList,
+                std::vector<std::shared_ptr<TEntity>> _entityList,
+                std::vector<std::shared_ptr<sf::Sprite>> _spriteList,
+                std::vector<std::shared_ptr<sf::Texture>> _textureList)
+            : systems(_systemList), entities(_entityList), sprites(_spriteList), textures(_textureList) {
                 for (int i = 0; i < sf::Keyboard::KeyCount; ++i) {
                     keyStates[static_cast<sf::Keyboard::Key>(i)] = false;
                 }
             }
 
+        std::vector<std::shared_ptr<TEntity>> getEntities()
+        {
+            return  entities;
+        }
+        std::vector<std::shared_ptr<TSystem>> getSystems()
+        {
+            return systems;
+        }
+
         void run() {
             sf::RenderWindow window(sf::VideoMode(1000, 1000), "R-Type");
             sf::Event event;
             std::vector<int> inputs = {0, 0, 0, 0};
-
+            std::cout << "[LAUNCH] Scene run" << std::endl;
             while (running)
             {
                 window.clear();

@@ -42,7 +42,6 @@ public:
     void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs) override {
         for (std::shared_ptr<TEntity>& entity : _entities) {
             std::pair<int, int> positionComp = entity->template getComponent<Position<std::pair<int, int>>>()->getValue();
-            // Perform operations on the Position component as needed.
         }
     }
 };

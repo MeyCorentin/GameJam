@@ -1,4 +1,9 @@
+#pragma once
+
 #include "SceneBuilder.hpp"
+#include "../parser/jsonParser.hpp"
+#include "SystemRegister.hpp"
+#include "ComponentRegister.hpp"
 
 class SceneDirector {
     private:
@@ -6,41 +11,87 @@ class SceneDirector {
         std::vector<std::shared_ptr<TSystem>> systems;
         std::vector<std::shared_ptr<TEntity>> entities;
 
-    void createSystemFromConfig(const json& systemConfig)
-    {
-        std::cout << "Create System" << std::endl;
-    }
+        std::shared_ptr<TSystem> createSystemFromConfig(const json& _systemConfig)
+        {
+            std::string type = _systemConfig["type"];
+            std::cout << "Load System: " << type << std::endl;
+            return SystemRegistry::instance().createSystem(type);
+        }
 
-    void createComponentFromConfig(const json& componentConfig)
-    {
-        std::cout << "Create Component" << std::endl;
+        const json& FindComponentConfigById(const json& _componentsConfig, int _id) {
+            int componentId;
+            static const json empty_json;
 
-    }
+            for (const auto& componentConfig : _componentsConfig)
+                if (componentConfig["id"] == _id)
+                    return componentConfig;
+            return empty_json;
+        }
 
-    void createEntityFromConfig(const json& entityConfig)
-    {
-        std::cout << "Create Entity" << std::endl;
 
-    }
+        bool processComponent(const json& _entityComponent, const json& _componentConfig, JsonParser& _parser, EntityBuilder& _entityBuilder)
+        {
+            std::string componentName = _componentConfig["type"];
+            std::string value_type = _componentConfig["value_type"];
+            json componentValue = _entityComponent["value"];
+            std::shared_ptr<TComponentBase> component = ComponentRegistry::instance().createComponent(componentName);
+            Variant value = _parser.parseValue(value_type, componentValue);
+
+            if (!component)
+                return false;
+            if (value_type == "Sprite") {
+                auto allPtr = std::get<std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>>(value);
+                sceneBuilder.addSprite( allPtr.second);
+                sceneBuilder.addTexture(allPtr.first);
+                _entityBuilder.addComponent(component,  allPtr.second);
+            } else if (value_type == "Int") {
+                _entityBuilder.addComponent(component, std::get<int>(value));
+            } else if (value_type == "Pair") {
+                _entityBuilder.addComponent(component, std::get<std::pair<int, int>>(value));
+            } else if (value_type == "Bool") {
+                _entityBuilder.addComponent(component, std::get<bool>(value));
+            } else {
+                std::cerr << "Unsupported component type: " << value_type << std::endl;
+                return false;
+            }
+            return true;
+        }
+
+        std::shared_ptr<TEntity> createEntityFromConfig(const json& _entityConfig, const json& _componentsConfig)
+        {
+            JsonParser parser;
+            int entityId = _entityConfig["id"];
+            EntityBuilder entityBuilder(entityId);
+            int componentId;
+
+            std::cout << "Create Entity: " << entityId << std::endl;
+            const json& entityComponents = _entityConfig["components"];
+            for (const auto& entityComponent : entityComponents) {
+                componentId = entityComponent["component_id"];
+                const json& componentConfig = FindComponentConfigById(_componentsConfig, componentId);
+                if (componentConfig.is_null())
+                    return entityBuilder.build();
+                if (!processComponent(entityComponent, componentConfig, parser, entityBuilder))
+                    return entityBuilder.build();
+            }
+            return entityBuilder.build();
+        }
+
     public:
-        SceneDirector(std::string file_path) { 
-                std::ifstream file(file_path);
-                json data;
-                file >> data;
-                file.close();
-                for (const auto& systemConfig : data["systems"]) {
-                    createSystemFromConfig(systemConfig);
-                }
-                for (const auto& componentConfig : data["components"]) {
-                    createComponentFromConfig(componentConfig);
-                }
+        SceneDirector(std::string _file_path) {
+            std::ifstream file(_file_path);
+            json data;
 
-                for (const auto& entityConfig : data["entities"]) {
-                    createEntityFromConfig(entityConfig);
-                }
+            file >> data;
+            file.close();
+            for (const auto& systemConfig : data["systems"])
+                sceneBuilder.addSystem(createSystemFromConfig(systemConfig));
+            for (const auto& entityConfig : data["entities"])
+                sceneBuilder.addEntity(createEntityFromConfig(entityConfig, data["components"]));
         }
 
         TScene constructScene() {
+            std::cout << "[CONSTRUCTOR] Scene construct" << std::endl;
             return sceneBuilder.build();
         }
 };

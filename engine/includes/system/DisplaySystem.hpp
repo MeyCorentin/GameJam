@@ -19,7 +19,7 @@ public:
     std::vector<std::shared_ptr<TEntity>> filter(const std::vector<std::shared_ptr<TEntity>>& _entities) override {
         std::vector<std::shared_ptr<TEntity>> filteredEntities;
         for (const std::shared_ptr<TEntity>& entity : _entities) {
-            if (entity->hasComponent(typeid(Sprite<sf::Sprite>)) &&
+            if (entity->hasComponent(typeid(Sprite<std::shared_ptr<sf::Sprite>>)) &&
                 entity->hasComponent(typeid(Position<std::pair<int, int>>))) {
                 filteredEntities.push_back(entity);
             }
@@ -39,13 +39,13 @@ public:
      */
     void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs) override {
         for (const std::shared_ptr<TEntity>& entity : _entities) {
-            sf::Sprite spriteComp = entity->template getComponent<Sprite<sf::Sprite>>()->getValue();
+            std::shared_ptr<sf::Sprite> spriteComp = entity->template getComponent<Sprite<std::shared_ptr<sf::Sprite>>>()->getValue();
             std::shared_ptr<Position<std::pair<int, int>>> positionComp = entity->template getComponent<Position<std::pair<int, int>>>();
             float xPosition = static_cast<float>(positionComp->getValue().first);
             float yPosition = static_cast<float>(positionComp->getValue().second);
 
-            spriteComp.setPosition(xPosition, yPosition);
-            _window.draw(spriteComp);
+            spriteComp->setPosition(xPosition, yPosition);
+            _window.draw(*spriteComp);
         }
     }
 };
