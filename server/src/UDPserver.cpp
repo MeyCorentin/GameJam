@@ -1,4 +1,4 @@
-#include "../includes/UDPserver.hpp"
+#include "../include/UDPserver.hpp"
 
 UDPServer::UDPServer(boost::asio::io_context& io_context, unsigned short port)
     : io_context_(io_context), socket_(io_context, udp::endpoint(udp::v4(), port))
@@ -8,13 +8,13 @@ UDPServer::UDPServer(boost::asio::io_context& io_context, unsigned short port)
 
 void UDPServer::start()
 {
-    read_data();
+    this->read_data();
 }
 
 void UDPServer::send_to_all(const std::string& message)
 {
-    for (const auto& [remote_endpoint_, _] : clients_) {
-        this->socket_.send_to(boost::asio::buffer(message), this->remote_endpoint_);
+    for (const auto& [client_endpoint, _] : clients_) {
+        this->socket_.send_to(boost::asio::buffer(message), client_endpoint);
     }
 }
 
@@ -30,7 +30,7 @@ void UDPServer::read_data()
                 this->send_to_all(receivedData);
 
             }
-            read_data();
+            this->read_data();
         });
 }
 

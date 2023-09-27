@@ -1,4 +1,4 @@
-#include "../includes/BinaryProtocole.hpp"
+#include "../include/BinaryProtocole.hpp"
 
 BinaryProtocole::BinaryProtocole()
 {
