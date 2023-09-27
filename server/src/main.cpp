@@ -2,20 +2,6 @@
 
 int main(int ac, char **av)
 {
-    BinaryProtocole proto;
-
-    BinaryProtocole::BinaryMessage msg = {type: 1, id: 0, x: 178, y: 789};
-
-    std::cout << "Before : " << msg.type << " | " << msg.id << " | " << msg.x << " | " << msg.y << std::endl;
-
-    std::vector<uint16_t> buffer = proto.ValueToBin(msg);
-
-    BinaryProtocole::BinaryMessage newMsg;
-
-    newMsg = proto.BinToValue(buffer);
-
-    std::cout << "After : " << newMsg.type << " | " << newMsg.id << " | " << newMsg.x << " | " << newMsg.y << std::endl;
-
     // unsigned int i = 1;
     // char *c = (char*)&i;
 

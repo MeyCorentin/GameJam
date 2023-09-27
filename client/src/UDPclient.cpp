@@ -7,23 +7,26 @@ UDPClient::UDPClient(boost::asio::io_context& io_context, const std::string& hos
     this->listening_thread_ = std::thread(&UDPClient::start_listening, this);
 }
 
-void UDPClient::send(const std::string& message)
+void UDPClient::send(BinaryProtocole::BinaryMessage msg)
 {
-    this->socket_.send_to(boost::asio::buffer(message), server_endpoint_);
+    this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), server_endpoint_);
 }
 
 void UDPClient::update_datas()
 {
     std::string message;
+    BinaryProtocole::BinaryMessage msg = {type: 1, id: 1, x: 1920, y:1080};
 
     while (true) {
         std::getline(std::cin, message);
-        this->send(message);
+        this->send(msg);
     }
 }
 
 void UDPClient::start_listening()
 {
+    const std::size_t buffer_size = 1024;
+    this->recv_buffer_.resize(buffer_size);
     this->read_data();
     this->io_context_.run();
 }
@@ -34,7 +37,8 @@ void UDPClient::read_data()
         boost::asio::buffer(this->recv_buffer_), this->server_endpoint_,
         [this](boost::system::error_code ec, std::size_t bytes_recvd) {
             if (!ec && bytes_recvd > 0) {
-                std::cout << "Received from server: " << std::string(this->recv_buffer_.begin(), this->recv_buffer_.begin() + bytes_recvd) << std::endl;
+                BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
+                std::cout << "Received from server : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << std::endl;
             }
             this->read_data();
         });

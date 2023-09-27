@@ -16,7 +16,7 @@ public:
     ~UDPServer();
 
     void start();
-    void send_to_all(const std::string& message);
+    void send_to_all(BinaryProtocole::BinaryMessage msg);
 
 private:
     void read_data();
@@ -24,7 +24,7 @@ private:
     boost::asio::io_context& io_context_;
     udp::socket socket_;
     udp::endpoint remote_endpoint_;
-    boost::array<char, 1024> recv_buffer_;
+    std::vector<uint16_t> recv_buffer_;
     std::map<udp::endpoint, bool> clients_;
     BinaryProtocole protocole;
 };

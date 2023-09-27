@@ -8,13 +8,15 @@ UDPServer::UDPServer(boost::asio::io_context& io_context, unsigned short port)
 
 void UDPServer::start()
 {
+    const std::size_t buffer_size = 1024;
+    this->recv_buffer_.resize(buffer_size);
     this->read_data();
 }
 
-void UDPServer::send_to_all(const std::string& message)
+void UDPServer::send_to_all(BinaryProtocole::BinaryMessage msg)
 {
     for (const auto& [client_endpoint, _] : clients_) {
-        this->socket_.send_to(boost::asio::buffer(message), client_endpoint);
+        this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), client_endpoint);
     }
 }
 
@@ -25,9 +27,9 @@ void UDPServer::read_data()
         [this](boost::system::error_code ec, std::size_t bytes_recvd) {
             if (!ec && bytes_recvd > 0) {
                 this->clients_[this->remote_endpoint_] = true;
-                std::string receivedData(this->recv_buffer_.data(), bytes_recvd);
-                std::cout << "Received: " << receivedData << std::endl;
-                this->send_to_all(receivedData);
+                BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
+                std::cout << "Received : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << std::endl;
+                this->send_to_all(msg);
 
             }
             this->read_data();
