@@ -1,4 +1,4 @@
-# INSTAL
+# INSTALL
 
 ### How to install from repository
 
@@ -9,6 +9,7 @@
 
  ### How to launch
 
+- cd engine/build
 - ./r-type_engine
 
 
