@@ -4,21 +4,37 @@ int main(int ac, char **av)
 {
     BinaryProtocole proto;
 
-    unsigned int i = 1;
-    char *c = (char*)&i;
+    BinaryProtocole::BinaryMessage msg;
+    msg.type = 1;
+    msg.id = 0;
+    msg.x = 178;
+    msg.y = 789;
 
-    if (proto.isLittleEndian(c))
-        std::cout << "Little Endian" << std::endl;
-    else
-        std::cout << "Big Endian" << std::endl;
+    std::cout << "Before : " << msg.type << " | " << msg.id << " | " << msg.x << " | " << msg.y << std::endl;
 
-    i = proto.bigToLittleEndian(i);
-    char *b = (char*)&i;
+    std::vector<uint16_t> buffer = proto.ValueToBin(msg);
 
-    if (proto.isLittleEndian(b))
-        std::cout << "Little Endian" << std::endl;
-    else
-        std::cout << "Big Endian" << std::endl;
+    BinaryProtocole::BinaryMessage newMsg;
+
+    newMsg = proto.BinToValue(buffer);
+
+    std::cout << "After : " << newMsg.type << " | " << newMsg.id << " | " << newMsg.x << " | " << newMsg.y << std::endl;
+
+    // unsigned int i = 1;
+    // char *c = (char*)&i;
+
+    // if (proto.isLittleEndian(c))
+    //     std::cout << "Little Endian" << std::endl;
+    // else
+    //     std::cout << "Big Endian" << std::endl;
+
+    // i = proto.bigToLittleEndian(i);
+    // char *b = (char*)&i;
+
+    // if (proto.isLittleEndian(b))
+    //     std::cout << "Little Endian" << std::endl;
+    // else
+    //     std::cout << "Big Endian" << std::endl;
 
     if (ac != 2) {
         std::cerr << "Usage: server <port>\n";

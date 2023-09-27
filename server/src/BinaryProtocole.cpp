@@ -32,18 +32,41 @@ uint32_t BinaryProtocole::bigToLittleEndian(uint32_t value)
     return res;
 }
 
-uint32_t BinaryProtocole::IntToBinary(int value)
+std::vector<uint16_t> BinaryProtocole::ValueToBin(BinaryProtocole::BinaryMessage &message)
 {
-    uint32_t res;
+    std::vector<uint16_t> buffer;
 
-    return res;
+    buffer.push_back(message.type);
+    buffer.push_back(message.id);
+    buffer.push_back(message.x);
+    buffer.push_back(message.y);
+
+    // for (uint16_t value : buffer)
+    //     std::cout << value << std::endl;
+
+    return buffer;
 }
 
-int BinaryProtocole::BinaryToInt(uint32_t value)
+BinaryProtocole::BinaryMessage BinaryProtocole::BinToValue(const std::vector<uint16_t> buffer)
 {
-    int res;
+    BinaryProtocole::BinaryMessage message;
 
+    int cmpt = 0;
 
+    for (uint16_t value : buffer) {
+        // std::cout << value << std::endl;
+        switch (cmpt) {
+            case 0:
+                message.type = value;
+            case 1:
+                message.id = value;
+            case 2:
+                message.x = value;
+            case 3:
+                message.y = value;
+        }
+        cmpt += 1;
+    }
 
-    return res;
+    return message;
 }
