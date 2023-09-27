@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(r-type)
 
-add_executable(r-type_client src/main.cpp src/UDPclient.cpp)
+add_executable(r-type_client src/main.cpp src/UDPclient.cpp ../server/src/BinaryProtocole.cpp)
 
 if(APPLE)
     find_package(Boost 1.82 REQUIRED COMPONENTS system)

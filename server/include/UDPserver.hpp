@@ -6,6 +6,8 @@
 #include <boost/array.hpp>
 #include <map>
 
+#include "BinaryProtocole.hpp"
+
 using boost::asio::ip::udp;
 
 class UDPServer {
@@ -24,6 +26,7 @@ private:
     udp::endpoint remote_endpoint_;
     boost::array<char, 1024> recv_buffer_;
     std::map<udp::endpoint, bool> clients_;
+    BinaryProtocole protocole;
 };
 
 #endif

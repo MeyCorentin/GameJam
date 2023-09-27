@@ -5,6 +5,7 @@
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 #include <thread>
+#include "../../server/include/BinaryProtocole.hpp"
 
 using boost::asio::ip::udp;
 
@@ -25,6 +26,7 @@ private:
     udp::endpoint server_endpoint_;
     boost::array<char, 1024> recv_buffer_;
     std::thread listening_thread_;
+    BinaryProtocole protocole;
 };
 
 #endif

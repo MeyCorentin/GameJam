@@ -4,11 +4,7 @@ int main(int ac, char **av)
 {
     BinaryProtocole proto;
 
-    BinaryProtocole::BinaryMessage msg;
-    msg.type = 1;
-    msg.id = 0;
-    msg.x = 178;
-    msg.y = 789;
+    BinaryProtocole::BinaryMessage msg = {type: 1, id: 0, x: 178, y: 789};
 
     std::cout << "Before : " << msg.type << " | " << msg.id << " | " << msg.x << " | " << msg.y << std::endl;
 
