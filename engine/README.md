@@ -21,7 +21,7 @@ Shortened as ECS, the Entity Component System is an architectural design pattern
 - Support for Linux
 - Support for SFML
 - Create custom System and Component 
--Create entities in json files with custom components
+- Create entities in json files with custom components
 - Generate entire scene from json file
 
 
