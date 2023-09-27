@@ -1,41 +1,30 @@
-# R-Type Project
 
-### How to build project ?
+# ENGINE
 
-git clone git@github.com:EpitechPromo2026/B-CPP-500-LYN-5-1-rtype-keziah.picq.git
-cd B-CPP-500-LYN-5-1-rtype-keziah.picq
+### Overview
 
-sudo pacman -Syu cmake
+Engine ecs library.
 
-mkdir client/build server/build engine/build
+**Disclaimer:** this module is still in development.
 
-##### Build client:
+### What is ECS
+Shortened as ECS, the Entity Component System is an architectural design pattern that allow to organize the data in a way so that the workload can be split into small and easy programs.
 
-cd client/build
-cmake ..
-make
-./r-type_client
+### Getting Started
 
-##### Build server:
+- [Install Engine](docs/INSTALL.md)
+- [Engine Documentation](docs/DOCUMENTATION.md)
+-  [Development Guide](docs/DOCUMENTATION.md)
 
-cd server/build
-cmake ..
-make
-./r-type_server
+### Features
 
-##### [Build engine](engine/README.md):
+- Support for Linux
+- Support for SFML
+- Create custom System and Component 
+-Create entities in json files with custom components
+- Generate entire scene from json file
 
-cd engine/build
-cmake ..
-make
-./r-type_engine
 
-##### INSTALL DOXYGENE
+### Exemple
 
-git clone https://github.com/doxygen/doxygen.git
-cd doxygen
-mkdir build
-cd build
-cmake -G "Unix Makefiles" ..
-make
-make install
+You can find some example projects [here: engine/examples](https://github.com/EpitechPromo2026/B-CPP-500-LYN-5-1-rtype-keziah.picq/engine/exampless)
