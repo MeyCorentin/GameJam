@@ -6,8 +6,6 @@ project(r-type)
 
 add_executable(r-type_client src/main.cpp src/UDPclient.cpp ../server/src/BinaryProtocole.cpp)
 
-if(APPLE)
-    find_package(Boost 1.82 REQUIRED COMPONENTS system)
-    include_directories(${Boost_INCLUDE_DIRS})
-    target_link_libraries(r-type_client ${Boost_LIBRARIES})
-endif()
+find_package(Boost REQUIRED COMPONENTS system)
+include_directories(${Boost_INCLUDE_DIRS})
+target_link_libraries(r-type_client ${Boost_LIBRARIES})
