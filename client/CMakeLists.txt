@@ -8,4 +8,4 @@ add_executable(r-type_client src/main.cpp src/UDPclient.cpp ../server/src/Binary
 
 find_package(Boost REQUIRED COMPONENTS system)
 include_directories(${Boost_INCLUDE_DIRS})
-target_link_libraries(r-type_client ${Boost_LIBRARIES})
+target_link_libraries(r-type_client ${Boost_LIBRARIES} pthread)

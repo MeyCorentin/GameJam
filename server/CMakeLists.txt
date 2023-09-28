@@ -8,4 +8,4 @@ add_executable(r-type_server src/main.cpp src/UDPserver.cpp src/BinaryProtocole.
 
 find_package(Boost REQUIRED COMPONENTS system)
 include_directories(${Boost_INCLUDE_DIRS})
-target_link_libraries(r-type_server ${Boost_LIBRARIES})
+target_link_libraries(r-type_server ${Boost_LIBRARIES} pthread)
