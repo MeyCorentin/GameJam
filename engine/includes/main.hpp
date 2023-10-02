@@ -14,5 +14,5 @@
 #include <any>
 #include <variant>
 
-using Variant = std::variant<std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>, int, std::pair<int, int>, bool>;
+using Variant = std::variant<std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>, int, std::pair<double, double>, std::pair<int, int>, bool, double>;
 using json = nlohmann::json;

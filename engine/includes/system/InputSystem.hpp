@@ -18,7 +18,7 @@ public:
     std::vector<std::shared_ptr<TEntity>> filter(const std::vector<std::shared_ptr<TEntity>>& _entities) override {
         std::vector<std::shared_ptr<TEntity>> filteredEntities;
         for (const std::shared_ptr<TEntity>& entity : _entities) {
-            if (entity->hasComponent(typeid(Player<bool>)) && entity->hasComponent(typeid(Position<std::pair<int, int>>))) {
+            if (entity->hasComponent(typeid(Player<bool>)) && entity->hasComponent(typeid(Position<std::pair<double, double>>))) {
                 filteredEntities.push_back(entity);
             }
         }
@@ -37,7 +37,7 @@ public:
      */
     void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int>  _inputs) override {
         for (const std::shared_ptr<TEntity>& entity : _entities) {
-            std::shared_ptr<Position<std::pair<int, int>>> positionComp = entity->template getComponent<Position<std::pair<int, int>>>();
+            std::shared_ptr<Position<std::pair<double, double>>> positionComp = entity->template getComponent<Position<std::pair<double, double>>>();
             if (_inputs[0] == 1)
                 positionComp->setValue(std::make_pair(positionComp->getValue().first, positionComp->getValue().second - 5));
             if (_inputs[1] == 1)

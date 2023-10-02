@@ -48,10 +48,14 @@ class SceneDirector {
                 _entityBuilder.addComponent(component,  allPtr.second);
             } else if (value_type == "Int") {
                 _entityBuilder.addComponent(component, std::get<int>(value));
-            } else if (value_type == "Pair") {
+            } else if (value_type == "PairDouble") {
+                _entityBuilder.addComponent(component, std::get<std::pair<double, double>>(value));
+            } else if (value_type == "PairInt") {
                 _entityBuilder.addComponent(component, std::get<std::pair<int, int>>(value));
             } else if (value_type == "Bool") {
                 _entityBuilder.addComponent(component, std::get<bool>(value));
+            } else if (value_type == "Double") {
+                _entityBuilder.addComponent(component, std::get<double>(value));
             } else {
                 std::cerr << "Unsupported component type: " << value_type << std::endl;
                 return false;

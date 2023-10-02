@@ -35,7 +35,25 @@ public:
         return intValue;
     }
 
-    static Variant parsePairValue(const json& value) {
+    static Variant parseDoubleValue(const json& value) {
+
+        double doubleValue = value;
+        return doubleValue;
+    }
+
+    static Variant parsePairDoubleValue(const json& value) {
+        if (!value.is_object() || !value.contains("x") || !value.contains("y")) {
+            std::cerr << "Invalid value for Pair type." << std::endl;
+            return Variant();
+        }
+
+        double x = value["x"];
+        double y = value["y"];
+        std::pair<double, double> pairValue = std::make_pair(x, y);
+        return pairValue;
+    }
+
+    static Variant parsePairIntValue(const json& value) {
         if (!value.is_object() || !value.contains("x") || !value.contains("y")) {
             std::cerr << "Invalid value for Pair type." << std::endl;
             return Variant();
@@ -62,10 +80,14 @@ public:
             return parseSpriteValue(value);
         } else if (valueType == "Int") {
             return parseIntValue(value);
-        } else if (valueType == "Pair") {
-            return parsePairValue(value);
+        } else if (valueType == "PairDouble") {
+            return parsePairDoubleValue(value);
+        } else if (valueType == "PairInt") {
+            return parsePairIntValue(value);
         } else if (valueType == "Bool") {
             return parseBoolValue(value);
+        } else if (valueType == "Double") {
+            return parseDoubleValue(value);
         }
 
         std::cerr << "Unsupported value type: " << valueType << std::endl;
