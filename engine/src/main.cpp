@@ -6,6 +6,7 @@ int main(int argc, char **argv)
 {
     Ecs _ecs(argc, argv);
     _ecs.create();
+
     while(true)
     {
         auto startTime = std::chrono::high_resolution_clock::now();

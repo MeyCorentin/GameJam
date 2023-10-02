@@ -29,9 +29,18 @@ class Ecs
 {
     TScene scene;
     public:
+    
         Ecs(){}
         Ecs(int ac, char **av)
         {
+        };
+        void update()
+        {
+            scene.update();
+        }
+        void create()
+        {
+
             SystemRegistry::instance().registerSystem("CollisionSystem", []() { return std::make_shared<CollisionSystem>(); });
             SystemRegistry::instance().registerSystem("HitSystem", []() { return std::make_shared<HitSystem>(); });
             SystemRegistry::instance().registerSystem("PositionSystem", []() { return std::make_shared<PositionSystem>(); });
@@ -50,13 +59,7 @@ class Ecs
             ComponentRegistry::instance().registerComponent("Player", []() { return std::make_shared<Player<bool>>(); });
             ComponentRegistry::instance().registerComponent("Server", []() { return std::make_shared<Server<bool>>(); });
             ComponentRegistry::instance().registerComponent("Client", []() { return std::make_shared<Client<bool>>(); });
-        };
-        void update()
-        {
-            scene.update();
-        }
-        void create()
-        {
+
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../scene_test.json");
 
