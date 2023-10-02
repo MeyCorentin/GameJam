@@ -31,8 +31,8 @@ void UDPServer::read_data()
                 std::cout << "Received: " << receivedData << std::endl;
                 this->socket_.send_to(boost::asio::buffer("ok"), this->remote_endpoint_);
             }
-            read_data();
-        });
+        read_data();
+    });
 }
 
 void UDPServer::start()
@@ -45,7 +45,6 @@ void UDPServer::start()
     t2.join();
 }
 
-
 void UDPServer::send_to_all(const std::string& message)
 {
     Ecs _ecs;
@@ -55,7 +54,6 @@ void UDPServer::send_to_all(const std::string& message)
         _ecs.update();
     }
 }
-
 
 UDPServer::~UDPServer()
 {
