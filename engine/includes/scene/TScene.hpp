@@ -33,7 +33,7 @@ class TScene {
                 secondClock = std::shared_ptr<sf::Clock>(new sf::Clock());
                 tick = std::shared_ptr<sf::Text>(new sf::Text());
                 font = std::shared_ptr<sf::Font>(new sf::Font());
-                font->loadFromFile("../sources/fonts/arial.ttf");
+                font->loadFromFile("../../rtype/sources/fonts/arial.ttf");
                 tick->setPosition(0, 0);
                 tick->setFillColor(sf::Color::White);
                 tick->setCharacterSize(14),

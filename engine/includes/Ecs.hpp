@@ -61,7 +61,7 @@ class Ecs
             ComponentRegistry::instance().registerComponent("Client", []() { return std::make_shared<Client<bool>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
-            SceneDirector SceneDirector("../scene_test.json");
+            SceneDirector SceneDirector("../../rtype/scene_test.json");
 
             scene = SceneDirector.constructScene();
         }
