@@ -97,11 +97,12 @@ public:
     }
 
     void createEntity(std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures, int id, std::shared_ptr<Position<std::pair<double, double>>> positionComp) {
-        std::string filepath = "../scene_test.json";
+        std::string filepath = "../../rtype/scene_test.json";
         std::ifstream file(filepath);
         json data;
         file >> data;
         file.close();
+        std::cout << "New entity created!" << std::endl;
         for (const auto& entityConfig : data["entities"]) {
             if (entityConfig["id"] == id) {
                 std::shared_ptr<TEntity> newEntity = createEntityFromConfig(entityConfig, data["components"], sprites, textures);
@@ -123,7 +124,7 @@ public:
      * @param _window SFML window (not used in this function).
      * @param _inputs Vector of integers representing player input.
      */
-    void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
+    void execute(std::vector<std::shared_ptr<TEntity>>& _entities, std::shared_ptr<sf::RenderWindow> _window, std::vector<int> _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
         for (const std::shared_ptr<TEntity>& entity : _entities) {
             std::shared_ptr<Position<std::pair<double, double>>> positionComp = entity->template getComponent<Position<std::pair<double, double>>>();
             if (_inputs[0] == 1)

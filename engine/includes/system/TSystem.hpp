@@ -26,7 +26,7 @@ class TSystem {
      * @param _window Game rendering window.
      * @param _inputs User inputs (e.g., keyboard keys).=
      */
-    void compute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) {
+    void compute(std::vector<std::shared_ptr<TEntity>>& _entities, std::shared_ptr<sf::RenderWindow> _window, std::vector<int> _inputs, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) {
         std::vector<std::shared_ptr<TEntity>> entities = filter(_entities);
         execute(entities, _window, _inputs, _entities, sprites, textures);
     }
@@ -52,5 +52,5 @@ class TSystem {
      * @param _window Game rendering window.
      * @param _inputs User inputs (e.g., keyboard keys).
      */
-    virtual void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int>  _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) = 0;
+    virtual void execute(std::vector<std::shared_ptr<TEntity>>& _entities, std::shared_ptr<sf::RenderWindow> _window, std::vector<int>  _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) = 0;
 };

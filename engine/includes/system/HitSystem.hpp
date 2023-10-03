@@ -29,7 +29,7 @@ public:
      * @param _window The SFML window used for display (not used in this function).
      * @param _input User inputs (not used in this function).
      */
-    void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _input, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
+    void execute(std::vector<std::shared_ptr<TEntity>>& _entities, std::shared_ptr<sf::RenderWindow> _window, std::vector<int> _input, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
         for (const std::shared_ptr<TEntity>& entity : _entities) {
             std::shared_ptr<Shield<int>> shieldComp = entity->template getComponent<Shield<int>>();
             if (shieldComp && shieldComp->getValue() > 0) {

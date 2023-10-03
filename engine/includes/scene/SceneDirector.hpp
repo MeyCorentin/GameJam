@@ -77,7 +77,10 @@ class SceneDirector {
                 componentId = entityComponent["component_id"];
                 const json& componentConfig = FindComponentConfigById(_componentsConfig, componentId);
                 if (componentConfig.is_null())
+                {
+                    std::cout << "NULL" << std::endl;
                     return entityBuilder.build();
+                }
                 if (!processComponent(entityComponent, componentConfig, parser, entityBuilder))
                     return entityBuilder.build();
             }

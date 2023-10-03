@@ -17,17 +17,17 @@ class CollisionSystem : public TSystem {
             return filteredEntities;
         }
 
-        void drawHitbox(sf::RenderWindow& _window, const std::shared_ptr<Position<std::pair<double, double>>>& positionComp, const std::shared_ptr<Hitbox<std::pair<int, int>>>& hitboxComp, bool isPlayer) {
+        void drawHitbox(std::shared_ptr<sf::RenderWindow> _window, const std::shared_ptr<Position<std::pair<double, double>>>& positionComp, const std::shared_ptr<Hitbox<std::pair<int, int>>>& hitboxComp, bool isPlayer) {
             sf::RectangleShape hitbox;
             hitbox.setPosition(positionComp->getValue().first, positionComp->getValue().second);
             hitbox.setSize(sf::Vector2f(hitboxComp->getValue().first, hitboxComp->getValue().second));
             hitbox.setFillColor(sf::Color::Transparent);
             hitbox.setOutlineColor(isPlayer ? sf::Color::Green : sf::Color::Red);
             hitbox.setOutlineThickness(1.0f);
-            _window.draw(hitbox);
+            _window->draw(hitbox);
         }
 
-        void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
+        void execute(std::vector<std::shared_ptr<TEntity>>& _entities, std::shared_ptr<sf::RenderWindow> _window, std::vector<int> _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
             for (const std::shared_ptr<TEntity>& entity1 : _entities) {
                 std::shared_ptr<Position<std::pair<double, double>>> positionComp1 = entity1->template getComponent<Position<std::pair<double, double>>>();
                 std::shared_ptr<Hitbox<std::pair<int, int>>> hitboxComp1 = entity1->template getComponent<Hitbox<std::pair<int, int>>>();

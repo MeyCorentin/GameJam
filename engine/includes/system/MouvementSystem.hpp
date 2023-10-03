@@ -19,7 +19,7 @@ class MouvementSystem : public TSystem {
             return filteredEntities;
         }
 
-        void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
+        void execute(std::vector<std::shared_ptr<TEntity>>& _entities, std::shared_ptr<sf::RenderWindow> _window, std::vector<int> _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
             for (const std::shared_ptr<TEntity>& entity : _entities) {
                 std::shared_ptr<Direction<std::pair<double, double>>> direction = entity->template getComponent<Direction<std::pair<double, double>>>();
                 std::shared_ptr<Position<std::pair<double, double>>> position = entity->template getComponent<Position<std::pair<double, double>>>();

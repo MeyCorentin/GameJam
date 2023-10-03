@@ -7,6 +7,20 @@ UDPClient::UDPClient(boost::asio::io_context& io_context, const std::string& hos
     start_listening();
 }
 
+
+void UDPClient::run_game(Ecs &_ecs)
+{
+    while (true)
+    {
+        auto startTime = std::chrono::high_resolution_clock::now();
+        _ecs.update();
+        auto endTime =  std::chrono::high_resolution_clock::now();
+        auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
+        if (elapsedTime < (1.0 / 60))
+            std::this_thread::sleep_for(std::chrono::duration<double>((1.0 / 60) - elapsedTime));
+    }
+}
+
 void UDPClient::send(const std::string& message)
 {
     this->socket_.send_to(boost::asio::buffer(message), server_endpoint_);
@@ -14,7 +28,12 @@ void UDPClient::send(const std::string& message)
 
 void UDPClient::start_listening()
 {
-    read_data();
+    Ecs _ecs;
+    _ecs.create();
+    std::thread t1(&UDPClient::read_data, this);
+    std::thread t2(&UDPClient::run_game, this, std::ref(_ecs));
+    t1.join();
+    t2.join();
 }
 
 void UDPClient::read_data()
