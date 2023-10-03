@@ -20,6 +20,7 @@ class TScene {
         std::unordered_map<sf::Keyboard::Key, bool> keyStates;
         std::shared_ptr<sf::Clock> secondClock;
         std::shared_ptr<sf::Text> tick;
+        std::shared_ptr<sf::Text> entitiesNbr;
         std::shared_ptr<sf::Font> font;
         bool running = true;
         double targetFrameTime = (1.0 / 60);
@@ -33,12 +34,19 @@ class TScene {
                 event = std::shared_ptr<sf::Event>(new sf::Event());
                 secondClock = std::shared_ptr<sf::Clock>(new sf::Clock());
                 tick = std::shared_ptr<sf::Text>(new sf::Text());
+                entitiesNbr = std::shared_ptr<sf::Text>(new sf::Text());
                 font = std::shared_ptr<sf::Font>(new sf::Font());
                 font->loadFromFile("../../rtype/sources/fonts/arial.ttf");
                 tick->setPosition(0, 0);
                 tick->setFillColor(sf::Color::White);
                 tick->setCharacterSize(14),
                 tick->setFont(*font);
+
+                entitiesNbr->setPosition(0, 20);
+                entitiesNbr->setFillColor(sf::Color::White);
+                entitiesNbr->setCharacterSize(14),
+                entitiesNbr->setFont(*font);
+
                 for (int i = 0; i < sf::Keyboard::KeyCount; ++i) {
                     keyStates[static_cast<sf::Keyboard::Key>(i)] = false;
                 }
@@ -59,6 +67,13 @@ class TScene {
         {
             return systems;
         }
+
+        void displayEntities(int nbr) {
+            std::string nbr_string = std::to_string(nbr) + " entities";
+            this->entitiesNbr->setString(nbr_string);
+            window->draw(*entitiesNbr);
+        }
+
         void displayTicks() {
             int &ref = framesThisSecond;
             ref += 1;
@@ -70,6 +85,7 @@ class TScene {
             }
             window->draw(*tick);
         }
+
         void update()
         {
             this->clearWindow();
@@ -92,6 +108,7 @@ class TScene {
             for (const auto& system : systems)
                 system->compute(entities, this->window, inputs, sprites, textures);
             displayTicks();
+            displayEntities(entities.size());
             window->display();
         }
 };
