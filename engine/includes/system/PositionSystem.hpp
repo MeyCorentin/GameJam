@@ -39,7 +39,7 @@ public:
      * @param _window A reference to an SFML RenderWindow.
      * @param _inputs A vector of integers representing user inputs.
      */
-    void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs) override {
+    void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
         for (std::shared_ptr<TEntity>& entity : _entities) {
             std::pair<double, double> positionComp = entity->template getComponent<Position<std::pair<double, double>>>()->getValue();
         }

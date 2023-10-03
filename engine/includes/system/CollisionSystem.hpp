@@ -27,7 +27,7 @@ class CollisionSystem : public TSystem {
             _window.draw(hitbox);
         }
 
-        void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs) override {
+        void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) override {
             for (const std::shared_ptr<TEntity>& entity1 : _entities) {
                 std::shared_ptr<Position<std::pair<double, double>>> positionComp1 = entity1->template getComponent<Position<std::pair<double, double>>>();
                 std::shared_ptr<Hitbox<std::pair<int, int>>> hitboxComp1 = entity1->template getComponent<Hitbox<std::pair<int, int>>>();
@@ -49,7 +49,7 @@ class CollisionSystem : public TSystem {
                         x1 + hitboxComp1->getValue().first> x2 &&
                         y1 < y2 + hitboxComp2->getValue().second &&
                         y1 + hitboxComp1->getValue().second > y2) {
-                            std::cout << "HIT" << std::endl;
+                            // std::cout << "HIT" << std::endl;
                     }
                 }
             }

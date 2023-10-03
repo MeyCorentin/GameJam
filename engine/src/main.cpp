@@ -15,6 +15,7 @@
 #include "../includes/components/Speed.hpp"
 #include "../includes/components/Mana.hpp"
 #include "../includes/components/TComponentBase.hpp"
+#include "../includes/components/Shield.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
 #include "../includes/scene/ComponentRegister.hpp"
@@ -40,6 +41,7 @@ int main(int argc, char **argv)
     ComponentRegistry::instance().registerComponent("Speed", []() { return std::make_shared<Speed<double>>(); });
     ComponentRegistry::instance().registerComponent("Hitbox", []() { return std::make_shared<Hitbox<std::pair<int, int>>>(); });
     ComponentRegistry::instance().registerComponent("Player", []() { return std::make_shared<Player<bool>>(); });
+    ComponentRegistry::instance().registerComponent("Shield", []() { return std::make_shared<Shield<int>>(); });
 
     SceneDirector SceneDirector("../scene_test.json");
 

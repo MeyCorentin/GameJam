@@ -2,6 +2,7 @@
 
 #include "../main.hpp"
 #include "../entity/EntityBuilder.hpp"
+#include <list>
 #include "../system/TSystem.hpp"
 
 class TScene {
@@ -11,7 +12,7 @@ class TScene {
         std::vector<std::shared_ptr<sf::Sprite>> sprites;
         std::vector<std::shared_ptr<sf::Texture>> textures;
     
-        std::unordered_map<sf::Keyboard::Key, bool> keyStates;
+        std::unordered_map<sf::Keyboard::Key, int> keyStates;
         bool running = true;
         double targetFrameTime = (1.0 / 60);
 
@@ -30,10 +31,22 @@ class TScene {
         {
             return  entities;
         }
+
         std::vector<std::shared_ptr<TSystem>> getSystems()
         {
             return systems;
         }
+
+        std::vector<std::shared_ptr<sf::Sprite>> getSprites()
+        {
+            return sprites;
+        }
+
+        std::vector<std::shared_ptr<sf::Texture>> getTextures()
+        {
+            return textures;
+        }
+
         void displayTicks(sf::RenderWindow& _window, sf::Text& _tick, int& _framesThisSecond, sf::Clock& _secondClock) {
             _framesThisSecond++;
             if (_secondClock.getElapsedTime().asSeconds() >= 1.0) {
@@ -50,7 +63,7 @@ class TScene {
             font.loadFromFile("../sources/fonts/arial.ttf");
             sf::RenderWindow window(sf::VideoMode(1000, 1000), "R-Type");
             sf::Event event;
-            std::vector<int> inputs = {0, 0, 0, 0};
+            std::vector<int> inputs = {0, 0, 0, 0, 0};
             int framesThisSecond = 0;
             sf::Clock secondClock;
             sf::Text tick;
@@ -64,22 +77,22 @@ class TScene {
             {
                 window.clear();
                 auto startTime = std::chrono::high_resolution_clock::now();
-                inputs = {0, 0, 0, 0};
                 while (window.pollEvent(event))
                 {
                     if (event.type == sf::Event::Closed)
                         window.close();
                     if (event.type == sf::Event::KeyPressed)
-                        keyStates[event.key.code] = true;
+                        keyStates[event.key.code] = 1;
                     if (event.type == sf::Event::KeyReleased)
-                        keyStates[event.key.code] = false;
+                        keyStates[event.key.code] = 0;
                 }
                 inputs[0] = keyStates[sf::Keyboard::Z];
                 inputs[1] = keyStates[sf::Keyboard::Q];
                 inputs[2] = keyStates[sf::Keyboard::S];
                 inputs[3] = keyStates[sf::Keyboard::D];
+                inputs[4] = keyStates[sf::Keyboard::Space];
                 for (const auto& system : systems)
-                    system->compute(entities, window, inputs);
+                    system->compute(entities, window, inputs, sprites, textures);
                 auto endTime =  std::chrono::high_resolution_clock::now();
                 auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
                 displayTicks(window, tick, framesThisSecond, secondClock);

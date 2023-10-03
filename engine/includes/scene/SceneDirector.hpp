@@ -63,6 +63,7 @@ class SceneDirector {
             return true;
         }
 
+    public:
         std::shared_ptr<TEntity> createEntityFromConfig(const json& _entityConfig, const json& _componentsConfig)
         {
             JsonParser parser;
@@ -83,7 +84,6 @@ class SceneDirector {
             return entityBuilder.build();
         }
 
-    public:
         SceneDirector(std::string _file_path) {
             std::ifstream file(_file_path);
             json data;

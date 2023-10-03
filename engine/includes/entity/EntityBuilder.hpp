@@ -3,6 +3,7 @@
 #include "TEntity.hpp"
 #include <memory>
 #include <vector>
+#include "../components/TComponent.hpp"
 
 class EntityBuilder {
 private:

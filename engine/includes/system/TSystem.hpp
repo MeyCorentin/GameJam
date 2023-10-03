@@ -3,10 +3,6 @@
 #include "../main.hpp"
 #include "../entity/TEntity.hpp"
 
-#pragma once
-
-#include "../main.hpp"
-#include "../entity/TEntity.hpp"
 /**
  * @brief Base class for the systems in the game engine.
  *
@@ -14,7 +10,7 @@
  * in the game engine.
  */
 class TSystem {
-public:
+    public:
     /**
      * @brief Virtual destructor to allow proper destruction of derived classes.
      */
@@ -28,11 +24,11 @@ public:
      *
      * @param _entities List of game entities.
      * @param _window Game rendering window.
-     * @param _inputs User inputs (e.g., keyboard keys).
+     * @param _inputs User inputs (e.g., keyboard keys).=
      */
-    void compute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs) {
+    void compute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int> _inputs, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) {
         std::vector<std::shared_ptr<TEntity>> entities = filter(_entities);
-        execute(entities, _window, _inputs);
+        execute(entities, _window, _inputs, _entities, sprites, textures);
     }
 
     /**
@@ -56,5 +52,5 @@ public:
      * @param _window Game rendering window.
      * @param _inputs User inputs (e.g., keyboard keys).
      */
-    virtual void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int>  _inputs) = 0;
+    virtual void execute(std::vector<std::shared_ptr<TEntity>>& _entities, sf::RenderWindow &_window, std::vector<int>  _inputs, std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) = 0;
 };
