@@ -45,6 +45,7 @@ public:
     {
         std::string componentName = _componentConfig["type"];
         std::string value_type = _componentConfig["value_type"];
+
         json componentValue = _entityComponent["value"];
         std::shared_ptr<TComponentBase> component = ComponentRegistry::instance().createComponent(componentName);
         Variant value = _parser.parseValue(value_type, componentValue);
@@ -95,16 +96,20 @@ public:
         return entityBuilder.build();
     }
 
-    void createEntity(std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures) {
+    void createEntity(std::vector<std::shared_ptr<TEntity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures, int id, std::shared_ptr<Position<std::pair<double, double>>> positionComp) {
         std::string filepath = "../scene_test.json";
         std::ifstream file(filepath);
         json data;
         file >> data;
         file.close();
         for (const auto& entityConfig : data["entities"]) {
-            std::shared_ptr<TEntity> newEntity = createEntityFromConfig(entityConfig, data["components"], sprites, textures);
-            allEntities.push_back(newEntity);
-            std::cout << "New entity created" << std::endl;
+            if (entityConfig["id"] == id) {
+                std::shared_ptr<TEntity> newEntity = createEntityFromConfig(entityConfig, data["components"], sprites, textures);
+                std::shared_ptr<Position<std::pair<double, double>>> positionNew = newEntity->template getComponent<Position<std::pair<double, double>>>();
+                positionNew->setValue(std::make_pair(positionComp->getValue().first, positionComp->getValue().second));
+                allEntities.push_back(newEntity);
+                std::cout << "New entity created" << std::endl;
+            }
         }
     }
 
@@ -130,7 +135,7 @@ public:
             if (_inputs[3] == 1)
                 positionComp->setValue(std::make_pair(positionComp->getValue().first + 5, positionComp->getValue().second));
             if (_inputs[4] == 1)
-                createEntity(allEntities, sprites, textures);
+                createEntity(allEntities, sprites, textures, 3, positionComp); //Change that (because is exec many times)
         }
     }
 };

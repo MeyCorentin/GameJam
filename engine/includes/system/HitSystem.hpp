@@ -44,7 +44,6 @@ public:
     }
 };
 
-// Component : projectile, 
+// Component : projectile,
 // System :: Projectil
-// position Direction
-// sprite vitesse
+// sprite vitesse direction position
