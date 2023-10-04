@@ -14,11 +14,13 @@ class Scene {
         std::vector<std::shared_ptr<sf::Sprite>> sprites_;
         std::vector<std::shared_ptr<sf::Texture>> textures_;
         int frames_this_second_;
+        int total_ticks_;
         std::unordered_map<sf::Keyboard::Key, bool> key_states_;
         std::shared_ptr<sf::Clock> second_clock_;
         std::shared_ptr<sf::Text> tick_;
         std::shared_ptr<sf::Text> entities_nbr_;
         std::shared_ptr<sf::Font> font_;
+        std::shared_ptr<sf::Text> current_tick_;
 
     public:
         Scene(){}
@@ -31,20 +33,30 @@ class Scene {
             : systems_(arg_system_list), entities_(arg_entity_list), sprites_(arg_sprite_list), textures_(arg_texture_list) {
                 window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(1000, 1000), "R-Type"));
                 frames_this_second_ = 0;
+                total_ticks_ = 0;
                 event_ = std::shared_ptr<sf::Event>(new sf::Event());
                 second_clock_ = std::shared_ptr<sf::Clock>(new sf::Clock());
-                tick_ = std::shared_ptr<sf::Text>(new sf::Text());
                 entities_nbr_ = std::shared_ptr<sf::Text>(new sf::Text());
                 font_ = std::shared_ptr<sf::Font>(new sf::Font());
                 font_->loadFromFile("../../rtype/sources/fonts/arial.ttf");
+                tick_ = std::shared_ptr<sf::Text>(new sf::Text());
                 tick_->setPosition(0, 0);
                 tick_->setFillColor(sf::Color::White);
                 tick_->setCharacterSize(14),
                 tick_->setFont(*font_);
+
                 entities_nbr_->setPosition(0, 20);
                 entities_nbr_->setFillColor(sf::Color::White);
                 entities_nbr_->setCharacterSize(14),
                 entities_nbr_->setFont(*font_);
+
+
+                current_tick_ = std::shared_ptr<sf::Text>(new sf::Text());
+                current_tick_->setPosition(0, 40);
+                current_tick_->setFillColor(sf::Color::White);
+                current_tick_->setCharacterSize(14),
+                current_tick_->setFont(*font_);
+
                 for (int i = 0; i < sf::Keyboard::KeyCount; ++i) {
                     key_states_[static_cast<sf::Keyboard::Key>(i)] = false;
                 }
@@ -66,8 +78,18 @@ class Scene {
             return systems_;
         }
 
+        void DisplayCurrentTick() {
+            int &ref = total_ticks_;
+            std::string tick_string;
+
+            ref += 1;
+            tick_string = std::to_string(ref) + " (ticks)";
+            current_tick_->setString(tick_string);
+            window_->draw(*current_tick_);
+        }
+
         void DisplayEntities(int nbr) {
-            std::string nbr_string = std::to_string(nbr) + " entities";
+            std::string nbr_string = std::to_string(nbr) + " (enttities)";
 
             this->entities_nbr_->setString(nbr_string);
             window_->draw(*entities_nbr_);
@@ -79,7 +101,7 @@ class Scene {
 
             ref += 1;
             if (second_clock_->getElapsedTime().asSeconds() >= 1.0) {
-                tick_string = std::to_string(ref) + " ticks";
+                tick_string = std::to_string(ref) + " (t/s)";
                 tick_->setString(tick_string);
                 ref= 0;
                 second_clock_->restart();
@@ -110,6 +132,7 @@ class Scene {
                 system->Compute(entities_, window_, inputs, sprites_, textures_);
             DisplayTicks();
             DisplayEntities(entities_.size());
+            DisplayCurrentTick();
             window_->display();
         }
 };
