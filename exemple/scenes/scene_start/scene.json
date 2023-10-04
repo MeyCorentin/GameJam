@@ -1,0 +1,181 @@
+{
+    "systems": [
+        {
+            "id": 1,
+            "type": "HitSystem"
+        },
+        {
+            "id": 2,
+            "type": "PositionSystem"
+        },
+        {
+            "id": 3,
+            "type": "DisplaySystem"
+        },
+        {
+            "id": 4,
+            "type": "InputSystem"
+        },
+        {
+            "id": 5,
+            "type": "ManaSystem"
+        },
+        {
+            "id": 6,
+            "type": "CollisionSystem"
+        },
+        {
+            "id": 7,
+            "type" : "MouvementSystem"
+        }
+    ],
+    "components": [
+        {
+            "id": 1,
+            "type": "Sprite",
+            "value_type": "Sprite"
+        },
+        {
+            "id": 2,
+            "type": "Life",
+            "value_type": "Int"
+        },
+        {
+            "id": 3,
+            "type": "Position",
+            "value_type": "PairDouble"
+        },
+        {
+            "id": 4,
+            "type": "Player",
+            "value_type": "Bool"
+        },
+        {
+            "id": 5,
+            "type": "Mana",
+            "value_type": "Int"
+        },
+        {
+            "id": 6,
+            "type": "Hitbox",
+            "value_type": "PairInt"
+        },
+        {
+            "id": 7,
+            "type": "Direction",
+            "value_type": "PairDouble"
+        },
+        {
+            "id": 8,
+            "type": "Speed",
+            "value_type": "Double"
+        },
+        {
+            "id": 9,
+            "type": "Client",
+            "value_type": "Bool"
+        },
+        {
+            "id": 10,
+            "type": "Server",
+            "value_type": "Bool"
+        }
+    ],
+    "entities": [
+        {
+            "id": 1,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/test.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 50, "y": 50 }
+                },
+                {
+                    "component_id": 4,
+                    "value": true
+                },
+                {
+                    "component_id": 5,
+                    "value": 0
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 35, "y": 20 }
+                },
+                {
+                    "component_id": 9,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/test.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 5,
+                    "value": 0
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 35, "y": 20 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0.2}
+                },
+                {
+                    "component_id": 8,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/r-typesheet1.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 45, "y": 20 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 10
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "entities": [
+        {
+            "id" : 1,
+            "path" : "e_mob_1.json"
+        },
+        {
+            "id" : 2,
+            "path" : "e_mob_2.json"
+        },
+        {
+            "id" : 3,
+            "path" : "e_player.json"
+        }
+    ]
+}

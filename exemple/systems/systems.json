@@ -1,0 +1,32 @@
+{
+    "systems": [
+        {
+            "id" : 1,
+            "path" : "s_collision.json"
+        },
+        {
+            "id" : 2,
+            "path" : "s_display.json"
+        },
+        {
+            "id" : 3,
+            "path" : "s_hit.json"
+        },
+        {
+            "id" : 4,
+            "path" : "s_input.json"
+        },
+        {
+            "id" : 5,
+            "path" : "s_mana.json"
+        },
+        {
+            "id" : 6,
+            "path" : "s_mouvement.json"
+        },
+        {
+            "id" : 7,
+            "path" : "s_position.json"
+        }
+    ]
+}

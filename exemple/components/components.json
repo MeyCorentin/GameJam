@@ -1,0 +1,48 @@
+{
+    "components": [
+        {
+            "id" : 1,
+            "path" : "c_client.json"
+        },
+        {
+            "id" : 2,
+            "path" : "c_direction.json"
+        },
+        {
+            "id" : 3,
+            "path" : "c_hitbox.json"
+        },
+        {
+            "id" : 4,
+            "path" : "c_life.json"
+        },
+        {
+            "id" : 5,
+            "path" : "c_mana.json"
+        },
+        {
+            "id" : 6,
+            "path" : "c_player.json"
+        },
+        {
+            "id" : 7,
+            "path" : "c_position.json"
+        },
+        {
+            "id" : 8,
+            "path" : "c_server.json"
+        },
+        {
+            "id" : 9,
+            "path" : "c_shield.json"
+        },
+        {
+            "id" : 10,
+            "path" : "c_speed.json"
+        },
+        {
+            "id" : 11,
+            "path" : "c_sprite.json"
+        }
+    ]
+}
