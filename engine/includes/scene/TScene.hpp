@@ -17,7 +17,7 @@ class TScene {
         std::vector<std::shared_ptr<sf::Sprite>> sprites;
         std::vector<std::shared_ptr<sf::Texture>> textures;
         int framesThisSecond;
-        std::unordered_map<sf::Keyboard::Key, bool> keyStates;
+        std::unordered_map<sf::Keyboard::Key, int> keyStates;
         std::shared_ptr<sf::Clock> secondClock;
         std::shared_ptr<sf::Text> tick;
         std::shared_ptr<sf::Font> font;
@@ -40,7 +40,7 @@ class TScene {
                 tick->setCharacterSize(14),
                 tick->setFont(*font);
                 for (int i = 0; i < sf::Keyboard::KeyCount; ++i) {
-                    keyStates[static_cast<sf::Keyboard::Key>(i)] = false;
+                    keyStates[static_cast<sf::Keyboard::Key>(i)] = 0;
                 }
             }
 
@@ -79,16 +79,17 @@ class TScene {
             {
                 if (this->event->type == sf::Event::Closed)
                     window->close();
-                if (this->event->type == sf::Event::KeyPressed)
-                    keyStates[this->event->key.code] = true;
-                if (this->event->type == sf::Event::KeyReleased)
-                    keyStates[this->event->key.code] = false;
+                if (this->event->type == sf::Event::KeyPressed) {
+                    keyStates[this->event->key.code] = 1;
+                } else {
+                    keyStates[this->event->key.code] = 0;
+                }
+                inputs[4] = keyStates[sf::Keyboard::Space];
             }
             inputs[0] = keyStates[sf::Keyboard::Z];
             inputs[1] = keyStates[sf::Keyboard::Q];
             inputs[2] = keyStates[sf::Keyboard::S];
             inputs[3] = keyStates[sf::Keyboard::D];
-            inputs[4] = keyStates[sf::Keyboard::Space];
             for (const auto& system : systems)
                 system->compute(entities, this->window, inputs, sprites, textures);
             displayTicks();

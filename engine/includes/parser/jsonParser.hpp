@@ -75,6 +75,28 @@ public:
         return boolValue;
     }
 
+    static Variant parseClockValue(const json& value) {
+        sf::Clock clock;
+        std::shared_ptr<sf::Clock> clockValue = std::make_shared<sf::Clock>(clock);
+        return clockValue;
+    }
+
+    static Variant parseIntRectValue(const json& value) {
+        if (!value.is_object() || !value.contains("left") || !value.contains("top") || !value.contains("width") || !value.contains("height")) {
+            std::cerr << "Invalid value for Pair type." << std::endl;
+            return Variant();
+        }
+
+        int left = value["left"];
+        int top = value["top"];
+        int width = value["width"];
+        int height = value["height"];
+
+        sf::IntRect rect = {left, top, width, height};
+        std::shared_ptr<sf::IntRect> rectValue = std::make_shared<sf::IntRect>(rect);
+        return rectValue;
+    }
+
     static Variant parseValue(const std::string& valueType, const json& value) {
         if (valueType == "Sprite") {
             return parseSpriteValue(value);
@@ -88,6 +110,10 @@ public:
             return parseBoolValue(value);
         } else if (valueType == "Double") {
             return parseDoubleValue(value);
+        } else if (valueType == "Clock") {
+            return parseClockValue(value);
+        } else if (valueType == "IntRect") {
+            return parseIntRectValue(value);
         }
 
         std::cerr << "Unsupported value type: " << valueType << std::endl;

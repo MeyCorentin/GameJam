@@ -56,6 +56,10 @@ class SceneDirector {
                 _entityBuilder.addComponent(component, std::get<bool>(value));
             } else if (value_type == "Double") {
                 _entityBuilder.addComponent(component, std::get<double>(value));
+            } else if (value_type == "Clock") {
+                _entityBuilder.addComponent(component, std::get<std::shared_ptr<sf::Clock>>(value));
+            } else if (value_type == "IntRect") {
+                _entityBuilder.addComponent(component, std::get<std::shared_ptr<sf::IntRect>>(value));
             } else {
                 std::cerr << "Unsupported component type: " << value_type << std::endl;
                 return false;

@@ -8,6 +8,7 @@
 #include "../includes/system/ManaSystem.hpp"
 #include "../includes/system/CollisionSystem.hpp"
 #include "../includes/system/MouvementSystem.hpp"
+#include "../includes/system/AnimationSystem.hpp"
 
 #include "../includes/components/Life.hpp"
 #include "../includes/components/Player.hpp"
@@ -48,6 +49,7 @@ class Ecs
             SystemRegistry::instance().registerSystem("InputSystem", []() { return std::make_shared<InputSystem>(); });
             SystemRegistry::instance().registerSystem("ManaSystem", []() { return std::make_shared<ManaSystem>(); });
             SystemRegistry::instance().registerSystem("MouvementSystem", []() { return std::make_shared<MouvementSystem>(); });
+            SystemRegistry::instance().registerSystem("AnimationSystem", []() { return std::make_shared<AnimationSystem>(); });
 
             ComponentRegistry::instance().registerComponent("Sprite", []() { return std::make_shared<Sprite<std::shared_ptr<sf::Sprite>>>(); });
             ComponentRegistry::instance().registerComponent("Life", []() { return std::make_shared<Life<int>>(); });
@@ -59,6 +61,11 @@ class Ecs
             ComponentRegistry::instance().registerComponent("Player", []() { return std::make_shared<Player<bool>>(); });
             ComponentRegistry::instance().registerComponent("Server", []() { return std::make_shared<Server<bool>>(); });
             ComponentRegistry::instance().registerComponent("Client", []() { return std::make_shared<Client<bool>>(); });
+            ComponentRegistry::instance().registerComponent("Shield", []() { return std::make_shared<Shield<int>>(); });
+            ComponentRegistry::instance().registerComponent("Clock", []() { return std::make_shared<Clock<std::shared_ptr<sf::Clock>>>(); });
+            ComponentRegistry::instance().registerComponent("SpriteRect", []() { return std::make_shared<SpriteRect<std::shared_ptr<sf::IntRect>>>(); });
+            ComponentRegistry::instance().registerComponent("Size", []() { return std::make_shared<Size<std::pair<int, int>>>(); });
+            ComponentRegistry::instance().registerComponent("Animation", []() { return std::make_shared<Animation<bool>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../../rtype/scene_test.json");
