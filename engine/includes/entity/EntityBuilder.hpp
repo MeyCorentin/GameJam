@@ -18,10 +18,10 @@ class EntityBuilder {
         EntityBuilder& addComponent(
                 std::shared_ptr<ComponentBase> arg_component,
                 T arg_value) {
-            auto concreteComponent = std::dynamic_pointer_cast<Component<T>>(arg_component);
+            auto concrete_component = std::dynamic_pointer_cast<Component<T>>(arg_component);
 
-            if (concreteComponent) {
-                concreteComponent->setValue(arg_value);
+            if (concrete_component) {
+                concrete_component->setValue(arg_value);
                 entity_->components_.push_back(arg_component);
             }
             return *this;
