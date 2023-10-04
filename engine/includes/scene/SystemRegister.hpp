@@ -4,19 +4,22 @@
 
 class SystemRegistry {
     public:
-        using SystemConstructor = std::function<std::shared_ptr<TSystem>()>;
+        using SystemConstructor = std::function<std::shared_ptr<System>()>;
 
         static SystemRegistry& instance() {
             static SystemRegistry registry;
             return registry;
         }
 
-        void registerSystem(const std::string& _name, SystemConstructor _constructor) {
-            systems[_name] = _constructor;
+        void registerSystem(
+                const std::string& arg_name,
+                SystemConstructor arg_constructor) {
+            systems[arg_name] = arg_constructor;
         }
 
-        std::shared_ptr<TSystem> createSystem(const std::string& _name) {
-            std::unordered_map<std::string, SystemRegistry::SystemConstructor>::iterator it = systems.find(_name);
+        std::shared_ptr<System> createSystem(const std::string& arg_name) {
+            std::unordered_map<std::string, SystemRegistry::SystemConstructor>::iterator it = systems.find(arg_name);
+
             if (it != systems.end())
                 return it->second();
             return nullptr;

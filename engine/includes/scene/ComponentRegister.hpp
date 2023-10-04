@@ -5,19 +5,20 @@
 
 class ComponentRegistry {
     public:
-        using ComponentConstructor = std::function<std::shared_ptr<TComponentBase>()>;
+        using ComponentConstructor = std::function<std::shared_ptr<ComponentBase>()>;
 
         static ComponentRegistry& instance() {
             static ComponentRegistry registry;
             return registry;
         }
 
-        void registerComponent(const std::string& _name, ComponentConstructor _constructor) {
-            components[_name] = _constructor;
+        void registerComponent(const std::string& arg_name, ComponentConstructor arg_constructor) {
+            components[arg_name] = arg_constructor;
         }
 
-        std::shared_ptr<TComponentBase> createComponent(const std::string& _name) {
-            std::unordered_map<std::string, ComponentRegistry::ComponentConstructor>::iterator it = components.find(_name);
+        std::shared_ptr<ComponentBase> createComponent(const std::string& arg_name) {
+            std::unordered_map<std::string, ComponentRegistry::ComponentConstructor>::iterator it = components.find(arg_name);
+
             if (it != components.end())
                 return it->second();
             return nullptr;
