@@ -2,11 +2,12 @@
 
 #include <iostream>
 #include <thread>
-#include <mutex> 
+#include <mutex>
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 #include "../../engine/includes/Ecs.hpp"
 #include "../../engine/includes/main.hpp"
+#include "BinaryProtocole.hpp"
 
 using boost::asio::ip::udp;
 
@@ -16,7 +17,8 @@ class UDPServer {
         ~UDPServer();
 
         void start();
-        void send_to_all(const std::string& message);
+        void send_to_all(BinaryProtocole::BinaryMessage msg);
+        void start_listening();
 
     private:
         void read_data();
@@ -25,6 +27,7 @@ class UDPServer {
         boost::asio::io_context& io_context_;
         udp::socket socket_;
         udp::endpoint remote_endpoint_;
-        boost::array<char, 1024> recv_buffer_;
+        std::vector<uint16_t> recv_buffer_;
         std::map<udp::endpoint, bool> clients_;
+        BinaryProtocole protocole;
 };

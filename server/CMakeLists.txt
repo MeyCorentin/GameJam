@@ -4,7 +4,7 @@ project(r-type)
 
 cmake_policy(SET CMP0077 NEW)
 
-add_executable(r-type_server src/main.cpp src/UDPserver.cpp)
+add_executable(r-type_server src/main.cpp src/UDPserver.cpp src/BinaryProtocole.cpp)
 # Find SFML
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
