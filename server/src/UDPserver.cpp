@@ -6,12 +6,12 @@ UDPServer::UDPServer(boost::asio::io_context& io_context, unsigned short port)
 
 }
 
-void UDPServer::run_server(Ecs &_ecs)
+void UDPServer::run_server(Ecs &ecs)
 {
     while (true)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
-        _ecs.update();
+        ecs.Update();
         auto endTime =  std::chrono::high_resolution_clock::now();
         auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
         if (elapsedTime < (1.0 / 60))
@@ -49,24 +49,24 @@ void UDPServer::read_data()
 
 void UDPServer::start()
 {
-    Ecs _ecs;
+    Ecs ecs;
 
-    _ecs.create();
+    ecs.Create();
     std::thread t1(&UDPServer::start_listening, this);
     // std::thread t2(&UDPServer::run_server, this, std::ref(_ecs));
     // t1.join();
-    run_server(_ecs);
+    run_server(ecs);
     // t2.join();
 }
 
 void UDPServer::send_to_all(BinaryProtocole::BinaryMessage msg)
 {
-    Ecs _ecs;
+    Ecs ecs;
 
-    _ecs.create();
+    ecs.Create();
     for (const auto& [client_endpoint, _] : clients_) {
         this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), client_endpoint);
-        _ecs.update();
+        ecs.Update();
     }
 }
 

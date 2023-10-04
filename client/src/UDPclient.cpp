@@ -10,12 +10,12 @@ UDPClient::UDPClient(boost::asio::io_context& io_context, const std::string& hos
 }
 
 
-void UDPClient::run_game(Ecs &_ecs)
+void UDPClient::run_game(Ecs &ecs)
 {
     while (true)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
-        _ecs.update();
+        ecs.Update();
         auto endTime =  std::chrono::high_resolution_clock::now();
         auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
         if (elapsedTime < (1.0 / 60))
@@ -39,13 +39,13 @@ void UDPClient::start_listening()
 
 void UDPClient::start()
 {
-    Ecs _ecs;
+    Ecs ecs;
 
-    _ecs.create();
+    ecs.Create();
     std::thread t1(&UDPClient::start_listening, this);
     // std::thread t2(&UDPClient::run_game, this, std::ref(_ecs));
     // t1.join();
-    run_game(_ecs);
+    run_game(ecs);
     // t2.join();
 }
 
