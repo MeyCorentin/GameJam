@@ -9,12 +9,12 @@ int main(int argc, char **argv)
     std::chrono::high_resolution_clock::time_point end_time;
     std::chrono::high_resolution_clock::time_point elapsed_time;
 
-    ecs.create();
+    ecs.Create();
 
     while(true)
     {
         start_time = std::chrono::high_resolution_clock::now();
-        ecs.update();
+        ecs.Update();
         end_time =  std::chrono::high_resolution_clock::now();
         auto elapsed_time = std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time).count();
         if (elapsed_time < (1.0 / 60))

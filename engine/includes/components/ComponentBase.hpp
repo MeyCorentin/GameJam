@@ -3,10 +3,10 @@
 class ComponentBase {
 public:
     virtual ~ComponentBase() {}
-    virtual const std::type_info& getType() const {
+    virtual const std::type_info& GetType() const {
         return typeid(ComponentBase);
     };
-    virtual std::shared_ptr<ComponentBase> clone() const = 0;
+    virtual std::shared_ptr<ComponentBase> Clone() const = 0;
     template <typename T>
-    void setValue(T arg_new_value) {};
+    void SetValue(T arg_new_value) {};
 };

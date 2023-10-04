@@ -51,29 +51,29 @@ class Scene {
             }
 
 
-        void clearWindow()
+        void ClearWindow()
         {
             window_->clear();
         }
 
-        std::vector<std::shared_ptr<Entity>> getEntities()
+        std::vector<std::shared_ptr<Entity>> GetEntities()
         {
             return  entities_;
         }
 
-        std::vector<std::shared_ptr<System>> getSystems()
+        std::vector<std::shared_ptr<System>> GetSystems()
         {
             return systems_;
         }
 
-        void displayEntities(int nbr) {
+        void DisplayEntities(int nbr) {
             std::string nbr_string = std::to_string(nbr) + " entities";
 
             this->entities_nbr_->setString(nbr_string);
             window_->draw(*entities_nbr_);
         }
 
-        void displayTicks() {
+        void DisplayTicks() {
             int &ref = frames_this_second_;
             std::string tick_string;
 
@@ -87,9 +87,9 @@ class Scene {
             window_->draw(*tick_);
         }
 
-        void update()
+        void Update()
         {
-            this->clearWindow();
+            this->ClearWindow();
             std::vector<int> inputs = {0, 0, 0, 0, 0};
 
             while (window_->pollEvent(*event_))
@@ -107,9 +107,9 @@ class Scene {
             inputs[3] = key_states_[sf::Keyboard::D];
             inputs[4] = key_states_[sf::Keyboard::Space];
             for (const auto& system : systems_)
-                system->compute(entities_, window_, inputs, sprites_, textures_);
-            displayTicks();
-            displayEntities(entities_.size());
+                system->Compute(entities_, window_, inputs, sprites_, textures_);
+            DisplayTicks();
+            DisplayEntities(entities_.size());
             window_->display();
         }
 };

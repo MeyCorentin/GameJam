@@ -4,18 +4,18 @@
 
 class S_Hit : public System {
     public:
-        std::vector<std::shared_ptr<Entity>> filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override {
+        std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override {
             std::vector<std::shared_ptr<Entity>> filtered_entities;
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
-                if (entity->hasComponent(typeid(C_Life<int>))) {
+                if (entity->HasComponent(typeid(C_Life<int>))) {
                     filtered_entities.push_back(entity);
                 }
             }
             return filtered_entities;
         }
 
-        void execute(
+        void Execute(
                 std::vector<std::shared_ptr<Entity>>& arg_entities,
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_input,
@@ -28,12 +28,12 @@ class S_Hit : public System {
             std::shared_ptr<C_Life<int>> life_comp;
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
-                shield_comp = entity->template getComponent<C_Shield<int>>();
+                shield_comp = entity->template GetComponent<C_Shield<int>>();
                 if (shield_comp && shield_comp->getValue() > 0) {
                     current_shield = shield_comp->getValue();
                     shield_comp->setValue(current_shield - 1);
                 } else {
-                    life_comp = entity->template getComponent<C_Life<int>>();
+                    life_comp = entity->template GetComponent<C_Life<int>>();
                     current_life = life_comp->getValue();
                     life_comp->setValue(current_life - 1);
                 }

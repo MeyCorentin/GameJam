@@ -9,12 +9,12 @@
 
 class S_Input : public System {
     public:
-        std::vector<std::shared_ptr<Entity>> filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override {
+        std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override {
             std::vector<std::shared_ptr<Entity>> filtered_entities;
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
-                if (entity->hasComponent(typeid(C_Player<bool>)) &&
-                    entity->hasComponent(typeid(C_Position<std::pair<double, double>>))) {
+                if (entity->HasComponent(typeid(C_Player<bool>)) &&
+                    entity->HasComponent(typeid(C_Position<std::pair<double, double>>))) {
                     filtered_entities.push_back(entity);
                 }
             }
@@ -30,7 +30,7 @@ class S_Input : public System {
             return empty_json;
         }
 
-        bool processComponent(
+        bool ProcessComponent(
                 const json& arg_entityComponent,
                 const json& arg_componentConfig,
                 JsonParser& arg_parser,
@@ -40,8 +40,8 @@ class S_Input : public System {
             std::string component_name = arg_componentConfig["type"];
             std::string value_type = arg_componentConfig["value_type"];
             json component_value = arg_entityComponent["value"];
-            std::shared_ptr<ComponentBase> component = ComponentRegistry::instance().createComponent(component_name);
-            Variant value = arg_parser.parseValue(value_type, component_value);
+            std::shared_ptr<ComponentBase> component = ComponentRegistry::Instance().CreateComponent(component_name);
+            Variant value = arg_parser.ParseValue(value_type, component_value);
 
             if (!component)
                 return false;
@@ -51,17 +51,17 @@ class S_Input : public System {
                 auto all_ptr = std::get<std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>>(value);
                 sprites.push_back(all_ptr.second);
                 textures.push_back(all_ptr.first);
-                arg_entityBuilder.addComponent(component,  all_ptr.second);
+                arg_entityBuilder.AddComponent(component,  all_ptr.second);
             } else if (value_type == "Int") {
-                arg_entityBuilder.addComponent(component, std::get<int>(value));
+                arg_entityBuilder.AddComponent(component, std::get<int>(value));
             } else if (value_type == "PairDouble") {
-                arg_entityBuilder.addComponent(component, std::get<std::pair<double, double>>(value));
+                arg_entityBuilder.AddComponent(component, std::get<std::pair<double, double>>(value));
             } else if (value_type == "PairInt") {
-                arg_entityBuilder.addComponent(component, std::get<std::pair<int, int>>(value));
+                arg_entityBuilder.AddComponent(component, std::get<std::pair<int, int>>(value));
             } else if (value_type == "Bool") {
-                arg_entityBuilder.addComponent(component, std::get<bool>(value));
+                arg_entityBuilder.AddComponent(component, std::get<bool>(value));
             } else if (value_type == "Double") {
-                arg_entityBuilder.addComponent(component, std::get<double>(value));
+                arg_entityBuilder.AddComponent(component, std::get<double>(value));
             } else {
                 std::cerr << "Unsupported component type: " << value_type << std::endl;
                 return false;
@@ -69,7 +69,7 @@ class S_Input : public System {
             return true;
         }
 
-        std::shared_ptr<Entity> createEntityFromConfig(
+        std::shared_ptr<Entity> CreateEntityFromConfig(
                 const json& arg_entity_config,
                 const json& arg_components_config,
                 std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
@@ -86,11 +86,11 @@ class S_Input : public System {
                 component_id = entity_component["component_id"];
                 component_config = FindComponentConfigById(arg_components_config, component_id);
                 if (component_config.is_null())
-                    return entity_builder.build();
-                if (!processComponent(entity_component, component_config, parser, entity_builder, arg_sprites, arg_textures))
-                    return entity_builder.build();
+                    return entity_builder.Build();
+                if (!ProcessComponent(entity_component, component_config, parser, entity_builder, arg_sprites, arg_textures))
+                    return entity_builder.Build();
             }
-            return entity_builder.build();
+            return entity_builder.Build();
         }
 
         void createEntity(
@@ -110,8 +110,8 @@ class S_Input : public System {
             std::cout << "New entity created!" << std::endl;
             for (const auto& entity_config : data["entities"]) {
                 if (entity_config["id"] == id) {
-                    new_entity = createEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
-                    position_new = new_entity->template getComponent<C_Position<std::pair<double, double>>>();
+                    new_entity = CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
+                    position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
                     position_new->setValue(std::make_pair(arg_position_comp->getValue().first, arg_position_comp->getValue().second));
                     arg_all_entities.push_back(new_entity);
                     std::cout << "New entity created" << std::endl;
@@ -119,7 +119,7 @@ class S_Input : public System {
             }
         }
 
-        void execute(
+        void Execute(
                 std::vector<std::shared_ptr<Entity>>& arg_entities,
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_inputs,
@@ -129,7 +129,7 @@ class S_Input : public System {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
-                position_comp = entity->template getComponent<C_Position<std::pair<double, double>>>();
+                position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
                 if (arg_inputs[0] == 1)
                     position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
                 if (arg_inputs[1] == 1)

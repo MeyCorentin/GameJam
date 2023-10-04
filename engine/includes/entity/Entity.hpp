@@ -10,17 +10,17 @@ class Entity {
         Entity(int arg_id, std::vector<std::shared_ptr<ComponentBase>> arg_components) : 
             id_(arg_id), components_(arg_components) {}
 
-        int getId() {
+        int GetId() {
             return id_;
         }
 
-        void setId(int arg_id) {
+        void SetId(int arg_id) {
             id_ = arg_id;
         }
 
-        bool hasComponent(const std::type_info& arg_type) const {
+        bool HasComponent(const std::type_info& arg_type) const {
             for (const auto& component : components_) {
-                if ((*component).getType() == arg_type) {
+                if ((*component).GetType() == arg_type) {
                     return true;
                 }
             }
@@ -28,7 +28,7 @@ class Entity {
         }
 
         template <class ComponentType>
-        std::shared_ptr<ComponentType> getComponent() const {
+        std::shared_ptr<ComponentType> GetComponent() const {
             for (const auto& component : components_) {
                 auto casted_component = std::dynamic_pointer_cast<ComponentType>(component);
                 if (casted_component) {

@@ -34,35 +34,34 @@ class Ecs
         Ecs(int ac, char **av)
         {
         };
-        void update()
+        void Update()
         {
-            scene.update();
+            scene.Update();
         }
-        void create()
+        void Create()
         {
+            SystemRegistry::Instance().RegisterSystem("CollisionSystem", []() { return std::make_shared<S_Collision>(); });
+            SystemRegistry::Instance().RegisterSystem("HitSystem", []() { return std::make_shared<S_Hit>(); });
+            SystemRegistry::Instance().RegisterSystem("PositionSystem", []() { return std::make_shared<S_Position>(); });
+            SystemRegistry::Instance().RegisterSystem("DisplaySystem", []() { return std::make_shared<S_Display>(); });
+            SystemRegistry::Instance().RegisterSystem("InputSystem", []() { return std::make_shared<S_Input>(); });
+            SystemRegistry::Instance().RegisterSystem("ManaSystem", []() { return std::make_shared<S_Mana>(); });
+            SystemRegistry::Instance().RegisterSystem("MouvementSystem", []() { return std::make_shared<S_Mouvement>(); });
 
-            SystemRegistry::instance().registerSystem("CollisionSystem", []() { return std::make_shared<S_Collision>(); });
-            SystemRegistry::instance().registerSystem("HitSystem", []() { return std::make_shared<S_Hit>(); });
-            SystemRegistry::instance().registerSystem("PositionSystem", []() { return std::make_shared<S_Position>(); });
-            SystemRegistry::instance().registerSystem("DisplaySystem", []() { return std::make_shared<S_Display>(); });
-            SystemRegistry::instance().registerSystem("InputSystem", []() { return std::make_shared<S_Input>(); });
-            SystemRegistry::instance().registerSystem("ManaSystem", []() { return std::make_shared<S_Mana>(); });
-            SystemRegistry::instance().registerSystem("MouvementSystem", []() { return std::make_shared<S_Mouvement>(); });
-
-            ComponentRegistry::instance().registerComponent("Sprite", []() { return std::make_shared<C_Sprite<std::shared_ptr<sf::Sprite>>>(); });
-            ComponentRegistry::instance().registerComponent("Life", []() { return std::make_shared<C_Life<int>>(); });
-            ComponentRegistry::instance().registerComponent("Mana", []() { return std::make_shared<C_Mana<int>>(); });
-            ComponentRegistry::instance().registerComponent("Position", []() { return std::make_shared<C_Position<std::pair<double, double>>>(); });
-            ComponentRegistry::instance().registerComponent("Direction", []() { return std::make_shared<C_Direction<std::pair<double, double>>>(); });
-            ComponentRegistry::instance().registerComponent("Speed", []() { return std::make_shared<C_Speed<double>>(); });
-            ComponentRegistry::instance().registerComponent("Hitbox", []() { return std::make_shared<C_Hitbox<std::pair<int, int>>>(); });
-            ComponentRegistry::instance().registerComponent("Player", []() { return std::make_shared<C_Player<bool>>(); });
-            ComponentRegistry::instance().registerComponent("Server", []() { return std::make_shared<C_Server<bool>>(); });
-            ComponentRegistry::instance().registerComponent("Client", []() { return std::make_shared<C_Client<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Sprite", []() { return std::make_shared<C_Sprite<std::shared_ptr<sf::Sprite>>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Life", []() { return std::make_shared<C_Life<int>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Mana", []() { return std::make_shared<C_Mana<int>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Position", []() { return std::make_shared<C_Position<std::pair<double, double>>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Direction", []() { return std::make_shared<C_Direction<std::pair<double, double>>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Speed", []() { return std::make_shared<C_Speed<double>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Hitbox", []() { return std::make_shared<C_Hitbox<std::pair<int, int>>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Player", []() { return std::make_shared<C_Player<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Server", []() { return std::make_shared<C_Server<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Client", []() { return std::make_shared<C_Client<bool>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../../rtype/scene_test.json");
 
-            scene = SceneDirector.constructScene();
+            scene = SceneDirector.ConstructScene();
         }
 };

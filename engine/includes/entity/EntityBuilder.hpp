@@ -15,7 +15,7 @@ class EntityBuilder {
         }
 
         template <typename T>
-        EntityBuilder& addComponent(
+        EntityBuilder& AddComponent(
                 std::shared_ptr<ComponentBase> arg_component,
                 T arg_value) {
             auto concrete_component = std::dynamic_pointer_cast<Component<T>>(arg_component);
@@ -27,12 +27,12 @@ class EntityBuilder {
             return *this;
         }
 
-        EntityBuilder& setID(int arg_id) {
-            entity_->setId(arg_id);
+        EntityBuilder& SetID(int arg_id) {
+            entity_->SetId(arg_id);
             return *this;
         }
 
-        std::shared_ptr<Entity> build() {
+        std::shared_ptr<Entity> Build() {
             return entity_;
         }
 };

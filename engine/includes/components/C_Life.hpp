@@ -10,30 +10,18 @@
  */
 template <class T>
 class C_Life : public Component<T> {
-public:
-    /**
-     * @brief Constructor to initialize the C_life component with a value.
-     *
-     * This constructor initializes the C_life component with the specified
-     * C_life value.
-     *
-     * @param n The initial C_life value.
-     */
-    C_Life(T n) : Component<T>(n) {}
-    C_Life() : Component<T>() {}
+    public:
+        C_Life(T arg_n) :
+            Component<T>(arg_n) {}
 
-    /**
-     * @brief Get the type information of the C_Life component.
-     *
-     * This method returns the type information of the C_Life component.
-     *
-     * @return The type information of the C_Life component.
-     */
-    const std::type_info& getType() const override {
-        return typeid(C_Life);
-    }
+        C_Life() :
+            Component<T>() {}
 
-    std::shared_ptr<ComponentBase> clone() const override {
-        return std::make_shared<C_Life>(*this);
-    }
+        const std::type_info& GetType() const override {
+            return typeid(C_Life);
+        }
+
+        std::shared_ptr<ComponentBase> Clone() const override {
+            return std::make_shared<C_Life>(*this);
+        }
 };

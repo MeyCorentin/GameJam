@@ -14,37 +14,37 @@ class SceneBuilder {
         std::vector<std::shared_ptr<sf::Texture>> textures_;
 
     public:
-        SceneBuilder& addSystem(std::shared_ptr<System> arg_system) {
+        SceneBuilder& AddSystem(std::shared_ptr<System> arg_system) {
             systems_.push_back(arg_system);
             return *this;
         }
 
-        SceneBuilder& addEntity(std::shared_ptr<Entity> arg_entity) {
+        SceneBuilder& AddEntity(std::shared_ptr<Entity> arg_entity) {
             entities_.push_back(arg_entity);
             return *this;
         }
 
-        SceneBuilder& addSprite(std::shared_ptr<sf::Sprite> arg_sprite) {
+        SceneBuilder& AddSprite(std::shared_ptr<sf::Sprite> arg_sprite) {
             sprites_.push_back(arg_sprite);
             return *this;
         }
 
-        SceneBuilder& addTexture(std::shared_ptr<sf::Texture> arg_texture) {
+        SceneBuilder& AddTexture(std::shared_ptr<sf::Texture> arg_texture) {
             textures_.push_back(arg_texture);
             return *this;
         }
 
-        std::vector<std::shared_ptr<Entity>> geteEntities()
+        std::vector<std::shared_ptr<Entity>> GetEntities()
         {
             return  entities_;
         }
 
-        std::vector<std::shared_ptr<System>> getSystems()
+        std::vector<std::shared_ptr<System>> GetSystems()
         {
             return systems_;
         }
 
-        Scene build() {
+        Scene Build() {
             std::cout << "[BUILDER] Scene build" << std::endl;
             Scene scene(systems_, entities_, sprites_, textures_);
             return scene;

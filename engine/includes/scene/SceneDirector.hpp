@@ -11,12 +11,12 @@ class SceneDirector {
         std::vector<std::shared_ptr<System>> systems_;
         std::vector<std::shared_ptr<Entity>> entities_;
 
-        std::shared_ptr<System> createSystemFromConfig(const json& arg_systemConfig)
+        std::shared_ptr<System> CreateSystemFromConfig(const json& arg_systemConfig)
         {
             std::string type = arg_systemConfig["type"];
 
             std::cout << type << std::endl;
-            return SystemRegistry::instance().createSystem(type);
+            return SystemRegistry::Instance().CreateSystem(type);
         }
 
         const json& FindComponentConfigById(
@@ -31,7 +31,7 @@ class SceneDirector {
         }
 
 
-        bool processComponent(
+        bool ProcessComponent(
                 const json& arg_entity_component,
                 const json& arg_component_config,
                 JsonParser& arg_parser,
@@ -39,27 +39,27 @@ class SceneDirector {
             std::string component_name = arg_component_config["type"];
             std::string value_type = arg_component_config["value_type"];
             json component_value = arg_entity_component["value"];
-            std::shared_ptr<ComponentBase> component = ComponentRegistry::instance().createComponent(component_name);
-            Variant value = arg_parser.parseValue(value_type, component_value);
+            std::shared_ptr<ComponentBase> component = ComponentRegistry::Instance().CreateComponent(component_name);
+            Variant value = arg_parser.ParseValue(value_type, component_value);
 
             if (!component)
                 return false;
             std::cout << " - " << component_name << std::endl;
             if (value_type == "Sprite") {
                 auto all_ptr = std::get<std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>>(value);
-                scene_builder_.addSprite( all_ptr.second);
-                scene_builder_.addTexture(all_ptr.first);
-                arg_entity_builder.addComponent(component,  all_ptr.second);
+                scene_builder_.AddSprite( all_ptr.second);
+                scene_builder_.AddTexture(all_ptr.first);
+                arg_entity_builder.AddComponent(component,  all_ptr.second);
             } else if (value_type == "Int") {
-                arg_entity_builder.addComponent(component, std::get<int>(value));
+                arg_entity_builder.AddComponent(component, std::get<int>(value));
             } else if (value_type == "PairDouble") {
-                arg_entity_builder.addComponent(component, std::get<std::pair<double, double>>(value));
+                arg_entity_builder.AddComponent(component, std::get<std::pair<double, double>>(value));
             } else if (value_type == "PairInt") {
-                arg_entity_builder.addComponent(component, std::get<std::pair<int, int>>(value));
+                arg_entity_builder.AddComponent(component, std::get<std::pair<int, int>>(value));
             } else if (value_type == "Bool") {
-                arg_entity_builder.addComponent(component, std::get<bool>(value));
+                arg_entity_builder.AddComponent(component, std::get<bool>(value));
             } else if (value_type == "Double") {
-                arg_entity_builder.addComponent(component, std::get<double>(value));
+                arg_entity_builder.AddComponent(component, std::get<double>(value));
             } else {
                 std::cerr << "Unsupported component type: " << value_type << std::endl;
                 return false;
@@ -68,7 +68,7 @@ class SceneDirector {
         }
 
     public:
-        std::shared_ptr<Entity> createEntityFromConfig(
+        std::shared_ptr<Entity> CreateEntityFromConfig(
                 const json& arg_entity_config,
                 const json& arg_components_config) {
             JsonParser parser;
@@ -82,13 +82,13 @@ class SceneDirector {
                 component_id = entity_component["component_id"];
                 const json& component_config = FindComponentConfigById(arg_components_config, component_id);
                 if (component_config.is_null()) {
-                    return entity_builder.build();
+                    return entity_builder.Build();
                 }
-                if (!processComponent(entity_component, component_config, parser, entity_builder)) {
-                    return entity_builder.build();
+                if (!ProcessComponent(entity_component, component_config, parser, entity_builder)) {
+                    return entity_builder.Build();
                 }
             }
-            return entity_builder.build();
+            return entity_builder.Build();
         }
 
         SceneDirector(std::string arg_file_path) {
@@ -98,15 +98,15 @@ class SceneDirector {
             file >> data;
             file.close();
             std::cout << "------[LOAD SYSTEMS]-------" << std::endl;
-            for (const auto& systemConfig : data["systems"])
-                scene_builder_.addSystem(createSystemFromConfig(systemConfig));
+            for (const auto& system_config : data["systems"])
+                scene_builder_.AddSystem(CreateSystemFromConfig(system_config));
             std::cout << "------[LOAD ENTITIES]-------" << std::endl;
-            for (const auto& entityConfig : data["entities"])
-                scene_builder_.addEntity(createEntityFromConfig(entityConfig, data["components"]));
+            for (const auto& entity_config : data["entities"])
+                scene_builder_.AddEntity(CreateEntityFromConfig(entity_config, data["components"]));
         }
 
-        Scene constructScene() {
+        Scene ConstructScene() {
             std::cout << "[CONSTRUCTOR] Scene construct" << std::endl;
-            return scene_builder_.build();
+            return scene_builder_.Build();
         }
 };

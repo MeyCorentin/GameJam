@@ -10,11 +10,13 @@ class Component: public ComponentBase {
         const std::type_info& original_type_;
 
     public:
-        Component(T n) : 
-            value_(n), original_type_(typeid(*this)) {}
+        Component(T arg_n) :
+            value_(arg_n), original_type_(typeid(*this)) {}
+
         Component() :
             value_(), original_type_(typeid(*this)) {}
-        const std::type_info& getType() const override {
+
+        const std::type_info& GetType() const override {
             return original_type_;
         }
 
@@ -24,7 +26,7 @@ class Component: public ComponentBase {
         void setValue(T arg_new_value) {
             value_ = arg_new_value;
         };
-        std::shared_ptr<ComponentBase> clone() const override {
+        std::shared_ptr<ComponentBase> Clone() const override {
             return std::make_shared<Component>(*this);
         }
 };
