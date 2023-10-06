@@ -6,82 +6,91 @@ class JsonParser {
 public:
     JsonParser() {}
 
-    static Variant parseSpriteValue(const json& _value) {
-        if (!_value.is_string()) {
+    static Variant ParseSpriteValue(const json& arg_value) {
+        sf::Sprite sprite;
+        sf::Texture texture;
+        std::shared_ptr<sf::Texture> texture_ptr; 
+        std::shared_ptr<sf::Sprite> sprite_ptr;
+
+        if (!arg_value.is_string()) {
             std::cerr << "Invalid value for Sprite type." << std::endl;
             return Variant();
         }
-
-        sf::Sprite sprite;
-        sf::Texture texture;
-        if (!texture.loadFromFile(_value)) {
+        if (!texture.loadFromFile(arg_value)) {
             std::cerr << "Failed to load texture for sprite." << std::endl;
             return Variant();
         }
-
-        std::shared_ptr<sf::Texture> texturePtr = std::make_shared<sf::Texture>(texture);
-        std::shared_ptr<sf::Sprite> spritePtr = std::make_shared<sf::Sprite>(sprite);
-        spritePtr->setTexture(*texturePtr);
-        return std::make_pair(texturePtr, spritePtr);
+        texture_ptr = std::make_shared<sf::Texture>(texture);
+        sprite_ptr = std::make_shared<sf::Sprite>(sprite);
+        sprite_ptr->setTexture(*texture_ptr);
+        return std::make_pair(texture_ptr, sprite_ptr);
     }
 
-    static Variant parseIntValue(const json& value) {
-        if (!value.is_number_integer()) {
+    static Variant ParseIntValue(const json& arg_value) {
+        int int_value;
+
+        if (!arg_value.is_number_integer()) {
             std::cerr << "Invalid value for Int type." << std::endl;
             return Variant();
         }
-
-        int intValue = value;
-        return intValue;
+        int_value = arg_value;
+        return int_value;
     }
 
-    static Variant parseDoubleValue(const json& value) {
+    static Variant ParseDoubleValue(const json& arg_value) {
 
-        double doubleValue = value;
-        return doubleValue;
+        double double_value = arg_value;
+        return double_value;
     }
 
-    static Variant parsePairDoubleValue(const json& value) {
-        if (!value.is_object() || !value.contains("x") || !value.contains("y")) {
+    static Variant ParsePairDoubleValue(const json& arg_value) {
+        double x;
+        double y;
+        std::pair<double, double> pair_value;
+
+        if (!arg_value.is_object() || !arg_value.contains("x") || !arg_value.contains("y")) {
             std::cerr << "Invalid value for Pair type." << std::endl;
             return Variant();
         }
-
-        double x = value["x"];
-        double y = value["y"];
-        std::pair<double, double> pairValue = std::make_pair(x, y);
-        return pairValue;
+        x = arg_value["x"];
+        y = arg_value["y"];
+        pair_value = std::make_pair(x, y);
+        return pair_value;
     }
 
-    static Variant parsePairIntValue(const json& value) {
-        if (!value.is_object() || !value.contains("x") || !value.contains("y")) {
+    static Variant ParsePairIntValue(const json& arg_value) {
+        int x;
+        int y;
+        std::pair<int, int> pair_value;
+
+        if (!arg_value.is_object() || !arg_value.contains("x") || !arg_value.contains("y")) {
             std::cerr << "Invalid value for Pair type." << std::endl;
             return Variant();
         }
-
-        int x = value["x"];
-        int y = value["y"];
-        std::pair<int, int> pairValue = std::make_pair(x, y);
-        return pairValue;
+        x = arg_value["x"];
+        y = arg_value["y"];
+        pair_value = std::make_pair(x, y);
+        return pair_value;
     }
 
-    static Variant parseBoolValue(const json& value) {
-        if (!value.is_boolean()) {
+    static Variant ParseBoolValue(const json& arg_value) {
+        bool bool_value;
+
+        if (!arg_value.is_boolean()) {
             std::cerr << "Invalid value for Bool type." << std::endl;
             return Variant();
         }
-
-        bool boolValue = value;
-        return boolValue;
+        bool_value = arg_value;
+        return bool_value;
     }
 
-    static Variant parseClockValue(const json& value) {
+    static Variant ParseClockValue(const json& value) {
         sf::Clock clock;
         std::shared_ptr<sf::Clock> clockValue = std::make_shared<sf::Clock>(clock);
         return clockValue;
     }
 
-    static Variant parseIntRectValue(const json& value) {
+    static Variant ParseIntRectValue(const json& value) {
         if (!value.is_object() || !value.contains("left") || !value.contains("top") || !value.contains("width") || !value.contains("height")) {
             std::cerr << "Invalid value for Pair type." << std::endl;
             return Variant();
@@ -95,28 +104,29 @@ public:
         sf::IntRect rect = {left, top, width, height};
         std::shared_ptr<sf::IntRect> rectValue = std::make_shared<sf::IntRect>(rect);
         return rectValue;
-    }
+      }
 
-    static Variant parseValue(const std::string& valueType, const json& value) {
-        if (valueType == "Sprite") {
-            return parseSpriteValue(value);
-        } else if (valueType == "Int") {
-            return parseIntValue(value);
-        } else if (valueType == "PairDouble") {
-            return parsePairDoubleValue(value);
-        } else if (valueType == "PairInt") {
-            return parsePairIntValue(value);
-        } else if (valueType == "Bool") {
-            return parseBoolValue(value);
-        } else if (valueType == "Double") {
-            return parseDoubleValue(value);
-        } else if (valueType == "Clock") {
-            return parseClockValue(value);
-        } else if (valueType == "IntRect") {
-            return parseIntRectValue(value);
+    static Variant ParseValue(const std::string& arg_value_type, const json& arg_value) {
+        if (arg_value_type == "Sprite") {
+            return ParseSpriteValue(arg_value);
+        } else if (arg_value_type == "Int") {
+            return ParseIntValue(arg_value);
+        } else if (arg_value_type == "PairDouble") {
+            return ParsePairDoubleValue(arg_value);
+        } else if (arg_value_type == "PairInt") {
+            return ParsePairIntValue(arg_value);
+        } else if (arg_value_type == "Bool") {
+            return ParseBoolValue(arg_value);
+        } else if (arg_value_type == "Double") {
+            return ParseDoubleValue(arg_value);
+        } else if (arg_value_type == "Clock") {
+            return ParseClockValue(arg_value);
+        } else if (arg_value_type == "IntRect") {
+            return ParseIntRectValue(arg_value);
+        } else {
+            std::cerr << "Unsupported value type: " << arg_value_type << std::endl;
         }
 
-        std::cerr << "Unsupported value type: " << valueType << std::endl;
         return Variant();
     }
 };

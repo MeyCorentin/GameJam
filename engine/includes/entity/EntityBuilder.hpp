@@ -1,35 +1,38 @@
 #pragma once
 
-#include "TEntity.hpp"
+#include "Entity.hpp"
 #include <memory>
 #include <vector>
-#include "../components/TComponent.hpp"
+#include "../components/Component.hpp"
 
 class EntityBuilder {
-private:
-    std::shared_ptr<TEntity> entity;
+    private:
+        std::shared_ptr<Entity> entity_;
 
-public:
-    EntityBuilder(int id) {
-        entity = std::make_shared<TEntity>(id , std::vector<std::shared_ptr<TComponentBase>>());
-    }
-
-    template <typename T>
-    EntityBuilder& addComponent(std::shared_ptr<TComponentBase> component, T value) {
-        auto concreteComponent = std::dynamic_pointer_cast<TComponent<T>>(component);
-        if (concreteComponent) {
-            concreteComponent->setValue(value);
-            entity->components.push_back(component);
+    public:
+        EntityBuilder(int arg_id) {
+            entity_ = std::make_shared<Entity>(arg_id , std::vector<std::shared_ptr<ComponentBase>>());
         }
-        return *this;
-    }
 
-    EntityBuilder& setID(int id) {
-        entity->setId(id);
-        return *this;
-    }
+        template <typename T>
+        EntityBuilder& AddComponent(
+                std::shared_ptr<ComponentBase> arg_component,
+                T arg_value) {
+            auto concrete_component = std::dynamic_pointer_cast<Component<T>>(arg_component);
 
-    std::shared_ptr<TEntity> build() {
-        return entity;
-    }
+            if (concrete_component) {
+                concrete_component->setValue(arg_value);
+                entity_->components_.push_back(arg_component);
+            }
+            return *this;
+        }
+
+        EntityBuilder& SetID(int arg_id) {
+            entity_->SetId(arg_id);
+            return *this;
+        }
+
+        std::shared_ptr<Entity> Build() {
+            return entity_;
+        }
 };

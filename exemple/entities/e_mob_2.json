@@ -1,0 +1,28 @@
+{
+    "components": [
+        {
+            "component_id": 1,
+            "value": "../../sprites/r-typesheet1.png"
+        },
+        {
+            "component_id": 2,
+            "value": 100
+        },
+        {
+            "component_id": 3,
+            "value": { "x": 80, "y": 80 }
+        },
+        {
+            "component_id": 6,
+            "value": { "x": 45, "y": 20 }
+        },
+        {
+            "component_id": 7,
+            "value": { "x": 1, "y": 0}
+        },
+        {
+            "component_id": 8,
+            "value": 10
+        }
+    ]
+}
