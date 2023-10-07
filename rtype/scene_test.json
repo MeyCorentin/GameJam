@@ -132,6 +132,11 @@
             "id": 20,
             "type": "FireRateSpeed",
             "value_type": "Double"
+        },
+        {
+            "id": 21,
+            "type": "Range",
+            "value_type": "Int"
         }
     ],
     "entities": [
@@ -214,6 +219,10 @@
                 {
                     "component_id": 20,
                     "value": 0.5
+                },
+                {
+                    "component_id": 21,
+                    "value": 500
                 }
             ]
         },

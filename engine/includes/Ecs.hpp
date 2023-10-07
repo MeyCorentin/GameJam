@@ -28,6 +28,7 @@
 #include "../includes/components/C_SpriteRect.hpp"
 #include "../includes/components/C_Clock.hpp"
 #include "../includes/components/C_FireRate.hpp"
+#include "../includes/components/C_Range.hpp"
 #include "../includes/components/C_FireRateSpeed.hpp"
 #include "../includes/components/ComponentBase.hpp"
 
@@ -81,6 +82,7 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("Follow", []() { return std::make_shared<C_Follow<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("FireRate", []() { return std::make_shared<C_FireRate<std::shared_ptr<sf::Clock>>>(); });
             ComponentRegistry::Instance().RegisterComponent("FireRateSpeed", []() { return std::make_shared<C_FireRateSpeed<double>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Range", []() { return std::make_shared<C_Range<int>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../../rtype/scene_test.json");

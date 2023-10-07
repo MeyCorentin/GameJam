@@ -71,7 +71,7 @@ class S_Collision : public System {
                         x1 + hitbox_comp_1->getValue().first> x2 &&
                         y1 < y2 + hitbox_comp_2->getValue().second &&
                         y1 + hitbox_comp_1->getValue().second > y2) {
-                            std::cout << "HIT" << std::endl;
+                            // std::cout << "HIT" << std::endl;
                     }
                 }
             }

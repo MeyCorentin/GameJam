@@ -5,7 +5,6 @@
 class S_Hit : public System {
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override {
-            std::cout << "Hit" << std::endl;
             std::vector<std::shared_ptr<Entity>> filtered_entities;
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
