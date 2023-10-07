@@ -36,12 +36,15 @@ class S_Target : public System {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_1;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_2;
+            std::shared_ptr<C_Direction<std::pair<double, double>>> direction_new;
             std::shared_ptr<C_FireRate<std::shared_ptr<sf::Clock>>>  fire_rate;
             std::shared_ptr<C_FireRateSpeed<double>>  fire_rate_speed;
             std::shared_ptr<Entity> new_entity;
             std::vector<std::shared_ptr<Entity>> temp_entities;
             std::string filepath = "../../rtype/scene_test.json";
             std::ifstream file(filepath);
+            std::pair<double, double> direction;
+            double length;
             json data;
             file >> data;
             file.close();
@@ -78,10 +81,15 @@ class S_Target : public System {
                             continue;
                         for (const auto& entity_config : data["entities"]) {
                             if (entity_config["id"] == 3) {
-                                // Set la direction ici
-                                new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
+                                direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                                 position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                                new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
+
+                                direction.first = position_comp_2->getValue().first - position_comp_1->getValue().first;
+                                direction.second = position_comp_2->getValue().second - position_comp_1->getValue().second;
+                                length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
                                 position_new->setValue(std::make_pair(position_comp_1->getValue().first, position_comp_1->getValue().second));
+                                direction_new->setValue(std::make_pair(direction.first /= length, direction.second /= length));
                                 temp_entities.push_back(new_entity);
                                 fire_rate->getValue()->restart();
                             }

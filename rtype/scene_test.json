@@ -122,6 +122,16 @@
             "id": 17,
             "type": "Target",
             "value_type": "Int"
+        },
+        {
+            "id": 19,
+            "type": "FireRate",
+            "value_type": "Clock"
+        },
+        {
+            "id": 20,
+            "type": "FireRateSpeed",
+            "value_type": "Double"
         }
     ],
     "entities": [
@@ -196,6 +206,14 @@
                 {
                     "component_id": 17,
                     "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 0.5
                 }
             ]
         },
