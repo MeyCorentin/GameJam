@@ -1,3 +1,5 @@
+#pragma once
+
 #include "System.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_Player.hpp"

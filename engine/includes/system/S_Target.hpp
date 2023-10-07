@@ -1,7 +1,13 @@
+#pragma once
+
 #include "System.hpp"
 #include "../components/C_Target.hpp"
 #include "../components/C_Follow.hpp"
 #include "../components/C_Position.hpp"
+#include "../components/C_Shoot.hpp"
+#include "../components/C_FireRate.hpp"
+#include "../components/C_FireRateSpeed.hpp"
+#include "S_Input.hpp"
 
 class S_Target : public System {
     public:
@@ -26,25 +32,65 @@ class S_Target : public System {
             int current_mana;
             std::shared_ptr<C_Target<int>> target;
             std::shared_ptr<C_Follow<bool>> follow;
+            std::shared_ptr<C_Shoot<bool>> shoot;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_1;
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_2;
+            std::shared_ptr<C_FireRate<std::shared_ptr<sf::Clock>>>  fire_rate;
+            std::shared_ptr<C_FireRateSpeed<double>>  fire_rate_speed;
+            std::shared_ptr<Entity> new_entity;
+            std::vector<std::shared_ptr<Entity>> temp_entities;
+            std::string filepath = "../../rtype/scene_test.json";
+            std::ifstream file(filepath);
+            json data;
+            file >> data;
+            file.close();
+            S_Input input;
 
             for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
                 for (const std::shared_ptr<Entity>& entity2 : arg_all_Entities) {
                     target = entity1->template GetComponent<C_Target<int>>();
                     follow = entity1->template GetComponent<C_Follow<bool>>();
+                    shoot = entity1->template GetComponent<C_Shoot<bool>>();
                     position_comp_1 = entity1->template GetComponent<C_Position<std::pair<double, double>>>();
                     position_comp_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
+                    fire_rate = entity1->template GetComponent<C_FireRate<std::shared_ptr<sf::Clock>>>();
+                    fire_rate_speed =  entity1->template GetComponent<C_FireRateSpeed<double>>();
 
                     if (entity1 == entity2)
                         continue;
-                    if (follow && position_comp_1 && position_comp_2 && target->getValue() == entity2->GetId())
+                    if (follow &&
+                        position_comp_1 &&
+                        position_comp_2 &&
+                        target->getValue() == entity2->GetId())
                     {
-                        std::cout << "OKKK" << std::endl;
                         position_comp_1->getValue().first = position_comp_2->getValue().first;
                         position_comp_1->getValue().second = position_comp_2->getValue().second;
                     }
+                    if (shoot &&
+                        position_comp_1 &&
+                        position_comp_2 &&
+                        target->getValue() == entity2->GetId() &&
+                        fire_rate &&
+                        fire_rate_speed)
+                    {
+                        if (fire_rate->getValue()->getElapsedTime().asSeconds() < fire_rate_speed->getValue())
+                            continue;
+                        for (const auto& entity_config : data["entities"]) {
+                            if (entity_config["id"] == 3) {
+                                // Set la direction ici
+                                new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
+                                position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                                position_new->setValue(std::make_pair(position_comp_1->getValue().first, position_comp_1->getValue().second));
+                                temp_entities.push_back(new_entity);
+                                fire_rate->getValue()->restart();
+                            }
+                        }
+                    }
                 }
+            }
+            for (const std::shared_ptr<Entity>& temp_entity : temp_entities) {
+                arg_all_Entities.push_back(temp_entity);
             }
         }
 };
