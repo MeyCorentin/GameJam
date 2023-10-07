@@ -9,6 +9,7 @@
 #include "../includes/system/S_Collision.hpp"
 #include "../includes/system/S_Mouvement.hpp"
 #include "../includes/system/S_Animation.hpp"
+#include "../includes/system/S_Target.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_Player.hpp"
@@ -56,6 +57,7 @@ class Ecs
             SystemRegistry::Instance().RegisterSystem("ManaSystem", []() { return std::make_shared<S_Mana>(); });
             SystemRegistry::Instance().RegisterSystem("MouvementSystem", []() { return std::make_shared<S_Mouvement>(); });
             SystemRegistry::Instance().RegisterSystem("S_Animation", []() { return std::make_shared<S_Animation>(); });
+            SystemRegistry::Instance().RegisterSystem("S_Target", []() { return std::make_shared<S_Target>(); });
 
             ComponentRegistry::Instance().RegisterComponent("Sprite", []() { return std::make_shared<C_Sprite<std::shared_ptr<sf::Sprite>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Life", []() { return std::make_shared<C_Life<int>>(); });
@@ -73,7 +75,7 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("Size", []() { return std::make_shared<C_Size<std::pair<int, int>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Animation", []() { return std::make_shared<C_Animation<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Shoot", []() { return std::make_shared<C_Shoot<bool>>(); });
-            ComponentRegistry::Instance().RegisterComponent("Target", []() { return std::make_shared<C_Target<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Target", []() { return std::make_shared<C_Target<int>>(); });
             ComponentRegistry::Instance().RegisterComponent("Follow", []() { return std::make_shared<C_Follow<bool>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
