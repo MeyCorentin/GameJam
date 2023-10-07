@@ -17,8 +17,15 @@
 #include "../includes/components/C_Direction.hpp"
 #include "../includes/components/C_Speed.hpp"
 #include "../includes/components/C_Mana.hpp"
-#include "../includes/components/C_Client.hpp"
+#include "../includes/components/C_Shoot.hpp"
+#include "../includes/components/C_Target.hpp"
+#include "../includes/components/C_Follow.hpp"
+#include "../includes/components/C_Animation.hpp"
 #include "../includes/components/C_Server.hpp"
+#include "../includes/components/C_Client.hpp"
+#include "../includes/components/C_Size.hpp"
+#include "../includes/components/C_SpriteRect.hpp"
+#include "../includes/components/C_Clock.hpp"
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
@@ -65,6 +72,9 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("SpriteRect", []() { return std::make_shared<C_SpriteRect<std::shared_ptr<sf::IntRect>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Size", []() { return std::make_shared<C_Size<std::pair<int, int>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Animation", []() { return std::make_shared<C_Animation<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Shoot", []() { return std::make_shared<C_Shoot<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Target", []() { return std::make_shared<C_Target<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Follow", []() { return std::make_shared<C_Follow<bool>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../../rtype/scene_test.json");
