@@ -10,6 +10,7 @@
 #include "../includes/system/S_Mouvement.hpp"
 #include "../includes/system/S_Animation.hpp"
 #include "../includes/system/S_Target.hpp"
+#include "../includes/system/S_KillEntity.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_Player.hpp"
@@ -61,6 +62,7 @@ class Ecs
             SystemRegistry::Instance().RegisterSystem("MouvementSystem", []() { return std::make_shared<S_Mouvement>(); });
             SystemRegistry::Instance().RegisterSystem("S_Animation", []() { return std::make_shared<S_Animation>(); });
             SystemRegistry::Instance().RegisterSystem("S_Target", []() { return std::make_shared<S_Target>(); });
+            SystemRegistry::Instance().RegisterSystem("KillEntity", []() { return std::make_shared<S_KillEntity>(); });
 
             ComponentRegistry::Instance().RegisterComponent("Sprite", []() { return std::make_shared<C_Sprite<std::shared_ptr<sf::Sprite>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Life", []() { return std::make_shared<C_Life<int>>(); });

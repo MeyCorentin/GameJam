@@ -133,6 +133,9 @@ class Scene {
             DisplayTicks();
             DisplayEntities(entities_.size());
             DisplayCurrentTick();
+            auto it = entities_.begin();
+            while (it != entities_.end())
+                ((*it)->is_dead_) ? it = entities_.erase(it) : ++it;
             window_->display();
         }
 };

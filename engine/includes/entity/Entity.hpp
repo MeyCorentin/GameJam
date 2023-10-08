@@ -6,6 +6,7 @@
 class Entity {
     public:
         int id_;
+        bool is_dead_ = false;;
         std::vector<std::shared_ptr<ComponentBase>> components_;
         Entity(int arg_id, std::vector<std::shared_ptr<ComponentBase>> arg_components) : 
             id_(arg_id), components_(arg_components) {}

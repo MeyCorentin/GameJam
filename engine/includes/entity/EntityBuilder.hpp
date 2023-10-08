@@ -11,9 +11,9 @@ class EntityBuilder {
 
     public:
         EntityBuilder(int arg_id) {
-            entity_ = std::make_shared<Entity>(arg_id , std::vector<std::shared_ptr<ComponentBase>>());
+            Entity* temp = new Entity(arg_id, std::vector<std::shared_ptr<ComponentBase>>());
+            entity_ = std::shared_ptr<Entity>(temp);
         }
-
         template <typename T>
         EntityBuilder& AddComponent(
                 std::shared_ptr<ComponentBase> arg_component,
