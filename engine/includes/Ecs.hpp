@@ -11,6 +11,7 @@
 #include "../includes/system/S_Animation.hpp"
 #include "../includes/system/S_Target.hpp"
 #include "../includes/system/S_KillEntity.hpp"
+#include "../includes/system/S_Parallax.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_Player.hpp"
@@ -29,6 +30,7 @@
 #include "../includes/components/C_SpriteRect.hpp"
 #include "../includes/components/C_Clock.hpp"
 #include "../includes/components/C_FireRate.hpp"
+#include "../includes/components/C_Parallax.hpp"
 #include "../includes/components/C_Range.hpp"
 #include "../includes/components/C_FireRateSpeed.hpp"
 #include "../includes/components/ComponentBase.hpp"
@@ -63,6 +65,7 @@ class Ecs
             SystemRegistry::Instance().RegisterSystem("S_Animation", []() { return std::make_shared<S_Animation>(); });
             SystemRegistry::Instance().RegisterSystem("S_Target", []() { return std::make_shared<S_Target>(); });
             SystemRegistry::Instance().RegisterSystem("KillEntity", []() { return std::make_shared<S_KillEntity>(); });
+            SystemRegistry::Instance().RegisterSystem("ParallaxSystem", []() { return std::make_shared<S_Parallax>(); });
 
             ComponentRegistry::Instance().RegisterComponent("Sprite", []() { return std::make_shared<C_Sprite<std::shared_ptr<sf::Sprite>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Life", []() { return std::make_shared<C_Life<int>>(); });
@@ -75,16 +78,17 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("Server", []() { return std::make_shared<C_Server<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Client", []() { return std::make_shared<C_Client<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Shield", []() { return std::make_shared<C_Shield<int>>(); });
-            ComponentRegistry::Instance().RegisterComponent("Clock", []() { return std::make_shared<C_Clock<std::shared_ptr<sf::Clock>>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Clock", []() { return std::make_shared<C_Clock<sf::Clock>>(); });
             ComponentRegistry::Instance().RegisterComponent("SpriteRect", []() { return std::make_shared<C_SpriteRect<std::shared_ptr<sf::IntRect>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Size", []() { return std::make_shared<C_Size<std::pair<int, int>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Animation", []() { return std::make_shared<C_Animation<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Shoot", []() { return std::make_shared<C_Shoot<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Target", []() { return std::make_shared<C_Target<int>>(); });
             ComponentRegistry::Instance().RegisterComponent("Follow", []() { return std::make_shared<C_Follow<bool>>(); });
-            ComponentRegistry::Instance().RegisterComponent("FireRate", []() { return std::make_shared<C_FireRate<std::shared_ptr<sf::Clock>>>(); });
+            ComponentRegistry::Instance().RegisterComponent("FireRate", []() { return std::make_shared<C_FireRate<sf::Clock>>(); });
             ComponentRegistry::Instance().RegisterComponent("FireRateSpeed", []() { return std::make_shared<C_FireRateSpeed<double>>(); });
             ComponentRegistry::Instance().RegisterComponent("Range", []() { return std::make_shared<C_Range<int>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Parallax", []() { return std::make_shared<C_Parallax<int>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../../rtype/scene_test.json");

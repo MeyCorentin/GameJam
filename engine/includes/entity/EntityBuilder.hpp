@@ -22,7 +22,7 @@ class EntityBuilder {
 
             if (concrete_component) {
                 concrete_component->setValue(arg_value);
-                entity_->components_.push_back(arg_component);
+                entity_->components_.push_back(concrete_component);
             }
             return *this;
         }

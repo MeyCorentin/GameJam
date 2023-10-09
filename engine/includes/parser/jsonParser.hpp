@@ -86,8 +86,7 @@ public:
 
     static Variant ParseClockValue(const json& value) {
         sf::Clock clock;
-        std::shared_ptr<sf::Clock> clockValue = std::make_shared<sf::Clock>(clock);
-        return clockValue;
+        return clock;
     }
 
     static Variant ParseIntRectValue(const json& value) {

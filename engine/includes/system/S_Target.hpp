@@ -30,6 +30,7 @@ class S_Target : public System {
                 std::vector<std::shared_ptr<Entity>>& arg_all_Entities,
                 std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures) override {
+            std::cout << "Run Target" << std::endl;
             int current_mana;
             std::shared_ptr<C_Target<int>> target;
             std::shared_ptr<C_Follow<bool>> follow;
@@ -38,7 +39,7 @@ class S_Target : public System {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_2;
             std::shared_ptr<C_Direction<std::pair<double, double>>> direction_new;
-            std::shared_ptr<C_FireRate<std::shared_ptr<sf::Clock>>>  fire_rate;
+            std::shared_ptr<C_FireRate<sf::Clock>>  fire_rate;
             std::shared_ptr<C_FireRateSpeed<double>>  fire_rate_speed;
             std::shared_ptr<C_Range<int>>  range;
             std::shared_ptr<Entity> new_entity;
@@ -53,13 +54,14 @@ class S_Target : public System {
             S_Input input;
 
             for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
+                std::cout << "ok" << std::endl;
                 for (const std::shared_ptr<Entity>& entity2 : arg_all_Entities) {
                     target = entity1->template GetComponent<C_Target<int>>();
                     follow = entity1->template GetComponent<C_Follow<bool>>();
                     shoot = entity1->template GetComponent<C_Shoot<bool>>();
                     position_comp_1 = entity1->template GetComponent<C_Position<std::pair<double, double>>>();
                     position_comp_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
-                    fire_rate = entity1->template GetComponent<C_FireRate<std::shared_ptr<sf::Clock>>>();
+                    fire_rate = entity1->template GetComponent<C_FireRate<sf::Clock>>();
                     fire_rate_speed =  entity1->template GetComponent<C_FireRateSpeed<double>>();
                     range =  entity1->template GetComponent<C_Range<int>>();
 
@@ -80,7 +82,7 @@ class S_Target : public System {
                         fire_rate &&
                         fire_rate_speed)
                     {
-                        if (fire_rate->getValue()->getElapsedTime().asSeconds() < fire_rate_speed->getValue())
+                        if (fire_rate->getValue().getElapsedTime().asSeconds() < fire_rate_speed->getValue())
                             continue;
                         for (const auto& entity_config : data["entities"]) {
                             if (entity_config["id"] == 3) {
@@ -89,14 +91,13 @@ class S_Target : public System {
                                 length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
                                 if (length > range->getValue())
                                     continue;
-                                std::cout << length  << " : " << range->getValue() << std::endl;
                                 new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
                                 direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                                 position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
                                 position_new->setValue(std::make_pair(position_comp_1->getValue().first, position_comp_1->getValue().second));
                                 direction_new->setValue(std::make_pair(direction.first /= length, direction.second /= length));
                                 temp_entities.push_back(new_entity);
-                                fire_rate->getValue()->restart();
+                                fire_rate->getValue().restart();
                             }
                         }
                     }

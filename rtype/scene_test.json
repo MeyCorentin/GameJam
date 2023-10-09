@@ -3,7 +3,7 @@
         {
             "id": 4,
             "type": "InputSystem"
-        },  
+        },
         {
             "id": 1,
             "type": "HitSystem"
@@ -39,6 +39,10 @@
         {
             "id": 10,
             "type" : "KillEntity"
+        },
+        {
+            "id": 11,
+            "type" : "ParallaxSystem"
         }
     ],
     "components": [
@@ -146,6 +150,11 @@
             "id": 22,
             "type": "Death",
             "value_type": "Bool"
+        },
+        {
+            "id": 23,
+            "type": "Parallax",
+            "value_type": "Int"
         }
     ],
     "entities": [
@@ -199,7 +208,7 @@
                 },
                 {
                     "component_id": 3,
-                    "value": { "x": 150, "y": 150 }
+                    "value": { "x": 1000, "y": 500 }
                 },
                 {
                     "component_id": 5,
@@ -230,6 +239,10 @@
                     "value": 0
                 },
                 {
+                    "component_id": 23,
+                    "value": -1
+                },
+                {
                     "component_id": 20,
                     "value": 0.5
                 },
@@ -240,6 +253,30 @@
                 {
                     "component_id": 22,
                     "value": false
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 24, "height": 23}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 144, "y": 23}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 15,
+                    "value": true
                 }
             ]
         },
@@ -328,6 +365,52 @@
                     "value": false
                 }
             ]
+        }
+    ],
+    "spawn": [
+        {
+            "tick" : 100,
+            "mob_id" : [1, 2, 3]
+        },
+        {
+            "tick" : 200,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 300,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 400,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 500,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 600,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 700,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 800,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 900,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 1000,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 1100,
+            "mob_id" : [2]
         }
     ]
 }

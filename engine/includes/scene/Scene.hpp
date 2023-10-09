@@ -9,10 +9,12 @@ class Scene {
     private:
         std::shared_ptr<sf::RenderWindow> window_;
         std::shared_ptr<sf::Event> event_;
+        std::vector<std::shared_ptr<Entity>> list_entities_;
         std::vector<std::shared_ptr<Entity>> entities_;
         std::vector<std::shared_ptr<System>> systems_;
         std::vector<std::shared_ptr<sf::Sprite>> sprites_;
         std::vector<std::shared_ptr<sf::Texture>> textures_;
+        std::vector<std::pair<int, std::vector<int>>> spawn_index_;
         int frames_this_second_;
         int total_ticks_;
         std::unordered_map<sf::Keyboard::Key, bool> key_states_;
@@ -29,8 +31,9 @@ class Scene {
         Scene( std::vector<std::shared_ptr<System>> arg_system_list,
                 std::vector<std::shared_ptr<Entity>> arg_entity_list,
                 std::vector<std::shared_ptr<sf::Sprite>> arg_sprite_list,
-                std::vector<std::shared_ptr<sf::Texture>> arg_texture_list)
-            : systems_(arg_system_list), entities_(arg_entity_list), sprites_(arg_sprite_list), textures_(arg_texture_list) {
+                std::vector<std::shared_ptr<sf::Texture>> arg_texture_list,
+                std::vector<std::pair<int, std::vector<int>>> arg_spawn_index)
+            : systems_(arg_system_list), list_entities_(arg_entity_list), sprites_(arg_sprite_list), textures_(arg_texture_list), spawn_index_(arg_spawn_index)  {
                 window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(1000, 1000), "R-Type"));
                 frames_this_second_ = 0;
                 total_ticks_ = 0;
@@ -130,6 +133,21 @@ class Scene {
             inputs[4] = key_states_[sf::Keyboard::Space];
             for (const auto& system : systems_)
                 system->Compute(entities_, window_, inputs, sprites_, textures_);
+
+            for (const auto& spawn_info : spawn_index_)
+            {
+                if (spawn_info.first != total_ticks_)
+                    continue;
+                for (int value : spawn_info.second)
+                {
+                    for (const auto& entity : list_entities_){
+                        if (value != entity.get()->GetId())
+                            continue;
+                        std::cout << "Spawn" << std::endl;
+                        entities_.push_back(std::make_shared<Entity>(*entity));
+                    }
+                }
+            }
             DisplayTicks();
             DisplayEntities(entities_.size());
             DisplayCurrentTick();
