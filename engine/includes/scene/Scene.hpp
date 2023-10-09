@@ -15,12 +15,16 @@ class Scene {
         std::vector<std::shared_ptr<sf::Texture>> textures_;
         int frames_this_second_;
         int total_ticks_;
-        std::unordered_map<sf::Keyboard::Key, bool> key_states_;
+        std::unordered_map<sf::Keyboard::Key, int> key_states_;
         std::shared_ptr<sf::Clock> second_clock_;
         std::shared_ptr<sf::Text> tick_;
         std::shared_ptr<sf::Text> entities_nbr_;
         std::shared_ptr<sf::Font> font_;
         std::shared_ptr<sf::Text> current_tick_;
+
+        int time_pressed_;
+        bool is_pressed_ = false;
+        std::vector<int> inputs_ = {0, 0, 0, 0, 0};
 
     public:
         Scene(){}
@@ -112,24 +116,9 @@ class Scene {
         void Update()
         {
             this->ClearWindow();
-            std::vector<int> inputs = {0, 0, 0, 0, 0};
 
-            while (window_->pollEvent(*event_))
-            {
-                if (event_->type == sf::Event::Closed)
-                    window_->close();
-                if (event_->type == sf::Event::KeyPressed)
-                    key_states_[event_->key.code] = true;
-                if (event_->type == sf::Event::KeyReleased)
-                    key_states_[event_->key.code] = false;
-            }
-            inputs[0] = key_states_[sf::Keyboard::Z];
-            inputs[1] = key_states_[sf::Keyboard::Q];
-            inputs[2] = key_states_[sf::Keyboard::S];
-            inputs[3] = key_states_[sf::Keyboard::D];
-            inputs[4] = key_states_[sf::Keyboard::Space];
             for (const auto& system : systems_)
-                system->Compute(entities_, window_, inputs, sprites_, textures_);
+                system->Compute(entities_, window_, inputs_, sprites_, textures_, event_);
             DisplayTicks();
             DisplayEntities(entities_.size());
             DisplayCurrentTick();
@@ -139,4 +128,3 @@ class Scene {
             window_->display();
         }
 };
-
