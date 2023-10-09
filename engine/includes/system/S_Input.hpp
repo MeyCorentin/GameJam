@@ -10,6 +10,8 @@
 #include "../scene/SceneBuilder.hpp"
 
 class S_Input : public System {
+    private:
+        std::vector<int> inputs_ = {0, 0, 0, 0, 0};
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override {
             std::vector<std::shared_ptr<Entity>> filtered_entities;
@@ -109,14 +111,12 @@ class S_Input : public System {
 
             file >> data;
             file.close();
-            std::cout << "New entity created!" << std::endl;
             for (const auto& entity_config : data["entities"]) {
                 if (entity_config["id"] == id) {
                     new_entity = CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
                     position_new->setValue(std::make_pair(arg_position_comp->getValue().first, arg_position_comp->getValue().second));
                     arg_all_entities.push_back(new_entity);
-                    std::cout << "New entity created" << std::endl;
                 }
             }
         }
@@ -127,21 +127,47 @@ class S_Input : public System {
                 std::vector<int> arg_inputs,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures) override {
+                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+                std::shared_ptr<sf::Event> event_) override { //TODO rename event_
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
                 position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                if (arg_inputs[0] == 1)
+                while (arg_window->pollEvent(*event_)) {
+                    if (event_->type == sf::Event::Closed)
+                        arg_window->close();
+                    if (event_->type == sf::Event::KeyPressed) {
+                        if (event_->key.code == sf::Keyboard::Z)
+                            inputs_[0] = 1;
+                        if (event_->key.code == sf::Keyboard::Q)
+                            inputs_[1] = 1;
+                        if (event_->key.code == sf::Keyboard::S)
+                            inputs_[2] = 1;
+                        if (event_->key.code == sf::Keyboard::D)
+                            inputs_[3] = 1;
+                    }
+                    if (event_->type == sf::Event::KeyReleased) {
+                        if (event_->key.code == sf::Keyboard::Z)
+                            inputs_[0] = 0;
+                        if (event_->key.code == sf::Keyboard::Q)
+                            inputs_[1] = 0;
+                        if (event_->key.code == sf::Keyboard::S)
+                            inputs_[2] = 0;
+                        if (event_->key.code == sf::Keyboard::D)
+                            inputs_[3] = 0;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+                        createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
+                    }
+                }
+                if (inputs_[0] == 1)
                     position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
-                if (arg_inputs[1] == 1)
+                if (inputs_[1] == 1)
                     position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
-                if (arg_inputs[2] == 1)
+                if (inputs_[2] == 1)
                     position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + 5));
-                if (arg_inputs[3] == 1)
+                if (inputs_[3] == 1)
                     position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
-                if (arg_inputs[4] == 1)
-                    createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp); //Change that (because is exec many times)
             }
         }
 };

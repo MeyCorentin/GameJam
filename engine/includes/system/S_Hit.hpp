@@ -21,7 +21,8 @@ class S_Hit : public System {
                 std::vector<int> arg_input,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures) override {
+                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+                std::shared_ptr<sf::Event> event_) override {
             int current_shield;
             int current_life;
             std::shared_ptr<C_Shield<int>> shield_comp;

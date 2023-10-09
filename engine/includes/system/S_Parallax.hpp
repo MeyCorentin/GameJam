@@ -26,7 +26,8 @@ class S_Parallax : public System {
                 std::vector<int> arg_inputs,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures) override {
+                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+                std::shared_ptr<sf::Event> event_) override {
             std::cout << "Run parallax" << std::endl;
             std::shared_ptr<C_Position<std::pair<double, double>>> position;
             std::shared_ptr<C_Parallax<int>> parallax;

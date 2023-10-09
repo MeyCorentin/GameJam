@@ -39,7 +39,8 @@ class S_Collision : public System {
                 std::vector<int> arg_inputs,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures) override {
+                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+                std::shared_ptr<sf::Event> event_) override {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_1;
             std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp_1;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_2;

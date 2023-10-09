@@ -26,11 +26,11 @@ class S_Target : public System {
         void Execute(
                 std::vector<std::shared_ptr<Entity>>& arg_entities,
                 std::shared_ptr<sf::RenderWindow> arg_window,
-                std::vector<int>arg_input,
+                std::vector<int> arg_input,
                 std::vector<std::shared_ptr<Entity>>& arg_all_Entities,
                 std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures) override {
-            std::cout << "Run Target" << std::endl;
+                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+                std::shared_ptr<sf::Event> event_) override {
             int current_mana;
             std::shared_ptr<C_Target<int>> target;
             std::shared_ptr<C_Follow<bool>> follow;

@@ -20,7 +20,8 @@ class S_Position : public System {
                 std::vector<int> arg_inputs,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures) override {
+                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+                std::shared_ptr<sf::Event> event_) override {
             std::pair<double, double> position_comp;
 
             for (std::shared_ptr<Entity>& entity : arg_entities) {
