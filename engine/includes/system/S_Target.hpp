@@ -54,7 +54,6 @@ class S_Target : public System {
             S_Input input;
 
             for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
-                std::cout << "ok" << std::endl;
                 for (const std::shared_ptr<Entity>& entity2 : arg_all_Entities) {
                     target = entity1->template GetComponent<C_Target<int>>();
                     follow = entity1->template GetComponent<C_Follow<bool>>();
@@ -72,8 +71,11 @@ class S_Target : public System {
                         position_comp_2 &&
                         target->getValue() == entity2->GetId())
                     {
-                        position_comp_1->getValue().first = position_comp_2->getValue().first;
-                        position_comp_1->getValue().second = position_comp_2->getValue().second;
+                        if (follow->getValue() == true)
+                        {
+                            position_comp_1->getValue().first = position_comp_2->getValue().first;
+                            position_comp_1->getValue().second = position_comp_2->getValue().second;
+                        }
                     }
                     if (shoot &&
                         position_comp_1 &&
@@ -82,22 +84,25 @@ class S_Target : public System {
                         fire_rate &&
                         fire_rate_speed)
                     {
-                        if (fire_rate->getValue().getElapsedTime().asSeconds() < fire_rate_speed->getValue())
-                            continue;
-                        for (const auto& entity_config : data["entities"]) {
-                            if (entity_config["id"] == 3) {
-                                direction.first = position_comp_2->getValue().first - position_comp_1->getValue().first;
-                                direction.second = position_comp_2->getValue().second - position_comp_1->getValue().second;
-                                length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
-                                if (length > range->getValue())
-                                    continue;
-                                new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
-                                direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
-                                position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                                position_new->setValue(std::make_pair(position_comp_1->getValue().first, position_comp_1->getValue().second));
-                                direction_new->setValue(std::make_pair(direction.first /= length, direction.second /= length));
-                                temp_entities.push_back(new_entity);
-                                fire_rate->getValue().restart();
+                        if (shoot->getValue() == true)
+                        {
+                            if (fire_rate->getValue().getElapsedTime().asSeconds() < fire_rate_speed->getValue())
+                                continue;
+                            for (const auto& entity_config : data["entities"]) {
+                                if (entity_config["id"] == 3) {
+                                    direction.first = position_comp_2->getValue().first - position_comp_1->getValue().first;
+                                    direction.second = position_comp_2->getValue().second - position_comp_1->getValue().second;
+                                    length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
+                                    if (length > range->getValue())
+                                        continue;
+                                    new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
+                                    direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
+                                    position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                                    position_new->setValue(std::make_pair(position_comp_1->getValue().first, position_comp_1->getValue().second));
+                                    direction_new->setValue(std::make_pair(direction.first /= length, direction.second /= length));
+                                    temp_entities.push_back(new_entity);
+                                    fire_rate->getValue().restart();
+                                }
                             }
                         }
                     }
