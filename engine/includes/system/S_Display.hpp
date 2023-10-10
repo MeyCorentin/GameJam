@@ -24,6 +24,7 @@ class S_Display : public System {
                 std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<sf::Event> event_) override {
+            std::cout << "In display" << std::endl;
             std::shared_ptr<sf::Sprite> sprite_comp;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
             float x_position;

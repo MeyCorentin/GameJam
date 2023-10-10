@@ -12,6 +12,7 @@
 class S_Input : public System {
     private:
         std::vector<int> inputs_ = {0, 0, 0, 0, 0};
+        int charged_time_ = 0;
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override {
             std::vector<std::shared_ptr<Entity>> filtered_entities;
@@ -66,6 +67,12 @@ class S_Input : public System {
                 arg_entityBuilder.AddComponent(component, std::get<bool>(value));
             } else if (value_type == "Double") {
                 arg_entityBuilder.AddComponent(component, std::get<double>(value));
+            } else if (value_type == "Clock") {
+                arg_entityBuilder.AddComponent(component, std::get<std::shared_ptr<sf::Clock>>(value));
+            } else if (value_type == "IntRect") {
+                arg_entityBuilder.AddComponent(component, std::get<std::shared_ptr<sf::IntRect>>(value));
+            } else if (value_type == "PairPairInt") {
+                arg_entityBuilder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
             } else {
                 std::cerr << "Unsupported component type: " << value_type << std::endl;
                 return false;
@@ -145,6 +152,8 @@ class S_Input : public System {
                             inputs_[2] = 1;
                         if (event_->key.code == sf::Keyboard::D)
                             inputs_[3] = 1;
+                        if (event_->key.code == sf::Keyboard::Space)
+                            charged_time_ += 1;
                     }
                     if (event_->type == sf::Event::KeyReleased) {
                         if (event_->key.code == sf::Keyboard::Z)
@@ -155,9 +164,21 @@ class S_Input : public System {
                             inputs_[2] = 0;
                         if (event_->key.code == sf::Keyboard::D)
                             inputs_[3] = 0;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
+                        if (event_->key.code == sf::Keyboard::Space) { // 3 5 6 7 8 9
+                            if (this->charged_time_ > 5)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 9, position_comp);
+                            else if (this->charged_time_ == 5)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 8, position_comp);
+                            else if (this->charged_time_ == 4)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 7, position_comp);
+                            else if (this->charged_time_ == 3)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 6, position_comp);
+                            else if (this->charged_time_ == 2)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 5, position_comp);
+                            else
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
+                            charged_time_ = 0;
+                        }
                     }
                 }
                 if (inputs_[0] == 1)

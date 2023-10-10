@@ -77,7 +77,7 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("Shield", []() { return std::make_shared<C_Shield<int>>(); });
             ComponentRegistry::Instance().RegisterComponent("Clock", []() { return std::make_shared<C_Clock<std::shared_ptr<sf::Clock>>>(); });
             ComponentRegistry::Instance().RegisterComponent("SpriteRect", []() { return std::make_shared<C_SpriteRect<std::shared_ptr<sf::IntRect>>>(); });
-            ComponentRegistry::Instance().RegisterComponent("Size", []() { return std::make_shared<C_Size<std::pair<int, int>>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Size", []() { return std::make_shared<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Animation", []() { return std::make_shared<C_Animation<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Shoot", []() { return std::make_shared<C_Shoot<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Target", []() { return std::make_shared<C_Target<int>>(); });

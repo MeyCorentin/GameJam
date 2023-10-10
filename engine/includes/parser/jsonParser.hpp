@@ -104,7 +104,33 @@ public:
         sf::IntRect rect = {left, top, width, height};
         std::shared_ptr<sf::IntRect> rectValue = std::make_shared<sf::IntRect>(rect);
         return rectValue;
-      }
+    }
+
+    static Variant ParsePairPairIntValue(const json& arg_value) {
+        int x;
+        int y;
+        int start_x;
+        int start_y;
+
+        std::pair<int, int> pair_value;
+        std::pair<int, int> pair_value_start;
+        std::pair<std::pair<int, int>, std::pair<int, int>> pair_value_comp;
+
+        if (!arg_value.is_object() || !arg_value.contains("x") || !arg_value.contains("y") || !arg_value.contains("start_x") || !arg_value.contains("start_y")) {
+            std::cerr << "Invalid value for Pair type." << std::endl;
+            return Variant();
+        }
+        x = arg_value["x"];
+        y = arg_value["y"];
+        start_x = arg_value["start_x"];
+        start_y = arg_value["start_y"];
+
+        pair_value = std::make_pair(x, y);
+        pair_value_start = std::make_pair(start_x, start_y);
+
+        pair_value_comp = std::make_pair(pair_value, pair_value_start);
+        return pair_value_comp;
+    }
 
     static Variant ParseValue(const std::string& arg_value_type, const json& arg_value) {
         if (arg_value_type == "Sprite") {
@@ -123,6 +149,8 @@ public:
             return ParseClockValue(arg_value);
         } else if (arg_value_type == "IntRect") {
             return ParseIntRectValue(arg_value);
+        } else if (arg_value_type == "PairPairInt") {
+            return ParsePairPairIntValue(arg_value);
         } else {
             std::cerr << "Unsupported value type: " << arg_value_type << std::endl;
         }
