@@ -13,6 +13,10 @@
             "type": "PositionSystem"
         },
         {
+            "id": 8,
+            "type" : "S_Animation"
+        },
+        {
             "id": 3,
             "type": "DisplaySystem"
         },
@@ -27,10 +31,6 @@
         {
             "id": 7,
             "type" : "MouvementSystem"
-        },
-        {
-            "id": 8,
-            "type" : "S_Animation"
         },
         {
             "id": 9,

@@ -3,6 +3,7 @@
 #include "System.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_Player.hpp"
+#include "../components/C_SpriteRect.hpp"
 #include "../entity/EntityBuilder.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
@@ -122,6 +123,9 @@ class S_Input : public System {
                 if (entity_config["id"] == id) {
                     new_entity = CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                    std::shared_ptr<sf::IntRect> rect = new_entity->template GetComponent<C_SpriteRect<std::shared_ptr<sf::IntRect>>>()->getValue();
+                    std::shared_ptr<sf::Sprite> sprite = new_entity->template GetComponent<C_Sprite<std::shared_ptr<sf::Sprite>>>()->getValue();
+                    sprite->setTextureRect(*rect);
                     position_new->setValue(std::make_pair(arg_position_comp->getValue().first, arg_position_comp->getValue().second));
                     arg_all_entities.push_back(new_entity);
                 }
