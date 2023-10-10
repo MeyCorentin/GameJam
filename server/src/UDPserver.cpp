@@ -34,17 +34,54 @@ void UDPServer::read_data()
         boost::asio::buffer(this->recv_buffer_), this->remote_endpoint_,
         [this](boost::system::error_code ec, std::size_t bytes_recvd) {
             if (!ec && bytes_recvd > 0) {
-                std::cout << "Received data from client" << std::endl;
-                this->clients_[this->remote_endpoint_] = true;
-                std::string data(this->recv_buffer_.begin(), this->recv_buffer_.end());
-                std::cout << "Received from client : " << data << std::endl;
-                // BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
+                BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
                 // std::cout << "Received : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << " data:" << msg.data << std::endl;
-                // this->send_to_all(msg);
-                this->socket_.send_to(boost::asio::buffer("ok"), this->remote_endpoint_);
+                if (msg.type == 1)
+                    handleClientMessage(msg);
             }
             read_data();
     });
+}
+
+void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
+{
+    switch (msg.data)
+    {
+        case 100: // Client connection
+            if (clients_.find(remote_endpoint_) == clients_.end()) {
+                clients_[remote_endpoint_] = next_client_id_++;
+                std::cout << "New client with ID: " << clients_[remote_endpoint_] << std::endl;
+
+                // Send client ID back
+                BinaryProtocole::BinaryMessage response = {type: 1, id: clients_[remote_endpoint_], x: 0, y: 0, data: 101};
+                send(response);
+            }
+            break;
+
+        case 200:
+            std::cout << "Client " << msg.id << " up." << std::endl;
+            break;
+
+        case 210:
+            std::cout << "Client " << msg.id << " left." << std::endl;
+            break;
+
+        case 220:
+            std::cout << "Client " << msg.id << " down." << std::endl;
+            break;
+
+        case 230:
+            std::cout << "Client " << msg.id << " right." << std::endl;
+            break;
+
+        case 300:
+            std::cout << "Client " << msg.id << " shoot." << std::endl;
+            break;
+
+        default:
+            std::cerr << "Unknown message data: " << msg.data << std::endl;
+            break;
+    }
 }
 
 void UDPServer::start()
@@ -57,6 +94,11 @@ void UDPServer::start()
     // t1.join();
     run_server(ecs);
     // t2.join();
+}
+
+void UDPServer::send(BinaryProtocole::BinaryMessage msg)
+{
+    this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), this->remote_endpoint_);
 }
 
 void UDPServer::send_to_all(BinaryProtocole::BinaryMessage msg)

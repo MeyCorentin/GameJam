@@ -4,11 +4,9 @@
 UDPClient::UDPClient(boost::asio::io_context& io_context, const std::string& host, unsigned short port)
     : io_context_(io_context), socket_(io_context, udp::endpoint(udp::v4(), 0)), server_endpoint_(boost::asio::ip::address::from_string(host), port)
 {
-    BinaryProtocole::BinaryMessage initial_msg = {type: 1, id: 1, x: 1920, y: 1080, data: 101};
+    BinaryProtocole::BinaryMessage initial_msg = {type: 1, id: 0, x: 1920, y: 1080, data: 100};
     send(initial_msg);
-    start_listening();
 }
-
 
 void UDPClient::run_game(Ecs &ecs)
 {
@@ -16,10 +14,42 @@ void UDPClient::run_game(Ecs &ecs)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
         ecs.Update();
+        retreiveKeyboard();
         auto endTime =  std::chrono::high_resolution_clock::now();
         auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
         if (elapsedTime < (1.0 / 60))
             std::this_thread::sleep_for(std::chrono::duration<double>((1.0 / 60) - elapsedTime));
+    }
+}
+
+void UDPClient::retreiveKeyboard()
+{
+    BinaryProtocole::BinaryMessage msg = {type: 1, id: getClientId(), x: 1920, y: 1080, data: 0};
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+    {
+        msg.data = 200;
+        send(msg);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+    {
+        msg.data = 210;
+        send(msg);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    {
+        msg.data = 220;
+        send(msg);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        msg.data = 230;
+        send(msg);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        msg.data = 300;
+        send(msg);
     }
 }
 
@@ -57,6 +87,12 @@ void UDPClient::read_data()
             if (!ec && bytes_recvd > 0) {
                 BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
                 std::cout << "Received from server : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << " data:" << msg.data << std::endl;
+
+                // Check if the received message is an ID assignment from the server
+                if (msg.data == 101) {
+                    setClientId(msg.id);
+                    std::cout << "Client ID assigned by server: " << getClientId() << std::endl;
+                }
             }
             this->read_data();
         });
