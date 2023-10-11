@@ -64,7 +64,7 @@
         {
             "id": 4,
             "type": "Player",
-            "value_type": "Bool"
+            "value_type": "Int"
         },
         {
             "id": 5,
@@ -157,8 +157,13 @@
             "value_type": "Clock"
         },
         {
-            "id": 25,
+            "id": 26,
             "type": "ShootCharging",
+            "value_type": "Bool"
+        },
+        {
+            "id": 25,
+            "type": "PlayerAmmo",
             "value_type": "Bool"
         }
     ],
@@ -180,7 +185,7 @@
                 },
                 {
                     "component_id": 4,
-                    "value": true
+                    "value": 0
                 },
                 {
                     "component_id": 5,
@@ -216,6 +221,10 @@
                 },
                 {
                     "component_id": 25,
+                    "value": false
+                },
+                {
+                    "component_id": 26,
                     "value": false
                 }
             ]
@@ -335,6 +344,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 25,
+                    "value": true
                 }
             ]
         },
@@ -425,6 +438,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 25,
+                    "value": true
                 }
             ]
         },
@@ -469,6 +486,10 @@
                 },
                 {
                     "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 25,
                     "value": true
                 }
             ]
@@ -515,6 +536,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 25,
+                    "value": true
                 }
             ]
         },
@@ -560,6 +585,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 25,
+                    "value": true
                 }
             ]
         },
@@ -601,6 +630,55 @@
                 {
                     "component_id": 13,
                     "value": { "x": 166, "y": 14, "start_x": 102, "start_y": 171}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 19, "y": 10 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 10
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 247, "top": 88, "width": 19, "height": 10}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 19, "y": 10, "start_x": 247, "start_y": 88}
                 },
                 {
                     "component_id": 14,

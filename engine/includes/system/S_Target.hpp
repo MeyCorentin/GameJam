@@ -24,6 +24,7 @@ class S_Target : public System {
         }
 
         void Execute(
+                int arg_is_server,
                 std::vector<std::shared_ptr<Entity>>& arg_entities,
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_input,
@@ -89,7 +90,7 @@ class S_Target : public System {
                             if (fire_rate->getValue().getElapsedTime().asSeconds() < fire_rate_speed->getValue())
                                 continue;
                             for (const auto& entity_config : data["entities"]) {
-                                if (entity_config["id"] == 3) {
+                                if (entity_config["id"] == 10) { // !TODO Récupérer l'id de la munition depuis le json
                                     direction.first = position_comp_2->getValue().first - position_comp_1->getValue().first;
                                     direction.second = position_comp_2->getValue().second - position_comp_1->getValue().second;
                                     length = std::sqrt(direction.first * direction.first + direction.second * direction.second);

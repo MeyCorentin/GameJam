@@ -21,7 +21,14 @@ class S_Animation : public System {
             return filteredEntities;
         }
 
-        void Execute(std::vector<std::shared_ptr<Entity>>& _entities, std::shared_ptr<sf::RenderWindow> _window, std::vector<int> _inputs, std::vector<std::shared_ptr<Entity>>& allEntities, std::vector<sf::Sprite>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures, std::shared_ptr<sf::Event> event_) override {
+        void Execute(
+                int arg_is_server,
+                std::vector<std::shared_ptr<Entity>>& _entities,
+                std::shared_ptr<sf::RenderWindow> _window,
+                std::vector<int> _inputs,
+                std::vector<std::shared_ptr<Entity>>& allEntities,
+                std::vector<sf::Sprite>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures,
+                std::shared_ptr<sf::Event> event_) override {
             for (const std::shared_ptr<Entity>& entity : _entities) {
                 std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
                 std::shared_ptr<C_Clock<sf::Clock>> clock = entity->template GetComponent<C_Clock<sf::Clock>>();

@@ -116,33 +116,98 @@ class Scene {
             window_->draw(*tick_);
         }
 
-        void Update()
+
+        void AddNewPlayer(int arg_id)
         {
-            this->ClearWindow();
-
-            for (const auto& system : systems_)
-                system->Compute(entities_, window_, inputs_, sprites_, textures_, event_);
-
-            for (const auto& spawn_info : spawn_index_)
-            {
-                if (spawn_info.first != total_ticks_)
-                    continue;
-                for (int value : spawn_info.second)
+            for (const auto& entity : list_entities_) {
+                if (entity->GetId() == 1)
                 {
-                    for (const auto& entity : list_entities_){
-                        if (value != entity.get()->GetId())
+                    std::shared_ptr<C_Player<int>> index;
+                    std::cout << "Add entity" << std::endl;
+                    entities_.push_back(std::make_shared<Entity>(*entity));
+                    for (const std::shared_ptr<Entity>& entity : entities_) {
+                        index = entity->template GetComponent<C_Player<int>>();
+                        if (!index)
                             continue;
-                        std::cout << "Spawn" << std::endl;
-                        entities_.push_back(std::make_shared<Entity>(*entity));
+                        if (index->getValue() != 0)
+                            continue;
+                        index->setValue(arg_id);
+                        std::cout << index->getValue() << std::endl;
                     }
                 }
             }
-            DisplayTicks();
-            DisplayEntities(entities_.size());
-            DisplayCurrentTick();
-            auto it = entities_.begin();
-            while (it != entities_.end())
-                ((*it)->is_dead_) ? it = entities_.erase(it) : ++it;
-            window_->display();
         }
+
+
+    void InputFromPlayer(std::pair<int,int> arg_message)
+    {
+        std::cout << "----- Input from player" << std::endl;
+        std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
+        for (const auto& entity : list_entities_) {
+            if (entity->GetId() == 1)
+            {
+                std::shared_ptr<C_Player<int>> index;
+                for (const std::shared_ptr<Entity>& entity : entities_) {
+                    index = entity->template GetComponent<C_Player<int>>();
+                    if (!index)
+                        continue;
+                    if (index->getValue() != arg_message.first)
+                        continue;
+                    position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                    if (!position_comp)
+                        continue;
+                    switch (arg_message.second) {
+                        case 200: // Up
+                            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
+                            break;
+                        case 210: // Left
+                            position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
+                            break;
+                        case 220: // Down
+                            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second + 5));
+                            break;
+                        case 230: // Right
+                            position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
+                            break;
+                        case 300: // Shoot
+                            break;
+                        default:
+                            std::cerr << "Unknown message data: " << arg_message.second << std::endl;
+                            break;
+                    }
+                    std::cout << "MOVE" << std::endl;
+                }
+            }
+        }
+    }
+
+    void Update(int arg_is_server)
+    {
+        this->ClearWindow();
+
+        for (const auto& system : systems_)
+            system->Compute(arg_is_server, entities_, window_, inputs_, sprites_, textures_, event_);
+
+        for (const auto& spawn_info : spawn_index_)
+        {
+            if (spawn_info.first != total_ticks_)
+                continue;
+            for (int value : spawn_info.second)
+            {
+                for (const auto& entity : list_entities_){
+                    if (value != entity.get()->GetId())
+                        continue;
+                    if (entity.get()->GetId() != arg_is_server)
+                        entities_.push_back(std::make_shared<Entity>(*entity));
+                }
+            }
+        }
+        DisplayTicks();
+        DisplayEntities(entities_.size());
+        DisplayCurrentTick();
+        auto it = entities_.begin();
+        while (it != entities_.end())
+            ((*it)->is_dead_) ? it = entities_.erase(it) : ++it;
+        window_->display();
+    }
 };

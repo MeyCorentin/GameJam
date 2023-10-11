@@ -13,7 +13,7 @@ void UDPClient::run_game(Ecs &ecs)
     while (true)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
-        ecs.Update();
+        ecs.Update(0);
         retreiveKeyboard();
         auto endTime =  std::chrono::high_resolution_clock::now();
         auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
@@ -71,7 +71,7 @@ void UDPClient::start()
 {
     Ecs ecs;
 
-    ecs.Create();
+    ecs.Create(0);
     std::thread t1(&UDPClient::start_listening, this);
     // std::thread t2(&UDPClient::run_game, this, std::ref(_ecs));
     // t1.join();
