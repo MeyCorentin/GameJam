@@ -61,7 +61,7 @@ class SceneDirector {
             } else if (value_type == "Double") {
                 arg_entity_builder.AddComponent(component, std::get<double>(value));
             } else if (value_type == "Clock") {
-                arg_entity_builder.AddComponent(component, std::get<std::shared_ptr<sf::Clock>>(value));
+                arg_entity_builder.AddComponent(component, std::get<sf::Clock>(value));
             } else if (value_type == "IntRect") {
                 arg_entity_builder.AddComponent(component, std::get<std::shared_ptr<sf::IntRect>>(value));
             } else if (value_type == "PairPairInt") {
@@ -97,6 +97,26 @@ class SceneDirector {
             return entity_builder.Build();
         }
 
+        std::vector<std::pair<int, std::vector<int>>> CreateMap(const json& arg_spawn_config)
+        {
+            std::vector<std::pair<int, std::vector<int>>> map;
+            for (const auto& spawn_entry : arg_spawn_config)
+            {
+                int tick = spawn_entry.at("tick").get<int>();
+                std::vector<int> ids;
+                std::cout << "[[" << tick << ": ";
+                for (const auto& id : spawn_entry.at("mob_id"))
+                {
+                    int id_value = id.get<int>();
+                    std::cout <<  id_value << " ";
+                    ids.push_back(id_value);
+                }
+                std::cout << "]]" << std::endl;
+                map.push_back(std::make_pair(tick, ids));
+            }
+            return map;
+        }
+
         SceneDirector(std::string arg_file_path) {
             std::ifstream file(arg_file_path);
             json data;
@@ -109,6 +129,7 @@ class SceneDirector {
             std::cout << "------[LOAD ENTITIES]-------" << std::endl;
             for (const auto& entity_config : data["entities"])
                 scene_builder_.AddEntity(CreateEntityFromConfig(entity_config, data["components"]));
+            scene_builder_.AddSpawnIndex(CreateMap(data["spawn"]));
         }
 
         Scene ConstructScene() {

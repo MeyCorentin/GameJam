@@ -69,7 +69,7 @@ class S_Input : public System {
             } else if (value_type == "Double") {
                 arg_entityBuilder.AddComponent(component, std::get<double>(value));
             } else if (value_type == "Clock") {
-                arg_entityBuilder.AddComponent(component, std::get<std::shared_ptr<sf::Clock>>(value));
+                arg_entityBuilder.AddComponent(component, std::get<sf::Clock>(value));
             } else if (value_type == "IntRect") {
                 arg_entityBuilder.AddComponent(component, std::get<std::shared_ptr<sf::IntRect>>(value));
             } else if (value_type == "PairPairInt") {

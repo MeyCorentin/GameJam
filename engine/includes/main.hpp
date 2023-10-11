@@ -21,7 +21,7 @@ using Variant = std::variant<
                 std::pair<int, int>, 
                 bool, 
                 double, 
-                std::shared_ptr<sf::Clock>, 
+                sf::Clock,
                 std::shared_ptr<sf::IntRect>, 
                 std::pair<std::pair<int, int>, std::pair<int, int>>>;
 using json = nlohmann::json;

@@ -13,7 +13,6 @@ int main(int ac, char **av)
         UDPServer server(io_context, port);
         std::cout << "Server running" << std::endl;
         server.start();
-        io_context.run();
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }

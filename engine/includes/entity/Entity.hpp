@@ -11,12 +11,27 @@ class Entity {
         Entity(int arg_id, std::vector<std::shared_ptr<ComponentBase>> arg_components) : 
             id_(arg_id), components_(arg_components) {}
 
+        Entity(const Entity& other) :
+            id_(other.id_),
+            is_dead_(other.is_dead_) {
+            components_.reserve(other.components_.size());
+            for (const auto& component : other.components_) {
+                if (component) {
+                    components_.emplace_back(component->Clone());
+                }
+            }
+        }
+
         int GetId() {
             return id_;
         }
 
         void SetId(int arg_id) {
             id_ = arg_id;
+        }
+
+        std::shared_ptr<Entity> Clone() const {
+            return std::make_shared<Entity>(*this);
         }
 
         bool HasComponent(const std::type_info& arg_type) const {

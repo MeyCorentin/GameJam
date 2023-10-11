@@ -6,18 +6,26 @@ UDPServer::UDPServer(boost::asio::io_context& io_context, unsigned short port)
 
 }
 
-
-void UDPServer::run_server(Ecs &_ecs)
+void UDPServer::run_server(Ecs &ecs)
 {
     while (true)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
-        _ecs.update();
+        ecs.Update();
         auto endTime =  std::chrono::high_resolution_clock::now();
         auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
         if (elapsedTime < (1.0 / 60))
             std::this_thread::sleep_for(std::chrono::duration<double>((1.0 / 60) - elapsedTime));
     }
+}
+
+void UDPServer::start_listening()
+{
+    const std::size_t buffer_size = 1024;
+
+    this->recv_buffer_.resize(buffer_size);
+    read_data();
+    this->io_context_.run();
 }
 
 void UDPServer::read_data()
@@ -26,32 +34,81 @@ void UDPServer::read_data()
         boost::asio::buffer(this->recv_buffer_), this->remote_endpoint_,
         [this](boost::system::error_code ec, std::size_t bytes_recvd) {
             if (!ec && bytes_recvd > 0) {
-                this->clients_[this->remote_endpoint_] = true;
-                std::string receivedData(this->recv_buffer_.data(), bytes_recvd);
-                std::cout << "Received: " << receivedData << std::endl;
-                this->socket_.send_to(boost::asio::buffer("ok"), this->remote_endpoint_);
+                BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
+                // std::cout << "Received : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << " data:" << msg.data << std::endl;
+                if (msg.type == 1)
+                    handleClientMessage(msg);
             }
-        read_data();
+            read_data();
     });
+}
+
+void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
+{
+    switch (msg.data)
+    {
+        case 100: // Client connection
+            if (clients_.find(remote_endpoint_) == clients_.end()) {
+                clients_[remote_endpoint_] = next_client_id_++;
+                std::cout << "New client with ID: " << clients_[remote_endpoint_] << std::endl;
+
+                // Send client ID back
+                BinaryProtocole::BinaryMessage response = {type: 1, id: clients_[remote_endpoint_], x: 0, y: 0, data: 101};
+                send(response);
+            }
+            break;
+
+        case 200:
+            std::cout << "Client " << msg.id << " up." << std::endl;
+            break;
+
+        case 210:
+            std::cout << "Client " << msg.id << " left." << std::endl;
+            break;
+
+        case 220:
+            std::cout << "Client " << msg.id << " down." << std::endl;
+            break;
+
+        case 230:
+            std::cout << "Client " << msg.id << " right." << std::endl;
+            break;
+
+        case 300:
+            std::cout << "Client " << msg.id << " shoot." << std::endl;
+            break;
+
+        default:
+            std::cerr << "Unknown message data: " << msg.data << std::endl;
+            break;
+    }
 }
 
 void UDPServer::start()
 {
-    Ecs _ecs;
-    _ecs.create();
-    std::thread t1(&UDPServer::read_data, this);
-    std::thread t2(&UDPServer::run_server, this, std::ref(_ecs));
-    t1.join();
-    t2.join();
+    Ecs ecs;
+
+    ecs.Create();
+    std::thread t1(&UDPServer::start_listening, this);
+    // std::thread t2(&UDPServer::run_server, this, std::ref(_ecs));
+    // t1.join();
+    run_server(ecs);
+    // t2.join();
 }
 
-void UDPServer::send_to_all(const std::string& message)
+void UDPServer::send(BinaryProtocole::BinaryMessage msg)
 {
-    Ecs _ecs;
-    _ecs.create();
-    for (const auto& [remote_endpoint_, _] : clients_) {
-        this->socket_.send_to(boost::asio::buffer(message), this->remote_endpoint_);
-        _ecs.update();
+    this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), this->remote_endpoint_);
+}
+
+void UDPServer::send_to_all(BinaryProtocole::BinaryMessage msg)
+{
+    Ecs ecs;
+
+    ecs.Create();
+    for (const auto& [client_endpoint, _] : clients_) {
+        this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), client_endpoint);
+        ecs.Update();
     }
 }
 
