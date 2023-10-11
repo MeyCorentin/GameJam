@@ -4,6 +4,7 @@
 #include "../components/C_Position.hpp"
 #include "../components/C_Player.hpp"
 #include "../components/C_SpriteRect.hpp"
+#include "../components/C_Hitbox.hpp"
 #include "../entity/EntityBuilder.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
@@ -142,10 +143,12 @@ class S_Input : public System {
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<sf::Event> event_) override { //TODO rename event_
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
+            std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size;
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
                 if (arg_is_server == 1)
                     continue;
                 position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                 while (arg_window->pollEvent(*event_)) {
                     if (event_->type == sf::Event::Closed)
                         arg_window->close();
@@ -188,13 +191,25 @@ class S_Input : public System {
                     }
                 }
                 if (inputs_[0] == 1)
-                    position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
+                {
+                    if (position_comp->getValue().second > 5)
+                        position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
+                }
                 if (inputs_[1] == 1)
-                    position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
+                {
+                    if (position_comp->getValue().first > 5)
+                        position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
+                }
                 if (inputs_[2] == 1)
-                    position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + 5));
+                {
+                    if (position_comp->getValue().second < arg_window->getSize().x - 5 - hitbox_size->getValue().second)
+                        position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + 5));
+                }
                 if (inputs_[3] == 1)
-                    position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
+                {
+                    if (position_comp->getValue().first < arg_window->getSize().y - 5 - hitbox_size->getValue().first)
+                        position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
+                }
             }
         }
 };

@@ -7,7 +7,7 @@ class S_Position : public System {
             std::vector<std::shared_ptr<Entity>> filtered_entities;
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
-                if (entity->HasComponent(typeid(C_Position<std::pair<int, int>>))) {
+                if (entity->HasComponent(typeid(C_Position<std::pair<double, double>>))) {
                     filtered_entities.push_back(entity);
                 }
             }

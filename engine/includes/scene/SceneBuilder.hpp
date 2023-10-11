@@ -12,7 +12,7 @@ class SceneBuilder {
         std::vector<std::shared_ptr<Entity>> entities_;
         std::vector<sf::Sprite> sprites_;
         std::vector<std::shared_ptr<sf::Texture>> textures_;
-        std::vector<std::pair<int, std::vector<int>>> spawn_index_;
+        std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> spawn_index_;
         std::string path_;
 
     public:
@@ -26,7 +26,7 @@ class SceneBuilder {
             return *this;
         }
 
-        SceneBuilder& AddSpawnIndex(std::vector<std::pair<int, std::vector<int>>> arg_spawn_index) {
+        SceneBuilder& AddSpawnIndex(std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index) {
             spawn_index_ = arg_spawn_index;
             return *this;
         }

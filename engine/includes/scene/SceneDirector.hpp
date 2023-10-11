@@ -97,19 +97,24 @@ class SceneDirector {
             return entity_builder.Build();
         }
 
-        std::vector<std::pair<int, std::vector<int>>> CreateMap(const json& arg_spawn_config)
+        std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> CreateMap(const json& arg_spawn_config)
         {
-            std::vector<std::pair<int, std::vector<int>>> map;
+            std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> map;
             for (const auto& spawn_entry : arg_spawn_config)
             {
                 int tick = spawn_entry.at("tick").get<int>();
-                std::vector<int> ids;
-                for (const auto& id : spawn_entry.at("mob_id"))
+                std::vector<std::pair<int, std::pair<int, int>> > entities;
+
+                for (const auto& entity : spawn_entry.at("mob_id"))
                 {
-                    int id_value = id.get<int>();
-                    ids.push_back(id_value);
+                    int id_value = entity.at("entity_id").get<int>();
+                    int x = entity.at("position").at("x").get<int>();
+                    int y = entity.at("position").at("y").get<int>();
+
+                    entities.push_back(std::make_pair(id_value, std::make_pair(x, y)));
                 }
-                map.push_back(std::make_pair(tick, ids));
+
+                map.push_back(std::make_pair(tick, entities));
             }
             return map;
         }

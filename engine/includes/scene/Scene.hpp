@@ -14,7 +14,7 @@ class Scene {
         std::vector<std::shared_ptr<System>> systems_;
         std::vector<sf::Sprite> sprites_;
         std::vector<std::shared_ptr<sf::Texture>> textures_;
-        std::vector<std::pair<int, std::vector<int>>> spawn_index_;
+        std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> spawn_index_;
         int frames_this_second_;
         int total_ticks_;
         std::unordered_map<sf::Keyboard::Key, int> key_states_;
@@ -36,7 +36,7 @@ class Scene {
                 std::vector<std::shared_ptr<Entity>> arg_entity_list,
                 std::vector<sf::Sprite> arg_sprite_list,
                 std::vector<std::shared_ptr<sf::Texture>> arg_texture_list,
-                std::vector<std::pair<int, std::vector<int>>> arg_spawn_index)
+                std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index)
             : systems_(arg_system_list), list_entities_(arg_entity_list), sprites_(arg_sprite_list), textures_(arg_texture_list), spawn_index_(arg_spawn_index)  {
                 window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(1000, 1000), "R-Type"));
                 frames_this_second_ = 0;
@@ -192,13 +192,29 @@ class Scene {
         {
             if (spawn_info.first != total_ticks_)
                 continue;
-            for (int value : spawn_info.second)
+
+            for (const auto& entity_info : spawn_info.second)
             {
-                for (const auto& entity : list_entities_){
-                    if (value != entity.get()->GetId())
-                        continue;
-                    if (entity.get()->GetId() != arg_is_server)
-                        entities_.push_back(std::make_shared<Entity>(*entity));
+                int entity_id = entity_info.first;
+                int x = entity_info.second.first;
+                int y = entity_info.second.second;
+
+                for (const auto& entity : list_entities_)
+                {
+                    if (entity_id == entity->GetId())
+                    {
+                        if (entity->GetId() != arg_is_server)
+                        {
+                            std::shared_ptr<C_Position<std::pair<double,double>>> position;
+                            std::cout << "-Add entity" << std::endl;
+                            entities_.push_back(std::make_shared<Entity>(*entity));
+                            std::cout << "--Add entity" << std::endl;
+                            position = entities_.back()->template GetComponent<C_Position<std::pair<double,double>>>();
+                            std::cout << "---Add entity" << std::endl;
+                            position->setValue(std::make_pair(x,y));
+                            std::cout << "----Add entity" << std::endl;
+                        }
+                    }
                 }
             }
         }

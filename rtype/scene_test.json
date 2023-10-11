@@ -5,10 +5,6 @@
             "type": "InputSystem"
         },
         {
-            "id": 1,
-            "type": "HitSystem"
-        },
-        {
             "id": 2,
             "type": "PositionSystem"
         },
@@ -172,7 +168,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 100
+                    "value": 1
                 },
                 {
                     "component_id": 3,
@@ -221,7 +217,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 100
+                    "value": 1
                 },
                 {
                     "component_id": 3,
@@ -294,7 +290,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 100
+                    "value": 1
                 },
                 {
                     "component_id": 3,
@@ -388,7 +384,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 100
+                    "value": 1
                 },
                 {
                     "component_id": 3,
@@ -437,7 +433,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 100
+                    "value": -1
                 },
                 {
                     "component_id": 3,
@@ -486,7 +482,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 100
+                    "value": -1
                 },
                 {
                     "component_id": 3,
@@ -535,7 +531,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 100
+                    "value": -1
                 },
                 {
                     "component_id": 3,
@@ -584,7 +580,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 100
+                    "value": -1
                 },
                 {
                     "component_id": 3,
@@ -633,7 +629,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 100
+                    "value": 1
                 },
                 {
                     "component_id": 3,
@@ -673,47 +669,110 @@
     "spawn": [
         {
             "tick" : 100,
-            "mob_id" : [1, 2, 4]
+            "mob_id": [
+                {
+                    "entity_id": 1,
+                    "position": { "x": 500, "y": 500 }
+                },
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 400 }
+                },
+                {
+                    "entity_id": 4,
+                    "position": { "x": 1000, "y": 500 }
+                }
+            ]
         },
         {
             "tick" : 200,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 100 }
+                }
+            ]
         },
         {
             "tick" : 300,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 800 }
+                }
+            ]
         },
         {
             "tick" : 400,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 700 }
+                }
+            ]
         },
         {
             "tick" : 500,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 350 }
+                }
+            ]
         },
         {
             "tick" : 600,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 200 }
+                }
+            ]
         },
         {
             "tick" : 700,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 100 }
+                }
+            ]
         },
         {
             "tick" : 800,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 700 }
+                }
+            ]
         },
         {
             "tick" : 900,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 500 }
+                }
+            ]
         },
         {
             "tick" : 1000,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 900 }
+                }
+            ]
         },
         {
             "tick" : 1100,
-            "mob_id" : [2]
+            "mob_id": [
+                {
+                    "entity_id": 2,
+                    "position": { "x": 1000, "y": 600 }
+                }
+            ]
         }
     ]
 }

@@ -4,6 +4,7 @@
 #include "../components/C_Position.hpp"
 #include "../components/C_PlayerAmmo.hpp"
 #include "../components/C_Hitbox.hpp"
+#include "../components/C_Life.hpp"
 
 class S_Collision : public System {
     public:
@@ -12,7 +13,8 @@ class S_Collision : public System {
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
                 if (entity->HasComponent(typeid(C_Hitbox<std::pair<int, int>>)) &&
-                    entity->HasComponent(typeid(C_Position<std::pair<double, double>>))) {
+                    entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
+                    entity->HasComponent(typeid(C_Life<int>))) {
                     filtered_entities.push_back(entity);
                 }
             }
@@ -52,6 +54,8 @@ class S_Collision : public System {
             std::shared_ptr<C_PlayerAmmo<bool>> is_player_ammo;
             std::shared_ptr<C_Player<int>> is_player_2;
             std::shared_ptr<C_PlayerAmmo<bool>> is_player_ammo_2;
+            std::shared_ptr<C_Life<int>> life_1;
+            std::shared_ptr<C_Life<int>> life_2;
             float x1;
             float y1;
             float x2;
@@ -62,6 +66,7 @@ class S_Collision : public System {
                 hitbox_comp_1 = entity1->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                 is_player = entity1->template GetComponent<C_Player<int>>();
                 is_player_ammo = entity1->template GetComponent<C_PlayerAmmo<bool>>();
+                life_1 = entity1->template GetComponent<C_Life<int>>();
 
                 DrawHitbox(arg_window, position_comp_1, hitbox_comp_1, is_player ? true : false, is_player_ammo ? true : false);
                 x1 = static_cast<float>(position_comp_1->getValue().first);
@@ -73,6 +78,7 @@ class S_Collision : public System {
                     hitbox_comp_2 = entity2->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                     is_player_2 = entity2->template GetComponent<C_Player<int>>();
                     is_player_ammo_2 = entity2->template GetComponent<C_PlayerAmmo<bool>>();
+                    life_2 = entity2->template GetComponent<C_Life<int>>();
                     x2 = static_cast<float>(position_comp_2->getValue().first);
                     y2 = static_cast<float>(position_comp_2->getValue().second);
                     if (!position_comp_2 || !hitbox_comp_2)
@@ -88,8 +94,14 @@ class S_Collision : public System {
                             continue;
                             if ((!is_player && !is_player_2 && !is_player_ammo && !is_player_ammo_2))
                                 continue;
-                            entity1->is_dead_ = 1;
-                            entity2->is_dead_ = 1;
+                            if (life_1->getValue() != 0)
+                                life_1->setValue(life_1->getValue() - 1);
+                            if (life_2->getValue() != 0)
+                                life_2->setValue(life_2->getValue() - 1);
+                            if (life_1->getValue() == 0)
+                                entity1->is_dead_ = 1;
+                            if (life_2->getValue() == 0)
+                                entity2->is_dead_ = 2;
                     }
                 }
             }
