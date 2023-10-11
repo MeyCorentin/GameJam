@@ -78,7 +78,9 @@ class S_Input : public System {
                 arg_entityBuilder.AddComponent(component, std::get<sf::IntRect>(value));
             } else if (value_type == "PairPairInt") {
                 arg_entityBuilder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
-            } else {
+            } else if (value_type == "SinFunc") {
+                arg_entityBuilder.AddComponent(component, std::get<SinusoidalFunction>(value));
+            }else {
                 std::cerr << "Unsupported component type: " << value_type << std::endl;
                 return false;
             }

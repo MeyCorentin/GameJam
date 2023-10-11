@@ -14,6 +14,14 @@
 #include <any>
 #include <variant>
 
+#pragma once
+
+struct SinusoidalFunction {
+    double amplitude;
+    double frequency;
+    double phase;
+};
+
 using Variant = std::variant<
                 std::pair<std::shared_ptr<sf::Texture>, sf::Sprite>,
                 int, 
@@ -23,5 +31,6 @@ using Variant = std::variant<
                 double, 
                 sf::Clock,
                 sf::IntRect, 
-                std::pair<std::pair<int, int>, std::pair<int, int>>>;
+                std::pair<std::pair<int, int>, std::pair<int, int>>,
+                SinusoidalFunction>;
 using json = nlohmann::json;

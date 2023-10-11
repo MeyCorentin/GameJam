@@ -128,6 +128,14 @@ public:
         return pair_value_comp;
     }
 
+    static Variant ParseSinFuncValue(const json& arg_value) {
+        double amplitude = arg_value["a"];
+        double frequency = arg_value["f"];
+        double phase = arg_value["p"];
+        SinusoidalFunction sin_func = {amplitude, frequency, phase};
+        return sin_func;
+    }
+
     static Variant ParseValue(const std::string& arg_value_type, const json& arg_value) {
         if (arg_value_type == "Sprite") {
             return ParseSpriteValue(arg_value);
@@ -147,6 +155,8 @@ public:
             return ParseIntRectValue(arg_value);
         } else if (arg_value_type == "PairPairInt") {
             return ParsePairPairIntValue(arg_value);
+        } else if (arg_value_type == "SinFunc") {
+            return ParseSinFuncValue(arg_value);
         } else {
             std::cerr << "Unsupported value type: " << arg_value_type << std::endl;
         }

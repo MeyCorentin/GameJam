@@ -7,9 +7,10 @@
 
 class EntityBuilder {
     private:
-        std::shared_ptr<Entity> entity_;
 
     public:
+        std::shared_ptr<Entity> entity_;
+
         EntityBuilder(int arg_id) {
             Entity* temp = new Entity(arg_id, std::vector<std::shared_ptr<ComponentBase>>());
             entity_ = std::shared_ptr<Entity>(temp);

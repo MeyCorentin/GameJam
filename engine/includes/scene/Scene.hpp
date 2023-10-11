@@ -4,6 +4,8 @@
 #include "../entity/EntityBuilder.hpp"
 #include <list>
 #include "../system/System.hpp"
+#include "../components/C_SinClock.hpp"
+#include "../components/C_Clock.hpp"
 
 class Scene {
     private:
@@ -206,9 +208,19 @@ class Scene {
                     if (entity->GetId() == arg_is_server)
                         continue;
                     std::shared_ptr<C_Position<std::pair<double,double>>> position;
+                    std::shared_ptr<C_SinClock<sf::Clock>> sin_clock;
+                    std::shared_ptr<C_Clock<sf::Clock>> clock_basic;
                     entities_.push_back(std::make_shared<Entity>(*entity));
                     position = entities_.back()->template GetComponent<C_Position<std::pair<double,double>>>();
                     position->setValue(std::make_pair(x,y));
+
+                    sin_clock = entities_.back()->template GetComponent<C_SinClock<sf::Clock>>();
+                    if (sin_clock)
+                        sin_clock->getValue().restart();
+                    
+                    clock_basic = entities_.back()->template GetComponent<C_Clock<sf::Clock>>();
+                    if (clock_basic)
+                        clock_basic->getValue().restart();
                 }
             }
         }
