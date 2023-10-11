@@ -33,6 +33,8 @@
 #include "../includes/components/C_Parallax.hpp"
 #include "../includes/components/C_Range.hpp"
 #include "../includes/components/C_FireRateSpeed.hpp"
+#include "../includes/components/C_ChargedShoot.hpp"
+#include "../includes/components/C_ShootCharging.hpp"
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
@@ -89,6 +91,8 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("FireRateSpeed", []() { return std::make_shared<C_FireRateSpeed<double>>(); });
             ComponentRegistry::Instance().RegisterComponent("Range", []() { return std::make_shared<C_Range<int>>(); });
             ComponentRegistry::Instance().RegisterComponent("Parallax", []() { return std::make_shared<C_Parallax<int>>(); });
+            ComponentRegistry::Instance().RegisterComponent("ChargedShoot", []() { return std::make_shared<C_ChargedShoot<sf::Clock>>(); });
+            ComponentRegistry::Instance().RegisterComponent("ShootCharging", []() { return std::make_shared<C_ShootCharging<bool>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../../rtype/scene_test.json");

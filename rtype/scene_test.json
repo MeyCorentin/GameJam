@@ -150,6 +150,16 @@
             "id": 23,
             "type": "Parallax",
             "value_type": "Int"
+        },
+        {
+            "id": 24,
+            "type": "ChargedShoot",
+            "value_type": "Clock"
+        },
+        {
+            "id": 25,
+            "type": "ShootCharging",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -199,6 +209,14 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 24,
+                    "value": 0
+                },
+                {
+                    "component_id": 25,
+                    "value": false
                 }
             ]
         },

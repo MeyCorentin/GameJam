@@ -29,7 +29,7 @@ class S_Animation : public System {
                 std::pair<std::pair<int, int>, std::pair<int, int>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>()->getValue();
                 bool animaion = entity->template GetComponent<C_Animation<bool>>()->getValue();
                 if (clock->getValue().getElapsedTime().asSeconds() > 0.1f) {
-                    if (rect->getValue().left >= rect->getValue().width + size.second.first) {
+                    if (rect->getValue().left >= (size.first.first - rect->getValue().width) + size.second.first) {
                         rect->getValue().left = size.second.first;
                     } else {
                         rect->getValue().left += rect->getValue().width;
