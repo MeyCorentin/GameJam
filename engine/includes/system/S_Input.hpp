@@ -168,7 +168,7 @@ class S_Input : public System {
                             inputs_[2] = 0;
                         if (event_->key.code == sf::Keyboard::D)
                             inputs_[3] = 0;
-                        if (event_->key.code == sf::Keyboard::Space) { // 3 5 6 7 8 9
+                        if (event_->key.code == sf::Keyboard::Space) { // ADD CLOCK TO INPUT
                             if (this->charged_time_ > 5)
                                 createEntity(arg_all_entities, arg_sprites, arg_textures, 9, position_comp);
                             else if (this->charged_time_ == 5)
