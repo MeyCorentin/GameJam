@@ -147,11 +147,6 @@
             "value_type": "Int"
         },
         {
-            "id": 22,
-            "type": "Death",
-            "value_type": "Bool"
-        },
-        {
             "id": 23,
             "type": "Parallax",
             "value_type": "Int"
@@ -195,11 +190,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 100, "top": 0, "width": 33, "height": 19}
+                    "value": { "left": 67, "top": 0, "width": 33, "height": 18}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 132, "y": 19, "start_x": 100, "start_y": 0}
+                    "value": { "x": 33, "y": 18, "start_x": 67, "start_y": 0}
                 },
                 {
                     "component_id": 14,
@@ -212,7 +207,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/test.gif"
+                    "value": "../../sprites/space_ship.gif"
                 },
                 {
                     "component_id": 2,
@@ -239,6 +234,22 @@
                     "value": 0
                 },
                 {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 67, "top": 0, "width": 33, "height": 18}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 33, "y": 18, "start_x": 67, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
                     "component_id": 16,
                     "value": true
                 },
@@ -251,10 +262,6 @@
                     "value": 0
                 },
                 {
-                    "component_id": 23,
-                    "value": -1
-                },
-                {
                     "component_id": 20,
                     "value": 0.5
                 },
@@ -263,34 +270,9 @@
                     "value": 500
                 },
                 {
-                    "component_id": 22,
-                    "value": false
-                },
-                {
-                    "component_id": 11,
-                    "value": 0
-                },
-                {
-                    "component_id": 12,
-                    "value": { "left": 0, "top": 0, "width": 24, "height": 23}
-                },
-                {
-                    "component_id": 13,
-                    "value": { "x": 144, "y": 23}
-                },
-                {
-                    "component_id": 14,
-                    "value": true
-                },
-                {
-                    "component_id": 17,
-                    "value": 1
-                },
-                {
-                    "component_id": 15,
-                    "value": true
+                    "component_id": 23,
+                    "value": -1
                 }
-
             ]
         },
         {
@@ -298,7 +280,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/missiles.gif"
                 },
                 {
                     "component_id": 2,
@@ -388,7 +370,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/missiles.gif"
                 },
                 {
                     "component_id": 2,
@@ -400,7 +382,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 45, "y": 20 }
+                    "value": { "x": 17, "y": 14 }
                 },
                 {
                     "component_id": 7,
@@ -433,7 +415,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/missiles.gif"
                 },
                 {
                     "component_id": 2,
@@ -478,7 +460,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/missiles.gif"
                 },
                 {
                     "component_id": 2,
@@ -523,7 +505,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/missiles.gif"
                 },
                 {
                     "component_id": 2,
@@ -568,7 +550,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/missiles.gif"
                 },
                 {
                     "component_id": 2,
@@ -612,7 +594,7 @@
     "spawn": [
         {
             "tick" : 100,
-            "mob_id" : [1, 2, 3]
+            "mob_id" : [1, 2, 4]
         },
         {
             "tick" : 200,

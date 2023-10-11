@@ -98,6 +98,12 @@ class S_Target : public System {
                                     new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
                                     direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                                    if (new_entity->HasComponent(typeid(C_SpriteRect<std::shared_ptr<sf::IntRect>>)) &&
+                                        new_entity->HasComponent(typeid(C_Sprite<std::shared_ptr<sf::Sprite>>))) {
+                                        std::shared_ptr<sf::IntRect> rect = new_entity->template GetComponent<C_SpriteRect<std::shared_ptr<sf::IntRect>>>()->getValue();
+                                        std::shared_ptr<sf::Sprite> sprite = new_entity->template GetComponent<C_Sprite<std::shared_ptr<sf::Sprite>>>()->getValue();
+                                        sprite->setTextureRect(*rect);
+                                    }
                                     position_new->setValue(std::make_pair(position_comp_1->getValue().first, position_comp_1->getValue().second));
                                     direction_new->setValue(std::make_pair(direction.first /= length, direction.second /= length));
                                     temp_entities.push_back(new_entity);

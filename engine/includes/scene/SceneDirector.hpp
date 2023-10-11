@@ -127,8 +127,17 @@ class SceneDirector {
             for (const auto& system_config : data["systems"])
                 scene_builder_.AddSystem(CreateSystemFromConfig(system_config));
             std::cout << "------[LOAD ENTITIES]-------" << std::endl;
-            for (const auto& entity_config : data["entities"])
-                scene_builder_.AddEntity(CreateEntityFromConfig(entity_config, data["components"]));
+            for (const auto& entity_config : data["entities"]) {
+                std::shared_ptr<Entity> new_entity = CreateEntityFromConfig(entity_config, data["components"]);
+                if (new_entity->HasComponent(typeid(C_SpriteRect<std::shared_ptr<sf::IntRect>>)) &&
+                    new_entity->HasComponent(typeid(C_Sprite<std::shared_ptr<sf::Sprite>>))) {
+                    std::shared_ptr<sf::IntRect> rect = new_entity->template GetComponent<C_SpriteRect<std::shared_ptr<sf::IntRect>>>()->getValue();
+                    std::shared_ptr<sf::Sprite> sprite = new_entity->template GetComponent<C_Sprite<std::shared_ptr<sf::Sprite>>>()->getValue();
+                    sprite->setTextureRect(*rect);
+                }
+                scene_builder_.AddEntity(new_entity);
+            }
+                
             scene_builder_.AddSpawnIndex(CreateMap(data["spawn"]));
         }
 

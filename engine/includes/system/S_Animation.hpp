@@ -23,20 +23,19 @@ class S_Animation : public System {
 
         void Execute(std::vector<std::shared_ptr<Entity>>& _entities, std::shared_ptr<sf::RenderWindow> _window, std::vector<int> _inputs, std::vector<std::shared_ptr<Entity>>& allEntities, std::vector<std::shared_ptr<sf::Sprite>>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures, std::shared_ptr<sf::Event> event_) override {
             for (const std::shared_ptr<Entity>& entity : _entities) {
-                std::cout << "In animation" << std::endl;
                 std::shared_ptr<sf::Sprite> sprite = entity->template GetComponent<C_Sprite<std::shared_ptr<sf::Sprite>>>()->getValue();
-                sf::Clock clock = entity->template GetComponent<C_Clock<sf::Clock>>()->getValue();
+                std::shared_ptr<C_Clock<sf::Clock>> clock = entity->template GetComponent<C_Clock<sf::Clock>>();
                 std::shared_ptr<sf::IntRect> rect = entity->template GetComponent<C_SpriteRect<std::shared_ptr<sf::IntRect>>>()->getValue();
                 std::pair<std::pair<int, int>, std::pair<int, int>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>()->getValue();
                 bool animaion = entity->template GetComponent<C_Animation<bool>>()->getValue();
-                if (clock.getElapsedTime().asSeconds() > 0.1f) {
+                if (clock->getValue().getElapsedTime().asSeconds() > 0.1f) {
                     if (rect->left >= size.first.first) {
                         rect->left = size.second.first;
                     } else {
                         rect->left += rect->width;
                     }
                     sprite->setTextureRect(*rect);
-                    clock.restart();
+                    clock->getValue().restart();
                 }
             }
         }
