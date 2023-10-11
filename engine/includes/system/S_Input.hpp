@@ -5,6 +5,8 @@
 #include "../components/C_Player.hpp"
 #include "../components/C_SpriteRect.hpp"
 #include "../components/C_Hitbox.hpp"
+#include "../components/C_ChargedShoot.hpp"
+#include "../components/C_ShootCharging.hpp"
 #include "../entity/EntityBuilder.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
@@ -14,14 +16,15 @@
 class S_Input : public System {
     private:
         std::vector<int> inputs_ = {0, 0, 0, 0, 0};
-        int charged_time_ = 0;
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override {
             std::vector<std::shared_ptr<Entity>> filtered_entities;
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
                 if (entity->HasComponent(typeid(C_Player<int>)) &&
-                    entity->HasComponent(typeid(C_Position<std::pair<double, double>>))) {
+                    entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
+                    entity->HasComponent(typeid(C_ChargedShoot<sf::Clock>))
+                    ) {
                     filtered_entities.push_back(entity);
                 }
             }
@@ -149,6 +152,8 @@ class S_Input : public System {
                     continue;
                 position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
                 hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+                std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
+                std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
                 while (arg_window->pollEvent(*event_)) {
                     if (event_->type == sf::Event::Closed)
                         arg_window->close();
@@ -161,8 +166,12 @@ class S_Input : public System {
                             inputs_[2] = 1;
                         if (event_->key.code == sf::Keyboard::D)
                             inputs_[3] = 1;
-                        if (event_->key.code == sf::Keyboard::Space)
-                            charged_time_ += 1;
+                        if (event_->key.code == sf::Keyboard::Space) {
+                            if (is_charging->getValue() == false) {
+                                clock->getValue().restart();
+                                is_charging->getValue() = true;
+                            }
+                        }
                     }
                     if (event_->type == sf::Event::KeyReleased) {
                         if (event_->key.code == sf::Keyboard::Z)
@@ -173,20 +182,21 @@ class S_Input : public System {
                             inputs_[2] = 0;
                         if (event_->key.code == sf::Keyboard::D)
                             inputs_[3] = 0;
-                        if (event_->key.code == sf::Keyboard::Space) { // 3 5 6 7 8 9
-                            if (this->charged_time_ > 5)
+                        if (event_->key.code == sf::Keyboard::Space) { // ADD CLOCK TO INPUT
+                            std::cout << "Time : " << clock->getValue().getElapsedTime().asSeconds() << std::endl;
+                            if (clock->getValue().getElapsedTime().asSeconds() > 1)
                                 createEntity(arg_all_entities, arg_sprites, arg_textures, 9, position_comp);
-                            else if (this->charged_time_ == 5)
+                            else if (clock->getValue().getElapsedTime().asSeconds() > 0.6)
                                 createEntity(arg_all_entities, arg_sprites, arg_textures, 8, position_comp);
-                            else if (this->charged_time_ == 4)
+                            else if (clock->getValue().getElapsedTime().asSeconds() > 0.4)
                                 createEntity(arg_all_entities, arg_sprites, arg_textures, 7, position_comp);
-                            else if (this->charged_time_ == 3)
+                            else if (clock->getValue().getElapsedTime().asSeconds() > 0.2)
                                 createEntity(arg_all_entities, arg_sprites, arg_textures, 6, position_comp);
-                            else if (this->charged_time_ == 2)
+                            else if (clock->getValue().getElapsedTime().asSeconds() > 0.1)
                                 createEntity(arg_all_entities, arg_sprites, arg_textures, 5, position_comp);
                             else
                                 createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
-                            charged_time_ = 0;
+                            is_charging->getValue() = false;
                         }
                     }
                 }

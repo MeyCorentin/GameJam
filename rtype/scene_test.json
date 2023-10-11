@@ -149,8 +149,13 @@
         },
         {
             "id": 24,
-            "type": "Parallax",
-            "value_type": "Int"
+            "type": "ChargedShoot",
+            "value_type": "Clock"
+        },
+        {
+            "id": 26,
+            "type": "ShootCharging",
+            "value_type": "Bool"
         },
         {
             "id": 25,
@@ -205,6 +210,18 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 24,
+                    "value": 0
+                },
+                {
+                    "component_id": 25,
+                    "value": false
+                },
+                {
+                    "component_id": 26,
+                    "value": false
                 }
             ]
         },
@@ -457,11 +474,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 196, "top": 119, "width": 37, "height": 14}
+                    "value": { "left": 201, "top": 119, "width": 31, "height": 14}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 74, "y": 14, "start_x": 196, "start_y": 119}
+                    "value": { "x": 62, "y": 14, "start_x": 201, "start_y": 119}
                 },
                 {
                     "component_id": 14,
@@ -506,11 +523,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 164, "top": 136, "width": 55, "height": 14}
+                    "value": { "left": 169, "top": 136, "width": 47, "height": 14}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 110, "y": 14, "start_x": 164, "start_y": 136}
+                    "value": { "x": 94, "y": 14, "start_x": 169, "start_y": 136}
                 },
                 {
                     "component_id": 14,
@@ -555,11 +572,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 130, "top": 154, "width": 70, "height": 14}
+                    "value": { "left": 135, "top": 154, "width": 65, "height": 14}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 140, "y": 14, "start_x": 130, "start_y": 154}
+                    "value": { "x": 130, "y": 14, "start_x": 135, "start_y": 154}
                 },
                 {
                     "component_id": 14,
