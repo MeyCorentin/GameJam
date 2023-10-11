@@ -10,7 +10,7 @@ class SceneBuilder {
     private:
         std::vector<std::shared_ptr<System>> systems_;
         std::vector<std::shared_ptr<Entity>> entities_;
-        std::vector<std::shared_ptr<sf::Sprite>> sprites_;
+        std::vector<sf::Sprite> sprites_;
         std::vector<std::shared_ptr<sf::Texture>> textures_;
         std::vector<std::pair<int, std::vector<int>>> spawn_index_;
         std::string path_;
@@ -31,7 +31,7 @@ class SceneBuilder {
             return *this;
         }
 
-        SceneBuilder& AddSprite(std::shared_ptr<sf::Sprite> arg_sprite) {
+        SceneBuilder& AddSprite(sf::Sprite arg_sprite) {
             sprites_.push_back(arg_sprite);
             return *this;
         }

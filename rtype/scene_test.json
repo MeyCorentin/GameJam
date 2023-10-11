@@ -13,6 +13,10 @@
             "type": "PositionSystem"
         },
         {
+            "id": 8,
+            "type" : "S_Animation"
+        },
+        {
             "id": 3,
             "type": "DisplaySystem"
         },
@@ -27,10 +31,6 @@
         {
             "id": 7,
             "type" : "MouvementSystem"
-        },
-        {
-            "id": 8,
-            "type" : "S_Animation"
         },
         {
             "id": 9,
@@ -109,7 +109,7 @@
         {
             "id": 13,
             "type": "Size",
-            "value_type": "PairInt"
+            "value_type": "PairPairInt"
         },
         {
             "id": 14,
@@ -147,11 +147,6 @@
             "value_type": "Int"
         },
         {
-            "id": 22,
-            "type": "Death",
-            "value_type": "Bool"
-        },
-        {
             "id": 23,
             "type": "Parallax",
             "value_type": "Int"
@@ -163,7 +158,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/test.gif"
+                    "value": "../../sprites/space_ship.gif"
                 },
                 {
                     "component_id": 2,
@@ -190,8 +185,20 @@
                     "value": true
                 },
                 {
-                    "component_id": 22,
-                    "value": false
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 67, "top": 0, "width": 33, "height": 18}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 33, "y": 18, "start_x": 67, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
                 }
             ]
         },
@@ -200,7 +207,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/test.gif"
+                    "value": "../../sprites/space_ship.gif"
                 },
                 {
                     "component_id": 2,
@@ -227,6 +234,22 @@
                     "value": 0
                 },
                 {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 33, "height": 18}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 166, "y": 18, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
                     "component_id": 16,
                     "value": true
                 },
@@ -239,10 +262,6 @@
                     "value": 0
                 },
                 {
-                    "component_id": 23,
-                    "value": -1
-                },
-                {
                     "component_id": 20,
                     "value": 0.5
                 },
@@ -251,32 +270,8 @@
                     "value": 500
                 },
                 {
-                    "component_id": 22,
-                    "value": false
-                },
-                {
-                    "component_id": 11,
-                    "value": 0
-                },
-                {
-                    "component_id": 12,
-                    "value": { "left": 0, "top": 0, "width": 24, "height": 23}
-                },
-                {
-                    "component_id": 13,
-                    "value": { "x": 144, "y": 23}
-                },
-                {
-                    "component_id": 14,
-                    "value": true
-                },
-                {
-                    "component_id": 17,
-                    "value": 1
-                },
-                {
-                    "component_id": 15,
-                    "value": true
+                    "component_id": 23,
+                    "value": -1
                 }
             ]
         },
@@ -285,7 +280,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/r-typesheet1.png"
+                    "value": "../../sprites/missiles.gif"
                 },
                 {
                     "component_id": 2,
@@ -297,7 +292,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 45, "y": 20 }
+                    "value": { "x": 19, "y": 10 }
                 },
                 {
                     "component_id": 7,
@@ -308,8 +303,20 @@
                     "value": 10
                 },
                 {
-                    "component_id": 22,
-                    "value": false
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 247, "top": 88, "width": 19, "height": 10}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 19, "y": 10, "start_x": 247, "start_y": 88}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
                 }
             ]
         },
@@ -346,7 +353,7 @@
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 144, "y": 23}
+                    "value": { "x": 144, "y": 23, "start_x": 0, "start_y": 0}
                 },
                 {
                     "component_id": 14,
@@ -355,14 +362,231 @@
                 {
                     "component_id": 17,
                     "value": 1
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
                 },
                 {
-                    "component_id": 15,
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 14 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 10
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 230, "top": 102, "width": 17, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 34, "y": 28, "start_x": 230, "start_y": 102}
+                },
+                {
+                    "component_id": 14,
                     "value": true
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
                 },
                 {
-                    "component_id": 22,
-                    "value": false
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 37, "y": 14 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 10
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 196, "top": 119, "width": 37, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 74, "y": 14, "start_x": 196, "start_y": 119}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 55, "y": 14 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 10
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 164, "top": 136, "width": 55, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 110, "y": 14, "start_x": 164, "start_y": 136}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 70, "y": 14 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 10
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 130, "top": 154, "width": 70, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 140, "y": 14, "start_x": 130, "start_y": 154}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 83, "y": 14 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 10
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 102, "top": 171, "width": 83, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 166, "y": 14, "start_x": 102, "start_y": 171}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
                 }
             ]
         }
@@ -370,7 +594,47 @@
     "spawn": [
         {
             "tick" : 100,
-            "mob_id" : [1, 2, 3]
+            "mob_id" : [1, 2, 4]
+        },
+        {
+            "tick" : 200,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 300,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 400,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 500,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 600,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 700,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 800,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 900,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 1000,
+            "mob_id" : [2]
+        },
+        {
+            "tick" : 1100,
+            "mob_id" : [2]
         }
     ]
 }

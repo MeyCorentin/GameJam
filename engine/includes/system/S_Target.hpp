@@ -29,7 +29,7 @@ class S_Target : public System {
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_input,
                 std::vector<std::shared_ptr<Entity>>& arg_all_Entities,
-                std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
+                std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<sf::Event> event_) override {
             int current_mana;
@@ -99,6 +99,12 @@ class S_Target : public System {
                                     new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
                                     direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                                    if (new_entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
+                                        new_entity->HasComponent(typeid(C_Sprite<sf::Sprite>))) {
+                                        std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+                                        std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
+                                        sprite->getValue().setTextureRect(rect->getValue());
+                                    }
                                     position_new->setValue(std::make_pair(position_comp_1->getValue().first, position_comp_1->getValue().second));
                                     direction_new->setValue(std::make_pair(direction.first /= length, direction.second /= length));
                                     temp_entities.push_back(new_entity);

@@ -9,8 +9,7 @@ public:
     static Variant ParseSpriteValue(const json& arg_value) {
         sf::Sprite sprite;
         sf::Texture texture;
-        std::shared_ptr<sf::Texture> texture_ptr; 
-        std::shared_ptr<sf::Sprite> sprite_ptr;
+        std::shared_ptr<sf::Texture> texture_ptr;
 
         if (!arg_value.is_string()) {
             std::cerr << "Invalid value for Sprite type." << std::endl;
@@ -21,9 +20,8 @@ public:
             return Variant();
         }
         texture_ptr = std::make_shared<sf::Texture>(texture);
-        sprite_ptr = std::make_shared<sf::Sprite>(sprite);
-        sprite_ptr->setTexture(*texture_ptr);
-        return std::make_pair(texture_ptr, sprite_ptr);
+        sprite.setTexture(*texture_ptr);
+        return std::make_pair(texture_ptr, sprite);
     }
 
     static Variant ParseIntValue(const json& arg_value) {
@@ -101,9 +99,34 @@ public:
         int height = value["height"];
 
         sf::IntRect rect = {left, top, width, height};
-        std::shared_ptr<sf::IntRect> rectValue = std::make_shared<sf::IntRect>(rect);
-        return rectValue;
-      }
+        return rect;
+    }
+
+    static Variant ParsePairPairIntValue(const json& arg_value) {
+        int x;
+        int y;
+        int start_x;
+        int start_y;
+
+        std::pair<int, int> pair_value;
+        std::pair<int, int> pair_value_start;
+        std::pair<std::pair<int, int>, std::pair<int, int>> pair_value_comp;
+
+        if (!arg_value.is_object() || !arg_value.contains("x") || !arg_value.contains("y") || !arg_value.contains("start_x") || !arg_value.contains("start_y")) {
+            std::cerr << "Invalid value for Pair type." << std::endl;
+            return Variant();
+        }
+        x = arg_value["x"];
+        y = arg_value["y"];
+        start_x = arg_value["start_x"];
+        start_y = arg_value["start_y"];
+
+        pair_value = std::make_pair(x, y);
+        pair_value_start = std::make_pair(start_x, start_y);
+
+        pair_value_comp = std::make_pair(pair_value, pair_value_start);
+        return pair_value_comp;
+    }
 
     static Variant ParseValue(const std::string& arg_value_type, const json& arg_value) {
         if (arg_value_type == "Sprite") {
@@ -122,6 +145,8 @@ public:
             return ParseClockValue(arg_value);
         } else if (arg_value_type == "IntRect") {
             return ParseIntRectValue(arg_value);
+        } else if (arg_value_type == "PairPairInt") {
+            return ParsePairPairIntValue(arg_value);
         } else {
             std::cerr << "Unsupported value type: " << arg_value_type << std::endl;
         }

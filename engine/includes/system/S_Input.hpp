@@ -3,6 +3,7 @@
 #include "System.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_Player.hpp"
+#include "../components/C_SpriteRect.hpp"
 #include "../entity/EntityBuilder.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
@@ -12,6 +13,7 @@
 class S_Input : public System {
     private:
         std::vector<int> inputs_ = {0, 0, 0, 0, 0};
+        int charged_time_ = 0;
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override {
             std::vector<std::shared_ptr<Entity>> filtered_entities;
@@ -39,7 +41,7 @@ class S_Input : public System {
                 const json& arg_componentConfig,
                 JsonParser& arg_parser,
                 EntityBuilder& arg_entityBuilder,
-                std::vector<std::shared_ptr<sf::Sprite>>& sprites,
+                std::vector<sf::Sprite>& sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& textures) {
             std::string component_name = arg_componentConfig["type"];
             std::string value_type = arg_componentConfig["value_type"];
@@ -52,7 +54,7 @@ class S_Input : public System {
 
             std::cout << " - " << component_name << std::endl;
             if (value_type == "Sprite") {
-                auto all_ptr = std::get<std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>>(value);
+                auto all_ptr = std::get<std::pair<std::shared_ptr<sf::Texture>, sf::Sprite>>(value);
                 sprites.push_back(all_ptr.second);
                 textures.push_back(all_ptr.first);
                 arg_entityBuilder.AddComponent(component,  all_ptr.second);
@@ -66,6 +68,12 @@ class S_Input : public System {
                 arg_entityBuilder.AddComponent(component, std::get<bool>(value));
             } else if (value_type == "Double") {
                 arg_entityBuilder.AddComponent(component, std::get<double>(value));
+            } else if (value_type == "Clock") {
+                arg_entityBuilder.AddComponent(component, std::get<sf::Clock>(value));
+            } else if (value_type == "IntRect") {
+                arg_entityBuilder.AddComponent(component, std::get<sf::IntRect>(value));
+            } else if (value_type == "PairPairInt") {
+                arg_entityBuilder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
             } else {
                 std::cerr << "Unsupported component type: " << value_type << std::endl;
                 return false;
@@ -76,7 +84,7 @@ class S_Input : public System {
         std::shared_ptr<Entity> CreateEntityFromConfig(
                 const json& arg_entity_config,
                 const json& arg_components_config,
-                std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
+                std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures) {
             JsonParser parser;
             json component_config;
@@ -99,7 +107,7 @@ class S_Input : public System {
 
         void createEntity(
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
+                std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 int id,
                 std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp) {
@@ -115,6 +123,9 @@ class S_Input : public System {
                 if (entity_config["id"] == id) {
                     new_entity = CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                    std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+                    std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
+                    sprite->getValue().setTextureRect(rect->getValue());
                     position_new->setValue(std::make_pair(arg_position_comp->getValue().first, arg_position_comp->getValue().second));
                     arg_all_entities.push_back(new_entity);
                 }
@@ -127,7 +138,7 @@ class S_Input : public System {
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_inputs,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
+                std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<sf::Event> event_) override { //TODO rename event_
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
@@ -147,6 +158,8 @@ class S_Input : public System {
                             inputs_[2] = 1;
                         if (event_->key.code == sf::Keyboard::D)
                             inputs_[3] = 1;
+                        if (event_->key.code == sf::Keyboard::Space)
+                            charged_time_ += 1;
                     }
                     if (event_->type == sf::Event::KeyReleased) {
                         if (event_->key.code == sf::Keyboard::Z)
@@ -157,9 +170,21 @@ class S_Input : public System {
                             inputs_[2] = 0;
                         if (event_->key.code == sf::Keyboard::D)
                             inputs_[3] = 0;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
+                        if (event_->key.code == sf::Keyboard::Space) { // 3 5 6 7 8 9
+                            if (this->charged_time_ > 5)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 9, position_comp);
+                            else if (this->charged_time_ == 5)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 8, position_comp);
+                            else if (this->charged_time_ == 4)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 7, position_comp);
+                            else if (this->charged_time_ == 3)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 6, position_comp);
+                            else if (this->charged_time_ == 2)
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 5, position_comp);
+                            else
+                                createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
+                            charged_time_ = 0;
+                        }
                     }
                 }
                 if (inputs_[0] == 1)

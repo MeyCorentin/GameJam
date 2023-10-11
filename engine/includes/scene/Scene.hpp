@@ -12,7 +12,7 @@ class Scene {
         std::vector<std::shared_ptr<Entity>> list_entities_;
         std::vector<std::shared_ptr<Entity>> entities_;
         std::vector<std::shared_ptr<System>> systems_;
-        std::vector<std::shared_ptr<sf::Sprite>> sprites_;
+        std::vector<sf::Sprite> sprites_;
         std::vector<std::shared_ptr<sf::Texture>> textures_;
         std::vector<std::pair<int, std::vector<int>>> spawn_index_;
         int frames_this_second_;
@@ -34,7 +34,7 @@ class Scene {
         double targetFrameTime = (1.0 / 60);
         Scene( std::vector<std::shared_ptr<System>> arg_system_list,
                 std::vector<std::shared_ptr<Entity>> arg_entity_list,
-                std::vector<std::shared_ptr<sf::Sprite>> arg_sprite_list,
+                std::vector<sf::Sprite> arg_sprite_list,
                 std::vector<std::shared_ptr<sf::Texture>> arg_texture_list,
                 std::vector<std::pair<int, std::vector<int>>> arg_spawn_index)
             : systems_(arg_system_list), list_entities_(arg_entity_list), sprites_(arg_sprite_list), textures_(arg_texture_list), spawn_index_(arg_spawn_index)  {
