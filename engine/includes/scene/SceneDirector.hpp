@@ -102,20 +102,18 @@ class SceneDirector {
             {
                 int tick = spawn_entry.at("tick").get<int>();
                 std::vector<int> ids;
-                std::cout << "[[" << tick << ": ";
                 for (const auto& id : spawn_entry.at("mob_id"))
                 {
                     int id_value = id.get<int>();
-                    std::cout <<  id_value << " ";
                     ids.push_back(id_value);
                 }
-                std::cout << "]]" << std::endl;
                 map.push_back(std::make_pair(tick, ids));
             }
             return map;
         }
+        SceneDirector() {}
 
-        SceneDirector(std::string arg_file_path) {
+        SceneDirector(std::string arg_file_path, int value) {
             std::ifstream file(arg_file_path);
             json data;
 
@@ -125,8 +123,8 @@ class SceneDirector {
             for (const auto& system_config : data["systems"])
                 scene_builder_.AddSystem(CreateSystemFromConfig(system_config));
             std::cout << "------[LOAD ENTITIES]-------" << std::endl;
-            for (const auto& entity_config : data["entities"])
-                scene_builder_.AddEntity(CreateEntityFromConfig(entity_config, data["components"]));
+            for (auto it = data["entities"].begin(); it != data["entities"].end(); ++it)
+                scene_builder_.AddEntity(CreateEntityFromConfig(*it, data["components"]));
             scene_builder_.AddSpawnIndex(CreateMap(data["spawn"]));
         }
 

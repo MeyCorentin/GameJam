@@ -28,12 +28,13 @@ class S_Collision : public System {
             hitbox.setPosition(arg_position_comp->getValue().first, arg_position_comp->getValue().second);
             hitbox.setSize(sf::Vector2f(arg_hitbox_comp->getValue().first, arg_hitbox_comp->getValue().second));
             hitbox.setFillColor(sf::Color::Transparent);
-            hitbox.setOutlineColor(arg_is_player ? sf::Color::Green : sf::Color::Red);
+            hitbox.setOutlineColor(arg_is_player  ? sf::Color::Green : sf::Color::Red);
             hitbox.setOutlineThickness(1.0f);
             arg_window->draw(hitbox);
         }
 
         void Execute(
+                int arg_is_server,
                 std::vector<std::shared_ptr<Entity>>& arg_entities,
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_inputs,
@@ -45,7 +46,7 @@ class S_Collision : public System {
             std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp_1;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_2;
             std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp_2;
-            std::shared_ptr<C_Player<bool>> is_player;
+            std::shared_ptr<C_Player<int>> is_player;
             float x1;
             float y1;
             float x2;
@@ -54,9 +55,9 @@ class S_Collision : public System {
             for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
                 position_comp_1 = entity1->template GetComponent<C_Position<std::pair<double, double>>>();
                 hitbox_comp_1 = entity1->template GetComponent<C_Hitbox<std::pair<int, int>>>();
-                is_player = entity1->template GetComponent<C_Player<bool>>();
+                is_player = entity1->template GetComponent<C_Player<int>>();
 
-                DrawHitbox(arg_window, position_comp_1, hitbox_comp_1, is_player ? is_player->getValue() : false);
+                DrawHitbox(arg_window, position_comp_1, hitbox_comp_1, is_player ? true : false);
                 x1 = static_cast<float>(position_comp_1->getValue().first);
                 y1 = static_cast<float>(position_comp_1->getValue().second);
                 for (const std::shared_ptr<Entity>& entity2 : arg_entities) {

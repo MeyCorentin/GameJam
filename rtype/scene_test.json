@@ -64,7 +64,7 @@
         {
             "id": 4,
             "type": "Player",
-            "value_type": "Bool"
+            "value_type": "Int"
         },
         {
             "id": 5,
@@ -175,7 +175,7 @@
                 },
                 {
                     "component_id": 4,
-                    "value": true
+                    "value": 0
                 },
                 {
                     "component_id": 5,
@@ -371,46 +371,6 @@
         {
             "tick" : 100,
             "mob_id" : [1, 2, 3]
-        },
-        {
-            "tick" : 200,
-            "mob_id" : [2]
-        },
-        {
-            "tick" : 300,
-            "mob_id" : [2]
-        },
-        {
-            "tick" : 400,
-            "mob_id" : [2]
-        },
-        {
-            "tick" : 500,
-            "mob_id" : [2]
-        },
-        {
-            "tick" : 600,
-            "mob_id" : [2]
-        },
-        {
-            "tick" : 700,
-            "mob_id" : [2]
-        },
-        {
-            "tick" : 800,
-            "mob_id" : [2]
-        },
-        {
-            "tick" : 900,
-            "mob_id" : [2]
-        },
-        {
-            "tick" : 1000,
-            "mob_id" : [2]
-        },
-        {
-            "tick" : 1100,
-            "mob_id" : [2]
         }
     ]
 }

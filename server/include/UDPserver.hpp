@@ -8,7 +8,7 @@
 #include "../../engine/includes/Ecs.hpp"
 #include "../../engine/includes/main.hpp"
 #include "BinaryProtocole.hpp"
-
+#include <queue>
 using boost::asio::ip::udp;
 
 class UDPServer {
@@ -25,6 +25,8 @@ class UDPServer {
         void read_data();
         void handleClientMessage(const BinaryProtocole::BinaryMessage& msg);
         void run_server(Ecs &_ecs);
+        std::queue<std::pair<int,int>> input_queue_;
+        std::mutex queue_mutex_;
 
         boost::asio::io_context& io_context_;
         udp::socket socket_;

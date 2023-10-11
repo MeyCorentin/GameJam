@@ -17,7 +17,7 @@ class S_Input : public System {
             std::vector<std::shared_ptr<Entity>> filtered_entities;
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
-                if (entity->HasComponent(typeid(C_Player<bool>)) &&
+                if (entity->HasComponent(typeid(C_Player<int>)) &&
                     entity->HasComponent(typeid(C_Position<std::pair<double, double>>))) {
                     filtered_entities.push_back(entity);
                 }
@@ -122,6 +122,7 @@ class S_Input : public System {
         }
 
         void Execute(
+                int arg_is_server,
                 std::vector<std::shared_ptr<Entity>>& arg_entities,
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_inputs,
@@ -130,8 +131,9 @@ class S_Input : public System {
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<sf::Event> event_) override { //TODO rename event_
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
-
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
+                if (arg_is_server == 1)
+                    continue;
                 position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
                 while (arg_window->pollEvent(*event_)) {
                     if (event_->type == sf::Event::Closed)

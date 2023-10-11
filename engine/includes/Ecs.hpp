@@ -42,18 +42,17 @@
 
 class Ecs
 {
-    Scene scene;
     public:
-    
+        Scene scene_;
         Ecs(){}
         Ecs(int ac, char **av)
         {
         };
-        void Update()
+        void Update(int arg_is_server)
         {
-            scene.Update();
+            scene_.Update(arg_is_server);
         }
-        void Create()
+        void Create(int arg_is_server)
         {
             SystemRegistry::Instance().RegisterSystem("CollisionSystem", []() { return std::make_shared<S_Collision>(); });
             SystemRegistry::Instance().RegisterSystem("HitSystem", []() { return std::make_shared<S_Hit>(); });
@@ -74,7 +73,7 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("Direction", []() { return std::make_shared<C_Direction<std::pair<double, double>>>(); });
             ComponentRegistry::Instance().RegisterComponent("Speed", []() { return std::make_shared<C_Speed<double>>(); });
             ComponentRegistry::Instance().RegisterComponent("Hitbox", []() { return std::make_shared<C_Hitbox<std::pair<int, int>>>(); });
-            ComponentRegistry::Instance().RegisterComponent("Player", []() { return std::make_shared<C_Player<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Player", []() { return std::make_shared<C_Player<int>>(); });
             ComponentRegistry::Instance().RegisterComponent("Server", []() { return std::make_shared<C_Server<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Client", []() { return std::make_shared<C_Client<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Shield", []() { return std::make_shared<C_Shield<int>>(); });
@@ -91,8 +90,8 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("Parallax", []() { return std::make_shared<C_Parallax<int>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
-            SceneDirector SceneDirector("../../rtype/scene_test.json");
+            SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);
 
-            scene = SceneDirector.ConstructScene();
+            scene_ = SceneDirector.ConstructScene();
         }
 };

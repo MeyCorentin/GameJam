@@ -8,14 +8,28 @@ UDPServer::UDPServer(boost::asio::io_context& io_context, unsigned short port)
 
 void UDPServer::run_server(Ecs &ecs)
 {
+    int connected_client = 0;
     while (true)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
-        ecs.Update();
+        ecs.Update(1);
         auto endTime =  std::chrono::high_resolution_clock::now();
         auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
         if (elapsedTime < (1.0 / 60))
             std::this_thread::sleep_for(std::chrono::duration<double>((1.0 / 60) - elapsedTime));
+        if (connected_client < clients_.size())
+        {
+            std::cout << "Player Connect" << std::endl;
+            ecs.scene_.AddNewPlayer(clients_.size());
+            connected_client++;
+        }
+        if (!input_queue_.empty())
+        {
+            std::cout << "READ INPUT" << std::endl;
+            std::pair<int, int> input = input_queue_.front();
+            input_queue_.pop();
+            ecs.scene_.InputFromPlayer(input);
+        }
     }
 }
 
@@ -45,6 +59,8 @@ void UDPServer::read_data()
 
 void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
 {
+
+    std::lock_guard<std::mutex> lock(queue_mutex_);
     switch (msg.data)
     {
         case 100: // Client connection
@@ -59,22 +75,27 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
             break;
 
         case 200:
+            input_queue_.push(std::make_pair(msg.id, 200));
             std::cout << "Client " << msg.id << " up." << std::endl;
             break;
 
         case 210:
+            input_queue_.push(std::make_pair(msg.id, 210));
             std::cout << "Client " << msg.id << " left." << std::endl;
             break;
 
         case 220:
+            input_queue_.push(std::make_pair(msg.id, 220));
             std::cout << "Client " << msg.id << " down." << std::endl;
             break;
 
         case 230:
+            input_queue_.push(std::make_pair(msg.id, 230));
             std::cout << "Client " << msg.id << " right." << std::endl;
             break;
 
         case 300:
+            input_queue_.push(std::make_pair(msg.id, 300));
             std::cout << "Client " << msg.id << " shoot." << std::endl;
             break;
 
@@ -86,12 +107,12 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
 
 void UDPServer::start()
 {
-    Ecs ecs;
-
-    ecs.Create();
     std::thread t1(&UDPServer::start_listening, this);
     // std::thread t2(&UDPServer::run_server, this, std::ref(_ecs));
     // t1.join();
+    while (clients_.size() == 0);
+    Ecs ecs;
+    ecs.Create(1);
     run_server(ecs);
     // t2.join();
 }
@@ -103,13 +124,8 @@ void UDPServer::send(BinaryProtocole::BinaryMessage msg)
 
 void UDPServer::send_to_all(BinaryProtocole::BinaryMessage msg)
 {
-    Ecs ecs;
-
-    ecs.Create();
-    for (const auto& [client_endpoint, _] : clients_) {
+    for (const auto& [client_endpoint, _] : clients_)
         this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), client_endpoint);
-        ecs.Update();
-    }
 }
 
 UDPServer::~UDPServer()

@@ -12,6 +12,7 @@ class S_KillEntity : public System {
         }
 
         void Execute(
+                int arg_is_server,
                 std::vector<std::shared_ptr<Entity>>& arg_entities,
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_inputs,

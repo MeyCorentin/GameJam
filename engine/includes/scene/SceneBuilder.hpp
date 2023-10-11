@@ -13,6 +13,7 @@ class SceneBuilder {
         std::vector<std::shared_ptr<sf::Sprite>> sprites_;
         std::vector<std::shared_ptr<sf::Texture>> textures_;
         std::vector<std::pair<int, std::vector<int>>> spawn_index_;
+        std::string path_;
 
     public:
         SceneBuilder& AddSystem(std::shared_ptr<System> arg_system) {
