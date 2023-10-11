@@ -201,20 +201,14 @@ class Scene {
 
                 for (const auto& entity : list_entities_)
                 {
-                    if (entity_id == entity->GetId())
-                    {
-                        if (entity->GetId() != arg_is_server)
-                        {
-                            std::shared_ptr<C_Position<std::pair<double,double>>> position;
-                            std::cout << "-Add entity" << std::endl;
-                            entities_.push_back(std::make_shared<Entity>(*entity));
-                            std::cout << "--Add entity" << std::endl;
-                            position = entities_.back()->template GetComponent<C_Position<std::pair<double,double>>>();
-                            std::cout << "---Add entity" << std::endl;
-                            position->setValue(std::make_pair(x,y));
-                            std::cout << "----Add entity" << std::endl;
-                        }
-                    }
+                    if (entity_id != entity->GetId())
+                        continue;
+                    if (entity->GetId() == arg_is_server)
+                        continue;
+                    std::shared_ptr<C_Position<std::pair<double,double>>> position;
+                    entities_.push_back(std::make_shared<Entity>(*entity));
+                    position = entities_.back()->template GetComponent<C_Position<std::pair<double,double>>>();
+                    position->setValue(std::make_pair(x,y));
                 }
             }
         }
