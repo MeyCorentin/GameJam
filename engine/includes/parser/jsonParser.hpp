@@ -9,8 +9,7 @@ public:
     static Variant ParseSpriteValue(const json& arg_value) {
         sf::Sprite sprite;
         sf::Texture texture;
-        std::shared_ptr<sf::Texture> texture_ptr; 
-        std::shared_ptr<sf::Sprite> sprite_ptr;
+        std::shared_ptr<sf::Texture> texture_ptr;
 
         if (!arg_value.is_string()) {
             std::cerr << "Invalid value for Sprite type." << std::endl;
@@ -21,9 +20,8 @@ public:
             return Variant();
         }
         texture_ptr = std::make_shared<sf::Texture>(texture);
-        sprite_ptr = std::make_shared<sf::Sprite>(sprite);
-        sprite_ptr->setTexture(*texture_ptr);
-        return std::make_pair(texture_ptr, sprite_ptr);
+        sprite.setTexture(*texture_ptr);
+        return std::make_pair(texture_ptr, sprite);
     }
 
     static Variant ParseIntValue(const json& arg_value) {
@@ -101,8 +99,7 @@ public:
         int height = value["height"];
 
         sf::IntRect rect = {left, top, width, height};
-        std::shared_ptr<sf::IntRect> rectValue = std::make_shared<sf::IntRect>(rect);
-        return rectValue;
+        return rect;
     }
 
     static Variant ParsePairPairIntValue(const json& arg_value) {

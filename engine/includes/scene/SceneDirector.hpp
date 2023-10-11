@@ -46,7 +46,7 @@ class SceneDirector {
                 return false;
             std::cout << " - " << component_name << std::endl;
             if (value_type == "Sprite") {
-                auto all_ptr = std::get<std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>>(value);
+                auto all_ptr = std::get<std::pair<std::shared_ptr<sf::Texture>, sf::Sprite>>(value);
                 scene_builder_.AddSprite( all_ptr.second);
                 scene_builder_.AddTexture(all_ptr.first);
                 arg_entity_builder.AddComponent(component,  all_ptr.second);
@@ -63,7 +63,7 @@ class SceneDirector {
             } else if (value_type == "Clock") {
                 arg_entity_builder.AddComponent(component, std::get<sf::Clock>(value));
             } else if (value_type == "IntRect") {
-                arg_entity_builder.AddComponent(component, std::get<std::shared_ptr<sf::IntRect>>(value));
+                arg_entity_builder.AddComponent(component, std::get<sf::IntRect>(value));
             } else if (value_type == "PairPairInt") {
                 arg_entity_builder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
             } else {
@@ -129,11 +129,11 @@ class SceneDirector {
             std::cout << "------[LOAD ENTITIES]-------" << std::endl;
             for (const auto& entity_config : data["entities"]) {
                 std::shared_ptr<Entity> new_entity = CreateEntityFromConfig(entity_config, data["components"]);
-                if (new_entity->HasComponent(typeid(C_SpriteRect<std::shared_ptr<sf::IntRect>>)) &&
-                    new_entity->HasComponent(typeid(C_Sprite<std::shared_ptr<sf::Sprite>>))) {
-                    std::shared_ptr<sf::IntRect> rect = new_entity->template GetComponent<C_SpriteRect<std::shared_ptr<sf::IntRect>>>()->getValue();
-                    std::shared_ptr<sf::Sprite> sprite = new_entity->template GetComponent<C_Sprite<std::shared_ptr<sf::Sprite>>>()->getValue();
-                    sprite->setTextureRect(*rect);
+                if (new_entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
+                    new_entity->HasComponent(typeid(C_Sprite<sf::Sprite>))) {
+                    std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+                    std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
+                    sprite->getValue().setTextureRect(rect->getValue());
                 }
                 scene_builder_.AddEntity(new_entity);
             }

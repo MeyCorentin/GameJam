@@ -41,7 +41,7 @@ class S_Input : public System {
                 const json& arg_componentConfig,
                 JsonParser& arg_parser,
                 EntityBuilder& arg_entityBuilder,
-                std::vector<std::shared_ptr<sf::Sprite>>& sprites,
+                std::vector<sf::Sprite>& sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& textures) {
             std::string component_name = arg_componentConfig["type"];
             std::string value_type = arg_componentConfig["value_type"];
@@ -54,7 +54,7 @@ class S_Input : public System {
 
             std::cout << " - " << component_name << std::endl;
             if (value_type == "Sprite") {
-                auto all_ptr = std::get<std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>>(value);
+                auto all_ptr = std::get<std::pair<std::shared_ptr<sf::Texture>, sf::Sprite>>(value);
                 sprites.push_back(all_ptr.second);
                 textures.push_back(all_ptr.first);
                 arg_entityBuilder.AddComponent(component,  all_ptr.second);
@@ -71,7 +71,7 @@ class S_Input : public System {
             } else if (value_type == "Clock") {
                 arg_entityBuilder.AddComponent(component, std::get<sf::Clock>(value));
             } else if (value_type == "IntRect") {
-                arg_entityBuilder.AddComponent(component, std::get<std::shared_ptr<sf::IntRect>>(value));
+                arg_entityBuilder.AddComponent(component, std::get<sf::IntRect>(value));
             } else if (value_type == "PairPairInt") {
                 arg_entityBuilder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
             } else {
@@ -84,7 +84,7 @@ class S_Input : public System {
         std::shared_ptr<Entity> CreateEntityFromConfig(
                 const json& arg_entity_config,
                 const json& arg_components_config,
-                std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
+                std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures) {
             JsonParser parser;
             json component_config;
@@ -107,7 +107,7 @@ class S_Input : public System {
 
         void createEntity(
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
+                std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 int id,
                 std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp) {
@@ -123,9 +123,9 @@ class S_Input : public System {
                 if (entity_config["id"] == id) {
                     new_entity = CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                    std::shared_ptr<sf::IntRect> rect = new_entity->template GetComponent<C_SpriteRect<std::shared_ptr<sf::IntRect>>>()->getValue();
-                    std::shared_ptr<sf::Sprite> sprite = new_entity->template GetComponent<C_Sprite<std::shared_ptr<sf::Sprite>>>()->getValue();
-                    sprite->setTextureRect(*rect);
+                    std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+                    std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
+                    sprite->getValue().setTextureRect(rect->getValue());
                     position_new->setValue(std::make_pair(arg_position_comp->getValue().first, arg_position_comp->getValue().second));
                     arg_all_entities.push_back(new_entity);
                 }
@@ -137,7 +137,7 @@ class S_Input : public System {
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_inputs,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
+                std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<sf::Event> event_) override { //TODO rename event_
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;

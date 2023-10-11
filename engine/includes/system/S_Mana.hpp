@@ -19,7 +19,7 @@ class S_Mana : public System {
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_input,
                 std::vector<std::shared_ptr<Entity>>& arg_all_Entities,
-                std::vector<std::shared_ptr<sf::Sprite>>& arg_sprites,
+                std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<sf::Event> event_) override {
             int current_mana;

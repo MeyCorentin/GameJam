@@ -15,13 +15,13 @@
 #include <variant>
 
 using Variant = std::variant<
-                std::pair<std::shared_ptr<sf::Texture>, std::shared_ptr<sf::Sprite>>,
+                std::pair<std::shared_ptr<sf::Texture>, sf::Sprite>,
                 int, 
                 std::pair<double, double>, 
                 std::pair<int, int>, 
                 bool, 
                 double, 
                 sf::Clock,
-                std::shared_ptr<sf::IntRect>, 
+                sf::IntRect, 
                 std::pair<std::pair<int, int>, std::pair<int, int>>>;
 using json = nlohmann::json;
