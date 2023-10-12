@@ -1,6 +1,7 @@
 #include "System.hpp"
 #include "../components/C_Sprite.hpp"
 #include "../components/C_Position.hpp"
+#include "../components/C_Background.hpp"
 
 class S_Display : public System {
     public:
@@ -27,10 +28,25 @@ class S_Display : public System {
                 std::shared_ptr<sf::Event> event_) override {
             sf::Sprite sprite_comp;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
+            std::shared_ptr<C_Background<bool>> is_background;
             float x_position;
             float y_position;
+            for (const std::shared_ptr<Entity>& entity : arg_entities) {
+                is_background = entity->template GetComponent<C_Background<bool>>();
+                if (!is_background)
+                    continue;
+                sprite_comp = entity->template GetComponent<C_Sprite<sf::Sprite>>()->getValue();
+                position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                x_position = static_cast<float>(position_comp->getValue().first);
+                y_position = static_cast<float>(position_comp->getValue().second);
+                sprite_comp.setPosition(x_position, y_position);
+                arg_window->draw(sprite_comp);
+            }
 
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
+                is_background = entity->template GetComponent<C_Background<bool>>();
+                if (is_background)
+                    continue;
                 sprite_comp = entity->template GetComponent<C_Sprite<sf::Sprite>>()->getValue();
                 position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
                 x_position = static_cast<float>(position_comp->getValue().first);

@@ -24,6 +24,7 @@
 #include "../includes/components/C_Shoot.hpp"
 #include "../includes/components/C_Target.hpp"
 #include "../includes/components/C_Follow.hpp"
+#include "../includes/components/C_Background.hpp"
 #include "../includes/components/C_Animation.hpp"
 #include "../includes/components/C_Server.hpp"
 #include "../includes/components/C_Client.hpp"
@@ -100,6 +101,7 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("PlayerAmmo", []() { return std::make_shared<C_PlayerAmmo<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("SinMoov", []() { return std::make_shared<C_SinMoov<SinusoidalFunction>>(); });
             ComponentRegistry::Instance().RegisterComponent("SinClock", []() { return std::make_shared<C_SinClock<sf::Clock>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Background", []() { return std::make_shared<C_Background<bool>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);
