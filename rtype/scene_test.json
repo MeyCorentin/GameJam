@@ -777,12 +777,8 @@
                     "value": 500
                 },
                 {
-                    "component_id": 23,
-                    "value": -1
-                },
-                {
                     "component_id": 27,
-                    "value": { "a": 2, "f": 1, "p": 0}
+                    "value": { "a": 1.5, "f": 0.5, "p": 0}
                 },
                 {
                     "component_id": 28,
