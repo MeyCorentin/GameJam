@@ -40,7 +40,7 @@ class Scene {
                 std::vector<std::shared_ptr<sf::Texture>> arg_texture_list,
                 std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index)
             : systems_(arg_system_list), list_entities_(arg_entity_list), sprites_(arg_sprite_list), textures_(arg_texture_list), spawn_index_(arg_spawn_index)  {
-                window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(1000, 1000), "R-Type"));
+                window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(384, 256), "R-Type"));
                 frames_this_second_ = 0;
                 total_ticks_ = 0;
                 event_ = std::shared_ptr<sf::Event>(new sf::Event());
@@ -51,19 +51,19 @@ class Scene {
                 tick_ = std::shared_ptr<sf::Text>(new sf::Text());
                 tick_->setPosition(0, 0);
                 tick_->setFillColor(sf::Color::White);
-                tick_->setCharacterSize(14),
+                tick_->setCharacterSize(10),
                 tick_->setFont(*font_);
 
-                entities_nbr_->setPosition(0, 20);
+                entities_nbr_->setPosition(0, 11);
                 entities_nbr_->setFillColor(sf::Color::White);
-                entities_nbr_->setCharacterSize(14),
+                entities_nbr_->setCharacterSize(10),
                 entities_nbr_->setFont(*font_);
 
 
                 current_tick_ = std::shared_ptr<sf::Text>(new sf::Text());
-                current_tick_->setPosition(0, 40);
+                current_tick_->setPosition(0, 22);
                 current_tick_->setFillColor(sf::Color::White);
-                current_tick_->setCharacterSize(14),
+                current_tick_->setCharacterSize(10),
                 current_tick_->setFont(*font_);
 
                 for (int i = 0; i < sf::Keyboard::KeyCount; ++i) {
