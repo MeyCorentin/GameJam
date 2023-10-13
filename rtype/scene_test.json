@@ -669,7 +669,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/missiles.gif"
+                    "value": "../../sprites/red_enemy_particles.gif"
                 },
                 {
                     "component_id": 2,
@@ -681,7 +681,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 19, "y": 10 }
+                    "value": { "x": 15, "y": 7 }
                 },
                 {
                     "component_id": 7,
@@ -697,11 +697,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 247, "top": 88, "width": 19, "height": 10}
+                    "value": { "left": 132, "top": 6, "width": 17, "height": 7}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 19, "y": 10, "start_x": 247, "start_y": 88}
+                    "value": { "x": 60, "y": 7, "start_x": 132, "start_y": 6}
                 },
                 {
                     "component_id": 14,
