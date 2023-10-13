@@ -249,7 +249,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/red_enemy.gif"
                 },
                 {
                     "component_id": 2,
@@ -265,7 +265,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 35, "y": 20 }
+                    "value": { "x": 32, "y": 31 }
                 },
                 {
                     "component_id": 7,
@@ -281,11 +281,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 0, "top": 0, "width": 33, "height": 18}
+                    "value": { "left": 0, "top": 4, "width": 33, "height": 31}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 166, "y": 18, "start_x": 0, "start_y": 0}
+                    "value": { "x": 264, "y": 31, "start_x": 0, "start_y": 4}
                 },
                 {
                     "component_id": 14,
@@ -428,7 +428,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": 2
                 },
                 {
                     "component_id": 3,
@@ -477,7 +477,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": -1
+                    "value": 3
                 },
                 {
                     "component_id": 3,
@@ -526,7 +526,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": -1
+                    "value": 4
                 },
                 {
                     "component_id": 3,
@@ -575,7 +575,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": -1
+                    "value": 5
                 },
                 {
                     "component_id": 3,
@@ -624,7 +624,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": -1
+                    "value": 6
                 },
                 {
                     "component_id": 3,
@@ -714,7 +714,7 @@
             "components": [
                 {
                     "component_id": 1,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/red_enemy.gif"
                 },
                 {
                     "component_id": 2,
@@ -730,7 +730,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 35, "y": 20 }
+                    "value": { "x": 32, "y": 31 }
                 },
                 {
                     "component_id": 7,
@@ -746,11 +746,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 0, "top": 0, "width": 33, "height": 18}
+                    "value": { "left": 0, "top": 4, "width": 33, "height": 31}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 166, "y": 18, "start_x": 0, "start_y": 0}
+                    "value": { "x": 264, "y": 31, "start_x": 0, "start_y": 4}
                 },
                 {
                     "component_id": 14,
@@ -799,7 +799,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": -1
                 },
                 {
                     "component_id": 3,

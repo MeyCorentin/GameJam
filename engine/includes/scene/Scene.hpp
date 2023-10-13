@@ -71,7 +71,6 @@ class Scene {
                 }
             }
 
-
         void ClearWindow()
         {
             window_->clear();
