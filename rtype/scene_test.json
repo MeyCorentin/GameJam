@@ -836,7 +836,7 @@
                 },
                 {
                     "component_id": 23,
-                    "value": -2
+                    "value": -1
                 }
             ]
         },
@@ -857,7 +857,7 @@
                 },
                 {
                     "component_id": 23,
-                    "value": -3
+                    "value": -2
                 }
             ]
         },
@@ -878,7 +878,7 @@
                 },
                 {
                     "component_id": 23,
-                    "value": -4
+                    "value": -3
                 }
             ]
         }
