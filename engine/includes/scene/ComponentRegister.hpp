@@ -7,10 +7,7 @@ class ComponentRegistry {
     public:
         using ComponentConstructor = std::function<std::shared_ptr<ComponentBase>()>;
 
-        static ComponentRegistry& Instance() {
-            static ComponentRegistry registry;
-            return registry;
-        }
+        static ComponentRegistry& Instance();
 
         void RegisterComponent(const std::string& arg_name, ComponentConstructor arg_constructor);
 

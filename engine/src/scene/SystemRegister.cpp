@@ -1,5 +1,10 @@
 #include "scene/SystemRegister.hpp"
 
+SystemRegistry& SystemRegistry::Instance() {
+    static SystemRegistry registry;
+    return registry;
+}
+
 void SystemRegistry::RegisterSystem(
         const std::string& arg_name,
         SystemConstructor arg_constructor) {

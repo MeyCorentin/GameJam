@@ -6,10 +6,7 @@ class SystemRegistry {
     public:
         using SystemConstructor = std::function<std::shared_ptr<System>()>;
 
-        static SystemRegistry& Instance() {
-            static SystemRegistry registry;
-            return registry;
-        }
+        static SystemRegistry& Instance();
 
         void RegisterSystem(const std::string& arg_name, SystemConstructor arg_constructor);
 

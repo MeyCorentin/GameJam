@@ -1,5 +1,11 @@
 #include "scene/ComponentRegister.hpp"
 
+ComponentRegistry& ComponentRegistry::Instance() {
+    static ComponentRegistry registry;
+    return registry;
+}
+
+
 void ComponentRegistry::RegisterComponent(const std::string& arg_name, ComponentConstructor arg_constructor) {
     components[arg_name] = arg_constructor;
 }
