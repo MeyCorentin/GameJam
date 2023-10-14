@@ -11,7 +11,7 @@ int main(int argc, char **argv)
     std::chrono::high_resolution_clock::time_point elapsed_time;
 
     ecs.Create(0);
-
+    srand(time(NULL));
     while(true)
     {
         start_time = std::chrono::high_resolution_clock::now();

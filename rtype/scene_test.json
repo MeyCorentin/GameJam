@@ -214,6 +214,11 @@
             "id": 35,
             "type": "PositionEnd",
             "value_type": "PairDouble"
+        },
+        {
+            "id": 36,
+            "type": "Ammo",
+            "value_type": "Int"
         }
     ],
     "entities": [
@@ -909,6 +914,10 @@
                 {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 36,
+                    "value": 10
                 }
             ]
         },
@@ -1436,20 +1445,20 @@
             ]
         },
         {
-            "tick" : 1004,
+            "tick" : 220,
             "mob_id": [
                 {
                     "entity_id": 11,
-                    "position": { "x": 1000, "y": 500 }
+                    "position": { "x": 384, "y": 128 }
                 }
             ]
         },
         {
-            "tick" : 1070,
+            "tick" : 240,
             "mob_id": [
                 {
                     "entity_id": 11,
-                    "position": { "x": 1000, "y": 500 }
+                    "position": { "x": 384, "y": 128 }
                 }
             ]
         },
@@ -1458,7 +1467,7 @@
             "mob_id": [
                 {
                     "entity_id": 11,
-                    "position": { "x": 384, "y": 500 }
+                    "position": { "x": 384, "y": 128 }
                 }
             ]
         },
@@ -1495,6 +1504,22 @@
                 {
                     "entity_id": 11,
                     "position": { "x": 384, "y": 128 }
+                }
+            ]
+        },
+        {
+            "tick" : 100,
+            "mob_id": [
+                {
+                    "entity_id": 11
+                }
+            ]
+        },
+        {
+            "tick" : 200,
+            "mob_id": [
+                {
+                    "entity_id": 11
                 }
             ]
         }

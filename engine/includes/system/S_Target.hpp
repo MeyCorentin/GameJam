@@ -8,6 +8,7 @@
 #include "../components/C_FireRate.hpp"
 #include "../components/C_FireRateSpeed.hpp"
 #include "../components/C_Range.hpp"
+#include "../components/C_Ammo.hpp"
 #include "S_Input.hpp"
 
 class S_Target : public System {
@@ -34,6 +35,7 @@ class S_Target : public System {
                 std::shared_ptr<sf::Event> event_) override {
             int current_mana;
             std::shared_ptr<C_Target<int>> target;
+            std::shared_ptr<C_Ammo<int>> ammo;
             std::shared_ptr<C_Follow<bool>> follow;
             std::shared_ptr<C_Shoot<bool>> shoot;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_1;
@@ -59,6 +61,7 @@ class S_Target : public System {
                     target = entity1->template GetComponent<C_Target<int>>();
                     follow = entity1->template GetComponent<C_Follow<bool>>();
                     shoot = entity1->template GetComponent<C_Shoot<bool>>();
+                    ammo = entity1->template GetComponent<C_Ammo<int>>();
                     position_comp_1 = entity1->template GetComponent<C_Position<std::pair<double, double>>>();
                     position_comp_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
                     fire_rate = entity1->template GetComponent<C_FireRate<sf::Clock>>();
@@ -79,6 +82,7 @@ class S_Target : public System {
                         }
                     }
                     if (shoot &&
+                        ammo &&
                         position_comp_1 &&
                         position_comp_2 &&
                         target->getValue() == entity2->GetId() &&
@@ -90,7 +94,7 @@ class S_Target : public System {
                             if (fire_rate->getValue().getElapsedTime().asSeconds() < fire_rate_speed->getValue())
                                 continue;
                             for (const auto& entity_config : data["entities"]) {
-                                if (entity_config["id"] == 10) { // !TODO Récupérer l'id de la munition depuis le json
+                                if (entity_config["id"] == ammo->getValue()) { // !TODO Récupérer l'id de la munition depuis le json
                                     direction.first = position_comp_2->getValue().first - position_comp_1->getValue().first;
                                     direction.second = position_comp_2->getValue().second - position_comp_1->getValue().second;
                                     length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
@@ -99,6 +103,8 @@ class S_Target : public System {
                                     new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
                                     direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                                    if (!direction_new || !position_new)
+                                        continue;
                                     if (new_entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
                                         new_entity->HasComponent(typeid(C_Sprite<sf::Sprite>))) {
                                         std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
