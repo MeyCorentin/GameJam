@@ -40,6 +40,8 @@
 #include "../includes/components/C_ShootCharging.hpp"
 #include "../includes/components/C_PlayerAmmo.hpp"
 #include "../includes/components/C_SinClock.hpp"
+#include "../includes/components/C_PositionEnd.hpp"
+#include "../includes/components/C_PositionStart.hpp"
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
@@ -102,6 +104,8 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("SinMoov", []() { return std::make_shared<C_SinMoov<SinusoidalFunction>>(); });
             ComponentRegistry::Instance().RegisterComponent("SinClock", []() { return std::make_shared<C_SinClock<sf::Clock>>(); });
             ComponentRegistry::Instance().RegisterComponent("Background", []() { return std::make_shared<C_Background<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("PositionEnd", []() { return std::make_shared<C_PositionEnd<std::pair<double, double>>>(); });
+            ComponentRegistry::Instance().RegisterComponent("PositionStart", []() { return std::make_shared<C_PositionStart<std::pair<double, double>>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);

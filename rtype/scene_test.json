@@ -180,6 +180,16 @@
             "id": 29,
             "type": "Background",
             "value_type": "Bool"
+        },
+        {
+            "id": 30,
+            "type": "PositionStart",
+            "value_type": "PairDouble"
+        },
+        {
+            "id": 31,
+            "type": "PositionEnd",
+            "value_type": "PairDouble"
         }
     ],
     "entities": [
@@ -831,6 +841,14 @@
                     "value": { "x": 0, "y": 0 }
                 },
                 {
+                    "component_id": 30,
+                    "value": { "x": 426, "y": 0 }
+                },
+                {
+                    "component_id": 31,
+                    "value": { "x": -426, "y": 0 }
+                },
+                {
                     "component_id": 23,
                     "value": -1
                 }
@@ -852,6 +870,14 @@
                     "value": { "x": 0, "y": 0 }
                 },
                 {
+                    "component_id": 30,
+                    "value": { "x": 426, "y": 0 }
+                },
+                {
+                    "component_id": 31,
+                    "value": { "x": -426, "y": 0 }
+                },
+                {
                     "component_id": 23,
                     "value": -2
                 }
@@ -867,6 +893,14 @@
                 {
                     "component_id": 2,
                     "value": 1
+                },
+                {
+                    "component_id": 30,
+                    "value": { "x": 426, "y": 0 }
+                },
+                {
+                    "component_id": 31,
+                    "value": { "x": -426, "y": 0 }
                 },
                 {
                     "component_id": 3,
@@ -898,6 +932,18 @@
                 {
                     "entity_id": 15,
                     "position": { "x": 0, "y": 0 }
+                },
+                {
+                    "entity_id": 13,
+                    "position": { "x": 426, "y": 0 }
+                },
+                {
+                    "entity_id": 14,
+                    "position": { "x": 426, "y": 0 }
+                },
+                {
+                    "entity_id": 15,
+                    "position": { "x": 426, "y": 0 }
                 },
                 {
                     "entity_id": 2,
