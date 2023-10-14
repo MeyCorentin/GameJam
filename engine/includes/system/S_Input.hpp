@@ -172,7 +172,7 @@ class S_Input : public System {
                     if (event_->type == sf::Event::Closed)
                         arg_window->close();
                     if (event_->type == sf::Event::KeyPressed) {
-                        if (event_->key.code == sf::Keyboard::Z) {
+                        if (event_->key.code == sf::Keyboard::Up) {
                             inputs_[0] = 1;
                             if (moving->getValue() == false) {
                                 moving->getValue() = true;
@@ -181,9 +181,9 @@ class S_Input : public System {
                             rect->getValue().left = size->getValue().second.first + (rect->getValue().width * 2);
                             sprite->getValue().setTextureRect(rect->getValue());
                         }
-                        if (event_->key.code == sf::Keyboard::Q)
+                        if (event_->key.code == sf::Keyboard::Left)
                             inputs_[1] = 1;
-                        if (event_->key.code == sf::Keyboard::S) {
+                        if (event_->key.code == sf::Keyboard::Down) {
                             inputs_[2] = 1;
                             if (moving->getValue() == false) {
                                 moving->getValue() = true;
@@ -192,7 +192,7 @@ class S_Input : public System {
                             rect->getValue().left = size->getValue().second.first - (rect->getValue().width * 2);
                             sprite->getValue().setTextureRect(rect->getValue());
                         }
-                        if (event_->key.code == sf::Keyboard::D)
+                        if (event_->key.code == sf::Keyboard::Right)
                             inputs_[3] = 1;
                         if (event_->key.code == sf::Keyboard::Space) {
                             if (is_charging->getValue() == false) {
@@ -202,21 +202,21 @@ class S_Input : public System {
                         }
                     }
                     if (event_->type == sf::Event::KeyReleased) {
-                        if (event_->key.code == sf::Keyboard::Z) {
+                        if (event_->key.code == sf::Keyboard::Up) {
                             inputs_[0] = 0;
                             moving->getValue() = false;
                             rect->getValue().left = size->getValue().second.first;
                             sprite->getValue().setTextureRect(rect->getValue());
                         }
-                        if (event_->key.code == sf::Keyboard::Q)
+                        if (event_->key.code == sf::Keyboard::Left)
                             inputs_[1] = 0;
-                        if (event_->key.code == sf::Keyboard::S) {
+                        if (event_->key.code == sf::Keyboard::Down) {
                             inputs_[2] = 0;
                             moving->getValue() = false;
                             rect->getValue().left = size->getValue().second.first;
                             sprite->getValue().setTextureRect(rect->getValue());
                         }
-                        if (event_->key.code == sf::Keyboard::D)
+                        if (event_->key.code == sf::Keyboard::Right)
                             inputs_[3] = 0;
                         if (event_->key.code == sf::Keyboard::Space) { // ADD CLOCK TO INPUT
                             std::cout << "Time : " << clock->getValue().getElapsedTime().asSeconds() << std::endl;

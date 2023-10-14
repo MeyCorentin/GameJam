@@ -431,6 +431,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 32,
+                    "value": 18
+                },
+                {
                     "component_id": 33,
                     "value": false
                 }
@@ -533,6 +537,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 32,
+                    "value": 20
+                },
+                {
                     "component_id": 33,
                     "value": false
                 }
@@ -584,6 +592,10 @@
                 {
                     "component_id": 25,
                     "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 20
                 },
                 {
                     "component_id": 33,
@@ -639,6 +651,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 32,
+                    "value": 20
+                },
+                {
                     "component_id": 33,
                     "value": false
                 }
@@ -690,6 +706,10 @@
                 {
                     "component_id": 25,
                     "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 20
                 },
                 {
                     "component_id": 33,
@@ -745,6 +765,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 32,
+                    "value": 20
+                },
+                {
                     "component_id": 33,
                     "value": false
                 }
@@ -759,7 +783,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": -1
                 },
                 {
                     "component_id": 3,
@@ -796,6 +820,10 @@
                 {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 32,
+                    "value": 19
                 }
             ]
         },
@@ -873,6 +901,10 @@
                 {
                     "component_id": 28,
                     "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
                 },
                 {
                     "component_id": 33,
@@ -1028,6 +1060,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 23,
+                    "value": -1
+                },
+                {
                     "component_id": 33,
                     "value": true
                 }
@@ -1063,6 +1099,133 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 23,
+                    "value": -1
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 287, "top": 85, "width": 15, "height": 12}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 30, "y": 12, "start_x": 287, "start_y": 85}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 23,
+                    "value": -1
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/red_enemy_particles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 116, "top": 19, "width": 17, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 85, "y": 14, "start_x": 116, "start_y": 19}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 23,
+                    "value": -1
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/blue.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 337, "top": 149, "width": 26, "height": 30}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 130, "y": 30, "start_x": 337, "start_y": 149}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 23,
+                    "value": -1
                 },
                 {
                     "component_id": 33,
@@ -1134,10 +1297,6 @@
                 {
                     "entity_id": 12,
                     "position": { "x": 330, "y": 240 }
-                },
-                {
-                    "entity_id": 17,
-                    "position": { "x": 100, "y": 100 }
                 }
             ]
         },
