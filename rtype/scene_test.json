@@ -214,6 +214,11 @@
             "id": 35,
             "type": "PositionEnd",
             "value_type": "PairDouble"
+        },
+        {
+            "id": 36,
+            "type": "Ammo",
+            "value_type": "Int"
         }
     ],
     "entities": [
@@ -877,6 +882,10 @@
                 {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 36,
+                    "value": 10
                 }
             ]
         },
