@@ -10,6 +10,7 @@
 #include "../components/C_AnimatedMove.hpp"
 #include "../components/C_IsMoving.hpp"
 #include "../components/C_Size.hpp"
+#include "../components/C_Admin.hpp"
 #include "../components/C_Sprite.hpp"
 #include "../components/C_SpriteRect.hpp"
 #include "../entity/EntityBuilder.hpp"
@@ -30,6 +31,7 @@ class S_Input : public System {
                     entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
                     entity->HasComponent(typeid(C_AnimatedMove<sf::Clock>)) &&
                     entity->HasComponent(typeid(C_IsMoving<bool>)) &&
+                    entity->HasComponent(typeid(C_Admin<bool>)) &&
                     entity->HasComponent(typeid(C_ChargedShoot<sf::Clock>))
                     ) {
                     filtered_entities.push_back(entity);
@@ -167,6 +169,8 @@ class S_Input : public System {
                 std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
                 std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
                 std::shared_ptr<C_IsMoving<bool>> moving = entity->template GetComponent<C_IsMoving<bool>>();
+                std::shared_ptr<C_Life<int>> life = entity->template GetComponent<C_Life<int>>();
+                std::shared_ptr<C_Admin<bool>> is_admin = entity->template GetComponent<C_Admin<bool>>();
                 std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
                 while (arg_window->pollEvent(*event_)) {
                     if (event_->type == sf::Event::Closed)
@@ -233,6 +237,15 @@ class S_Input : public System {
                             else
                                 createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
                             is_charging->getValue() = false;
+                        }
+                        if (event_->key.code == sf::Keyboard::A) {
+                            if (is_admin->getValue()) {
+                                life->getValue() = 1;
+                                is_admin->getValue() = false;
+                            } else {
+                                life->getValue() = -1;
+                                is_admin->getValue() = true;
+                            }
                         }
                     }
                 }

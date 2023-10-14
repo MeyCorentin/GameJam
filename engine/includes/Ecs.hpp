@@ -45,6 +45,7 @@
 #include "../includes/components/C_IsMoving.hpp"
 #include "../includes/components/C_Child.hpp"
 #include "../includes/components/C_Ammo.hpp"
+#include "../includes/components/C_Admin.hpp"
 #include "../includes/components/C_UniqueAnimation.hpp"
 #include "../includes/components/C_PositionEnd.hpp"
 #include "../includes/components/C_PositionStart.hpp"
@@ -115,6 +116,7 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("IsMoving", []() { return std::make_shared<C_IsMoving<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("Child", []() { return std::make_shared<C_Child<int>>(); });
             ComponentRegistry::Instance().RegisterComponent("Ammo", []() { return std::make_shared<C_Ammo<int>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Admin", []() { return std::make_shared<C_Admin<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("UniqueAnimation", []() { return std::make_shared<C_UniqueAnimation<bool>>(); });
             ComponentRegistry::Instance().RegisterComponent("PositionEnd", []() { return std::make_shared<C_PositionEnd<std::pair<double, double>>>(); });
             ComponentRegistry::Instance().RegisterComponent("PositionStart", []() { return std::make_shared<C_PositionStart<std::pair<double, double>>>(); });

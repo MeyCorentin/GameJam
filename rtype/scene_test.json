@@ -219,6 +219,11 @@
             "id": 36,
             "type": "Ammo",
             "value_type": "Int"
+        },
+        {
+            "id": 37,
+            "type": "Admin",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -295,6 +300,10 @@
                 },
                 {
                     "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 37,
                     "value": false
                 }
             ]
