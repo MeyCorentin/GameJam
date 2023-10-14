@@ -13,7 +13,7 @@
 #include "../includes/system/S_KillEntity.hpp"
 #include "../includes/system/S_Parallax.hpp"
 #include "../includes/system/S_SinMoov.hpp"
-#include "../includes/system/S_EraseEntity.hpp"
+#include "../includes/system/S_MakeBaby.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_Player.hpp"
@@ -81,7 +81,7 @@ class Ecs
             SystemRegistry::Instance().RegisterSystem("KillEntity", []() { return std::make_shared<S_KillEntity>(); });
             SystemRegistry::Instance().RegisterSystem("ParallaxSystem", []() { return std::make_shared<S_Parallax>(); });
             SystemRegistry::Instance().RegisterSystem("SinMoovSystem", []() { return std::make_shared<S_SinMoov>(); });
-            SystemRegistry::Instance().RegisterSystem("EraseEntity", []() { return std::make_shared<S_EraseEntity>(); });
+            SystemRegistry::Instance().RegisterSystem("MakeBaby", []() { return std::make_shared<S_MakeBaby>(); });
 
             ComponentRegistry::Instance().RegisterComponent("Sprite", []() { return std::make_shared<C_Sprite<sf::Sprite>>(); });
             ComponentRegistry::Instance().RegisterComponent("Life", []() { return std::make_shared<C_Life<int>>(); });
