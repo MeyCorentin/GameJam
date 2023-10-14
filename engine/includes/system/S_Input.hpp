@@ -7,6 +7,11 @@
 #include "../components/C_Hitbox.hpp"
 #include "../components/C_ChargedShoot.hpp"
 #include "../components/C_ShootCharging.hpp"
+#include "../components/C_AnimatedMove.hpp"
+#include "../components/C_IsMoving.hpp"
+#include "../components/C_Size.hpp"
+#include "../components/C_Sprite.hpp"
+#include "../components/C_SpriteRect.hpp"
 #include "../entity/EntityBuilder.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
@@ -23,6 +28,8 @@ class S_Input : public System {
             for (const std::shared_ptr<Entity>& entity : arg_entities) {
                 if (entity->HasComponent(typeid(C_Player<int>)) &&
                     entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
+                    entity->HasComponent(typeid(C_AnimatedMove<sf::Clock>)) &&
+                    entity->HasComponent(typeid(C_IsMoving<bool>)) &&
                     entity->HasComponent(typeid(C_ChargedShoot<sf::Clock>))
                     ) {
                     filtered_entities.push_back(entity);
@@ -156,16 +163,35 @@ class S_Input : public System {
                 hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                 std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
                 std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
+                std::shared_ptr<C_AnimatedMove<sf::Clock>> clock_move = entity->template GetComponent<C_AnimatedMove<sf::Clock>>();
+                std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+                std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
+                std::shared_ptr<C_IsMoving<bool>> moving = entity->template GetComponent<C_IsMoving<bool>>();
+                std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
                 while (arg_window->pollEvent(*event_)) {
                     if (event_->type == sf::Event::Closed)
                         arg_window->close();
                     if (event_->type == sf::Event::KeyPressed) {
-                        if (event_->key.code == sf::Keyboard::Z)
+                        if (event_->key.code == sf::Keyboard::Z) {
                             inputs_[0] = 1;
+                            if (moving->getValue() == false) {
+                                moving->getValue() = true;
+                                clock_move->getValue().restart();
+                            }
+                            rect->getValue().left = size->getValue().second.first + (rect->getValue().width * 2);
+                            sprite->getValue().setTextureRect(rect->getValue());
+                        }
                         if (event_->key.code == sf::Keyboard::Q)
                             inputs_[1] = 1;
-                        if (event_->key.code == sf::Keyboard::S)
+                        if (event_->key.code == sf::Keyboard::S) {
                             inputs_[2] = 1;
+                            if (moving->getValue() == false) {
+                                moving->getValue() = true;
+                                clock_move->getValue().restart();
+                            }
+                            rect->getValue().left = size->getValue().second.first - (rect->getValue().width * 2);
+                            sprite->getValue().setTextureRect(rect->getValue());
+                        }
                         if (event_->key.code == sf::Keyboard::D)
                             inputs_[3] = 1;
                         if (event_->key.code == sf::Keyboard::Space) {
@@ -176,12 +202,20 @@ class S_Input : public System {
                         }
                     }
                     if (event_->type == sf::Event::KeyReleased) {
-                        if (event_->key.code == sf::Keyboard::Z)
+                        if (event_->key.code == sf::Keyboard::Z) {
                             inputs_[0] = 0;
+                            moving->getValue() = false;
+                            rect->getValue().left = size->getValue().second.first;
+                            sprite->getValue().setTextureRect(rect->getValue());
+                        }
                         if (event_->key.code == sf::Keyboard::Q)
                             inputs_[1] = 0;
-                        if (event_->key.code == sf::Keyboard::S)
+                        if (event_->key.code == sf::Keyboard::S) {
                             inputs_[2] = 0;
+                            moving->getValue() = false;
+                            rect->getValue().left = size->getValue().second.first;
+                            sprite->getValue().setTextureRect(rect->getValue());
+                        }
                         if (event_->key.code == sf::Keyboard::D)
                             inputs_[3] = 0;
                         if (event_->key.code == sf::Keyboard::Space) { // ADD CLOCK TO INPUT

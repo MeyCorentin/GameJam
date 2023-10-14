@@ -13,6 +13,7 @@
 #include "../includes/system/S_KillEntity.hpp"
 #include "../includes/system/S_Parallax.hpp"
 #include "../includes/system/S_SinMoov.hpp"
+#include "../includes/system/S_EraseEntity.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_Player.hpp"
@@ -40,6 +41,10 @@
 #include "../includes/components/C_ShootCharging.hpp"
 #include "../includes/components/C_PlayerAmmo.hpp"
 #include "../includes/components/C_SinClock.hpp"
+#include "../includes/components/C_AnimatedMove.hpp"
+#include "../includes/components/C_IsMoving.hpp"
+#include "../includes/components/C_Child.hpp"
+#include "../includes/components/C_UniqueAnimation.hpp"
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
@@ -73,6 +78,7 @@ class Ecs
             SystemRegistry::Instance().RegisterSystem("KillEntity", []() { return std::make_shared<S_KillEntity>(); });
             SystemRegistry::Instance().RegisterSystem("ParallaxSystem", []() { return std::make_shared<S_Parallax>(); });
             SystemRegistry::Instance().RegisterSystem("SinMoovSystem", []() { return std::make_shared<S_SinMoov>(); });
+            SystemRegistry::Instance().RegisterSystem("EraseEntity", []() { return std::make_shared<S_EraseEntity>(); });
 
             ComponentRegistry::Instance().RegisterComponent("Sprite", []() { return std::make_shared<C_Sprite<sf::Sprite>>(); });
             ComponentRegistry::Instance().RegisterComponent("Life", []() { return std::make_shared<C_Life<int>>(); });
@@ -102,6 +108,10 @@ class Ecs
             ComponentRegistry::Instance().RegisterComponent("SinMoov", []() { return std::make_shared<C_SinMoov<SinusoidalFunction>>(); });
             ComponentRegistry::Instance().RegisterComponent("SinClock", []() { return std::make_shared<C_SinClock<sf::Clock>>(); });
             ComponentRegistry::Instance().RegisterComponent("Background", []() { return std::make_shared<C_Background<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("AnimatedMove", []() { return std::make_shared<C_AnimatedMove<sf::Clock>>(); });
+            ComponentRegistry::Instance().RegisterComponent("IsMoving", []() { return std::make_shared<C_IsMoving<bool>>(); });
+            ComponentRegistry::Instance().RegisterComponent("Child", []() { return std::make_shared<C_Child<int>>(); });
+            ComponentRegistry::Instance().RegisterComponent("UniqueAnimation", []() { return std::make_shared<C_UniqueAnimation<bool>>(); });
 
             std::cout << "[ECS] start create scene" << std::endl;
             SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);

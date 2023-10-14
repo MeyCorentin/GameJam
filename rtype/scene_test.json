@@ -43,6 +43,10 @@
         {
             "id": 12,
             "type" : "SinMoovSystem"
+        },
+        {
+            "id": 13,
+            "type": "EraseEntity"
         }
     ],
     "components": [
@@ -180,6 +184,26 @@
             "id": 29,
             "type": "Background",
             "value_type": "Bool"
+        },
+        {
+            "id": 30,
+            "type": "AnimatedMove",
+            "value_type": "Clock"
+        },
+        {
+            "id": 31,
+            "type": "IsMoving",
+            "value_type": "Bool"
+        },
+        {
+            "id": 32,
+            "type": "Child",
+            "value_type": "Int"
+        },
+        {
+            "id": 33,
+            "type": "UniqueAnimation",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -240,6 +264,22 @@
                 },
                 {
                     "component_id": 26,
+                    "value": false
+                },
+                {
+                    "component_id": 30,
+                    "value": 0
+                },
+                {
+                    "component_id": 31,
+                    "value": false
+                },
+                {
+                    "component_id": 32,
+                    "value": 16
+                },
+                {
+                    "component_id": 33,
                     "value": false
                 }
             ]
@@ -322,6 +362,14 @@
                 {
                     "component_id": 28,
                     "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -371,6 +419,10 @@
                 {
                     "component_id": 25,
                     "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -416,6 +468,10 @@
                 {
                     "component_id": 17,
                     "value": 1
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -465,6 +521,10 @@
                 {
                     "component_id": 25,
                     "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -514,6 +574,10 @@
                 {
                     "component_id": 25,
                     "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -563,6 +627,10 @@
                 {
                     "component_id": 25,
                     "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -612,6 +680,10 @@
                 {
                     "component_id": 25,
                     "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -661,6 +733,10 @@
                 {
                     "component_id": 25,
                     "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -706,6 +782,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -783,6 +863,10 @@
                 {
                     "component_id": 28,
                     "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         },
@@ -877,6 +961,80 @@
                     "value": -3
                 }
             ]
+        },
+        {
+            "id": 16,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 67, "top": 342, "width": 33, "height": 30}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 198, "y": 30, "start_x": 67, "start_y": 342}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 128, "top": 0, "width": 33, "height": 33}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 198, "y": 33, "start_x": 128, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                }
+            ]
         }
     ],
     "spawn": [
@@ -930,6 +1088,10 @@
                 {
                     "entity_id": 12,
                     "position": { "x": 330, "y": 240 }
+                },
+                {
+                    "entity_id": 17,
+                    "position": { "x": 100, "y": 100 }
                 }
             ]
         },
