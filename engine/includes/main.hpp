@@ -12,6 +12,7 @@
 #include <nlohmann/json.hpp>
 #include <functional>
 #include <any>
+#include <random>
 #include <variant>
 
 #pragma once

@@ -99,6 +99,20 @@ class SceneDirector {
             return entity_builder.Build();
         }
 
+        template <typename T>
+        T getRandomInRange(T min, T max)
+        {
+            if (max <= min)
+                return min;
+
+            std::mt19937_64 gen(std::chrono::system_clock::now().time_since_epoch().count());
+            std::uniform_int_distribution<long long> distribution(min, max);
+
+            T nbr = (T)distribution(gen);
+
+            return nbr;
+        }
+
         std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> CreateMap(const json& arg_spawn_config)
         {
             std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> map;
@@ -110,9 +124,16 @@ class SceneDirector {
                 for (const auto& entity : spawn_entry.at("mob_id"))
                 {
                     int id_value = entity.at("entity_id").get<int>();
-                    int x = entity.at("position").at("x").get<int>();
-                    int y = entity.at("position").at("y").get<int>();
-
+                    int x;
+                    int y;
+                    if (entity.find("position") != entity.end())
+                    {
+                        x = entity.at("position").at("x").get<int>();
+                        y = entity.at("position").at("y").get<int>();
+                    } else {
+                        x = 384;
+                        y = getRandomInRange(0,180);
+                    }
                     entities.push_back(std::make_pair(id_value, std::make_pair(x, y)));
                 }
 
