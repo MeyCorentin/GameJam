@@ -11,8 +11,6 @@ jobs:
 
 build_engine:
 
-    runs-on: ubuntu-latest
-    steps:
     - uses: actions/checkout@v3
     - name: Configure and build engine
       run: |
@@ -22,6 +20,7 @@ build_engine:
         make
 
 build_server:
+
     needs: build_engine
 
     steps:
