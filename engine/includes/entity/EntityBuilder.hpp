@@ -11,10 +11,8 @@ class EntityBuilder {
     public:
         std::shared_ptr<Entity> entity_;
 
-        EntityBuilder(int arg_id) {
-            Entity* temp = new Entity(arg_id, std::vector<std::shared_ptr<ComponentBase>>());
-            entity_ = std::shared_ptr<Entity>(temp);
-        }
+        EntityBuilder(int arg_id);
+
         template <typename T>
         EntityBuilder& AddComponent(
                 std::shared_ptr<ComponentBase> arg_component,
@@ -28,12 +26,7 @@ class EntityBuilder {
             return *this;
         }
 
-        EntityBuilder& SetID(int arg_id) {
-            entity_->SetId(arg_id);
-            return *this;
-        }
+        EntityBuilder& SetID(int arg_id);
 
-        std::shared_ptr<Entity> Build() {
-            return entity_;
-        }
+        std::shared_ptr<Entity> Build();
 };

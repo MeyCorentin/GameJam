@@ -25,6 +25,6 @@ Shortened as ECS, the Entity Component System is an architectural design pattern
 - Generate entire scene from json file
 
 
-### Exemple
+### Link
 
-You can find some example projects [here: engine/examples](https://github.com/EpitechPromo2026/B-CPP-500-LYN-5-1-rtype-keziah.picq/engine/exampless)
+github projects [here: engine](https://github.com/EpitechPromo2026/B-CPP-500-LYN-5-1-rtype-keziah.picq/tree/main/engine)
