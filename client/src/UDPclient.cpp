@@ -26,22 +26,22 @@ void UDPClient::retreiveKeyboard()
 {
     BinaryProtocole::BinaryMessage msg = {type: 1, id: getClientId(), x: 1920, y: 1080, data: 0};
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         msg.data = 200;
         send(msg);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         msg.data = 210;
         send(msg);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         msg.data = 220;
         send(msg);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         msg.data = 230;
         send(msg);

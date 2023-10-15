@@ -20,7 +20,7 @@ void UDPServer::run_server(Ecs &ecs)
         if (connected_client < clients_.size())
         {
             std::cout << "Player Connect" << std::endl;
-            ecs.scene_.AddNewPlayer(clients_.size());
+            ecs.scene_.AddNewPlayer(clients_.size() + connected_client);
             connected_client++;
         }
         if (!input_queue_.empty())
@@ -49,7 +49,7 @@ void UDPServer::read_data()
         [this](boost::system::error_code ec, std::size_t bytes_recvd) {
             if (!ec && bytes_recvd > 0) {
                 BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
-                // std::cout << "Received : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << " data:" << msg.data << std::endl;
+                std::cout << "Received : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << " data:" << msg.data << std::endl;
                 if (msg.type == 1)
                     handleClientMessage(msg);
             }
@@ -61,6 +61,7 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
 {
 
     std::lock_guard<std::mutex> lock(queue_mutex_);
+    std::cout << "NEW MESSAGE" << std::endl;
     switch (msg.data)
     {
         case 100: // Client connection
