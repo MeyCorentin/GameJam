@@ -27,7 +27,7 @@ jobs:
       working-directory: engine/build
       run: make
     - name: Set RTYPE_LIBRARY environment variable
-      run: echo "RTYPE_LIBRARY=/chemin/vers/engine/build" >> $GITHUB_ENV
+      run: echo "RTYPE_LIBRARY=engine/build" >> $GITHUB_ENV
 
   build_server:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
     needs: build
 
     steps:
-  
+
     - name: Checkout server code
       uses: actions/checkout@v2
 
