@@ -11,15 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout engine code
-      uses: actions/checkout@v2
-
-    - name: Configure and build engine
-      run: |
-        mkdir engine/build
-        cd engine/build
-        cmake ..
-        make
+    - uses: actions/checkout@v3
+    - name: Set up CMake
+      run: sudo apt-get install cmake
+    - name: Install SFML
+      run: sudo apt-get install libsfml-dev
+    - name: Install nlohmann/json
+      run: sudo apt-get install nlohmann-json3-dev
+    - name: Create build directory
+      run: mkdir engine/build
+    - name: Configure and build
+      working-directory: engine/build
+      run: cmake ..
+    - name: Build
+      working-directory: engine/build
+      run: make
 
   build_server:
     runs-on: ubuntu-latest
