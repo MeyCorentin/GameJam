@@ -33,8 +33,12 @@ jobs:
     needs: build
 
     steps:
+
     - name: Checkout server code
       uses: actions/checkout@v2
+
+    - name: Set RTYPE_LIBRARY environment variable
+      run: echo "::set-env name=RTYPE_LIBRARY::/chemin/vers/engine/build"
 
     - name: Set up CMake
       run: sudo apt-get install cmake
