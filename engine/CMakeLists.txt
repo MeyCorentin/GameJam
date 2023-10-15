@@ -12,7 +12,11 @@ file(GLOB entity_sources "src/entity/*.cpp")
 # Find SFML
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
-add_executable(r-type_engine src/main.cpp src/Ecs.cpp ${system_sources} ${scene_sources} ${parser_sources} ${entity_sources})
+add_executable(r-type_engine src/main.cpp src/Ecs.cpp
+                ${system_sources}
+                ${scene_sources}
+                ${parser_sources}
+                ${entity_sources})
 
 # Specify the C++ standard
 target_compile_features(r-type_engine PRIVATE cxx_std_11)
