@@ -1,15 +1,18 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(r-type)
-
-cmake_policy(SET CMP0077 NEW)
-
+# Nom du projet
+project(r-type_client)
+# Liste des fichiers source de votre serveur
 add_executable(r-type_client src/main.cpp src/UDPclient.cpp ../server/src/BinaryProtocole.cpp)
-# Find SFML
+
+# Find SFML (si nécessaire)
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 
 # Specify the C++ standard
 target_compile_features(r-type_client PRIVATE cxx_std_11)
 
-# Link SFML libraries
-target_link_libraries(r-type_client sfml-graphics sfml-window sfml-system)
+target_include_directories(r-type_client PRIVATE includes)
+
+find_library(RTYPE_LIBRARY r-type_library HINTS ../engine/build)
+
+target_link_libraries(r-type_client sfml-graphics sfml-window sfml-system ${RTYPE_LIBRARY})
