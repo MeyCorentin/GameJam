@@ -178,6 +178,7 @@ void S_Input::Execute(
                 if (event_->key.code == sf::Keyboard::Space) {
                     if (is_charging->getValue() == false) {
                         clock->getValue().restart();
+                        createEntity(arg_all_entities, arg_sprites, arg_textures, 27, position_comp);
                         is_charging->getValue() = true;
                     }
                 }

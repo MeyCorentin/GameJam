@@ -10,6 +10,7 @@
 #include "../components/C_Direction.hpp"
 #include "../components/C_Range.hpp"
 #include "../components/C_Ammo.hpp"
+#include "../components/C_PositionFollow.hpp"
 #include "../components/C_Life.hpp"
 #include "S_Input.hpp"
 

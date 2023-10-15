@@ -224,6 +224,16 @@
             "id": 37,
             "type": "Admin",
             "value_type": "Bool"
+        },
+        {
+            "id": 38,
+            "type": "PositionFollow",
+            "value_type": "PairDouble"
+        },
+        {
+            "id": 39,
+            "type": "Inventory",
+            "value_type": "VectorEntity"
         }
     ],
     "entities": [
@@ -462,6 +472,10 @@
                     "value": "../../sprites/drone.gif"
                 },
                 {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
                     "component_id": 3,
                     "value": { "x": 80, "y": 80 }
                 },
@@ -494,12 +508,24 @@
                     "value": true
                 },
                 {
+                    "component_id": 15,
+                    "value": true
+                },
+                {
                     "component_id": 17,
                     "value": 1
                 },
                 {
+                    "component_id": 25,
+                    "value": true
+                },
+                {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 38,
+                    "value": {"x": 0, "y": -30}
                 }
             ]
         },
@@ -1301,7 +1327,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": -1
                 },
                 {
                     "component_id": 3,
@@ -1328,8 +1354,24 @@
                     "value": true
                 },
                 {
+                    "component_id": 15,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                },
+                {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 38,
+                    "value": {"x": 20, "y": 0}
                 }
             ]
         },
@@ -1342,7 +1384,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": -1
                 },
                 {
                     "component_id": 3,
@@ -1369,8 +1411,24 @@
                     "value": true
                 },
                 {
+                    "component_id": 15,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                },
+                {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 38,
+                    "value": {"x": 20, "y": 0}
                 }
             ]
         },
@@ -1383,7 +1441,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": -1
                 },
                 {
                     "component_id": 3,
@@ -1410,8 +1468,24 @@
                     "value": true
                 },
                 {
+                    "component_id": 15,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                },
+                {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 38,
+                    "value": {"x": 15, "y": 0}
                 }
             ]
         },
@@ -1496,12 +1570,106 @@
                     "value": false
                 }
             ]
+        },
+        {
+            "id": 27,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 50, "width": 33, "height": 34}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 264, "y": 34, "start_x": 0, "start_y": 50}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 15,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 38,
+                    "value": {"x": 30, "y": -5}
+                }
+            ]
+        },
+        {
+            "id": 28,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/robot.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 33, "y": 34 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 33, "height": 34}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 99, "y": 34, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                }
+            ]
         }
     ],
     "spawn": [
         {
             "tick" : 0,
             "mob_id": [
+                {
+                    "entity_id": 24,
+                    "position": { "x": 70, "y": 70 }
+                },
                 {
                     "entity_id": 1,
                     "position": { "x": 125, "y": 125 }

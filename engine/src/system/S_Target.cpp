@@ -28,6 +28,7 @@ void S_Target::Execute(
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_1;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_2;
+    std::shared_ptr<C_PositionFollow<std::pair<double, double>>> position_follow;
     std::shared_ptr<C_Direction<std::pair<double, double>>> direction_new;
     std::shared_ptr<C_FireRate<sf::Clock>>  fire_rate;
     std::shared_ptr<C_FireRateSpeed<double>>  fire_rate_speed;
@@ -51,6 +52,7 @@ void S_Target::Execute(
             ammo = entity1->template GetComponent<C_Ammo<int>>();
             position_comp_1 = entity1->template GetComponent<C_Position<std::pair<double, double>>>();
             position_comp_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
+            position_follow = entity1->template GetComponent<C_PositionFollow<std::pair<double, double>>>();
             fire_rate = entity1->template GetComponent<C_FireRate<sf::Clock>>();
             fire_rate_speed =  entity1->template GetComponent<C_FireRateSpeed<double>>();
             range =  entity1->template GetComponent<C_Range<int>>();
@@ -64,8 +66,8 @@ void S_Target::Execute(
             {
                 if (follow->getValue() == true)
                 {
-                    position_comp_1->getValue().first = position_comp_2->getValue().first;
-                    position_comp_1->getValue().second = position_comp_2->getValue().second;
+                    position_comp_1->getValue().first = position_comp_2->getValue().first + position_follow->getValue().first;
+                    position_comp_1->getValue().second = position_comp_2->getValue().second + position_follow->getValue().second;
                 }
             }
             if (shoot &&
