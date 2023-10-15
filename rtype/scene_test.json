@@ -467,7 +467,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 24, "y": 23 }
+                    "value": { "x": 17, "y": 14 }
                 },
                 {
                     "component_id": 7,
@@ -483,11 +483,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 0, "top": 0, "width": 24, "height": 23}
+                    "value": { "left": 0, "top": 2, "width": 17, "height": 14}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 144, "y": 23, "start_x": 0, "start_y": 0}
+                    "value": { "x": 204, "y": 14, "start_x": 0, "start_y": 2}
                 },
                 {
                     "component_id": 14,
@@ -1248,6 +1248,252 @@
                 {
                     "component_id": 33,
                     "value": true
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 282, "top": 297, "width": 36, "height": 28}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 180, "y": 28, "start_x": 282, "start_y": 297}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 23,
+                    "value": -1
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 22,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/weapons.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 24, "y": 18 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 157, "top": 34, "width": 24, "height": 18}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 144, "y": 18, "start_x": 157, "start_y": 34}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                }
+            ]
+        },
+        {
+            "id": 23,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/weapons.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 30, "y": 18 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 119, "top": 71, "width": 30, "height": 18}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 180, "y": 18, "start_x": 119, "start_y": 71}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                }
+            ]
+        },
+        {
+            "id": 24,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/weapons.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 35, "y": 26 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 161, "top": 378, "width": 35, "height": 26}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 140, "y": 26, "start_x": 161, "start_y": 378}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                }
+            ]
+        },
+        {
+            "id": 25,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/weapons.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 18, "y": 18 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 229, "top": 452, "width": 18, "height": 18}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 72, "y": 18, "start_x": 229, "start_y": 452}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                }
+            ]
+        },
+        {
+            "id": 26,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/weapons.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 66, "y": 32 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 37, "top": 505, "width": 66, "height": 32}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 264, "y": 32, "start_x": 37, "start_y": 505}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
                 }
             ]
         }
