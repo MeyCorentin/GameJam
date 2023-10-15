@@ -2,16 +2,20 @@ name: Server Compil
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
   build:
+    runs-on: ubuntu-latest
 
-build_engine:
+    steps:
+    - name: Checkout engine code
+      uses: actions/checkout@v2
+      with:
+        repository: your/engine/repository
 
-    - uses: actions/checkout@v3
     - name: Configure and build engine
       run: |
         mkdir engine/build
@@ -19,23 +23,31 @@ build_engine:
         cmake ..
         make
 
-build_server:
+  build_server:
+    runs-on: ubuntu-latest
 
-    needs: build_engine
+    needs: build
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout server code
+      uses: actions/checkout@v2
+
     - name: Set up CMake
       run: sudo apt-get install cmake
+
     - name: Install SFML
       run: sudo apt-get install libsfml-dev
+
     - name: Install nlohmann/json
       run: sudo apt-get install nlohmann-json3-dev
+
     - name: Create build directory
       run: mkdir server/build
+
     - name: Configure and build
       working-directory: server/build
       run: cmake ..
+
     - name: Build
       working-directory: server/build
       run: make
