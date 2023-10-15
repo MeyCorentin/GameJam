@@ -13,8 +13,6 @@ jobs:
     steps:
     - name: Checkout engine code
       uses: actions/checkout@v2
-      with:
-        repository: your/engine/repository
 
     - name: Configure and build engine
       run: |
