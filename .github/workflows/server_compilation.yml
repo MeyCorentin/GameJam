@@ -9,7 +9,20 @@ on:
 jobs:
   build:
 
+build_engine:
+
     runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Configure and build engine
+      run: |
+        mkdir engine/build
+        cd engine/build
+        cmake ..
+        make
+
+build_server:
+    needs: build_engine
 
     steps:
     - uses: actions/checkout@v3
