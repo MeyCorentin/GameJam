@@ -17,6 +17,8 @@ jobs:
       run: sudo apt-get install cmake
     - name: Install SFML
       run: sudo apt-get install libsfml-dev
+    - name: Install nlohmann/json
+      run: sudo apt-get install nlohmann-json3-dev
     - name: Create build directory
       run: mkdir engine/build
     - name: Configure and build
