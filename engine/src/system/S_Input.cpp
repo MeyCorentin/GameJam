@@ -64,6 +64,8 @@ bool S_Input::ProcessComponent(
         arg_entityBuilder.AddComponent(component, std::get<sf::IntRect>(value));
     } else if (value_type == "PairPairInt") {
         arg_entityBuilder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
+    } else if (value_type == "VectorInt") {
+        arg_entityBuilder.AddComponent(component, std::get<std::vector<int>>(value));
     } else if (value_type == "SinFunc") {
         arg_entityBuilder.AddComponent(component, std::get<SinusoidalFunction>(value));
     }else {

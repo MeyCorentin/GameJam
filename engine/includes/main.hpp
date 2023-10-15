@@ -34,5 +34,6 @@ using Variant = std::variant<
                 sf::Clock,
                 sf::IntRect, 
                 std::pair<std::pair<int, int>, std::pair<int, int>>,
+                std::vector<int>,
                 SinusoidalFunction>;
 using json = nlohmann::json;

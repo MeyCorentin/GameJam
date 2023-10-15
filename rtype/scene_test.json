@@ -233,7 +233,7 @@
         {
             "id": 39,
             "type": "Inventory",
-            "value_type": "VectorEntity"
+            "value_type": "VectorInt"
         }
     ],
     "entities": [
@@ -315,6 +315,10 @@
                 {
                     "component_id": 37,
                     "value": false
+                },
+                {
+                    "component_id": 39,
+                    "value": []
                 }
             ]
         },
@@ -509,7 +513,7 @@
                 },
                 {
                     "component_id": 15,
-                    "value": true
+                    "value": false
                 },
                 {
                     "component_id": 17,
@@ -1704,7 +1708,7 @@
                 },
                 {
                     "entity_id": 4,
-                    "position": { "x": 125, "y": 125 }
+                    "position": { "x": 30, "y": 30 }
                 },
                 {
                     "entity_id": 12,

@@ -6,6 +6,8 @@
 #include "../components/C_Player.hpp"
 #include "../components/C_Hitbox.hpp"
 #include "../components/C_Life.hpp"
+#include "../components/C_Follow.hpp"
+#include "../components/C_Inventory.hpp"
 
 class S_Collision : public System {
     public:

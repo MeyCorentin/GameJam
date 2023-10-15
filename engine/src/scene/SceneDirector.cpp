@@ -55,6 +55,8 @@ bool SceneDirector::ProcessComponent(
         arg_entity_builder.AddComponent(component, std::get<sf::IntRect>(value));
     } else if (value_type == "PairPairInt") {
         arg_entity_builder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
+    } else if (value_type == "VectorInt") {
+        arg_entity_builder.AddComponent(component, std::get<std::vector<int>>(value));
     } else if (value_type == "SinFunc") {
         arg_entity_builder.AddComponent(component, std::get<SinusoidalFunction>(value));
     } else {

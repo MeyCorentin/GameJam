@@ -12,6 +12,7 @@
 #include "../components/C_Ammo.hpp"
 #include "../components/C_PositionFollow.hpp"
 #include "../components/C_Life.hpp"
+#include "../components/C_Inventory.hpp"
 #include "S_Input.hpp"
 /**
  * @class S_Target

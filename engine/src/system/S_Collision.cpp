@@ -46,6 +46,7 @@ void S_Collision::Execute(
     std::shared_ptr<C_PlayerAmmo<bool>> is_player_ammo;
     std::shared_ptr<C_Player<int>> is_player_2;
     std::shared_ptr<C_PlayerAmmo<bool>> is_player_ammo_2;
+    std::shared_ptr<C_Follow<bool>> follow;
     std::shared_ptr<C_Life<int>> life_1;
     std::shared_ptr<C_Life<int>> life_2;
     float x1;
@@ -70,6 +71,7 @@ void S_Collision::Execute(
             hitbox_comp_2 = entity2->template GetComponent<C_Hitbox<std::pair<int, int>>>();
             is_player_2 = entity2->template GetComponent<C_Player<int>>();
             is_player_ammo_2 = entity2->template GetComponent<C_PlayerAmmo<bool>>();
+            follow = entity2->template GetComponent<C_Follow<bool>>();
             life_2 = entity2->template GetComponent<C_Life<int>>();
             x2 = static_cast<float>(position_comp_2->getValue().first);
             y2 = static_cast<float>(position_comp_2->getValue().second);
@@ -79,6 +81,16 @@ void S_Collision::Execute(
                 x1 + hitbox_comp_1->getValue().first> x2 &&
                 y1 < y2 + hitbox_comp_2->getValue().second &&
                 y1 + hitbox_comp_1->getValue().second > y2) {
+                    if (is_player && is_player_ammo_2 && follow) {
+                        std::shared_ptr<C_Inventory<std::vector<int>>> vector_entities = entity1->template GetComponent<C_Inventory<std::vector<int>>>();
+                        std::cout << "Before : " << entity2->GetId() << std::endl;
+                        if (!follow->getValue()) {
+                            std::cout << "In if" << std::endl;
+                            vector_entities->getValue().push_back(entity2->GetId());
+                            std::cout << "After" << std::endl;
+                            follow->getValue() = true;
+                        }
+                    }
                     if ((is_player && is_player_2) ||
                         (is_player_ammo && is_player_ammo_2) ||
                         (is_player_ammo && is_player_2) ||
@@ -91,9 +103,9 @@ void S_Collision::Execute(
                     if (life_2->getValue() != 0)
                         life_2->setValue(life_2->getValue() - 1);
                     if (life_1->getValue() == 0)
-                        entity1->is_dead_ = 1;
+                        entity1->is_dead_ = true;
                     if (life_2->getValue() == 0)
-                        entity2->is_dead_ = 2;
+                        entity2->is_dead_ = true;
             }
         }
     }
