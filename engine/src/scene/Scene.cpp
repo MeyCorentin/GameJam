@@ -114,7 +114,6 @@ void Scene::AddNewPlayer(int arg_id)
 
 void Scene::InputFromPlayer(std::pair<int,int> arg_message)
 {
-    std::cout << "----- Input from player" << std::endl;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
     for (const auto& entity : list_entities_) {
         if (entity->GetId() == 1)

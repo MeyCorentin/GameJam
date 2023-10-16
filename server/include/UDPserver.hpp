@@ -25,7 +25,7 @@ class UDPServer {
         void read_data();
         void handleClientMessage(const BinaryProtocole::BinaryMessage& msg);
         void run_server(Ecs &_ecs);
-        std::queue<std::pair<int,int>> input_queue_;
+        std::vector<std::pair<int,int>> input_queue_;
         std::mutex queue_mutex_;
 
         boost::asio::io_context& io_context_;
