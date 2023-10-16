@@ -14,6 +14,7 @@
 #include "../includes/system/S_Parallax.hpp"
 #include "../includes/system/S_SinMoov.hpp"
 #include "../includes/system/S_MakeBaby.hpp"
+#include "../includes/system/S_Sound.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_Player.hpp"
@@ -50,6 +51,7 @@
 #include "../includes/components/C_PositionEnd.hpp"
 #include "../includes/components/C_PositionStart.hpp"
 #include "../includes/components/ComponentBase.hpp"
+#include "../includes/components/Sound.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
 #include "../includes/scene/ComponentRegister.hpp"
