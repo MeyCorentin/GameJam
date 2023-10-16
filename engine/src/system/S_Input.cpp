@@ -64,8 +64,8 @@ bool S_Input::ProcessComponent(
         arg_entityBuilder.AddComponent(component, std::get<sf::IntRect>(value));
     } else if (value_type == "PairPairInt") {
         arg_entityBuilder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
-    } else if (value_type == "VectorInt") {
-        arg_entityBuilder.AddComponent(component, std::get<std::vector<int>>(value));
+    } else if (value_type == "VectorEntity") {
+        arg_entityBuilder.AddComponent(component, std::get<std::vector<std::shared_ptr<Entity>>>(value));
     } else if (value_type == "SinFunc") {
         arg_entityBuilder.AddComponent(component, std::get<SinusoidalFunction>(value));
     }else {
@@ -99,7 +99,7 @@ std::shared_ptr<Entity> S_Input::CreateEntityFromConfig(
     return entity_builder.Build();
 }
 
-void S_Input::createEntity(
+std::shared_ptr<Entity> S_Input::createEntity(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         std::vector<sf::Sprite>& arg_sprites,
         std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
@@ -124,6 +124,7 @@ void S_Input::createEntity(
             arg_all_entities.push_back(new_entity);
         }
     }
+    return new_entity;
 }
 
 void S_Input::Execute(
@@ -151,6 +152,7 @@ void S_Input::Execute(
         std::shared_ptr<C_Life<int>> life = entity->template GetComponent<C_Life<int>>();
         std::shared_ptr<C_Admin<bool>> is_admin = entity->template GetComponent<C_Admin<bool>>();
         std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
+        std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
         while (arg_window->pollEvent(*event_)) {
             if (event_->type == sf::Event::Closed)
                 arg_window->close();
@@ -180,7 +182,7 @@ void S_Input::Execute(
                 if (event_->key.code == sf::Keyboard::Space) {
                     if (is_charging->getValue() == false) {
                         clock->getValue().restart();
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 27, position_comp);
+                        vector_entities->getValue().push_back(createEntity(arg_all_entities, arg_sprites, arg_textures, 27, position_comp));
                         is_charging->getValue() = true;
                     }
                 }
@@ -216,6 +218,10 @@ void S_Input::Execute(
                         createEntity(arg_all_entities, arg_sprites, arg_textures, 5, position_comp);
                     else
                         createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
+                    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+                        if (v_entity->GetId() == 27)
+                            v_entity->is_dead_ = true;
+                    }
                     is_charging->getValue() = false;
                 }
                 if (event_->key.code == sf::Keyboard::A) {

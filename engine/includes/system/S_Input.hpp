@@ -13,6 +13,7 @@
 #include "../components/C_Admin.hpp"
 #include "../components/C_Sprite.hpp"
 #include "../components/C_SpriteRect.hpp"
+#include "../components/C_Inventory.hpp"
 #include "../entity/EntityBuilder.hpp"
 #include "../components/C_Life.hpp"
 #include "../parser/jsonParser.hpp"
@@ -42,7 +43,7 @@ class S_Input : public System {
                 std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures);
 
-        void createEntity(
+        std::shared_ptr<Entity> createEntity(
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,

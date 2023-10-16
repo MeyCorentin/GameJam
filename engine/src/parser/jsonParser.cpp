@@ -133,8 +133,8 @@ Variant JsonParser::ParseSinFuncValue(const json& arg_value) {
     return sin_func;
 }
 
-Variant JsonParser::ParseVectorIntValue(const json& arg_value) {
-    std::vector<int> entities;
+Variant JsonParser::ParseVectorEntityValue(const json& arg_value) {
+    std::vector<std::shared_ptr<Entity>> entities;
     return entities;
 }
 
@@ -159,8 +159,8 @@ Variant JsonParser::ParseValue(const std::string& arg_value_type, const json& ar
         return ParsePairPairIntValue(arg_value);
     } else if (arg_value_type == "SinFunc") {
         return ParseSinFuncValue(arg_value);
-    } else if (arg_value_type == "VectorInt") {
-        return ParseVectorIntValue(arg_value);
+    } else if (arg_value_type == "VectorEntity") {
+        return ParseVectorEntityValue(arg_value);
     } else {
         std::cerr << "Unsupported value type: " << arg_value_type << std::endl;
     }

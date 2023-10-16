@@ -82,12 +82,9 @@ void S_Collision::Execute(
                 y1 < y2 + hitbox_comp_2->getValue().second &&
                 y1 + hitbox_comp_1->getValue().second > y2) {
                     if (is_player && is_player_ammo_2 && follow) {
-                        std::shared_ptr<C_Inventory<std::vector<int>>> vector_entities = entity1->template GetComponent<C_Inventory<std::vector<int>>>();
-                        std::cout << "Before : " << entity2->GetId() << std::endl;
+                        std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
                         if (!follow->getValue()) {
-                            std::cout << "In if" << std::endl;
-                            vector_entities->getValue().push_back(entity2->GetId());
-                            std::cout << "After" << std::endl;
+                            vector_entities->getValue().push_back(entity2);
                             follow->getValue() = true;
                         }
                     }
