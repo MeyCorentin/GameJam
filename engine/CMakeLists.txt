@@ -8,6 +8,9 @@ project(r-type)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Trouvez SFML
+find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+
 # Liste des fichiers source de la bibliothèque
 file(GLOB library_sources "src/system/*.cpp" "src/scene/*.cpp" "src/parser/*.cpp" "src/entity/*.cpp" "src/*.cpp")
 
@@ -15,19 +18,17 @@ file(GLOB library_sources "src/system/*.cpp" "src/scene/*.cpp" "src/parser/*.cpp
 add_library(r-type_library SHARED ${library_sources})
 
 # Incluez les répertoires d'en-têtes pour la bibliothèque
-target_include_directories(r-type_library PRIVATE includes)
+target_include_directories(r-type_library PUBLIC includes)
+target_include_directories(r-type_library PUBLIC ${SFML_INCLUDE_DIR})
 
-# Find SFML
-find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+# Liez la bibliothèque à SFML
+target_link_libraries(r-type_library sfml-graphics sfml-window sfml-system)
 
 # Créez un exécutable à partir du fichier source principal
 add_executable(r-type_engine src/main.cpp src/Ecs.cpp)
 
 # Liez l'exécutable avec la bibliothèque
 target_link_libraries(r-type_engine r-type_library)
-
-# Link SFML libraries
-target_link_libraries(r-type_engine sfml-graphics sfml-window sfml-system)
 
 # Incluez les répertoires d'en-têtes pour l'exécutable
 target_include_directories(r-type_engine PRIVATE includes)
