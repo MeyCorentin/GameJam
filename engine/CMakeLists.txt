@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Trouvez SFML
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+find_package(nlohmann_json REQUIRED)
 
 # Liste des fichiers source de la bibliothèque
 file(GLOB library_sources "src/system/*.cpp" "src/scene/*.cpp" "src/parser/*.cpp" "src/entity/*.cpp" "src/*.cpp")
@@ -19,10 +20,10 @@ add_library(r-type_library SHARED ${library_sources})
 
 # Incluez les répertoires d'en-têtes pour la bibliothèque
 target_include_directories(r-type_library PUBLIC includes)
-target_include_directories(r-type_library PUBLIC ${SFML_INCLUDE_DIR})
+target_include_directories(r-type_library PUBLIC ${SFML_INCLUDE_DIR} ${NLOHMANN_JSON_INCLUDE_DIR})
 
 # Liez la bibliothèque à SFML
-target_link_libraries(r-type_library sfml-graphics sfml-window sfml-system)
+target_link_libraries(r-type_library sfml-graphics sfml-window sfml-system nlohmann_json::nlohmann_json)
 
 # Créez un exécutable à partir du fichier source principal
 add_executable(r-type_engine src/main.cpp src/Ecs.cpp)
