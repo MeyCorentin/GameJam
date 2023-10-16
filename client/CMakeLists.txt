@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.0)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # Nom du projet
 project(r-type_client)
 # Liste des fichiers source de votre serveur
@@ -15,4 +18,4 @@ target_include_directories(r-type_client PRIVATE includes)
 
 find_library(RTYPE_LIBRARY r-type_library HINTS ../engine/build)
 
-target_link_libraries(r-type_client sfml-graphics sfml-window sfml-system ${RTYPE_LIBRARY})
+target_link_libraries(r-type_client sfml-graphics sfml-window sfml-system pthread ${RTYPE_LIBRARY})
