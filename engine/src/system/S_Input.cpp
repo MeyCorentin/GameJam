@@ -204,7 +204,7 @@ void S_Input::Execute(
                 }
                 if (event_->key.code == sf::Keyboard::Right)
                     inputs_[3] = 0;
-                if (event_->key.code == sf::Keyboard::Space) { // ADD CLOCK TO INPUT
+                if (event_->key.code == sf::Keyboard::Space) {
                     std::cout << "Time : " << clock->getValue().getElapsedTime().asSeconds() << std::endl;
                     if (clock->getValue().getElapsedTime().asSeconds() > 1)
                         createEntity(arg_all_entities, arg_sprites, arg_textures, 9, position_comp);
@@ -221,6 +221,11 @@ void S_Input::Execute(
                     for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
                         if (v_entity->GetId() == 27)
                             v_entity->is_dead_ = true;
+                        if (v_entity->GetId() == 4  || v_entity->GetId() == 29) {
+                            std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                            std::shared_ptr<C_Weapon<int>> weapon = v_entity->template GetComponent<C_Weapon<int>>();
+                            createEntity(arg_all_entities, arg_sprites, arg_textures, weapon->getValue(), position_drone);
+                        }
                     }
                     is_charging->getValue() = false;
                 }

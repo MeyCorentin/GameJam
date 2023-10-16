@@ -16,6 +16,7 @@
 #include "../components/C_Inventory.hpp"
 #include "../entity/EntityBuilder.hpp"
 #include "../components/C_Life.hpp"
+#include "../components/C_Weapon.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
 #include "../scene/ComponentRegister.hpp"

@@ -64,6 +64,7 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("PositionStart", []() { return std::make_shared<C_PositionStart<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("PositionFollow", []() { return std::make_shared<C_PositionFollow<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Inventory", []() { return std::make_shared<C_Inventory<std::vector<std::shared_ptr<Entity>>>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Weapon", []() { return std::make_shared<C_Weapon<int>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
     SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);

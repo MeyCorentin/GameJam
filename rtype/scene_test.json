@@ -234,6 +234,11 @@
             "id": 39,
             "type": "Inventory",
             "value_type": "VectorEntity"
+        },
+        {
+            "id": 40,
+            "type": "Weapon",
+            "value_type": "Int"
         }
     ],
     "entities": [
@@ -530,6 +535,10 @@
                 {
                     "component_id": 38,
                     "value": {"x": 0, "y": -30}
+                },
+                {
+                    "component_id": 40,
+                    "value": 30
                 }
             ]
         },
@@ -1664,12 +1673,199 @@
                     "value": false
                 }
             ]
+        },
+        {
+            "id": 29,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/drone.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 14 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 0
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 2, "width": 17, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 204, "y": 14, "start_x": 0, "start_y": 2}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 15,
+                    "value": false
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 38,
+                    "value": {"x": 0, "y": 37}
+                },
+                {
+                    "component_id": 40,
+                    "value": 31
+                }
+            ]
+        },
+        {
+            "id": 30,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/weapons.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 35, "y": 11 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 10
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 86, "top": 310, "width": 35, "height": 11}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 70, "y": 11, "start_x": 86, "start_y": 310}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 18
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                }
+            ]
+        },
+        {
+            "id": 31,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/weapons.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 80, "y": 80 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 35, "y": 11 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 10
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 86, "top": 328, "width": 35, "height": 11}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 70, "y": 11, "start_x": 86, "start_y": 328}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 18
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                }
+            ]
         }
     ],
     "spawn": [
         {
             "tick" : 0,
             "mob_id": [
+                {
+                    "entity_id": 29,
+                    "position": { "x": 200, "y": 200 }
+                },
                 {
                     "entity_id": 24,
                     "position": { "x": 70, "y": 70 }

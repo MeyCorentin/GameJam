@@ -51,6 +51,7 @@
 #include "../includes/components/C_PositionEnd.hpp"
 #include "../includes/components/C_PositionStart.hpp"
 #include "../includes/components/C_PositionFollow.hpp"
+#include "../includes/components/C_Weapon.hpp"
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
