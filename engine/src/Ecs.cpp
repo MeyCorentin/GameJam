@@ -54,7 +54,6 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("SinMoov", []() { return std::make_shared<C_SinMoov<SinusoidalFunction>>(); });
     ComponentRegistry::Instance().RegisterComponent("SinClock", []() { return std::make_shared<C_SinClock<sf::Clock>>(); });
     ComponentRegistry::Instance().RegisterComponent("Background", []() { return std::make_shared<C_Background<bool>>(); });
-    ComponentRegistry::Instance().RegisterComponent("AnimatedMove", []() { return std::make_shared<C_AnimatedMove<sf::Clock>>(); });
     ComponentRegistry::Instance().RegisterComponent("IsMoving", []() { return std::make_shared<C_IsMoving<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("Child", []() { return std::make_shared<C_Child<int>>(); });
     ComponentRegistry::Instance().RegisterComponent("Ammo", []() { return std::make_shared<C_Ammo<int>>(); });
@@ -65,6 +64,7 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("PositionFollow", []() { return std::make_shared<C_PositionFollow<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Inventory", []() { return std::make_shared<C_Inventory<std::vector<std::shared_ptr<Entity>>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Weapon", []() { return std::make_shared<C_Weapon<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("PositionShot", []() { return std::make_shared<C_PositionShot<std::pair<double, double>>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
     SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);

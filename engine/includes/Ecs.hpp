@@ -41,7 +41,6 @@
 #include "../includes/components/C_ShootCharging.hpp"
 #include "../includes/components/C_PlayerAmmo.hpp"
 #include "../includes/components/C_SinClock.hpp"
-#include "../includes/components/C_AnimatedMove.hpp"
 #include "../includes/components/C_IsMoving.hpp"
 #include "../includes/components/C_Child.hpp"
 #include "../includes/components/C_Ammo.hpp"
@@ -52,6 +51,7 @@
 #include "../includes/components/C_PositionStart.hpp"
 #include "../includes/components/C_PositionFollow.hpp"
 #include "../includes/components/C_Weapon.hpp"
+#include "../includes/components/C_PositionShot.hpp"
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
