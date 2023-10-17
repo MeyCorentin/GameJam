@@ -273,6 +273,11 @@
             "id": 47,
             "type": "Music",
             "value_type": "Music"
+        },
+        {
+            "id": 48,
+            "type": "ParallaxClock",
+            "value_type": "Clock"
         }
     ],
     "entities": [
@@ -1094,6 +1099,10 @@
                 {
                     "component_id": 23,
                     "value": -1
+                },
+                {
+                    "component_id": 48,
+                    "value": 0
                 }
             ]
         },
@@ -1123,6 +1132,10 @@
                 {
                     "component_id": 23,
                     "value": -2
+                },
+                {
+                    "component_id": 48,
+                    "value": 0
                 }
             ]
         },
@@ -1152,6 +1165,10 @@
                 {
                     "component_id": 23,
                     "value": -3
+                },
+                {
+                    "component_id": 48,
+                    "value": 0
                 }
             ]
         },
@@ -1189,6 +1206,10 @@
                 {
                     "component_id": 23,
                     "value": -1
+                },
+                {
+                    "component_id": 48,
+                    "value": 0
                 },
                 {
                     "component_id": 33,
@@ -1232,6 +1253,10 @@
                     "value": -1
                 },
                 {
+                    "component_id": 48,
+                    "value": 0
+                },
+                {
                     "component_id": 33,
                     "value": true
                 }
@@ -1271,6 +1296,10 @@
                 {
                     "component_id": 23,
                     "value": -1
+                },
+                {
+                    "component_id": 48,
+                    "value": 0
                 },
                 {
                     "component_id": 33,
@@ -1314,6 +1343,10 @@
                     "value": -1
                 },
                 {
+                    "component_id": 48,
+                    "value": 0
+                },
+                {
                     "component_id": 33,
                     "value": true
                 }
@@ -1355,6 +1388,10 @@
                     "value": -1
                 },
                 {
+                    "component_id": 48,
+                    "value": 0
+                },
+                {
                     "component_id": 33,
                     "value": true
                 }
@@ -1394,6 +1431,10 @@
                 {
                     "component_id": 23,
                     "value": -1
+                },
+                {
+                    "component_id": 48,
+                    "value": 0
                 },
                 {
                     "component_id": 33,
@@ -2119,6 +2160,10 @@
                 {
                     "component_id": 23,
                     "value": -1
+                },
+                {
+                    "component_id": 48,
+                    "value": 0
                 },
                 {
                     "component_id": 42,
