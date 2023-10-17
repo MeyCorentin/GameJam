@@ -47,6 +47,10 @@
         {
             "id": 13,
             "type": "MakeBaby"
+        },
+        {
+            "id": 14,
+            "type": "PlaySound"
         }
     ],
     "components": [
@@ -249,6 +253,21 @@
             "id": 43,
             "type": "BonusPower",
             "value_type": "Int"
+        },
+        {
+            "id": 44,
+            "type": "Sound",
+            "value_type": "Sound"
+        },
+        {
+            "id": 45,
+            "type": "SoundBuffer",
+            "value_type": "SoundBuffer"
+        },
+        {
+            "id": 46,
+            "type": "SoundIsActive",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -484,6 +503,18 @@
                 {
                     "component_id": 41,
                     "value": {"x": 30, "y": 7}
+                },
+                {
+                    "component_id": 44,
+                    "value": 0
+                },
+                {
+                    "component_id": 45,
+                    "value": "../../sounds/laser.wav"
+                },
+                {
+                    "component_id": 46,
+                    "value": true
                 }
             ]
         },
@@ -2170,220 +2201,6 @@
                 {
                     "entity_id": 12,
                     "position": { "x": 330, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 14,
-            "mob_id": [
-                    {
-                        "entity_id": 12,
-                        "position": { "x": 384, "y": 240 }
-                    }
-                ]
-        },
-        {
-            "tick" : 80,
-            "mob_id": [
-                    {
-                        "entity_id": 12,
-                        "position": { "x": 384, "y": 240 }
-                    }
-                ]
-        },
-        {
-            "tick" : 146,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 212,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 225 }
-                }
-            ]
-        },
-        {
-            "tick" : 278,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 344,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 210 }
-                }
-            ]
-        },
-        {
-            "tick" : 410,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 476,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 542,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 608,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 674,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 740,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 806,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 872,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 225 }
-                }
-            ]
-        },
-        {
-            "tick" : 938,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 220,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 240,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 260,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 280,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 300,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 320,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 340,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 100,
-            "mob_id": [
-                {
-                    "entity_id": 11
-                }
-            ]
-        },
-        {
-            "tick" : 200,
-            "mob_id": [
-                {
-                    "entity_id": 11
                 }
             ]
         }

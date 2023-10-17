@@ -29,4 +29,8 @@ public:
     static Variant ParseValue(const std::string& arg_value_type, const json& arg_value);
 
     static Variant ParseVectorEntityValue(const json& arg_value);
+
+    static Variant ParseSoundValue(const json& arg_value);
+
+    static Variant ParseSoundBufferValue(const json& arg_value);
 };
