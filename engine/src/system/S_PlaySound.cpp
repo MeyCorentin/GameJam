@@ -3,14 +3,11 @@
 std::vector<std::shared_ptr<Entity>> S_PlaySound::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
     std::vector<std::shared_ptr<Entity>> filtered_entities;
 
-    std::cout << "Before" << std::endl;
-
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Sound<sf::Sound>)) &&
             entity->HasComponent(typeid(C_SoundIsActive<bool>)) &&
             entity->HasComponent(typeid(C_SoundBuffer<sf::SoundBuffer>))) {
             filtered_entities.push_back(entity);
-            std::cout << "In if" << std::endl;
         }
     }
     return filtered_entities;
@@ -26,9 +23,6 @@ void S_PlaySound::Execute(
         std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
         std::shared_ptr<sf::Event> event_)  {
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
-
-        std::cout << "Audio id : " << entity->GetId() << std::endl;
-
         std::shared_ptr<C_Sound<sf::Sound>> sound = entity->template GetComponent<C_Sound<sf::Sound>>();
         std::shared_ptr<C_SoundBuffer<sf::SoundBuffer>> buffer = entity->template GetComponent<C_SoundBuffer<sf::SoundBuffer>>();
         std::shared_ptr<C_SoundIsActive<bool>> is_active = entity->template GetComponent<C_SoundIsActive<bool>>();
