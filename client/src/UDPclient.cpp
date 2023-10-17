@@ -54,7 +54,9 @@ void UDPClient::run_game(Ecs &ecs)
             for (auto it = input_queue_.begin(); it != input_queue_.end();++it)
                 if (it->second % 2 == 0)
                 {
-                    BinaryProtocole::BinaryMessage msg = {type: 1, id: it->first, x: 1920, y: 1080, data: it->second};
+                    int value_1 = it->first;
+                    int value_2 = it->second;
+                    BinaryProtocole::BinaryMessage msg = {type: 1, id: (uint32_t)it->first, x: 1920, y: 1080, data: (uint16_t)it->second};
                     ecs.scene_.InputFromPlayer(*it);
                 }
         }
