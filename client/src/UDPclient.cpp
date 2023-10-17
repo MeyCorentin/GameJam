@@ -32,8 +32,11 @@ void UDPClient::run_game(Ecs &ecs)
             {
                 if (input.second == 100)
                 {
-                    ecs.scene_.AddNewPlayer(connected_client++);
-                    std::cout << "---- ADD NEW PLAYER" << std::endl;
+                    if (input.first !=  clientId)
+                    {
+                        ecs.scene_.AddNewPlayer(connected_client++);
+                        std::cout << "---- ADD NEW PLAYER" << std::endl;
+                    }
                 }
                 temp = input;
                 input_queue_.erase(input_queue_.begin());
