@@ -17,6 +17,8 @@
 #include "../components/C_Life.hpp"
 #include "../components/C_Weapon.hpp"
 #include "../components/C_PositionShot.hpp"
+#include "../components/C_Sound.hpp"
+#include "../components/C_SoundBuffer.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
 #include "../scene/ComponentRegister.hpp"

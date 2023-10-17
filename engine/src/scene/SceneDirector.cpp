@@ -59,6 +59,10 @@ bool SceneDirector::ProcessComponent(
         arg_entity_builder.AddComponent(component, std::get<std::vector<std::shared_ptr<Entity>>>(value));
     } else if (value_type == "SinFunc") {
         arg_entity_builder.AddComponent(component, std::get<SinusoidalFunction>(value));
+    } else if (value_type == "Sound") {
+        arg_entity_builder.AddComponent(component, std::get<sf::Sound>(value));
+    } else if (value_type == "SoundBuffer") {
+        arg_entity_builder.AddComponent(component, std::get<sf::SoundBuffer>(value));
     } else {
         std::cerr << "Unsupported component type: " << value_type << std::endl;
         return false;
