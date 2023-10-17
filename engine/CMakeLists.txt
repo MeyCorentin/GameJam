@@ -18,17 +18,16 @@ add_library(r-type_library SHARED ${library_sources})
 target_include_directories(r-type_library PRIVATE includes)
 
 # Find SFML
-find_package(SFML 2.5 COMPONENTS graphics window system audio REQUIRED)
-
-# Since SFML provides imported targets, we can link against them directly
-# Linking this way also ensures that we get the proper include directories and dependencies
-target_link_libraries(r-type_library sfml-graphics sfml-audio sfml-window sfml-system)
+find_package(SFML 2.5 COMPONENTS audio graphics window system REQUIRED)
 
 # Créez un exécutable à partir du fichier source principal
 add_executable(r-type_engine src/main.cpp src/Ecs.cpp)
 
 # Liez l'exécutable avec la bibliothèque
 target_link_libraries(r-type_engine r-type_library)
+
+# Link SFML libraries
+target_link_libraries(r-type_engine sfml-audio sfml-graphics sfml-window sfml-system)
 
 # Incluez les répertoires d'en-têtes pour l'exécutable
 target_include_directories(r-type_engine PRIVATE includes)
