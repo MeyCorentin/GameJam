@@ -37,10 +37,11 @@ void UDPClient::run_game(Ecs &ecs)
                         ecs.scene_.AddNewPlayer(connected_client++);
                         std::cout << "---- ADD NEW PLAYER" << std::endl;
                     }
+                } else {
+                    temp = input;
+                    input_queue_.push_back(std::make_pair(temp.first, temp.second));
                 }
-                temp = input;
                 input_queue_.erase(input_queue_.begin());
-                input_queue_.push_back(std::make_pair(temp.first, temp.second));
             } else {
                 for (auto it = input_queue_.begin(); it != input_queue_.end();) {
                     if (it->first == input.first && it->second == input.second - 1) {
