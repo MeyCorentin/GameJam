@@ -23,13 +23,13 @@ void UDPServer::run_server(Ecs &ecs)
             std::this_thread::sleep_for(std::chrono::duration<double>((1.0 / 60) - elapsedTime));
         if (connected_client < clients_.size())
         {
-            std::cout << "Player Connect" << std::endl;
             ecs.scene_.AddNewPlayer(clients_.size());
+            BinaryProtocole::BinaryMessage msg = {type: 1, id: clients_.size(), x: 1920, y: 1080, data: 100};
+            send_to_all(msg);
             connected_client++;
         }
         if (!input_queue_.empty())
         {
-            std::cout << "READ INPUT" << std::endl;
             std::pair<int, int> input = input_queue_.front();
             if (input.second % 2 == 0)
             {
@@ -48,7 +48,11 @@ void UDPServer::run_server(Ecs &ecs)
             }
             for (auto it = input_queue_.begin(); it != input_queue_.end();++it)
                 if (it->second % 2 == 0)
+                {
+                    BinaryProtocole::BinaryMessage msg = {type: 1, id: it->first, x: 1920, y: 1080, data: it->second};
+                    send_to_all(msg);
                     ecs.scene_.InputFromPlayer(*it);
+                }
         }
     }
 }
@@ -69,7 +73,7 @@ void UDPServer::read_data()
         [this](boost::system::error_code ec, std::size_t bytes_recvd) {
             if (!ec && bytes_recvd > 0) {
                 BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
-                std::cout << "Received : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << " data:" << msg.data << std::endl;
+                // std::cout << "Received : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << " data:" << msg.data << std::endl;
                 if (msg.type == 1)
                     handleClientMessage(msg);
             }
@@ -81,7 +85,6 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
 {
 
     std::lock_guard<std::mutex> lock(queue_mutex_);
-    std::cout << "NEW MESSAGE" << std::endl;
     switch (msg.data)
     {
         case 100: // Client connection
@@ -152,13 +155,10 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
 void UDPServer::start()
 {
     std::thread t1(&UDPServer::start_listening, this);
-    // std::thread t2(&UDPServer::run_server, this, std::ref(_ecs));
-    // t1.join();
     while (clients_.size() == 0);
     Ecs ecs;
     ecs.Create(1);
     run_server(ecs);
-    // t2.join();
 }
 
 void UDPServer::send(BinaryProtocole::BinaryMessage msg)
@@ -168,6 +168,7 @@ void UDPServer::send(BinaryProtocole::BinaryMessage msg)
 
 void UDPServer::send_to_all(BinaryProtocole::BinaryMessage msg)
 {
+    std::cout << "SEND TO ALL : " << msg.data << std::endl;
     for (const auto& [client_endpoint, _] : clients_)
         this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), client_endpoint);
 }

@@ -21,6 +21,7 @@ public:
     void start();
     void setClientId(uint32_t _clientId) { clientId = _clientId; }
     uint32_t getClientId() { return clientId; }
+    std::vector<std::pair<int,int>> input_queue_;   
 
 private:
     void read_data();

@@ -13,6 +13,11 @@ void UDPClient::run_game(Ecs &ecs)
 {
     while (true)
     {
+        std::pair<int, int> temp;
+        std::vector<std::pair<int, int>> temp_queue;
+        int temp_index;
+        int temp_value;
+        int connected_client = 0;
         auto startTime = std::chrono::high_resolution_clock::now();
         ecs.Update(0);
         retreiveKeyboard();
@@ -20,6 +25,36 @@ void UDPClient::run_game(Ecs &ecs)
         auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
         if (elapsedTime < (1.0 / 60))
             std::this_thread::sleep_for(std::chrono::duration<double>((1.0 / 60) - elapsedTime));
+        if (!input_queue_.empty())
+        {
+            std::pair<int, int> input = input_queue_.front();
+            if (input.second % 2 == 0)
+            {
+                if (input.second == 100)
+                {
+                    ecs.scene_.AddNewPlayer(connected_client++);
+                    std::cout << "---- ADD NEW PLAYER" << std::endl;
+                }
+                temp = input;
+                input_queue_.erase(input_queue_.begin());
+                input_queue_.push_back(std::make_pair(temp.first, temp.second));
+            } else {
+                for (auto it = input_queue_.begin(); it != input_queue_.end();) {
+                    if (it->first == input.first && it->second == input.second - 1) {
+                        it = input_queue_.erase(it);
+                    } else {
+                        ++it;
+                    }
+                }
+                input_queue_.erase(input_queue_.begin());
+            }
+            for (auto it = input_queue_.begin(); it != input_queue_.end();++it)
+                if (it->second % 2 == 0)
+                {
+                    BinaryProtocole::BinaryMessage msg = {type: 1, id: it->first, x: 1920, y: 1080, data: it->second};
+                    ecs.scene_.InputFromPlayer(*it);
+                }
+        }
     }
 }
 
@@ -108,10 +143,7 @@ void UDPClient::start()
 
     ecs.Create(0);
     std::thread t1(&UDPClient::start_listening, this);
-    // std::thread t2(&UDPClient::run_game, this, std::ref(_ecs));
-    // t1.join();
     run_game(ecs);
-    // t2.join();
 }
 
 void UDPClient::read_data()
@@ -119,17 +151,70 @@ void UDPClient::read_data()
     this->socket_.async_receive_from(
         boost::asio::buffer(this->recv_buffer_), this->server_endpoint_,
         [this](boost::system::error_code ec, std::size_t bytes_recvd) {
-            if (!ec && bytes_recvd > 0) {
-                BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
-                std::cout << "Received from server : type:" << msg.type << " id:" << msg.id << " x:" << msg.x << " y:" << msg.y << " data:" << msg.data << std::endl;
+            BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
 
-                // Check if the received message is an ID assignment from the server
-                if (msg.data == 101) {
-                    setClientId(msg.id);
-                    std::cout << "Client ID assigned by server: " << getClientId() << std::endl;
-                }
+            if (msg.data == 101)
+                setClientId(msg.id);
+            switch (msg.data)
+            {
+                case 100:
+                        input_queue_.push_back(std::make_pair(msg.id, 100));
+                    break;
+
+                case 200:
+                    input_queue_.push_back(std::make_pair(msg.id, 200));
+                    std::cout << "Client " << msg.id << " press up." << std::endl;
+                    break;
+
+                case 210:
+                    input_queue_.push_back(std::make_pair(msg.id, 210));
+                    std::cout << "Client " << msg.id << " press left." << std::endl;
+                    break;
+
+                case 220:
+                    input_queue_.push_back(std::make_pair(msg.id, 220));
+                    std::cout << "Client " << msg.id << " press down." << std::endl;
+                    break;
+
+                case 230:
+                    input_queue_.push_back(std::make_pair(msg.id, 230));
+                    std::cout << "Client " << msg.id << " press right." << std::endl;
+                    break;
+
+                case 300:
+                    input_queue_.push_back(std::make_pair(msg.id, 300));
+                    std::cout << "Client " << msg.id << " press shoot." << std::endl;
+                    break;
+                case 201:
+                    input_queue_.push_back(std::make_pair(msg.id, 201));
+                    std::cout << "Client " << msg.id << " release up." << std::endl;
+                    break;
+
+                case 211:
+                    input_queue_.push_back(std::make_pair(msg.id, 211));
+                    std::cout << "Client " << msg.id << " release left." << std::endl;
+                    break;
+
+                case 221:
+                    input_queue_.push_back(std::make_pair(msg.id, 221));
+                    std::cout << "Client " << msg.id << " release down." << std::endl;
+                    break;
+
+                case 231:
+                    input_queue_.push_back(std::make_pair(msg.id, 231));
+                    std::cout << "Client " << msg.id << " release right." << std::endl;
+                    break;
+
+                case 301:
+                    input_queue_.push_back(std::make_pair(msg.id, 301));
+                    std::cout << "Client " << msg.id << " release shoot." << std::endl;
+                    break;
+
+                default:
+                    std::cerr << "Unknown message data: " << msg.data << std::endl;
+                    break;
             }
-            this->read_data();
+            read_data();
         });
 }
 

@@ -55,7 +55,6 @@ BinaryProtocole::BinaryMessage BinaryProtocole::BinToValue(const std::vector<uin
     int cmpt = 0;
 
     for (uint16_t value : buffer) {
-        // std::cout << value << std::endl;
         switch (cmpt) {
             case 0:
                 message.type = value;
