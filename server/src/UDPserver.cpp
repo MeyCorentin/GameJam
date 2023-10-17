@@ -24,7 +24,7 @@ void UDPServer::run_server(Ecs &ecs)
         if (connected_client < clients_.size())
         {
             ecs.scene_.AddNewPlayer(clients_.size());
-            BinaryProtocole::BinaryMessage msg = {type: 1, id: clients_.size(), x: 1920, y: 1080, data: 100};
+            BinaryProtocole::BinaryMessage msg = {1, static_cast<uint32_t>(clients_.size()), 1920, 1080, 100};
             send_to_all(msg);
             connected_client++;
         }
@@ -50,7 +50,7 @@ void UDPServer::run_server(Ecs &ecs)
             {
                 if (it->second % 2 == 0)
                 {
-                    BinaryProtocole::BinaryMessage msg = {type: 1, id: it->first, x: 1920, y: 1080, data: it->second};
+                    BinaryProtocole::BinaryMessage msg = {1, static_cast<uint32_t>(it->first), 1920, 1080, static_cast<uint16_t>(it->second)};
                     ecs.scene_.InputFromPlayer(*it);
                 }
             }
@@ -93,35 +93,30 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
                 clients_[remote_endpoint_] = next_client_id_++;
                 std::cout << "New client with ID: " << clients_[remote_endpoint_] << std::endl;
                 // Send client ID back
-                BinaryProtocole::BinaryMessage response = {type: 1, id: clients_[remote_endpoint_], x: 0, y: 0, data: 101};
+                BinaryProtocole::BinaryMessage response = {1, clients_[remote_endpoint_], 0, 0, 101};
                 send(response);
             }
             break;
-
         case 200:
             input_queue_.push_back(std::make_pair(msg.id, 200));
             std::cout << "Client " << msg.id << " press up." << std::endl;
             send_to_all(msg);
             break;
-
         case 210:
             input_queue_.push_back(std::make_pair(msg.id, 210));
             std::cout << "Client " << msg.id << " press left." << std::endl;
             send_to_all(msg);
             break;
-
         case 220:
             input_queue_.push_back(std::make_pair(msg.id, 220));
             std::cout << "Client " << msg.id << " press down." << std::endl;
             send_to_all(msg);
             break;
-
         case 230:
             input_queue_.push_back(std::make_pair(msg.id, 230));
             std::cout << "Client " << msg.id << " press right." << std::endl;
             send_to_all(msg);
             break;
-
         case 300:
             input_queue_.push_back(std::make_pair(msg.id, 300));
             std::cout << "Client " << msg.id << " press shoot." << std::endl;
@@ -132,31 +127,26 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
             std::cout << "Client " << msg.id << " release up." << std::endl;
             send_to_all(msg);
             break;
-
         case 211:
             input_queue_.push_back(std::make_pair(msg.id, 211));
             std::cout << "Client " << msg.id << " release left." << std::endl;
             send_to_all(msg);
             break;
-
         case 221:
             input_queue_.push_back(std::make_pair(msg.id, 221));
             std::cout << "Client " << msg.id << " release down." << std::endl;
             send_to_all(msg);
             break;
-
         case 231:
             input_queue_.push_back(std::make_pair(msg.id, 231));
             std::cout << "Client " << msg.id << " release right." << std::endl;
             send_to_all(msg);
             break;
-
         case 301:
             input_queue_.push_back(std::make_pair(msg.id, 301));
             std::cout << "Client " << msg.id << " release shoot." << std::endl;
             send_to_all(msg);
             break;
-
         default:
             std::cerr << "Unknown message data: " << msg.data << std::endl;
             break;
