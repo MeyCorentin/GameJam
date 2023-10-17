@@ -14,7 +14,6 @@ void UDPClient::run_game(Ecs &ecs)
     while (true)
     {
         std::pair<int, int> temp;
-        std::vector<std::pair<int, int>> temp_queue;
         int temp_index;
         int temp_value;
         int connected_client = 0;
@@ -34,14 +33,13 @@ void UDPClient::run_game(Ecs &ecs)
                 {
                     if (input.first !=  clientId)
                     {
-                        ecs.scene_.AddNewPlayer(connected_client++);
+                        ecs.scene_.AddNewPlayer(input.first);
                         std::cout << "---- ADD NEW PLAYER" << std::endl;
                     }
                 } else {
                     temp = input;
                     input_queue_.push_back(std::make_pair(temp.first, temp.second));
                 }
-                input_queue_.erase(input_queue_.begin());
             } else {
                 for (auto it = input_queue_.begin(); it != input_queue_.end();) {
                     if (it->first == input.first && it->second == input.second - 1) {
@@ -50,8 +48,8 @@ void UDPClient::run_game(Ecs &ecs)
                         ++it;
                     }
                 }
-                input_queue_.erase(input_queue_.begin());
             }
+            input_queue_.erase(input_queue_.begin());
             for (auto it = input_queue_.begin(); it != input_queue_.end();++it)
                 if (it->second % 2 == 0)
                 {

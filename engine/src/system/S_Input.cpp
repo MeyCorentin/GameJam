@@ -334,7 +334,12 @@ void S_Input::Execute(
         std::shared_ptr<sf::Event> event_)  {
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
         if (arg_is_server == 1)
+            continue;
+        if (!player_id)
+            continue;
+        if (&entity != &arg_entities.front())
             continue;
         while (arg_window->pollEvent(*event_)) {
             if (event_->type == sf::Event::Closed)

@@ -11,6 +11,7 @@
 #include "../components/C_Size.hpp"
 #include "../components/C_Admin.hpp"
 #include "../components/C_Sprite.hpp"
+#include "../components/C_Player.hpp"
 #include "../components/C_SpriteRect.hpp"
 #include "../components/C_Inventory.hpp"
 #include "../entity/EntityBuilder.hpp"
