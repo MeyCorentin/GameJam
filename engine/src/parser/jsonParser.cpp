@@ -21,6 +21,23 @@ Variant JsonParser::ParseSpriteValue(const json& arg_value) {
     return std::make_pair(texture_ptr, sprite);
 }
 
+Variant JsonParser::ParseSound(const json& arg_value) {
+    sf::SoundBuffer sound_buffer;
+
+    if (!arg_value.is_string()) {
+        std::cerr << "Invalid value for Sound type." << std::endl;
+        return Variant();
+    }
+    if (!sound_buffer.loadFromFile(arg_value)) {
+        std::cerr << "Failed to load texture for sprite." << std::endl;
+        return Variant();
+    }
+    sf::Sound sound;
+    sound.setBuffer(sound_buffer);
+    return sound;
+}
+
+
 Variant JsonParser::ParseIntValue(const json& arg_value) {
     int int_value;
 
@@ -154,7 +171,9 @@ Variant JsonParser::ParseValue(const std::string& arg_value_type, const json& ar
         return ParsePairPairIntValue(arg_value);
     } else if (arg_value_type == "SinFunc") {
         return ParseSinFuncValue(arg_value);
-    } else {
+    } else if (arg_value_type == "SfSound") {
+        return ParseSound(arg_value);
+    }  else {
         std::cerr << "Unsupported value type: " << arg_value_type << std::endl;
     }
 

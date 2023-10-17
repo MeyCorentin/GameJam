@@ -7,6 +7,7 @@
 #include <chrono>
 #include <thread>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <unordered_map>
 #include <map>
 #include <nlohmann/json.hpp>
@@ -26,13 +27,14 @@ struct SinusoidalFunction {
 
 using Variant = std::variant<
                 std::pair<std::shared_ptr<sf::Texture>, sf::Sprite>,
-                int, 
-                std::pair<double, double>, 
-                std::pair<int, int>, 
-                bool, 
-                double, 
+                int,
+                std::pair<double, double>,
+                std::pair<int, int>,
+                bool,
+                double,
                 sf::Clock,
-                sf::IntRect, 
+                sf::IntRect,
                 std::pair<std::pair<int, int>, std::pair<int, int>>,
-                SinusoidalFunction>;
+                SinusoidalFunction,
+                sf::Sound>;
 using json = nlohmann::json;

@@ -25,6 +25,7 @@ void Ecs::Create(int arg_is_server)
     SystemRegistry::Instance().RegisterSystem("ParallaxSystem", []() { return std::make_shared<S_Parallax>(); });
     SystemRegistry::Instance().RegisterSystem("SinMoovSystem", []() { return std::make_shared<S_SinMoov>(); });
     SystemRegistry::Instance().RegisterSystem("MakeBaby", []() { return std::make_shared<S_MakeBaby>(); });
+    SystemRegistry::Instance().RegisterSystem("SoundSystem", []() { return std::make_shared<S_Sound>(); });
 
     ComponentRegistry::Instance().RegisterComponent("Sprite", []() { return std::make_shared<C_Sprite<sf::Sprite>>(); });
     ComponentRegistry::Instance().RegisterComponent("Life", []() { return std::make_shared<C_Life<int>>(); });
@@ -62,6 +63,7 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("UniqueAnimation", []() { return std::make_shared<C_UniqueAnimation<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("PositionEnd", []() { return std::make_shared<C_PositionEnd<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("PositionStart", []() { return std::make_shared<C_PositionStart<std::pair<double, double>>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Sound", []() { return std::make_shared<C_Sound<sf::Sound>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
     SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);

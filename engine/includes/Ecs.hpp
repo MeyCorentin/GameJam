@@ -51,7 +51,7 @@
 #include "../includes/components/C_PositionEnd.hpp"
 #include "../includes/components/C_PositionStart.hpp"
 #include "../includes/components/ComponentBase.hpp"
-#include "../includes/components/Sound.hpp"
+#include "../includes/components/C_Sound.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
 #include "../includes/scene/ComponentRegister.hpp"

@@ -47,7 +47,7 @@
         {
             "id": 13,
             "type": "MakeBaby"
-        }
+        },
         {
             "id": 14,
             "type": "SoundSystem"
@@ -228,11 +228,11 @@
             "id": 37,
             "type": "Admin",
             "value_type": "Bool"
-        }
+        },
         {
             "id": 38,
             "type": "Sound",
-            "value_type": "sfSound"
+            "value_type": "SfSound"
         }
     ],
     "entities": [
@@ -314,6 +314,10 @@
                 {
                     "component_id": 37,
                     "value": false
+                },
+                {
+                    "component_id": 38,
+                    "value": "../../sound/sound.ogg"
                 }
             ]
         },
@@ -1503,15 +1507,6 @@
                 {
                     "component_id": 33,
                     "value": false
-                }
-            ]
-        },
-        {
-            "id": 27,
-            "components": [
-                {
-                    "component_id": 38,
-                    "value": "../../sound/sound.ogg"
                 }
             ]
         }

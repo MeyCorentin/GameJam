@@ -27,4 +27,6 @@ public:
     static Variant ParseSinFuncValue(const json& arg_value);
 
     static Variant ParseValue(const std::string& arg_value_type, const json& arg_value);
+
+    static Variant ParseSound(const json& arg_value);
 };
