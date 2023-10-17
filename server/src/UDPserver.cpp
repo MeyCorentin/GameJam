@@ -24,7 +24,7 @@ void UDPServer::run_server(Ecs &ecs)
         if (connected_client < clients_.size())
         {
             std::cout << "Player Connect" << std::endl;
-            ecs.scene_.AddNewPlayer(clients_.size() + connected_client);
+            ecs.scene_.AddNewPlayer(clients_.size());
             connected_client++;
         }
         if (!input_queue_.empty())
