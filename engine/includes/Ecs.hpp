@@ -36,6 +36,7 @@
 #include "../includes/components/C_Clock.hpp"
 #include "../includes/components/C_FireRate.hpp"
 #include "../includes/components/C_Parallax.hpp"
+#include "../includes/components/C_ParallaxClock.hpp"
 #include "../includes/components/C_Range.hpp"
 #include "../includes/components/C_FireRateSpeed.hpp"
 #include "../includes/components/C_ChargedShoot.hpp"
