@@ -8,6 +8,10 @@ UDPServer::UDPServer(boost::asio::io_context& io_context, unsigned short port)
 
 void UDPServer::run_server(Ecs &ecs)
 {
+    std::pair<int, int> temp;
+    std::vector<std::pair<int, int>> temp_queue;
+    int temp_index;
+    int temp_value;
     int connected_client = 0;
     while (true)
     {
@@ -20,15 +24,31 @@ void UDPServer::run_server(Ecs &ecs)
         if (connected_client < clients_.size())
         {
             std::cout << "Player Connect" << std::endl;
-            ecs.scene_.AddNewPlayer(clients_.size() + connected_client);
+            ecs.scene_.AddNewPlayer(clients_.size());
             connected_client++;
         }
         if (!input_queue_.empty())
         {
             std::cout << "READ INPUT" << std::endl;
             std::pair<int, int> input = input_queue_.front();
-            input_queue_.pop();
-            ecs.scene_.InputFromPlayer(input);
+            if (input.second % 2 == 0)
+            {
+                temp = input;
+                input_queue_.erase(input_queue_.begin());
+                input_queue_.push_back(std::make_pair(temp.first, temp.second));
+            } else {
+                for (auto it = input_queue_.begin(); it != input_queue_.end();) {
+                    if (it->first == input.first && it->second == input.second - 1) {
+                        it = input_queue_.erase(it);
+                    } else {
+                        ++it;
+                    }
+                }
+                input_queue_.erase(input_queue_.begin());
+            }
+            for (auto it = input_queue_.begin(); it != input_queue_.end();++it)
+                if (it->second % 2 == 0)
+                    ecs.scene_.InputFromPlayer(*it);
         }
     }
 }
@@ -68,7 +88,6 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
             if (clients_.find(remote_endpoint_) == clients_.end()) {
                 clients_[remote_endpoint_] = next_client_id_++;
                 std::cout << "New client with ID: " << clients_[remote_endpoint_] << std::endl;
-
                 // Send client ID back
                 BinaryProtocole::BinaryMessage response = {type: 1, id: clients_[remote_endpoint_], x: 0, y: 0, data: 101};
                 send(response);
@@ -76,28 +95,52 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
             break;
 
         case 200:
-            input_queue_.push(std::make_pair(msg.id, 200));
-            std::cout << "Client " << msg.id << " up." << std::endl;
+            input_queue_.push_back(std::make_pair(msg.id, 200));
+            std::cout << "Client " << msg.id << " press up." << std::endl;
             break;
 
         case 210:
-            input_queue_.push(std::make_pair(msg.id, 210));
-            std::cout << "Client " << msg.id << " left." << std::endl;
+            input_queue_.push_back(std::make_pair(msg.id, 210));
+            std::cout << "Client " << msg.id << " press left." << std::endl;
             break;
 
         case 220:
-            input_queue_.push(std::make_pair(msg.id, 220));
-            std::cout << "Client " << msg.id << " down." << std::endl;
+            input_queue_.push_back(std::make_pair(msg.id, 220));
+            std::cout << "Client " << msg.id << " press down." << std::endl;
             break;
 
         case 230:
-            input_queue_.push(std::make_pair(msg.id, 230));
-            std::cout << "Client " << msg.id << " right." << std::endl;
+            input_queue_.push_back(std::make_pair(msg.id, 230));
+            std::cout << "Client " << msg.id << " press right." << std::endl;
             break;
 
         case 300:
-            input_queue_.push(std::make_pair(msg.id, 300));
-            std::cout << "Client " << msg.id << " shoot." << std::endl;
+            input_queue_.push_back(std::make_pair(msg.id, 300));
+            std::cout << "Client " << msg.id << " press shoot." << std::endl;
+            break;
+        case 201:
+            input_queue_.push_back(std::make_pair(msg.id, 201));
+            std::cout << "Client " << msg.id << " release up." << std::endl;
+            break;
+
+        case 211:
+            input_queue_.push_back(std::make_pair(msg.id, 211));
+            std::cout << "Client " << msg.id << " release left." << std::endl;
+            break;
+
+        case 221:
+            input_queue_.push_back(std::make_pair(msg.id, 221));
+            std::cout << "Client " << msg.id << " release down." << std::endl;
+            break;
+
+        case 231:
+            input_queue_.push_back(std::make_pair(msg.id, 231));
+            std::cout << "Client " << msg.id << " release right." << std::endl;
+            break;
+
+        case 301:
+            input_queue_.push_back(std::make_pair(msg.id, 301));
+            std::cout << "Client " << msg.id << " release shoot." << std::endl;
             break;
 
         default:

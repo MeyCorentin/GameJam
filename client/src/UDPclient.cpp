@@ -4,6 +4,7 @@
 UDPClient::UDPClient(boost::asio::io_context& io_context, const std::string& host, unsigned short port)
     : io_context_(io_context), socket_(io_context, udp::endpoint(udp::v4(), 0)), server_endpoint_(boost::asio::ip::address::from_string(host), port)
 {
+    inputs_ = {0,0,0,0,0};
     BinaryProtocole::BinaryMessage initial_msg = {type: 1, id: 0, x: 1920, y: 1080, data: 100};
     send(initial_msg);
 }
@@ -26,29 +27,63 @@ void UDPClient::retreiveKeyboard()
 {
     BinaryProtocole::BinaryMessage msg = {type: 1, id: getClientId(), x: 1920, y: 1080, data: 0};
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && inputs_[0] == 0)
     {
+        inputs_[0] = 1;
         msg.data = 200;
         send(msg);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && inputs_[1] == 0)
     {
+        inputs_[1] = 1;
         msg.data = 210;
         send(msg);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && inputs_[2] == 0)
     {
+        inputs_[2] = 1;
         msg.data = 220;
         send(msg);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && inputs_[3] == 0)
     {
+        inputs_[3] = 1;
         msg.data = 230;
         send(msg);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && inputs_[4] == 0)
     {
+        inputs_[4] = 1;
         msg.data = 300;
+        send(msg);
+    } else if  (!sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && inputs_[0] == 1)
+    {
+        inputs_[0] = 0;
+        msg.data = 201;
+        send(msg);
+    }
+    else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && inputs_[1] == 1)
+    {
+        inputs_[1] = 0;
+        msg.data = 211;
+        send(msg);
+    }
+    else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && inputs_[2] == 1)
+    {
+        inputs_[2] = 0;
+        msg.data = 221;
+        send(msg);
+    }
+    else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && inputs_[3] == 1)
+    {
+        inputs_[3] = 0;
+        msg.data = 231;
+        send(msg);
+    }
+    else if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && inputs_[4] == 1)
+    {
+        inputs_[4] = 0;
+        msg.data = 301;
         send(msg);
     }
 }

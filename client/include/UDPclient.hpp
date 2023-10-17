@@ -33,4 +33,5 @@ private:
     std::vector<uint16_t> recv_buffer_;
     BinaryProtocole protocole;
     uint32_t clientId = 0;
+    std::vector<int> inputs_;
 };

@@ -23,7 +23,7 @@ target_include_directories(r-type_library PUBLIC includes)
 target_include_directories(r-type_library PUBLIC ${SFML_INCLUDE_DIR} ${NLOHMANN_JSON_INCLUDE_DIR})
 
 # Liez la bibliothèque à SFML
-target_link_libraries(r-type_library sfml-graphics sfml-window sfml-system nlohmann_json::nlohmann_json)
+target_link_libraries(r-type_library sfml-audio sfml-graphics sfml-window sfml-system nlohmann_json::nlohmann_json)
 
 # Créez un exécutable à partir du fichier source principal
 add_executable(r-type_engine src/main.cpp src/Ecs.cpp)
