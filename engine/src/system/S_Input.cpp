@@ -117,10 +117,14 @@ std::shared_ptr<Entity> S_Input::createEntity(
         if (entity_config["id"] == id) {
             new_entity = CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
             position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_PositionShot<std::pair<double, double>>> position_shot = new_entity->template GetComponent<C_PositionShot<std::pair<double, double>>>();
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
-            position_new->setValue(std::make_pair(arg_position_comp->getValue().first, arg_position_comp->getValue().second));
+            std::cout << position_shot->getValue().first << std::endl;
+            std::cout << "Here" << std::endl;
+            position_new->setValue(std::make_pair(arg_position_comp->getValue().first + position_shot->getValue().first, arg_position_comp->getValue().second + position_shot->getValue().second));
+            std::cout << "After" << std::endl;
             arg_all_entities.push_back(new_entity);
         }
     }
@@ -174,6 +178,65 @@ void S_Input::ChangeAdminMode(
     }
 }
 
+void S_Input::BasicShot(
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::vector<sf::Sprite>& arg_sprites,
+    std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp)
+{
+    std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
+
+    if (clock->getValue().getElapsedTime().asSeconds() > 1)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 9, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.6)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 8, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.4)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 7, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.2)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 6, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.1)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 5, position_comp);
+    else
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
+}
+
+void S_Input::SpecialShot(
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::vector<sf::Sprite>& arg_sprites,
+    std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp)
+{
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+
+    //Player attacks
+    std::shared_ptr<C_Weapon<int>> weapon_player = entity->template GetComponent<C_Weapon<int>>();
+    if (weapon_player->getValue() != -1) {
+        if (weapon_player->getValue() == 25) {
+            for (int i = 0; i < 1; i++) { //TODO Set to 5
+                createEntity(arg_all_entities, arg_sprites, arg_textures, weapon_player->getValue(), position_comp);
+                createEntity(arg_all_entities, arg_sprites, arg_textures, 32, position_comp); //TODO Change that
+            }
+        }
+        if (weapon_player->getValue() == 26) {
+            createEntity(arg_all_entities, arg_sprites, arg_textures, 33, position_comp);
+            createEntity(arg_all_entities, arg_sprites, arg_textures, weapon_player->getValue(), position_comp);
+        }
+    }
+
+    //Drone attacks
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+        if (v_entity->GetId() == 27)
+            v_entity->is_dead_ = true;
+        if ((v_entity->GetId() == 4  || v_entity->GetId() == 29) && weapon_player->getValue() == 26) {
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_Weapon<int>> weapon = v_entity->template GetComponent<C_Weapon<int>>();
+            createEntity(arg_all_entities, arg_sprites, arg_textures, weapon->getValue(), position_drone);
+        }
+    }
+}
+
 void S_Input::CheckTouchPressed(
     const std::shared_ptr<Entity>& entity,
     std::vector<std::shared_ptr<Entity>>& arg_all_entities,
@@ -187,8 +250,8 @@ void S_Input::CheckTouchPressed(
     std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
     std::shared_ptr<C_IsMoving<bool>> moving = entity->template GetComponent<C_IsMoving<bool>>();
     std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
-    std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
 
     if (event_->type == sf::Event::KeyPressed) {
         if (event_->key.code == sf::Keyboard::Up) {
@@ -235,7 +298,6 @@ void S_Input::CheckTouchReleased(
     std::shared_ptr<C_IsMoving<bool>> moving = entity->template GetComponent<C_IsMoving<bool>>();
     std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
     std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
 
     if (event_->type == sf::Event::KeyReleased) {
         if (event_->key.code == sf::Keyboard::Up) {
@@ -255,41 +317,8 @@ void S_Input::CheckTouchReleased(
         if (event_->key.code == sf::Keyboard::Right)
             inputs_[3] = 0;
         if (event_->key.code == sf::Keyboard::Space) {
-            if (clock->getValue().getElapsedTime().asSeconds() > 1)
-                createEntity(arg_all_entities, arg_sprites, arg_textures, 9, position_comp);
-            else if (clock->getValue().getElapsedTime().asSeconds() > 0.6)
-                createEntity(arg_all_entities, arg_sprites, arg_textures, 8, position_comp);
-            else if (clock->getValue().getElapsedTime().asSeconds() > 0.4)
-                createEntity(arg_all_entities, arg_sprites, arg_textures, 7, position_comp);
-            else if (clock->getValue().getElapsedTime().asSeconds() > 0.2)
-                createEntity(arg_all_entities, arg_sprites, arg_textures, 6, position_comp);
-            else if (clock->getValue().getElapsedTime().asSeconds() > 0.1)
-                createEntity(arg_all_entities, arg_sprites, arg_textures, 5, position_comp);
-            else
-                createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
-
-            //Player attacks
-            std::shared_ptr<C_Weapon<int>> weapon_player = entity->template GetComponent<C_Weapon<int>>();
-            if (weapon_player->getValue() != -1) {
-                if (weapon_player->getValue() == 25) {
-                    for (int i = 0; i < 1; i++) { //TODO Set to 5
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, weapon_player->getValue(), position_comp);
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 32, position_comp); //TODO Change that
-                    }
-                }
-                if (weapon_player->getValue() == 26) {
-                    createEntity(arg_all_entities, arg_sprites, arg_textures, weapon_player->getValue(), position_comp);
-                }
-            }
-            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
-                if (v_entity->GetId() == 27)
-                    v_entity->is_dead_ = true;
-                if ((v_entity->GetId() == 4  || v_entity->GetId() == 29) && weapon_player->getValue() == 26) {
-                    std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                    std::shared_ptr<C_Weapon<int>> weapon = v_entity->template GetComponent<C_Weapon<int>>();
-                    createEntity(arg_all_entities, arg_sprites, arg_textures, weapon->getValue(), position_drone);
-                }
-            }
+            BasicShot(entity, arg_all_entities, arg_sprites, arg_textures, position_comp);
+            SpecialShot(entity, arg_all_entities, arg_sprites, arg_textures, position_comp);
             is_charging->getValue() = false;
         }
         ChangeAdminMode(entity, event_);
