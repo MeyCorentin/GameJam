@@ -115,6 +115,7 @@ void Scene::AddNewPlayer(int arg_id)
 void Scene::InputFromPlayer(std::pair<int,int> arg_message)
 {
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
+    std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size;
     for (const auto& entity : list_entities_) {
         if (entity->GetId() == 1)
         {
@@ -126,20 +127,25 @@ void Scene::InputFromPlayer(std::pair<int,int> arg_message)
                 if (index->getValue() != arg_message.first)
                     continue;
                 position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                 if (!position_comp)
                     continue;
                 switch (arg_message.second) {
                     case 200: // Up
-                        position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
+                        if (position_comp->getValue().second > 5)
+                            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
                         break;
                     case 210: // Left
-                        position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
+                        if (position_comp->getValue().first > 5)
+                            position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
                         break;
                     case 220: // Down
-                        position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second + 5));
+                        if (position_comp->getValue().second <  window_->getSize().y - 5 - hitbox_size->getValue().second)
+                            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second + 5));
                         break;
                     case 230: // Right
-                        position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
+                        if (position_comp->getValue().first < window_->getSize().x - 5- hitbox_size->getValue().first)
+                            position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
                         break;
                     case 300: // Shoot
                         break;

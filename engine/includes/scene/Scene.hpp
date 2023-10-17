@@ -8,6 +8,7 @@
 #include "../components/C_Player.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_SpriteRect.hpp"
+#include "../components/C_Hitbox.hpp"
 #include "../components/C_Sprite.hpp"
 
 class Scene {

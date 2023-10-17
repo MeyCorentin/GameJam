@@ -122,9 +122,7 @@ std::shared_ptr<Entity> S_Input::createEntity(
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
             std::cout << position_shot->getValue().first << std::endl;
-            std::cout << "Here" << std::endl;
             position_new->setValue(std::make_pair(arg_position_comp->getValue().first + position_shot->getValue().first, arg_position_comp->getValue().second + position_shot->getValue().second));
-            std::cout << "After" << std::endl;
             arg_all_entities.push_back(new_entity);
         }
     }
@@ -150,12 +148,12 @@ void S_Input::Move(
     }
     if (inputs_[2] == 1)
     {
-        if (position_comp->getValue().second < arg_window->getSize().x - 5 - hitbox_size->getValue().second)
+        if (position_comp->getValue().second < arg_window->getSize().y - 5 - hitbox_size->getValue().second)
             position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + 5));
     }
     if (inputs_[3] == 1)
     {
-        if (position_comp->getValue().first < arg_window->getSize().y - 5 - hitbox_size->getValue().first)
+        if (position_comp->getValue().first < arg_window->getSize().x - 5- hitbox_size->getValue().first)
             position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
     }
 }
@@ -333,7 +331,7 @@ void S_Input::Execute(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         std::vector<sf::Sprite>& arg_sprites,
         std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
-        std::shared_ptr<sf::Event> event_)  { //TODO rename event_
+        std::shared_ptr<sf::Event> event_)  {
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         if (arg_is_server == 1)
@@ -341,6 +339,11 @@ void S_Input::Execute(
         while (arg_window->pollEvent(*event_)) {
             if (event_->type == sf::Event::Closed)
                 arg_window->close();
+            if (event_->type == sf::Event::Resized)
+            {
+                sf::FloatRect visibleArea(0, 0, event_->size.width, event_->size.height);
+                arg_window->setView(sf::View(visibleArea));
+            }
             CheckTouchPressed(entity, arg_all_entities, arg_sprites, arg_textures, position_comp, event_);
             CheckTouchReleased(entity, arg_all_entities, arg_sprites, arg_textures, position_comp, event_);
         }
