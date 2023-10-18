@@ -30,6 +30,7 @@ void S_PlayMusic::Execute(
         auto music = arg_music_list.begin();
 
         if (!is_active->getValue()) {
+            (*music)->setVolume(30);
             if (!(*music)->openFromFile(music_path->getValue()))
                 std::cerr << "Failed to open file : " << music_path->getValue() << std::endl;
             (*music)->play();
