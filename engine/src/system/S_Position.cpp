@@ -19,6 +19,7 @@ void S_Position::Execute(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         std::vector<sf::Sprite>& arg_sprites,
         std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
         std::shared_ptr<sf::Event> event_)  {
     std::pair<double, double> position_comp;
 

@@ -26,6 +26,11 @@ SceneBuilder& SceneBuilder::AddTexture(std::shared_ptr<sf::Texture> arg_texture)
     return *this;
 }
 
+SceneBuilder& SceneBuilder::AddMusic(std::shared_ptr<sf::Music> arg_music) {
+    music_.push_back(arg_music);
+    return *this;
+}
+
 std::vector<std::shared_ptr<Entity>> SceneBuilder::GetEntities()
 {
     return  entities_;
@@ -38,6 +43,6 @@ std::vector<std::shared_ptr<System>> SceneBuilder::GetSystems()
 
 Scene SceneBuilder::Build() {
     std::cout << "[BUILDER] Scene build" << std::endl;
-    Scene scene(systems_, entities_, sprites_, textures_, spawn_index_);
+    Scene scene(systems_, entities_, sprites_, textures_, music_, spawn_index_);
     return scene;
 }

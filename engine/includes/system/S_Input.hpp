@@ -20,6 +20,7 @@
 #include "../components/C_PositionShot.hpp"
 #include "../components/C_Sound.hpp"
 #include "../components/C_SoundBuffer.hpp"
+#include "../components/C_Music.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
 #include "../scene/ComponentRegister.hpp"
@@ -62,6 +63,7 @@ class S_Input : public System {
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::vector<sf::Sprite>& arg_sprites,
                 std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+                std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
                 std::shared_ptr<sf::Event> event_) override;
 
         void Move(

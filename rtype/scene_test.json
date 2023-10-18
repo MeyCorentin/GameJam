@@ -51,6 +51,10 @@
         {
             "id": 14,
             "type": "PlaySound"
+        },
+        {
+            "id": 15,
+            "type": "PlayMusic"
         }
     ],
     "components": [
@@ -272,10 +276,15 @@
         {
             "id": 47,
             "type": "Music",
-            "value_type": "Music"
+            "value_type": "String"
         },
         {
             "id": 48,
+            "type": "MusicIsActive",
+            "value_type": "Bool"
+        },
+        {
+            "id": 49,
             "type": "ParallaxClock",
             "value_type": "Clock"
         }
@@ -363,6 +372,14 @@
                 {
                     "component_id": 40,
                     "value": -1
+                },
+                {
+                    "component_id": 47,
+                    "value": "../../sounds/stage_1.ogg"
+                },
+                {
+                    "component_id": 48,
+                    "value": false
                 }
             ]
         },
@@ -1101,7 +1118,7 @@
                     "value": -1
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 }
             ]
@@ -1134,7 +1151,7 @@
                     "value": -2
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 }
             ]
@@ -1167,7 +1184,7 @@
                     "value": -3
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 }
             ]
@@ -1208,7 +1225,7 @@
                     "value": -1
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 },
                 {
@@ -1253,7 +1270,7 @@
                     "value": -1
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 },
                 {
@@ -1298,7 +1315,7 @@
                     "value": -1
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 },
                 {
@@ -1343,7 +1360,7 @@
                     "value": -1
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 },
                 {
@@ -1388,7 +1405,7 @@
                     "value": -1
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 },
                 {
@@ -1433,7 +1450,7 @@
                     "value": -1
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 },
                 {
@@ -2162,7 +2179,7 @@
                     "value": -1
                 },
                 {
-                    "component_id": 48,
+                    "component_id": 49,
                     "value": 0
                 },
                 {

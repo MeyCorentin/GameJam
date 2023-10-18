@@ -23,6 +23,7 @@ void S_Animation::Execute(
         std::vector<int> _inputs,
         std::vector<std::shared_ptr<Entity>>& allEntities,
         std::vector<sf::Sprite>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures,
+        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
         std::shared_ptr<sf::Event> event_) {
     for (const std::shared_ptr<Entity>& entity : _entities) {
         std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();

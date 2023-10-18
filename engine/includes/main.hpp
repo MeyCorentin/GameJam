@@ -16,6 +16,7 @@
 #include <random>
 #include <variant>
 #include <list>
+#include <string>
 
 #pragma once
 
@@ -38,6 +39,7 @@ using Variant = std::variant<
                 sf::Sound,
                 sf::SoundBuffer,
                 sf::IntRect, 
+                std::string,
                 std::pair<std::pair<int, int>, std::pair<int, int>>,
                 std::vector<std::shared_ptr<Entity>>,
                 SinusoidalFunction>;

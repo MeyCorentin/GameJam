@@ -150,6 +150,11 @@ Variant JsonParser::ParseSoundBufferValue(const json& arg_value) {
     return buffer;
 }
 
+Variant JsonParser::ParseStringValue(const json& arg_value) {
+    std::string str = arg_value;
+    return str;
+}
+
 Variant JsonParser::ParseValue(const std::string& arg_value_type, const json& arg_value) {
     if (arg_value_type == "Sprite") {
         return ParseSpriteValue(arg_value);
@@ -177,6 +182,8 @@ Variant JsonParser::ParseValue(const std::string& arg_value_type, const json& ar
         return ParseSoundValue(arg_value);
     } else if (arg_value_type == "SoundBuffer") {
         return ParseSoundBufferValue(arg_value);    
+    } else if (arg_value_type == "String") {
+        return ParseStringValue(arg_value);    
     } else {
         std::cerr << "Unsupported value type: " << arg_value_type << std::endl;
     }

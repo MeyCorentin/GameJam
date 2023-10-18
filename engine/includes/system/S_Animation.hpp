@@ -73,6 +73,7 @@ class S_Animation : public System {
                 std::vector<int> _inputs,
                 std::vector<std::shared_ptr<Entity>>& allEntities,
                 std::vector<sf::Sprite>& sprites, std::vector<std::shared_ptr<sf::Texture>>& textures,
+                std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
                 std::shared_ptr<sf::Event> event_) override;
 };
 
