@@ -10,6 +10,8 @@
 #include "../components/C_IsMoving.hpp"
 #include "../components/C_Size.hpp"
 #include "../components/C_Admin.hpp"
+#include "../components/C_Bonus.hpp"
+#include "../components/C_PlayerAmmo.hpp"
 #include "../components/C_Sprite.hpp"
 #include "../components/C_Player.hpp"
 #include "../components/C_SpriteRect.hpp"
@@ -28,7 +30,7 @@
 
 class S_Input : public System {
     private:
-        std::vector<int> inputs_ = {0, 0, 0, 0, 0};
+        std::vector<int> inputs_ = {0, 0, 0, 0, 0, 0};
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
 
@@ -69,7 +71,8 @@ class S_Input : public System {
         void Move(
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 std::shared_ptr<sf::RenderWindow> arg_window,
-                const std::shared_ptr<Entity>& entity);
+                const std::shared_ptr<Entity>& entity,
+                std::vector<std::shared_ptr<Entity>>& entity_list);
         
         void ChangeAdminMode(
                 const std::shared_ptr<Entity>& entity,
