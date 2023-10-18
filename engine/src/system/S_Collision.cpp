@@ -43,6 +43,7 @@ void S_Collision::Execute(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         std::vector<sf::Sprite>& arg_sprites,
         std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
         std::shared_ptr<sf::Event> event_) {
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_1;
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp_1;

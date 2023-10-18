@@ -51,6 +51,10 @@
         {
             "id": 14,
             "type": "PlaySound"
+        },
+        {
+            "id": 15,
+            "type": "PlayMusic"
         }
     ],
     "components": [
@@ -272,7 +276,12 @@
         {
             "id": 47,
             "type": "Music",
-            "value_type": "Music"
+            "value_type": "String"
+        },
+        {
+            "id": 48,
+            "type": "MusicIsActive",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -358,6 +367,14 @@
                 {
                     "component_id": 40,
                     "value": -1
+                },
+                {
+                    "component_id": 47,
+                    "value": "../../sounds/stage_1.ogg"
+                },
+                {
+                    "component_id": 48,
+                    "value": false
                 }
             ]
         },

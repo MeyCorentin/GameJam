@@ -72,6 +72,8 @@ bool S_Input::ProcessComponent(
         arg_entityBuilder.AddComponent(component, std::get<sf::Sound>(value));
     } else if (value_type == "SoundBuffer") {
         arg_entityBuilder.AddComponent(component, std::get<sf::SoundBuffer>(value));
+    } else if (value_type == "String") {
+        arg_entityBuilder.AddComponent(component, std::get<std::string>(value));
     } else {
         std::cerr << "Unsupported component type: " << value_type << std::endl;
         return false;
@@ -335,6 +337,7 @@ void S_Input::Execute(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         std::vector<sf::Sprite>& arg_sprites,
         std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
         std::shared_ptr<sf::Event> event_)  {
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
