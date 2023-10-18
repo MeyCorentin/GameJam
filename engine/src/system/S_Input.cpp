@@ -135,12 +135,30 @@ std::shared_ptr<Entity> S_Input::createEntity(
     return new_entity;
 }
 
+void DrawEntityHitbox(
+    std::shared_ptr<sf::RenderWindow> arg_window,
+    const std::shared_ptr<Entity>& entity,
+    sf::Color outlineColor) {
+    std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+    sf::RectangleShape hitbox;
+    hitbox.setPosition(position_comp->getValue().first, position_comp->getValue().second);
+    hitbox.setSize(sf::Vector2f(hitbox_comp->getValue().first, hitbox_comp->getValue().second));
+    hitbox.setFillColor(sf::Color::Transparent);
+    hitbox.setOutlineColor(outlineColor);
+    hitbox.setOutlineThickness(1.0f);
+    arg_window->draw(hitbox);
+}
+
+
 void S_Input::Move(
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp, 
     std::shared_ptr<sf::RenderWindow> arg_window,
-    const std::shared_ptr<Entity>& entity)
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_entities)
 {
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+
 
     if (inputs_[0] == 1)
     {
@@ -161,6 +179,30 @@ void S_Input::Move(
     {
         if (position_comp->getValue().first < arg_window->getSize().x - 5- hitbox_size->getValue().first)
             position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
+    }
+    if (inputs_[5] == 1)
+    {
+        for (const std::shared_ptr<Entity>& entity : arg_entities) {
+            std::shared_ptr<C_Player<int>> is_player = entity->template GetComponent<C_Player<int>>();
+            std::shared_ptr<C_PlayerAmmo<bool>> is_player_ammo = entity->template GetComponent<C_PlayerAmmo<bool>>();
+            std::shared_ptr<C_Bonus<bool>> is_bonus =  entity->template GetComponent<C_Bonus<bool>>();
+            std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            sf::Color outlineColor;
+            if (!hitbox_comp || !position_comp)
+                continue;
+            if (is_player || is_player_ammo) {
+                outlineColor = sf::Color::Green;
+            }
+            else if (is_bonus) {
+                outlineColor = sf::Color::Blue;
+            }
+            else {
+                outlineColor = sf::Color::Red;
+            }
+            DrawEntityHitbox(arg_window, entity, outlineColor);
+        }
+
     }
 }
 
@@ -285,6 +327,10 @@ void S_Input::CheckTouchPressed(
                 is_charging->getValue() = true;
             }
         }
+        if (event_->key.code == sf::Keyboard::Z && inputs_[5] == 1)
+            inputs_[5] = 0;
+        else if (event_->key.code == sf::Keyboard::Z && inputs_[5] == 0)
+            inputs_[5] = 1;
     }
 }
 
@@ -351,14 +397,9 @@ void S_Input::Execute(
         while (arg_window->pollEvent(*event_)) {
             if (event_->type == sf::Event::Closed)
                 arg_window->close();
-            if (event_->type == sf::Event::Resized)
-            {
-                sf::FloatRect visibleArea(0, 0, event_->size.width, event_->size.height);
-                arg_window->setView(sf::View(visibleArea));
-            }
             CheckTouchPressed(entity, arg_all_entities, arg_sprites, arg_textures, position_comp, event_);
             CheckTouchReleased(entity, arg_all_entities, arg_sprites, arg_textures, position_comp, event_);
         }
-        Move(position_comp, arg_window, entity);
+        Move(position_comp, arg_window, entity, arg_all_entities);
     }
 }

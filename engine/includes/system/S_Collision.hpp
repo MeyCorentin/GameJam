@@ -16,14 +16,6 @@ class S_Collision : public System {
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
 
-        void DrawHitbox(
-                std::shared_ptr<sf::RenderWindow> arg_window,
-                const std::shared_ptr<C_Position<std::pair<double, double>>>& arg_position_comp,
-                const std::shared_ptr<C_Hitbox<std::pair<int, int>>>& arg_hitbox_comp,
-                bool arg_is_player,
-                bool arg_is_player_ammo,
-                bool arg_is_bonus);
-
         void Execute(
                 int arg_is_server,
                 std::vector<std::shared_ptr<Entity>>& arg_entities,
