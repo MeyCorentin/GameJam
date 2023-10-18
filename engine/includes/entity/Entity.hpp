@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../main.hpp"
 #include "../components/ComponentBase.hpp"
 
 class Entity {

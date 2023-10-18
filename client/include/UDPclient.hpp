@@ -21,6 +21,7 @@ public:
     void start();
     void setClientId(uint32_t _clientId) { clientId = _clientId; }
     uint32_t getClientId() { return clientId; }
+    std::vector<std::pair<int,int>> input_queue_;   
 
 private:
     void read_data();
@@ -33,4 +34,5 @@ private:
     std::vector<uint16_t> recv_buffer_;
     BinaryProtocole protocole;
     uint32_t clientId = 0;
+    std::vector<int> inputs_;
 };

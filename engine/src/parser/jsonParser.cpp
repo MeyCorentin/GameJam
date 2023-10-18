@@ -133,6 +133,23 @@ Variant JsonParser::ParseSinFuncValue(const json& arg_value) {
     return sin_func;
 }
 
+Variant JsonParser::ParseVectorEntityValue(const json& arg_value) {
+    std::vector<std::shared_ptr<Entity>> entities;
+    return entities;
+}
+
+Variant JsonParser::ParseSoundValue(const json& arg_value) {
+    sf::Sound sound;
+    return sound;
+}
+
+Variant JsonParser::ParseSoundBufferValue(const json& arg_value) {
+    sf::SoundBuffer buffer;
+    if (!buffer.loadFromFile(arg_value))
+        std::cerr << "Failed to read file : " << arg_value << std::endl;
+    return buffer;
+}
+
 Variant JsonParser::ParseValue(const std::string& arg_value_type, const json& arg_value) {
     if (arg_value_type == "Sprite") {
         return ParseSpriteValue(arg_value);
@@ -154,6 +171,12 @@ Variant JsonParser::ParseValue(const std::string& arg_value_type, const json& ar
         return ParsePairPairIntValue(arg_value);
     } else if (arg_value_type == "SinFunc") {
         return ParseSinFuncValue(arg_value);
+    } else if (arg_value_type == "VectorEntity") {
+        return ParseVectorEntityValue(arg_value);
+    } else if (arg_value_type == "Sound") {
+        return ParseSoundValue(arg_value);
+    } else if (arg_value_type == "SoundBuffer") {
+        return ParseSoundBufferValue(arg_value);    
     } else {
         std::cerr << "Unsupported value type: " << arg_value_type << std::endl;
     }

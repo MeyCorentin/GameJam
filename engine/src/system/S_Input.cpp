@@ -6,9 +6,9 @@ std::vector<std::shared_ptr<Entity>> S_Input::Filter(const std::vector<std::shar
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Player<int>)) &&
             entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
-            entity->HasComponent(typeid(C_AnimatedMove<sf::Clock>)) &&
             entity->HasComponent(typeid(C_IsMoving<bool>)) &&
             entity->HasComponent(typeid(C_Admin<bool>)) &&
+            entity->HasComponent(typeid(C_Weapon<int>)) &&
             entity->HasComponent(typeid(C_ChargedShoot<sf::Clock>))
             ) {
             filtered_entities.push_back(entity);
@@ -64,9 +64,15 @@ bool S_Input::ProcessComponent(
         arg_entityBuilder.AddComponent(component, std::get<sf::IntRect>(value));
     } else if (value_type == "PairPairInt") {
         arg_entityBuilder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
+    } else if (value_type == "VectorEntity") {
+        arg_entityBuilder.AddComponent(component, std::get<std::vector<std::shared_ptr<Entity>>>(value));
     } else if (value_type == "SinFunc") {
         arg_entityBuilder.AddComponent(component, std::get<SinusoidalFunction>(value));
-    }else {
+    } else if (value_type == "Sound") {
+        arg_entityBuilder.AddComponent(component, std::get<sf::Sound>(value));
+    } else if (value_type == "SoundBuffer") {
+        arg_entityBuilder.AddComponent(component, std::get<sf::SoundBuffer>(value));
+    } else {
         std::cerr << "Unsupported component type: " << value_type << std::endl;
         return false;
     }
@@ -97,7 +103,7 @@ std::shared_ptr<Entity> S_Input::CreateEntityFromConfig(
     return entity_builder.Build();
 }
 
-void S_Input::createEntity(
+std::shared_ptr<Entity> S_Input::createEntity(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         std::vector<sf::Sprite>& arg_sprites,
         std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
@@ -115,12 +121,209 @@ void S_Input::createEntity(
         if (entity_config["id"] == id) {
             new_entity = CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
             position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_PositionShot<std::pair<double, double>>> position_shot = new_entity->template GetComponent<C_PositionShot<std::pair<double, double>>>();
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
-            position_new->setValue(std::make_pair(arg_position_comp->getValue().first, arg_position_comp->getValue().second));
+            std::cout << position_shot->getValue().first << std::endl;
+            position_new->setValue(std::make_pair(arg_position_comp->getValue().first + position_shot->getValue().first, arg_position_comp->getValue().second + position_shot->getValue().second));
             arg_all_entities.push_back(new_entity);
         }
+    }
+    return new_entity;
+}
+
+void S_Input::Move(
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp, 
+    std::shared_ptr<sf::RenderWindow> arg_window,
+    const std::shared_ptr<Entity>& entity)
+{
+    std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+
+    if (inputs_[0] == 1)
+    {
+        if (position_comp->getValue().second > 5)
+            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
+    }
+    if (inputs_[1] == 1)
+    {
+        if (position_comp->getValue().first > 5)
+            position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
+    }
+    if (inputs_[2] == 1)
+    {
+        if (position_comp->getValue().second < arg_window->getSize().y - 5 - hitbox_size->getValue().second)
+            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + 5));
+    }
+    if (inputs_[3] == 1)
+    {
+        if (position_comp->getValue().first < arg_window->getSize().x - 5- hitbox_size->getValue().first)
+            position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
+    }
+}
+
+void S_Input::ChangeAdminMode(
+    const std::shared_ptr<Entity>& entity,
+    std::shared_ptr<sf::Event> event_)
+{
+    std::shared_ptr<C_Life<int>> life = entity->template GetComponent<C_Life<int>>();
+    std::shared_ptr<C_Admin<bool>> is_admin = entity->template GetComponent<C_Admin<bool>>();
+
+    if (event_->key.code == sf::Keyboard::A) {
+        if (is_admin->getValue()) {
+            life->getValue() = 1;
+            is_admin->getValue() = false;
+        } else {
+            life->getValue() = -1;
+            is_admin->getValue() = true;
+        }
+    }
+}
+
+void S_Input::BasicShot(
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::vector<sf::Sprite>& arg_sprites,
+    std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp)
+{
+    std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
+
+    if (clock->getValue().getElapsedTime().asSeconds() > 1)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 9, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.6)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 8, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.4)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 7, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.2)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 6, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.1)
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 5, position_comp);
+    else
+        createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
+}
+
+void S_Input::SpecialShot(
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::vector<sf::Sprite>& arg_sprites,
+    std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp)
+{
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+
+    //Player attacks
+    std::shared_ptr<C_Weapon<int>> weapon_player = entity->template GetComponent<C_Weapon<int>>();
+    if (weapon_player->getValue() != -1) {
+        if (weapon_player->getValue() == 25) {
+            for (int i = 0; i < 1; i++) { //TODO Set to 5
+                createEntity(arg_all_entities, arg_sprites, arg_textures, weapon_player->getValue(), position_comp);
+                createEntity(arg_all_entities, arg_sprites, arg_textures, 32, position_comp); //TODO Change that
+            }
+        }
+        if (weapon_player->getValue() == 26) {
+            createEntity(arg_all_entities, arg_sprites, arg_textures, 33, position_comp);
+            createEntity(arg_all_entities, arg_sprites, arg_textures, weapon_player->getValue(), position_comp);
+        }
+    }
+
+    //Drone attacks
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+        if (v_entity->GetId() == 27)
+            v_entity->is_dead_ = true;
+        if ((v_entity->GetId() == 4  || v_entity->GetId() == 29) && weapon_player->getValue() == 26) {
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_Weapon<int>> weapon = v_entity->template GetComponent<C_Weapon<int>>();
+            createEntity(arg_all_entities, arg_sprites, arg_textures, weapon->getValue(), position_drone);
+        }
+    }
+}
+
+void S_Input::CheckTouchPressed(
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::vector<sf::Sprite>& arg_sprites,
+    std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
+    std::shared_ptr<sf::Event> event_)
+{
+    std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
+    std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+    std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
+    std::shared_ptr<C_IsMoving<bool>> moving = entity->template GetComponent<C_IsMoving<bool>>();
+    std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
+
+    if (event_->type == sf::Event::KeyPressed) {
+        if (event_->key.code == sf::Keyboard::Up) {
+            inputs_[0] = 1;
+            if (moving->getValue() == false) {
+                moving->getValue() = true;
+                rect->getValue().left = size->getValue().second.first + (rect->getValue().width * 2);
+                sprite->getValue().setTextureRect(rect->getValue());
+            }
+        }
+        if (event_->key.code == sf::Keyboard::Left)
+            inputs_[1] = 1;
+        if (event_->key.code == sf::Keyboard::Down) {
+            inputs_[2] = 1;
+            if (moving->getValue() == false) {
+                moving->getValue() = true;
+                rect->getValue().left = size->getValue().second.first - (rect->getValue().width * 2);
+                sprite->getValue().setTextureRect(rect->getValue());
+            }
+        }
+        if (event_->key.code == sf::Keyboard::Right)
+            inputs_[3] = 1;
+        if (event_->key.code == sf::Keyboard::Space) {
+            if (is_charging->getValue() == false) {
+                clock->getValue().restart();
+                vector_entities->getValue().push_back(createEntity(arg_all_entities, arg_sprites, arg_textures, 27, position_comp));
+                is_charging->getValue() = true;
+            }
+        }
+    }
+}
+
+void S_Input::CheckTouchReleased(
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::vector<sf::Sprite>& arg_sprites,
+    std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
+    std::shared_ptr<sf::Event> event_)
+{
+    std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
+    std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+    std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
+    std::shared_ptr<C_IsMoving<bool>> moving = entity->template GetComponent<C_IsMoving<bool>>();
+    std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
+    std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
+
+    if (event_->type == sf::Event::KeyReleased) {
+        if (event_->key.code == sf::Keyboard::Up) {
+            inputs_[0] = 0;
+            moving->getValue() = false;
+            rect->getValue().left = size->getValue().second.first;
+            sprite->getValue().setTextureRect(rect->getValue());
+        }
+        if (event_->key.code == sf::Keyboard::Left)
+            inputs_[1] = 0;
+        if (event_->key.code == sf::Keyboard::Down) {
+            inputs_[2] = 0;
+            moving->getValue() = false;
+            rect->getValue().left = size->getValue().second.first;
+            sprite->getValue().setTextureRect(rect->getValue());
+        }
+        if (event_->key.code == sf::Keyboard::Right)
+            inputs_[3] = 0;
+        if (event_->key.code == sf::Keyboard::Space) {
+            BasicShot(entity, arg_all_entities, arg_sprites, arg_textures, position_comp);
+            SpecialShot(entity, arg_all_entities, arg_sprites, arg_textures, position_comp);
+            is_charging->getValue() = false;
+        }
+        ChangeAdminMode(entity, event_);
     }
 }
 
@@ -132,119 +335,27 @@ void S_Input::Execute(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         std::vector<sf::Sprite>& arg_sprites,
         std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
-        std::shared_ptr<sf::Event> event_)  { //TODO rename event_
-    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
-    std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size;
+        std::shared_ptr<sf::Event> event_)  {
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
+        std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
         if (arg_is_server == 1)
             continue;
-        position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
-        hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
-        std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
-        std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
-        std::shared_ptr<C_AnimatedMove<sf::Clock>> clock_move = entity->template GetComponent<C_AnimatedMove<sf::Clock>>();
-        std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
-        std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
-        std::shared_ptr<C_IsMoving<bool>> moving = entity->template GetComponent<C_IsMoving<bool>>();
-        std::shared_ptr<C_Life<int>> life = entity->template GetComponent<C_Life<int>>();
-        std::shared_ptr<C_Admin<bool>> is_admin = entity->template GetComponent<C_Admin<bool>>();
-        std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
+        if (!player_id)
+            continue;
+        if (&entity != &arg_entities.front())
+            continue;
         while (arg_window->pollEvent(*event_)) {
             if (event_->type == sf::Event::Closed)
                 arg_window->close();
-            if (event_->type == sf::Event::KeyPressed) {
-                if (event_->key.code == sf::Keyboard::Up) {
-                    inputs_[0] = 1;
-                    if (moving->getValue() == false) {
-                        moving->getValue() = true;
-                        clock_move->getValue().restart();
-                    }
-                    rect->getValue().left = size->getValue().second.first + (rect->getValue().width * 2);
-                    sprite->getValue().setTextureRect(rect->getValue());
-                }
-                if (event_->key.code == sf::Keyboard::Left)
-                    inputs_[1] = 1;
-                if (event_->key.code == sf::Keyboard::Down) {
-                    inputs_[2] = 1;
-                    if (moving->getValue() == false) {
-                        moving->getValue() = true;
-                        clock_move->getValue().restart();
-                    }
-                    rect->getValue().left = size->getValue().second.first - (rect->getValue().width * 2);
-                    sprite->getValue().setTextureRect(rect->getValue());
-                }
-                if (event_->key.code == sf::Keyboard::Right)
-                    inputs_[3] = 1;
-                if (event_->key.code == sf::Keyboard::Space) {
-                    if (is_charging->getValue() == false) {
-                        clock->getValue().restart();
-                        is_charging->getValue() = true;
-                    }
-                }
+            if (event_->type == sf::Event::Resized)
+            {
+                sf::FloatRect visibleArea(0, 0, event_->size.width, event_->size.height);
+                arg_window->setView(sf::View(visibleArea));
             }
-            if (event_->type == sf::Event::KeyReleased) {
-                if (event_->key.code == sf::Keyboard::Up) {
-                    inputs_[0] = 0;
-                    moving->getValue() = false;
-                    rect->getValue().left = size->getValue().second.first;
-                    sprite->getValue().setTextureRect(rect->getValue());
-                }
-                if (event_->key.code == sf::Keyboard::Left)
-                    inputs_[1] = 0;
-                if (event_->key.code == sf::Keyboard::Down) {
-                    inputs_[2] = 0;
-                    moving->getValue() = false;
-                    rect->getValue().left = size->getValue().second.first;
-                    sprite->getValue().setTextureRect(rect->getValue());
-                }
-                if (event_->key.code == sf::Keyboard::Right)
-                    inputs_[3] = 0;
-                if (event_->key.code == sf::Keyboard::Space) { // ADD CLOCK TO INPUT
-                    std::cout << "Time : " << clock->getValue().getElapsedTime().asSeconds() << std::endl;
-                    if (clock->getValue().getElapsedTime().asSeconds() > 1)
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 9, position_comp);
-                    else if (clock->getValue().getElapsedTime().asSeconds() > 0.6)
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 8, position_comp);
-                    else if (clock->getValue().getElapsedTime().asSeconds() > 0.4)
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 7, position_comp);
-                    else if (clock->getValue().getElapsedTime().asSeconds() > 0.2)
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 6, position_comp);
-                    else if (clock->getValue().getElapsedTime().asSeconds() > 0.1)
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 5, position_comp);
-                    else
-                        createEntity(arg_all_entities, arg_sprites, arg_textures, 3, position_comp);
-                    is_charging->getValue() = false;
-                }
-                if (event_->key.code == sf::Keyboard::A) {
-                    if (is_admin->getValue()) {
-                        life->getValue() = 1;
-                        is_admin->getValue() = false;
-                    } else {
-                        life->getValue() = -1;
-                        is_admin->getValue() = true;
-                    }
-                }
-            }
+            CheckTouchPressed(entity, arg_all_entities, arg_sprites, arg_textures, position_comp, event_);
+            CheckTouchReleased(entity, arg_all_entities, arg_sprites, arg_textures, position_comp, event_);
         }
-        if (inputs_[0] == 1)
-        {
-            if (position_comp->getValue().second > 5)
-                position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
-        }
-        if (inputs_[1] == 1)
-        {
-            if (position_comp->getValue().first > 5)
-                position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
-        }
-        if (inputs_[2] == 1)
-        {
-            if (position_comp->getValue().second < arg_window->getSize().x - 5 - hitbox_size->getValue().second)
-                position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + 5));
-        }
-        if (inputs_[3] == 1)
-        {
-            if (position_comp->getValue().first < arg_window->getSize().y - 5 - hitbox_size->getValue().first)
-                position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
-        }
+        Move(position_comp, arg_window, entity);
     }
 }

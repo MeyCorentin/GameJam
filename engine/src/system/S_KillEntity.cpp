@@ -23,10 +23,10 @@ void S_KillEntity::Execute(
 
     for (std::shared_ptr<Entity>& entity : arg_entities) {
         position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>()->getValue();
-        if (position_comp.first > arg_window.get()->getSize().x * 2 ||
-            position_comp.first < -((int)arg_window.get()->getSize().x * 2) ||
-            position_comp.second > arg_window.get()->getSize().y * 2 ||
-            position_comp.second < -((int)arg_window.get()->getSize().y * 2))
+        if (position_comp.first > arg_window.get()->getSize().x * 1.5  ||
+            position_comp.first < -((int)arg_window.get()->getSize().x  * 1.5) ||
+            position_comp.second > arg_window.get()->getSize().y * 1.5 ||
+            position_comp.second < -((int)arg_window.get()->getSize().y * 1.5))
         {
             entity->is_dead_ = true;
         }

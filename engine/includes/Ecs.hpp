@@ -14,6 +14,7 @@
 #include "../includes/system/S_Parallax.hpp"
 #include "../includes/system/S_SinMoov.hpp"
 #include "../includes/system/S_MakeBaby.hpp"
+#include "../includes/system/S_PlaySound.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_Player.hpp"
@@ -35,20 +36,29 @@
 #include "../includes/components/C_Clock.hpp"
 #include "../includes/components/C_FireRate.hpp"
 #include "../includes/components/C_Parallax.hpp"
+#include "../includes/components/C_ParallaxClock.hpp"
 #include "../includes/components/C_Range.hpp"
 #include "../includes/components/C_FireRateSpeed.hpp"
 #include "../includes/components/C_ChargedShoot.hpp"
 #include "../includes/components/C_ShootCharging.hpp"
 #include "../includes/components/C_PlayerAmmo.hpp"
 #include "../includes/components/C_SinClock.hpp"
-#include "../includes/components/C_AnimatedMove.hpp"
 #include "../includes/components/C_IsMoving.hpp"
 #include "../includes/components/C_Child.hpp"
 #include "../includes/components/C_Ammo.hpp"
 #include "../includes/components/C_Admin.hpp"
+#include "../includes/components/C_Inventory.hpp"
 #include "../includes/components/C_UniqueAnimation.hpp"
 #include "../includes/components/C_PositionEnd.hpp"
 #include "../includes/components/C_PositionStart.hpp"
+#include "../includes/components/C_Bonus.hpp"
+#include "../includes/components/C_BonusPower.hpp"
+#include "../includes/components/C_PositionFollow.hpp"
+#include "../includes/components/C_Weapon.hpp"
+#include "../includes/components/C_PositionShot.hpp"
+#include "../includes/components/C_Sound.hpp"
+#include "../includes/components/C_SoundBuffer.hpp"
+#include "../includes/components/C_SoundIsActive.hpp"
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
@@ -60,7 +70,6 @@ class Ecs
 {
     public:
         Scene scene_;
-
 
         Ecs(int ac, char **av);
 

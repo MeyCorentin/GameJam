@@ -7,6 +7,7 @@
 #include <chrono>
 #include <thread>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <unordered_map>
 #include <map>
 #include <nlohmann/json.hpp>
@@ -17,6 +18,8 @@
 #include <list>
 
 #pragma once
+
+class Entity;
 
 struct SinusoidalFunction {
     double amplitude;
@@ -32,7 +35,10 @@ using Variant = std::variant<
                 bool, 
                 double, 
                 sf::Clock,
+                sf::Sound,
+                sf::SoundBuffer,
                 sf::IntRect, 
                 std::pair<std::pair<int, int>, std::pair<int, int>>,
+                std::vector<std::shared_ptr<Entity>>,
                 SinusoidalFunction>;
 using json = nlohmann::json;

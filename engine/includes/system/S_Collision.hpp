@@ -6,6 +6,11 @@
 #include "../components/C_Player.hpp"
 #include "../components/C_Hitbox.hpp"
 #include "../components/C_Life.hpp"
+#include "../components/C_Follow.hpp"
+#include "../components/C_Inventory.hpp"
+#include "../components/C_Bonus.hpp"
+#include "../components/C_Weapon.hpp"
+#include "../components/C_BonusPower.hpp"
 
 class S_Collision : public System {
     public:
@@ -16,7 +21,8 @@ class S_Collision : public System {
                 const std::shared_ptr<C_Position<std::pair<double, double>>>& arg_position_comp,
                 const std::shared_ptr<C_Hitbox<std::pair<int, int>>>& arg_hitbox_comp,
                 bool arg_is_player,
-                bool arg_is_player_ammo);
+                bool arg_is_player_ammo,
+                bool arg_is_bonus);
 
         void Execute(
                 int arg_is_server,

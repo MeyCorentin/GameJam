@@ -5,7 +5,8 @@ std::vector<std::shared_ptr<Entity>> S_Parallax::Filter(const std::vector<std::s
 
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
-            entity->HasComponent(typeid(C_Parallax<int>))) {
+            entity->HasComponent(typeid(C_Parallax<int>)) &&
+            entity->HasComponent(typeid(C_ParallaxClock<sf::Clock>))) {
             filtered_entities.push_back(entity);
         }
     }
@@ -25,12 +26,16 @@ void S_Parallax::Execute(
     std::shared_ptr<C_PositionStart<std::pair<double, double>>> position_start;
     std::shared_ptr<C_PositionEnd<std::pair<double, double>>> position_end;
     std::shared_ptr<C_Parallax<int>> parallax;
+    std::shared_ptr<C_ParallaxClock<sf::Clock>> parallax_clock;
 
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         position = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         parallax = entity->template GetComponent<C_Parallax<int>>();
-        position->setValue(std::make_pair(  position->getValue().first + parallax->getValue(),
+        parallax_clock = entity->template GetComponent<C_ParallaxClock<sf::Clock>>();
+        sf::Time elapsed1 = parallax_clock->getValue().getElapsedTime();
+        position->setValue(std::make_pair(  position->getValue().first + ((parallax->getValue() * elapsed1.asMilliseconds() / 10)),
                                             position->getValue().second));
+        parallax_clock->getValue().restart();
         position_start = entity->template GetComponent<C_PositionStart<std::pair<double, double>>>();
         position_end = entity->template GetComponent<C_PositionEnd<std::pair<double, double>>>();
         if (position_start && position_end)

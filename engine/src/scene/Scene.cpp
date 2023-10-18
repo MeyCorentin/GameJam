@@ -98,15 +98,10 @@ void Scene::AddNewPlayer(int arg_id)
             std::shared_ptr<C_Player<int>> index;
             std::cout << "Add entity" << std::endl;
             entities_.push_back(std::make_shared<Entity>(*entity));
-            for (const std::shared_ptr<Entity>& entity : entities_) {
-                index = entity->template GetComponent<C_Player<int>>();
-                if (!index)
-                    continue;
-                if (index->getValue() != 0)
-                    continue;
-                index->setValue(arg_id);
-                std::cout << index->getValue() << std::endl;
-            }
+            index = entities_.back() ->template GetComponent<C_Player<int>>();
+            index->setValue(arg_id);
+            std::cout << "SET INDEX : " <<index->getValue() << std::endl;
+            std::cout << index->getValue() << std::endl;
         }
     }
 }
@@ -114,43 +109,43 @@ void Scene::AddNewPlayer(int arg_id)
 
 void Scene::InputFromPlayer(std::pair<int,int> arg_message)
 {
-    std::cout << "----- Input from player" << std::endl;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
-    for (const auto& entity : list_entities_) {
-        if (entity->GetId() == 1)
-        {
-            std::shared_ptr<C_Player<int>> index;
-            for (const std::shared_ptr<Entity>& entity : entities_) {
-                index = entity->template GetComponent<C_Player<int>>();
-                if (!index)
-                    continue;
-                if (index->getValue() != arg_message.first)
-                    continue;
-                position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                if (!position_comp)
-                    continue;
-                switch (arg_message.second) {
-                    case 200: // Up
-                        position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
-                        break;
-                    case 210: // Left
-                        position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
-                        break;
-                    case 220: // Down
-                        position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second + 5));
-                        break;
-                    case 230: // Right
-                        position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
-                        break;
-                    case 300: // Shoot
-                        break;
-                    default:
-                        std::cerr << "Unknown message data: " << arg_message.second << std::endl;
-                        break;
-                }
-                std::cout << "MOVE" << std::endl;
-            }
+    std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size;
+    std::shared_ptr<C_Player<int>> index;
+    for (const std::shared_ptr<Entity>& entity : entities_) {
+        index = entity->template GetComponent<C_Player<int>>();
+        if (!index)
+            continue;
+        if (index->getValue() != arg_message.first)
+            continue;
+        position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+        if (!position_comp)
+            continue;
+        switch (arg_message.second) {
+            case 200: // Up
+                if (position_comp->getValue().second > 5)
+                    position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
+                break;
+            case 210: // Left
+                if (position_comp->getValue().first > 5)
+                    position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
+                break;
+            case 220: // Down
+                if (position_comp->getValue().second <  window_->getSize().y - 5 - hitbox_size->getValue().second)
+                    position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second + 5));
+                break;
+            case 230: // Right
+                if (position_comp->getValue().first < window_->getSize().x - 5- hitbox_size->getValue().first)
+                    position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
+                break;
+            case 300: // Shoot
+                break;
+            default:
+                std::cerr << "Unknown message data: " << arg_message.second << std::endl;
+                break;
         }
+        std::cout << "MOVE" << std::endl;
     }
 }
 
