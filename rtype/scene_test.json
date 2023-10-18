@@ -299,11 +299,11 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": 10000000000000
                 },
                 {
                     "component_id": 3,
-                    "value": { "x": 50, "y": 50 }
+                    "value": { "x": 125, "y": 125 }
                 },
                 {
                     "component_id": 4,
