@@ -74,6 +74,7 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("SoundIsActive", []() { return std::make_shared<C_SoundIsActive<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("Music", []() { return std::make_shared<C_Music<std::string>>(); });
     ComponentRegistry::Instance().RegisterComponent("MusicIsActive", []() { return std::make_shared<C_MusicIsActive<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("ParallaxClock", []() { return std::make_shared<C_ParallaxClock<sf::Clock>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
     SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);

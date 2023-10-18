@@ -4,6 +4,7 @@
 #include "../components/C_Direction.hpp"
 #include "../components/C_Speed.hpp"
 #include "../components/C_Parallax.hpp"
+#include "../components/C_ParallaxClock.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_PositionStart.hpp"
 #include "../components/C_PositionEnd.hpp"

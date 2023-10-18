@@ -5,7 +5,9 @@ UDPClient::UDPClient(boost::asio::io_context& io_context, const std::string& hos
     : io_context_(io_context), socket_(io_context, udp::endpoint(udp::v4(), 0)), server_endpoint_(boost::asio::ip::address::from_string(host), port)
 {
     inputs_ = {0,0,0,0,0};
-    BinaryProtocole::BinaryMessage initial_msg = {type: 1, id: 0, x: 1920, y: 1080, data: 100};
+    BinaryProtocole::BinaryMessage initial_msg;
+
+    initial_msg = {1, 0, 1920, 1080, 100};
     send(initial_msg);
 }
 
@@ -55,7 +57,7 @@ void UDPClient::run_game(Ecs &ecs)
                 {
                     int value_1 = it->first;
                     int value_2 = it->second;
-                    BinaryProtocole::BinaryMessage msg = {type: 1, id: (uint32_t)it->first, x: 1920, y: 1080, data: (uint16_t)it->second};
+                    BinaryProtocole::BinaryMessage msg = {1, (uint32_t)it->first, 1920, 1080, (uint16_t)it->second};
                     ecs.scene_.InputFromPlayer(*it);
                 }
         }
@@ -64,7 +66,7 @@ void UDPClient::run_game(Ecs &ecs)
 
 void UDPClient::retreiveKeyboard()
 {
-    BinaryProtocole::BinaryMessage msg = {type: 1, id: getClientId(), x: 1920, y: 1080, data: 0};
+    BinaryProtocole::BinaryMessage msg = {1, getClientId(), 1920, 1080, 0};
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && inputs_[0] == 0)
     {
@@ -164,27 +166,22 @@ void UDPClient::read_data()
                 case 100:
                         input_queue_.push_back(std::make_pair(msg.id, 100));
                     break;
-
                 case 200:
                     input_queue_.push_back(std::make_pair(msg.id, 200));
                     std::cout << "Client " << msg.id << " press up." << std::endl;
                     break;
-
                 case 210:
                     input_queue_.push_back(std::make_pair(msg.id, 210));
                     std::cout << "Client " << msg.id << " press left." << std::endl;
                     break;
-
                 case 220:
                     input_queue_.push_back(std::make_pair(msg.id, 220));
                     std::cout << "Client " << msg.id << " press down." << std::endl;
                     break;
-
                 case 230:
                     input_queue_.push_back(std::make_pair(msg.id, 230));
                     std::cout << "Client " << msg.id << " press right." << std::endl;
                     break;
-
                 case 300:
                     input_queue_.push_back(std::make_pair(msg.id, 300));
                     std::cout << "Client " << msg.id << " press shoot." << std::endl;
@@ -193,27 +190,22 @@ void UDPClient::read_data()
                     input_queue_.push_back(std::make_pair(msg.id, 201));
                     std::cout << "Client " << msg.id << " release up." << std::endl;
                     break;
-
                 case 211:
                     input_queue_.push_back(std::make_pair(msg.id, 211));
                     std::cout << "Client " << msg.id << " release left." << std::endl;
                     break;
-
                 case 221:
                     input_queue_.push_back(std::make_pair(msg.id, 221));
                     std::cout << "Client " << msg.id << " release down." << std::endl;
                     break;
-
                 case 231:
                     input_queue_.push_back(std::make_pair(msg.id, 231));
                     std::cout << "Client " << msg.id << " release right." << std::endl;
                     break;
-
                 case 301:
                     input_queue_.push_back(std::make_pair(msg.id, 301));
                     std::cout << "Client " << msg.id << " release shoot." << std::endl;
                     break;
-
                 default:
                     std::cerr << "Unknown message data: " << msg.data << std::endl;
                     break;
