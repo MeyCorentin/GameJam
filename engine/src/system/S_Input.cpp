@@ -224,7 +224,7 @@ void S_Input::SpecialShot(
             }
         }
         if (weapon_player->getValue() == 26) {
-            createEntity(arg_all_entities, arg_sprites, arg_textures, 33, position_comp);
+            // createEntity(arg_all_entities, arg_sprites, arg_textures, 33, position_comp);
             createEntity(arg_all_entities, arg_sprites, arg_textures, weapon_player->getValue(), position_comp);
         }
     }
