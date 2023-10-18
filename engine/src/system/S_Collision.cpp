@@ -40,6 +40,7 @@ void S_Collision::Execute(
     std::shared_ptr<C_BonusPower<int>> power_2;
     std::shared_ptr<C_Weapon<int>> weapon_1;
     std::shared_ptr<C_Weapon<int>> weapon_2;
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities;
     float x1;
     float y1;
     float x2;
@@ -55,7 +56,7 @@ void S_Collision::Execute(
         power_1 = entity1->template GetComponent<C_BonusPower<int>>();
         weapon_1 = entity1->template GetComponent<C_Weapon<int>>();
         x1 = static_cast<float>(position_comp_1->getValue().first);
-        y1 = static_cast<float>(position_comp_1->getValue().second);
+        y1 = static_cast<float>(position_comp_1->getValue().second);        
         for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
             if (entity1 == entity2)
                 continue;
@@ -77,7 +78,7 @@ void S_Collision::Execute(
                 y1 < y2 + hitbox_comp_2->getValue().second &&
                 y1 + hitbox_comp_1->getValue().second > y2) {
                     if (is_player && is_player_ammo_2 && follow) {
-                        std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+                        vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
                         if (!follow->getValue()) {
                             vector_entities->getValue().push_back(entity2);
                             follow->getValue() = true;
