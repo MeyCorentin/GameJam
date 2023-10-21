@@ -43,6 +43,6 @@ std::vector<std::shared_ptr<System>> SceneBuilder::GetSystems()
 
 Scene SceneBuilder::Build() {
     std::cout << "[BUILDER] Scene build" << std::endl;
-    Scene scene(systems_, entities_, sprites_, textures_, music_, spawn_index_);
+    Scene scene(systems_, entities_, sprites_, music_, spawn_index_);
     return scene;
 }

@@ -35,4 +35,6 @@ public:
     static Variant ParseSoundBufferValue(const json& arg_value);
 
     static Variant ParseStringValue(const json& arg_value);
+
+    static Variant ParseTextureValue(const json& arg_value);
 };

@@ -5,13 +5,11 @@ Scene::Scene() {}
 Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
         std::vector<std::shared_ptr<Entity>> arg_entity_list,
         std::vector<sf::Sprite> arg_sprite_list,
-        std::vector<std::shared_ptr<sf::Texture>> arg_texture_list,
         std::vector<std::shared_ptr<sf::Music>> arg_music_list,
         std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index) :
     systems_(arg_system_list),
     list_entities_(arg_entity_list),
     sprites_(arg_sprite_list),
-    textures_(arg_texture_list),
     musics_(arg_music_list),
     spawn_index_(arg_spawn_index)  {
         window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(384, 256), "R-Type"));
@@ -156,7 +154,7 @@ void Scene::Update(int arg_is_server)
     this->ClearWindow();
 
     for (const auto& system : systems_)
-        system->Compute(arg_is_server, entities_, window_, inputs_, sprites_, textures_, musics_, event_);
+        system->Compute(arg_is_server, entities_, window_, inputs_, musics_, event_);
 
     for (const auto& spawn_info : spawn_index_)
     {

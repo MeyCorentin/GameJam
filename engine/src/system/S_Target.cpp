@@ -17,8 +17,6 @@ void S_Target::Execute(
         std::shared_ptr<sf::RenderWindow> arg_window,
         std::vector<int> arg_input,
         std::vector<std::shared_ptr<Entity>>& arg_all_Entities,
-        std::vector<sf::Sprite>& arg_sprites,
-        std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
         std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
         std::shared_ptr<sf::Event> event_) {
     int current_mana;
@@ -91,7 +89,7 @@ void S_Target::Execute(
                     length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
                     if (length > range->getValue())
                         continue;
-                    new_entity = input.CreateEntityFromConfig(entity_config, data["components"], arg_sprites, arg_textures);
+                    new_entity = input.CreateEntityFromConfig(entity_config, data["components"]);
                     direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
                     if (!direction_new || !position_new)

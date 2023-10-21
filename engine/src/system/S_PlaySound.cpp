@@ -19,8 +19,6 @@ void S_PlaySound::Execute(
         std::shared_ptr<sf::RenderWindow> arg_window,
         std::vector<int> arg_inputs,
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-        std::vector<sf::Sprite>& arg_sprites,
-        std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
         std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
         std::shared_ptr<sf::Event> event_)  {
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
