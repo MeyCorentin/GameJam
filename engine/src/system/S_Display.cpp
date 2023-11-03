@@ -34,7 +34,7 @@ void S_Display::Execute(
         texture_comp = entity->template GetComponent<C_Texture<sf::Texture>>();
         if (texture_comp)
         {
-            std::cout << "(+)" << std::endl;
+            // std::cout << "(+)" << std::endl;
             const sf::Texture* texture = sprite_comp->getValue().getTexture();
             if (texture == nullptr)
             {
@@ -57,7 +57,7 @@ void S_Display::Execute(
         texture_comp = entity->template GetComponent<C_Texture<sf::Texture>>();
         if (texture_comp)
         {
-            std::cout << "(+)" << std::endl;
+            // std::cout << "(+)" << std::endl;
             const sf::Texture* texture = sprite_comp->getValue().getTexture();
             if (texture == nullptr)
             {

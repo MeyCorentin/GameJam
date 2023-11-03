@@ -11,10 +11,17 @@
 #include "../components/C_Bonus.hpp"
 #include "../components/C_Weapon.hpp"
 #include "../components/C_BonusPower.hpp"
+#include "../components/C_PositionFollow.hpp"
+#include "S_Input.hpp"
 
 class S_Collision : public System {
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+
+        std::shared_ptr<Entity> reCreateEntity(
+                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+                int id,
+                std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp);
 
         void Execute(
                 int arg_is_server,
