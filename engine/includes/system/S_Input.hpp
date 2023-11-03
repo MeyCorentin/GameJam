@@ -64,7 +64,9 @@ class S_Input : public System {
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 const std::shared_ptr<Entity>& entity,
-                std::vector<std::shared_ptr<Entity>>& entity_list);
+                std::vector<std::shared_ptr<Entity>>& entity_list,
+                sf::Font arg_font,
+                sf::Text arg_entity_id);
 
         void ChangeAdminMode(
                 const std::shared_ptr<Entity>& entity,

@@ -6,12 +6,14 @@ Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
         std::vector<std::shared_ptr<Entity>> arg_entity_list,
         std::vector<sf::Sprite> arg_sprite_list,
         std::vector<std::shared_ptr<sf::Music>> arg_music_list,
-        std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index) :
+        std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index,
+        std::vector<std::pair<int,int>> arg_jump_index) :
     systems_(arg_system_list),
     list_entities_(arg_entity_list),
     sprites_(arg_sprite_list),
     musics_(arg_music_list),
-    spawn_index_(arg_spawn_index)  {
+    spawn_index_(arg_spawn_index),
+    jump_index_(arg_jump_index)  {
         window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(384, 256), "R-Type"));
         frames_this_second_ = 0;
         total_ticks_ = 0;
@@ -233,6 +235,11 @@ void Scene::Update(int arg_is_server)
                     clock_basic->getValue().restart();
             }
         }
+    }
+    for (const auto& jump_info : jump_index_)
+    {
+        if (jump_info.first == total_ticks_)
+            total_ticks_ = jump_info.second;
     }
     DisplayTicks();
     DisplayEntities(entities_.size());

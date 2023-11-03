@@ -117,6 +117,8 @@ std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> Sc
         int tick = spawn_entry.at("tick").get<int>();
         std::vector<std::pair<int, std::pair<int, int>> > entities;
 
+        if (spawn_entry.find("mob_id") == spawn_entry.end())
+            continue;
         for (const auto& entity : spawn_entry.at("mob_id"))
         {
             int id_value = entity.at("entity_id").get<int>();
@@ -137,6 +139,25 @@ std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> Sc
     }
     return map;
 }
+
+
+std::vector<std::pair<int,int>> SceneDirector::CreateJump(const json& arg_spawn_config)
+{
+    std::vector<std::pair<int, int>> jump;
+    for (const auto& spawn_entry : arg_spawn_config)
+    {
+
+
+        if (spawn_entry.find("jump") == spawn_entry.end())
+            continue;
+        int tick = spawn_entry.at("tick").get<int>();
+        int jump_value = spawn_entry.at("jump").get<int>();
+
+        jump.push_back(std::make_pair(tick, jump_value));
+    }
+    return jump;
+}
+
 
 SceneDirector::SceneDirector() {}
 
@@ -162,6 +183,7 @@ SceneDirector::SceneDirector(std::string arg_file_path, int value) {
     }
 
     scene_builder_.AddSpawnIndex(CreateMap(data["spawn"]));
+    scene_builder_.AddJumpIndex(CreateJump(data["spawn"]));
 }
 
 Scene SceneDirector::ConstructScene() {
