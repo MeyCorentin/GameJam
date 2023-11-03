@@ -202,7 +202,6 @@ void UDPServer::send_to_last(BinaryProtocole::BinaryMessage msg)
     }
 }
 
-
 UDPServer::~UDPServer()
 {
     this->socket_.close();
