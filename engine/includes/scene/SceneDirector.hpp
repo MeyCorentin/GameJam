@@ -14,6 +14,7 @@ class SceneDirector {
     public:
 
         std::shared_ptr<System> CreateSystemFromConfig(const json& arg_systemConfig);
+        std::shared_ptr<System> CreateSystemFromType(std::string arg_type);
 
         const json& FindComponentConfigById(
                 const json& arg_componentsConfig,

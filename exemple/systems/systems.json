@@ -2,59 +2,59 @@
     "systems": [
         {
             "id": 4,
-            "type": "InputSystem"
+            "path": "s_input.json"
         },
         {
             "id": 2,
-            "type": "PositionSystem"
+            "path": "s_position.json"
         },
         {
             "id": 8,
-            "type" : "S_Animation"
+            "path": "s_animation.json"
         },
         {
             "id": 3,
-            "type": "DisplaySystem"
+            "path": "s_display.json"
         },
         {
             "id": 5,
-            "type": "ManaSystem"
+            "path": "s_mana.json"
         },
         {
             "id": 6,
-            "type": "CollisionSystem"
+            "path": "s_collision.json"
         },
         {
             "id": 7,
-            "type" : "MouvementSystem"
+            "path": "s_mouvement.json"
         },
         {
             "id": 9,
-            "type" : "S_Target"
+            "path": "s_target.json"
         },
         {
             "id": 10,
-            "type" : "KillEntity"
+            "path": "s_killentity.json"
         },
         {
             "id": 11,
-            "type" : "ParallaxSystem"
+            "path": "s_parallax.json"
         },
         {
             "id": 12,
-            "type" : "SinMoovSystem"
+            "path": "s_sinmoov.json"
         },
         {
             "id": 13,
-            "type": "MakeBaby"
+            "path": "s_makebaby.json"
         },
         {
             "id": 14,
-            "type": "PlaySound"
+            "path": "s_playsound.json"
         },
         {
             "id": 15,
-            "type": "PlayMusic"
+            "path": "s_PlayMusic.json"
         }
     ]
 }

@@ -78,7 +78,7 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("ParallaxClock", []() { return std::make_shared<C_ParallaxClock<sf::Clock>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
-    SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);
+    SceneDirector SceneDirector("../../exemple", arg_is_server);
 
     scene_ = SceneDirector.ConstructScene();
 }

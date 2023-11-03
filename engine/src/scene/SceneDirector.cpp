@@ -8,6 +8,11 @@ std::shared_ptr<System> SceneDirector::CreateSystemFromConfig(const json& arg_sy
     return SystemRegistry::Instance().CreateSystem(type);
 }
 
+std::shared_ptr<System> SceneDirector::CreateSystemFromType(std::string arg_type)
+{
+    return SystemRegistry::Instance().CreateSystem(arg_type);
+}
+
 const json& SceneDirector::FindComponentConfigById(
         const json& arg_componentsConfig,
         int arg_id) {
@@ -159,31 +164,122 @@ std::vector<std::pair<int,int>> SceneDirector::CreateJump(const json& arg_spawn_
 }
 
 
+bool checkRequiredFilesExist(const std::string& arg_folder_path) {
+    std::filesystem::path folder_path(arg_folder_path);
+
+    // Check if the required folders and files exist
+    if (!std::filesystem::exists(folder_path / "scenes/scene_start" / "timeline.json")) {
+        std::cout << "Missing file: scenes/scene_start/timeline.json" << std::endl;
+        return false;
+    }
+    if (!std::filesystem::exists(folder_path / "scenes/scene_start" / "systems.json")) {
+        std::cout << "Missing file: scenes/scene_start/systems.json" << std::endl;
+        return false;
+    }
+    if (!std::filesystem::exists(folder_path / "entities" / "entities.json")) {
+        std::cout << "Missing file: entities/entities.json" << std::endl;
+        return false;
+    }
+    if (!std::filesystem::exists(folder_path / "systems" / "systems.json")) {
+        std::cout << "Missing file: systems/systems.json" << std::endl;
+        return false;
+    }
+    if (!std::filesystem::exists(folder_path / "components" / "components.json")) {
+        std::cout << "Missing file: components/components.json" << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
 SceneDirector::SceneDirector() {}
 
 SceneDirector::SceneDirector(std::string arg_file_path, int value) {
-    std::ifstream file(arg_file_path);
-    json data;
+    if (checkRequiredFilesExist(arg_file_path))
+    {
 
-    file >> data;
-    file.close();
-    std::cout << "------[LOAD SYSTEMS]-------" << std::endl;
-    for (const auto& system_config : data["systems"])
-        scene_builder_.AddSystem(CreateSystemFromConfig(system_config));
-    std::cout << "------[LOAD ENTITIES]-------" << std::endl;
-    for (const auto& entity_config : data["entities"]) {
-        std::shared_ptr<Entity> new_entity = CreateEntityFromConfig(entity_config, data["components"]);
-        if (new_entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
-            new_entity->HasComponent(typeid(C_Sprite<sf::Sprite>))) {
-            std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
-            std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
-            sprite->getValue().setTextureRect(rect->getValue());
+        std::cout << "------[LOAD SYSTEMS]-------" << std::endl;
+        std::string systemsFilePath = arg_file_path + "/scenes/scene_start/systems.json";
+        std::ifstream file(systemsFilePath);
+        json systems_needed;
+        file >> systems_needed;
+        file.close();
+        for (const auto& systemId : systems_needed["systems"]) {
+            std::string systemsJsonPath = arg_file_path + "/systems/systems.json";
+            std::ifstream systemsJsonFile(systemsJsonPath);
+            if (systemsJsonFile.is_open()) {
+                json systemsJsonData;
+                systemsJsonFile >> systemsJsonData;
+                systemsJsonFile.close();
+                for (const auto& system : systemsJsonData["systems"]) {
+                    if (system["id"] == systemId) {
+                        std::string systemPath = system["path"];
+                        json type;
+                        std::string systemsFinalJsonPath = arg_file_path + "/systems/" + systemPath;
+                        std::ifstream systemsFinalJsonFile(systemsFinalJsonPath);
+                        if (systemsFinalJsonFile.is_open())
+                        {
+                            systemsFinalJsonFile >> type;
+                            systemsFinalJsonFile.close();
+                            std::cout << "ID: " << systemId << ", Path: " << systemPath << ", Type: " << type["type"]  << std::endl;
+                            scene_builder_.AddSystem(CreateSystemFromType(type["type"]));
+                        }
+                        break;
+                    }
+                }
+            }
         }
-        scene_builder_.AddEntity(new_entity);
-    }
 
-    scene_builder_.AddSpawnIndex(CreateMap(data["spawn"]));
-    scene_builder_.AddJumpIndex(CreateJump(data["spawn"]));
+        std::cout << "------[LOAD ENTITIES]-------" << std::endl;
+
+        std::string systemsFilePath = arg_file_path + "/scenes/scene_start/systems.json";
+        std::ifstream file(systemsFilePath);
+        json systems_needed;
+        file >> systems_needed;
+        file.close();
+
+        std::string timelineFilePath = arg_file_path + "/scenes/scene_start/timeline.json";
+        std::ifstream file_timeline(timelineFilePath);
+        json timelineData;
+        file_timeline >> timelineData;
+        file_timeline.close();
+
+        // Extraction des entity_id uniques
+        std::set<int> uniqueEntityIds;
+        for (const auto& spawnObject : timelineData["spawn"]) {
+            std::cout << "test" << std::endl;
+            // if (spawnObject.is_object() && spawnObject.contains("mob_id") && spawnObject["mob_id"].is_array()) {
+            //     const auto& mobIdArray = spawnObject["mob_id"];
+            //     for (const auto& entityObject : mobIdArray) {
+            //         if (entityObject.is_object() && entityObject.contains("entity_id") && entityObject["entity_id"].is_number()) {
+            //             uniqueEntityIds.insert(entityObject["entity_id"].get<int>());
+            //         }
+            //     }
+            // }
+        }
+
+        // Affichage des entity_id uniques
+        std::cout << "Unique Entity IDs:" << std::endl;
+        for (const auto& entityId : uniqueEntityIds) {
+            std::cout << entityId << std::endl;
+        }
+
+
+        // std::cout << "------[LOAD ENTITIES]-------" << std::endl;
+        // for (const auto& entity_config : data["entities"]) {
+        //     std::shared_ptr<Entity> new_entity = CreateEntityFromConfig(entity_config, data["components"]);
+        //     if (new_entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
+        //         new_entity->HasComponent(typeid(C_Sprite<sf::Sprite>))) {
+        //         std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+        //         std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
+        //         sprite->getValue().setTextureRect(rect->getValue());
+        //     }
+        //     scene_builder_.AddEntity(new_entity);
+        // }
+
+        // scene_builder_.AddSpawnIndex(CreateMap(data["spawn"]));
+        // scene_builder_.AddJumpIndex(CreateJump(data["spawn"]));
+    }
 }
 
 Scene SceneDirector::ConstructScene() {
