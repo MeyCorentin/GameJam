@@ -59,7 +59,10 @@ class Scene {
 
         void AddNewPlayer(int arg_id);
 
-    void InputFromPlayer(std::pair<int,int> arg_message);
 
-    void Update(int arg_is_server);
+        std::vector<EntityPosition> GetPlayerPosition();
+
+        void InputFromPlayer(std::pair<int,int> arg_message);
+
+        void Update(int arg_is_server);
 };

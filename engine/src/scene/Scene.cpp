@@ -107,6 +107,22 @@ void Scene::AddNewPlayer(int arg_id)
 }
 
 
+std::vector<EntityPosition> Scene::GetPlayerPosition()
+{
+    std::vector<EntityPosition> positions;
+    for (const auto& entity : entities_) {
+        std::shared_ptr<C_Player<int>> index = entity->template GetComponent<C_Player<int>>();
+        std::shared_ptr<C_Position<std::pair<double, double>>> position_comp =  entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        if (index && position_comp) {
+            EntityPosition pos;
+            pos.id = index->getValue();
+            pos.x_position = position_comp->getValue().first;
+            pos.y_position = position_comp->getValue().second;
+            positions.push_back(pos);
+        }
+    }
+    return positions;
+}
 void Scene::InputFromPlayer(std::pair<int,int> arg_message)
 {
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
