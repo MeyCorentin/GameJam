@@ -26,6 +26,7 @@ void UDPServer::run_server(Ecs &ecs)
         {
             ecs.scene_.AddNewPlayer(clients_.size());
             std::vector<EntityPosition> player_position_list = ecs.scene_.GetPlayerPosition();
+            std::vector<EntityPosition> entity_position_list = ecs.scene_.GetEntityPosition();
             BinaryProtocole::BinaryMessage msg_new_player = {1, static_cast<uint32_t>(clients_.size()), 1920, 1080, 100};
             send_to_all(msg_new_player);
             connected_client++;

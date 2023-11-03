@@ -102,6 +102,7 @@ void S_Target::Execute(
                     }
                     position_new->setValue(std::make_pair(position_comp_1->getValue().first, position_comp_1->getValue().second));
                     direction_new->setValue(std::make_pair(direction.first /= length, direction.second /= length));
+                    new_entity->SetId(-1);
                     temp_entities.push_back(new_entity);
                     fire_rate->getValue().restart();
                 }
