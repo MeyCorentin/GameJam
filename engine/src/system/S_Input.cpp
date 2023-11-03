@@ -8,7 +8,7 @@ std::vector<std::shared_ptr<Entity>> S_Input::Filter(const std::vector<std::shar
             entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
             entity->HasComponent(typeid(C_IsMoving<bool>)) &&
             entity->HasComponent(typeid(C_Admin<bool>)) &&
-            entity->HasComponent(typeid(C_Weapon<int>)) &&
+            entity->HasComponent(typeid(C_Weapon<std::pair<int, int>>)) &&
             entity->HasComponent(typeid(C_ChargedShoot<sf::Clock>))
             ) {
             filtered_entities.push_back(entity);
@@ -264,17 +264,43 @@ void S_Input::SpecialShot(
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
 
     //Player attacks
-    std::shared_ptr<C_Weapon<int>> weapon_player = entity->template GetComponent<C_Weapon<int>>();
-    if (weapon_player->getValue() != -1) {
-        if (weapon_player->getValue() == 25) {
-            for (int i = 0; i < 1; i++) { //TODO Set to 5
-                createEntity(arg_all_entities, weapon_player->getValue(), position_comp);
-                createEntity(arg_all_entities, 32, position_comp); //TODO Change that
+    std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon_player = entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+
+    std::list<int> my_list_1 = {22, 23, 24};
+    std::list<int> my_list_2 = {38, 39, 40};
+
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+        if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
+            std::cout << "In first if" << std::endl;
+            std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            if (weapon->getValue().first != -1) {
+                if (weapon->getValue().first == 25) {
+                    for (int i = 0; i < 1; i++) { //TODO Set to 5
+                        createEntity(arg_all_entities, weapon->getValue().first, position_force);
+                        createEntity(arg_all_entities, 32, position_force); //TODO Change that
+                    }
+                }
+                if (weapon->getValue().first == 26) {
+                    createEntity(arg_all_entities, weapon->getValue().first, position_force);
+                }
             }
         }
-        if (weapon_player->getValue() == 26) {
-            createEntity(arg_all_entities, 33, position_comp);
-            createEntity(arg_all_entities, weapon_player->getValue(), position_comp);
+        if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+            std::cout << "In second if" << std::endl;
+            std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            if (weapon->getValue().second != -1) {
+                if (weapon->getValue().second == 32) {
+                    for (int i = 0; i < 1; i++) { //TODO Set to 5
+                        createEntity(arg_all_entities, weapon->getValue().second, position_force);
+                        createEntity(arg_all_entities, 25, position_force); //TODO Change that
+                    }
+                }
+                if (weapon->getValue().second == 43) {
+                    createEntity(arg_all_entities, weapon->getValue().second, position_force);
+                }
+            }
         }
     }
 
@@ -282,10 +308,10 @@ void S_Input::SpecialShot(
     for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
         if (v_entity->GetId() == 27)
             v_entity->is_dead_ = true;
-        if ((v_entity->GetId() == 4  || v_entity->GetId() == 29) && weapon_player->getValue() == 26) {
+        if ((v_entity->GetId() == 4  || v_entity->GetId() == 29) && weapon_player->getValue().first == 26) {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-            std::shared_ptr<C_Weapon<int>> weapon = v_entity->template GetComponent<C_Weapon<int>>();
-            createEntity(arg_all_entities, weapon->getValue(), position_drone);
+            std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+            createEntity(arg_all_entities, weapon->getValue().first, position_drone);
         }
     }
 }

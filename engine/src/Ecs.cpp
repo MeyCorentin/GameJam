@@ -66,9 +66,9 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("PositionStart", []() { return std::make_shared<C_PositionStart<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("PositionFollow", []() { return std::make_shared<C_PositionFollow<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Inventory", []() { return std::make_shared<C_Inventory<std::vector<std::shared_ptr<Entity>>>>(); });
-    ComponentRegistry::Instance().RegisterComponent("Weapon", []() { return std::make_shared<C_Weapon<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Weapon", []() { return std::make_shared<C_Weapon<std::pair<int, int>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Bonus", []() { return std::make_shared<C_Bonus<bool>>(); });
-    ComponentRegistry::Instance().RegisterComponent("BonusPower", []() { return std::make_shared<C_BonusPower<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("BonusPower", []() { return std::make_shared<C_BonusPower<std::pair<int, int>>>(); });
     ComponentRegistry::Instance().RegisterComponent("PositionShot", []() { return std::make_shared<C_PositionShot<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Sound", []() { return std::make_shared<C_Sound<sf::Sound>>(); });
     ComponentRegistry::Instance().RegisterComponent("SoundBuffer", []() { return std::make_shared<C_SoundBuffer<sf::SoundBuffer>>(); });
