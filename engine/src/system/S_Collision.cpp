@@ -13,6 +13,29 @@ std::vector<std::shared_ptr<Entity>> S_Collision::Filter(const std::vector<std::
     return filtered_entities;
 }
 
+std::shared_ptr<Entity> S_Collision::reCreateEntity(
+        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+        int id,
+        std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp) {
+    std::shared_ptr<Entity> new_entity;
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
+    std::string filepath = "../../rtype/scene_test.json";
+    std::ifstream file(filepath);
+    json data;
+    S_Input input;
+
+    file >> data;
+    file.close();
+    std::cout << "Before for" << std::endl;
+    for (const auto& entity_config : data["entities"]) {
+        if (entity_config["id"] == id) {
+            new_entity = input.CreateEntityFromConfig(entity_config, data["components"]);
+            arg_all_entities.push_back(new_entity);
+        }
+    }
+    return new_entity;
+}
+
 void S_Collision::Execute(
         int arg_is_server,
         std::vector<std::shared_ptr<Entity>>& arg_entities,
@@ -32,6 +55,7 @@ void S_Collision::Execute(
     std::shared_ptr<C_PlayerAmmo<bool>> is_player_ammo_2;
     std::shared_ptr<C_Bonus<bool>> is_bonus_2;
     std::shared_ptr<C_Follow<bool>> follow;
+    std::shared_ptr<C_Follow<bool>> new_follow;
     std::shared_ptr<C_Life<int>> life_1;
     std::shared_ptr<C_Life<int>> life_2;
     std::shared_ptr<C_BonusPower<int>> power_1;
@@ -39,6 +63,7 @@ void S_Collision::Execute(
     std::shared_ptr<C_Weapon<int>> weapon_1;
     std::shared_ptr<C_Weapon<int>> weapon_2;
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities;
+    std::shared_ptr<Entity> new_entity;
     float x1;
     float y1;
     float x2;
@@ -78,8 +103,14 @@ void S_Collision::Execute(
                     if (is_player && is_player_ammo_2 && follow) {
                         vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
                         if (!follow->getValue()) {
-                            vector_entities->getValue().push_back(entity2);
-                            follow->getValue() = true;
+                            if (x2 - x1 > 0)
+                                new_entity = reCreateEntity(arg_all_entities, 22, position_comp_2);
+                            else
+                                new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
+                            entity2->is_dead_ = true;
+                            vector_entities->getValue().push_back(new_entity);
+                            new_follow = new_entity->template GetComponent<C_Follow<bool>>();
+                            new_follow->getValue() = true;
                         }
                     }
                     if ((is_player && is_player_2) ||
