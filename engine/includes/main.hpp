@@ -28,6 +28,13 @@ struct SinusoidalFunction {
     double phase;
 };
 
+struct EntityPosition  {
+    int id;
+    int base_id;
+    float x_position;
+    float y_position;
+};
+
 using Variant = std::variant<
                 sf::Sprite,
                 sf::Texture,

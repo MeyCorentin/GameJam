@@ -5,6 +5,7 @@
 class Entity {
     public:
         int id_;
+        int base_id_;
         bool is_dead_ = false;;
         std::vector<std::shared_ptr<ComponentBase>> components_;
         Entity(int arg_id, std::vector<std::shared_ptr<ComponentBase>> arg_components);
@@ -14,6 +15,10 @@ class Entity {
         int GetId();
 
         void SetId(int arg_id);
+
+        int GetBaseId();
+
+        void SetBaseId(int arg_id);
 
         std::shared_ptr<Entity> Clone() const;
 

@@ -13,6 +13,7 @@ void UDPServer::run_server(Ecs &ecs)
     int temp_index;
     int temp_value;
     int connected_client = 0;
+    int loop_client = 0;
     while (true)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
@@ -24,9 +25,22 @@ void UDPServer::run_server(Ecs &ecs)
         if (connected_client < clients_.size())
         {
             ecs.scene_.AddNewPlayer(clients_.size());
-            BinaryProtocole::BinaryMessage msg = {1, static_cast<uint32_t>(clients_.size()), 1920, 1080, 100};
-            send_to_all(msg);
+            std::vector<EntityPosition> player_position_list = ecs.scene_.GetPlayerPosition();
+            std::cout << "-- PLAYER POSITION --" << std::endl;
+            for (const auto& position : player_position_list)
+                std::cout  << position.id << " | " << position.base_id << " | " << position.x_position << " | " << position.y_position << std::endl;
+            std::cout << "-- ENTITY POSITION --" << std::endl;
+            std::vector<EntityPosition> entity_position_list = ecs.scene_.GetEntityPosition();
+            for (const auto& position : entity_position_list)
+                std::cout << position.id << " | " << position.base_id << " | " << position.x_position << " | "<< position.y_position << std::endl;
+            BinaryProtocole::BinaryMessage msg_new_player = {1, static_cast<uint32_t>(clients_.size()), 1920, 1080, 100};
+            send_to_all(msg_new_player);
             connected_client++;
+            for (loop_client = 0; loop_client != connected_client - 1; loop_client++)
+            {
+                BinaryProtocole::BinaryMessage msg_create_player = {1, static_cast<uint32_t>(loop_client), 1920, 1080, 100};
+                send_to_last(msg_create_player);
+            }
         }
         if (!input_queue_.empty())
         {
@@ -174,6 +188,17 @@ void UDPServer::send_to_all(BinaryProtocole::BinaryMessage msg)
     {
         if (id != msg.id)
             this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), client_endpoint);
+    }
+}
+
+void UDPServer::send_to_last(BinaryProtocole::BinaryMessage msg)
+{
+    std::cout << "SEND TO LAST : " << msg.data << std::endl;
+    if (!clients_.empty())
+    {
+        auto last_client = clients_.rbegin();
+        if (last_client->second != msg.id)
+            this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), last_client->first);
     }
 }
 

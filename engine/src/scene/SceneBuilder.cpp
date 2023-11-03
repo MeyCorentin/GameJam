@@ -16,6 +16,13 @@ SceneBuilder& SceneBuilder::AddSpawnIndex(std::vector<std::pair<int, std::vector
     return *this;
 }
 
+
+SceneBuilder& SceneBuilder::AddJumpIndex(std::vector<std::pair<int,int>> arg_jump_index) {
+    jump_index_ = arg_jump_index;
+    return *this;
+}
+
+
 SceneBuilder& SceneBuilder::AddSprite(sf::Sprite arg_sprite) {
     sprites_.push_back(arg_sprite);
     return *this;
@@ -43,6 +50,6 @@ std::vector<std::shared_ptr<System>> SceneBuilder::GetSystems()
 
 Scene SceneBuilder::Build() {
     std::cout << "[BUILDER] Scene build" << std::endl;
-    Scene scene(systems_, entities_, sprites_, music_, spawn_index_);
+    Scene scene(systems_, entities_, sprites_, music_, spawn_index_, jump_index_);
     return scene;
 }

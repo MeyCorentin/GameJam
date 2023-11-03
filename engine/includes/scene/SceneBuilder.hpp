@@ -14,6 +14,7 @@ class SceneBuilder {
         std::vector<std::shared_ptr<sf::Texture>> textures_;
         std::vector<std::shared_ptr<sf::Music>> music_;
         std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> spawn_index_;
+        std::vector<std::pair<int, int>> jump_index_;
         std::string path_;
 
     public:
@@ -22,6 +23,8 @@ class SceneBuilder {
         SceneBuilder& AddEntity(std::shared_ptr<Entity> arg_entity);
 
         SceneBuilder& AddSpawnIndex(std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index);
+
+        SceneBuilder& AddJumpIndex(std::vector<std::pair<int,int>> arg_jump_index) ;
 
         SceneBuilder& AddSprite(sf::Sprite arg_sprite);
 

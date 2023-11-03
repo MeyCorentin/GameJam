@@ -164,7 +164,7 @@ void UDPClient::read_data()
             switch (msg.data)
             {
                 case 100:
-                        input_queue_.push_back(std::make_pair(msg.id, 100));
+                    input_queue_.push_back(std::make_pair(msg.id, 100));
                     break;
                 case 200:
                     input_queue_.push_back(std::make_pair(msg.id, 200));

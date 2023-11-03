@@ -34,6 +34,8 @@ class SceneDirector {
 
         std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> CreateMap(const json& arg_spawn_config);
 
+        std::vector<std::pair<int,int>> CreateJump(const json& arg_spawn_config);
+
         SceneDirector();
 
         SceneDirector(std::string arg_file_path, int value);

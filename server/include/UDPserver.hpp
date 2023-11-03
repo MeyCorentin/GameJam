@@ -19,6 +19,7 @@ class UDPServer {
         void start();
         void send(BinaryProtocole::BinaryMessage msg);
         void send_to_all(BinaryProtocole::BinaryMessage msg);
+        void send_to_last(BinaryProtocole::BinaryMessage msg);
         void start_listening();
 
     private:

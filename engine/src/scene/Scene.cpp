@@ -6,12 +6,14 @@ Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
         std::vector<std::shared_ptr<Entity>> arg_entity_list,
         std::vector<sf::Sprite> arg_sprite_list,
         std::vector<std::shared_ptr<sf::Music>> arg_music_list,
-        std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index) :
+        std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index,
+        std::vector<std::pair<int,int>> arg_jump_index) :
     systems_(arg_system_list),
     list_entities_(arg_entity_list),
     sprites_(arg_sprite_list),
     musics_(arg_music_list),
-    spawn_index_(arg_spawn_index)  {
+    spawn_index_(arg_spawn_index),
+    jump_index_(arg_jump_index)  {
         window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(384, 256), "R-Type"));
         frames_this_second_ = 0;
         total_ticks_ = 0;
@@ -107,6 +109,43 @@ void Scene::AddNewPlayer(int arg_id)
 }
 
 
+std::vector<EntityPosition> Scene::GetPlayerPosition()
+{
+    std::vector<EntityPosition> positions;
+    for (const auto& entity : entities_) {
+        std::shared_ptr<C_Player<int>> index = entity->template GetComponent<C_Player<int>>();
+        std::shared_ptr<C_Position<std::pair<double, double>>> position_comp =  entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        if (index && position_comp) {
+            EntityPosition pos;
+            pos.id = index->getValue();
+            pos.base_id = entity->GetBaseId();
+            pos.x_position = position_comp->getValue().first;
+            pos.y_position = position_comp->getValue().second;
+            positions.push_back(pos);
+        }
+    }
+    return positions;
+}
+
+
+std::vector<EntityPosition> Scene::GetEntityPosition()
+{
+    std::vector<EntityPosition> positions;
+    for (const auto& entity : entities_) {
+        std::shared_ptr<C_Player<int>> index = entity->template GetComponent<C_Player<int>>();
+        std::shared_ptr<C_Position<std::pair<double, double>>> position_comp =  entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        if (!index && position_comp) {
+            EntityPosition pos;
+            pos.id = entity->GetId();
+            pos.base_id = entity->GetBaseId();
+            pos.x_position = position_comp->getValue().first;
+            pos.y_position = position_comp->getValue().second;
+            positions.push_back(pos);
+        }
+    }
+    return positions;
+}
+
 void Scene::InputFromPlayer(std::pair<int,int> arg_message)
 {
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
@@ -156,6 +195,11 @@ void Scene::Update(int arg_is_server)
     for (const auto& system : systems_)
         system->Compute(arg_is_server, entities_, window_, inputs_, musics_, event_);
 
+    for (const auto& entity : entities_)
+    {
+        if (entity->GetId() == -1)
+            entity->SetId(id_store_++);
+    }
     for (const auto& spawn_info : spawn_index_)
     {
         if (spawn_info.first != total_ticks_)
@@ -177,6 +221,8 @@ void Scene::Update(int arg_is_server)
                 std::shared_ptr<C_SinClock<sf::Clock>> sin_clock;
                 std::shared_ptr<C_Clock<sf::Clock>> clock_basic;
                 entities_.push_back(std::make_shared<Entity>(*entity));
+                entities_.back()->SetId(id_store_++);
+                entities_.back()->SetBaseId(entity->GetId());
                 position = entities_.back()->template GetComponent<C_Position<std::pair<double,double>>>();
                 position->setValue(std::make_pair(x,y));
 
@@ -189,6 +235,11 @@ void Scene::Update(int arg_is_server)
                     clock_basic->getValue().restart();
             }
         }
+    }
+    for (const auto& jump_info : jump_index_)
+    {
+        if (jump_info.first == total_ticks_)
+            total_ticks_ = jump_info.second;
     }
     DisplayTicks();
     DisplayEntities(entities_.size());

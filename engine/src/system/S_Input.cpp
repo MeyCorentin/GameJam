@@ -128,6 +128,21 @@ std::shared_ptr<Entity> S_Input::createEntity(
     return new_entity;
 }
 
+void DrawEntityID(
+    std::shared_ptr<sf::RenderWindow> arg_window,
+    const std::shared_ptr<Entity>& entity,
+    sf::Font arg_font,
+    sf::Text arg_entity_id) {
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+    if (position_comp)
+    {
+        arg_entity_id.setPosition(position_comp->getValue().first, position_comp->getValue().second);
+        arg_entity_id.setString(std::to_string(entity->GetId()));
+        arg_window->draw(arg_entity_id);
+    }
+}
+
+
 void DrawEntityHitbox(
     std::shared_ptr<sf::RenderWindow> arg_window,
     const std::shared_ptr<Entity>& entity,
@@ -148,7 +163,9 @@ void S_Input::Move(
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp, 
     std::shared_ptr<sf::RenderWindow> arg_window,
     const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_entities)
+    std::vector<std::shared_ptr<Entity>>& arg_entities,
+    sf::Font arg_font,
+    sf::Text arg_entity_id)
 {
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
 
@@ -194,6 +211,7 @@ void S_Input::Move(
                 outlineColor = sf::Color::Red;
             }
             DrawEntityHitbox(arg_window, entity, outlineColor);
+            DrawEntityID(arg_window, entity, arg_font, arg_entity_id);
         }
 
     }
@@ -368,6 +386,12 @@ void S_Input::Execute(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
         std::shared_ptr<sf::Event> event_)  {
+    sf::Font font_arg_;
+    font_arg_.loadFromFile("../../rtype/sources/fonts/arial.ttf");
+    sf::Text entity_id;
+    entity_id.setFillColor(sf::Color::Magenta);
+    entity_id.setCharacterSize(10);
+    entity_id.setFont(font_arg_);
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
@@ -383,6 +407,6 @@ void S_Input::Execute(
             CheckTouchPressed(entity, arg_all_entities, position_comp, event_);
             CheckTouchReleased(entity, arg_all_entities, position_comp, event_);
         }
-        Move(position_comp, arg_window, entity, arg_all_entities);
+        Move(position_comp, arg_window, entity, arg_all_entities, font_arg_, entity_id);
     }
 }

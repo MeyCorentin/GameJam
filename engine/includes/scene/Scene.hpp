@@ -21,6 +21,7 @@ class Scene {
         std::vector<sf::Sprite> sprites_;
         std::vector<std::shared_ptr<sf::Music>> musics_;
         std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> spawn_index_;
+        std::vector<std::pair<int,int>> jump_index_;
         int frames_this_second_;
         int total_ticks_;
         std::unordered_map<sf::Keyboard::Key, int> key_states_;
@@ -33,7 +34,7 @@ class Scene {
         int time_pressed_;
         bool is_pressed_ = false;
         std::vector<int> inputs_ = {0, 0, 0, 0, 0};
-
+        int id_store_ = 0;
     public:
         bool running = true;
         double targetFrameTime = (1.0 / 60);
@@ -42,7 +43,8 @@ class Scene {
                 std::vector<std::shared_ptr<Entity>> arg_entity_list,
                 std::vector<sf::Sprite> arg_sprite_list,
                 std::vector<std::shared_ptr<sf::Music>> arg_music_list,
-                std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index);
+                std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index,
+                std::vector<std::pair<int,int>> arg_jump_index);
 
         void ClearWindow();
 
@@ -59,7 +61,11 @@ class Scene {
 
         void AddNewPlayer(int arg_id);
 
-    void InputFromPlayer(std::pair<int,int> arg_message);
+        std::vector<EntityPosition> GetPlayerPosition();
 
-    void Update(int arg_is_server);
+        std::vector<EntityPosition> GetEntityPosition();
+
+        void InputFromPlayer(std::pair<int,int> arg_message);
+
+        void Update(int arg_is_server);
 };
