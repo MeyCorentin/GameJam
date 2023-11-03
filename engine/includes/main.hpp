@@ -30,6 +30,7 @@ struct SinusoidalFunction {
 
 struct EntityPosition  {
     int id;
+    int base_id;
     float x_position;
     float y_position;
 };

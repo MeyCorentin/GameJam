@@ -116,6 +116,7 @@ std::vector<EntityPosition> Scene::GetPlayerPosition()
         if (index && position_comp) {
             EntityPosition pos;
             pos.id = index->getValue();
+            pos.base_id = entity->GetBaseId();
             pos.x_position = position_comp->getValue().first;
             pos.y_position = position_comp->getValue().second;
             positions.push_back(pos);
@@ -134,6 +135,7 @@ std::vector<EntityPosition> Scene::GetEntityPosition()
         if (!index && position_comp) {
             EntityPosition pos;
             pos.id = entity->GetId();
+            pos.base_id = entity->GetBaseId();
             pos.x_position = position_comp->getValue().first;
             pos.y_position = position_comp->getValue().second;
             positions.push_back(pos);
@@ -218,6 +220,7 @@ void Scene::Update(int arg_is_server)
                 std::shared_ptr<C_Clock<sf::Clock>> clock_basic;
                 entities_.push_back(std::make_shared<Entity>(*entity));
                 entities_.back()->SetId(id_store_++);
+                entities_.back()->SetBaseId(entity->GetId());
                 position = entities_.back()->template GetComponent<C_Position<std::pair<double,double>>>();
                 position->setValue(std::make_pair(x,y));
 
