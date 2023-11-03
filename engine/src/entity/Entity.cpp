@@ -22,6 +22,15 @@ void Entity::SetId(int arg_id) {
     id_ = arg_id;
 }
 
+
+int Entity::GetBaseId() {
+    return base_id_;
+}
+
+void Entity::SetBaseId(int arg_id) {
+    base_id_ = arg_id;
+}
+
 std::shared_ptr<Entity> Entity::Clone() const {
     return std::make_shared<Entity>(*this);
 }
