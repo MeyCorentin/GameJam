@@ -33,7 +33,7 @@ class Scene {
         int time_pressed_;
         bool is_pressed_ = false;
         std::vector<int> inputs_ = {0, 0, 0, 0, 0};
-
+        int id_store_ = 0;
     public:
         bool running = true;
         double targetFrameTime = (1.0 / 60);
@@ -59,8 +59,9 @@ class Scene {
 
         void AddNewPlayer(int arg_id);
 
-
         std::vector<EntityPosition> GetPlayerPosition();
+
+        std::vector<EntityPosition> GetEntityPosition();
 
         void InputFromPlayer(std::pair<int,int> arg_message);
 

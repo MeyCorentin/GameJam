@@ -123,6 +123,25 @@ std::vector<EntityPosition> Scene::GetPlayerPosition()
     }
     return positions;
 }
+
+
+std::vector<EntityPosition> Scene::GetEntityPosition()
+{
+    std::vector<EntityPosition> positions;
+    for (const auto& entity : entities_) {
+        std::shared_ptr<C_Player<int>> index = entity->template GetComponent<C_Player<int>>();
+        std::shared_ptr<C_Position<std::pair<double, double>>> position_comp =  entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        if (!index && position_comp) {
+            EntityPosition pos;
+            pos.id = entity->GetId();
+            pos.x_position = position_comp->getValue().first;
+            pos.y_position = position_comp->getValue().second;
+            positions.push_back(pos);
+        }
+    }
+    return positions;
+}
+
 void Scene::InputFromPlayer(std::pair<int,int> arg_message)
 {
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
@@ -172,6 +191,11 @@ void Scene::Update(int arg_is_server)
     for (const auto& system : systems_)
         system->Compute(arg_is_server, entities_, window_, inputs_, musics_, event_);
 
+    for (const auto& entity : entities_)
+    {
+        if (entity->GetId() == -1)
+            entity->SetId(id_store_++);
+    }
     for (const auto& spawn_info : spawn_index_)
     {
         if (spawn_info.first != total_ticks_)
@@ -193,6 +217,7 @@ void Scene::Update(int arg_is_server)
                 std::shared_ptr<C_SinClock<sf::Clock>> sin_clock;
                 std::shared_ptr<C_Clock<sf::Clock>> clock_basic;
                 entities_.push_back(std::make_shared<Entity>(*entity));
+                entities_.back()->SetId(id_store_++);
                 position = entities_.back()->template GetComponent<C_Position<std::pair<double,double>>>();
                 position->setValue(std::make_pair(x,y));
 
