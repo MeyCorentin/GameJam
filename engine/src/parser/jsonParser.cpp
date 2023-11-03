@@ -3,10 +3,8 @@
 
 JsonParser::JsonParser() {}
 
-Variant JsonParser::ParseSpriteValue(const json& arg_value) {
-    sf::Sprite sprite;
+Variant JsonParser::ParseTextureValue(const json& arg_value) {
     sf::Texture texture;
-    std::shared_ptr<sf::Texture> texture_ptr;
 
     if (!arg_value.is_string()) {
         std::cerr << "Invalid value for Sprite type." << std::endl;
@@ -16,9 +14,12 @@ Variant JsonParser::ParseSpriteValue(const json& arg_value) {
         std::cerr << "Failed to load texture for sprite." << std::endl;
         return Variant();
     }
-    texture_ptr = std::make_shared<sf::Texture>(texture);
-    sprite.setTexture(*texture_ptr);
-    return std::make_pair(texture_ptr, sprite);
+    return texture;
+}
+
+Variant JsonParser::ParseSpriteValue(const json& arg_value) {
+    sf::Sprite sprite;
+    return sprite;
 }
 
 Variant JsonParser::ParseIntValue(const json& arg_value) {
@@ -158,6 +159,8 @@ Variant JsonParser::ParseStringValue(const json& arg_value) {
 Variant JsonParser::ParseValue(const std::string& arg_value_type, const json& arg_value) {
     if (arg_value_type == "Sprite") {
         return ParseSpriteValue(arg_value);
+    } else if (arg_value_type == "Texture") {
+        return ParseTextureValue(arg_value);
     } else if (arg_value_type == "Int") {
         return ParseIntValue(arg_value);
     } else if (arg_value_type == "PairDouble") {
@@ -181,9 +184,9 @@ Variant JsonParser::ParseValue(const std::string& arg_value_type, const json& ar
     } else if (arg_value_type == "Sound") {
         return ParseSoundValue(arg_value);
     } else if (arg_value_type == "SoundBuffer") {
-        return ParseSoundBufferValue(arg_value);    
+        return ParseSoundBufferValue(arg_value);
     } else if (arg_value_type == "String") {
-        return ParseStringValue(arg_value);    
+        return ParseStringValue(arg_value);
     } else {
         std::cerr << "Unsupported value type: " << arg_value_type << std::endl;
     }

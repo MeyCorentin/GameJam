@@ -40,20 +40,14 @@ class S_Input : public System {
                 const json& arg_entityComponent,
                 const json& arg_componentConfig,
                 JsonParser& arg_parser,
-                EntityBuilder& arg_entityBuilder,
-                std::vector<sf::Sprite>& sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& textures);
+                EntityBuilder& arg_entityBuilder);
 
         std::shared_ptr<Entity> CreateEntityFromConfig(
                 const json& arg_entity_config,
-                const json& arg_components_config,
-                std::vector<sf::Sprite>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures);
+                const json& arg_components_config);
 
         std::shared_ptr<Entity> createEntity(
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<sf::Sprite>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 int id,
                 std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp);
 
@@ -63,8 +57,6 @@ class S_Input : public System {
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_inputs,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<sf::Sprite>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
                 std::shared_ptr<sf::Event> event_) override;
 
@@ -73,7 +65,7 @@ class S_Input : public System {
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& entity_list);
-        
+
         void ChangeAdminMode(
                 const std::shared_ptr<Entity>& entity,
                 std::shared_ptr<sf::Event> event_);
@@ -81,31 +73,23 @@ class S_Input : public System {
         void CheckTouchPressed(
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<sf::Sprite>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 std::shared_ptr<sf::Event> event_);
 
         void CheckTouchReleased(
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<sf::Sprite>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 std::shared_ptr<sf::Event> event_);
 
         void BasicShot(
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<sf::Sprite>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp);
 
         void SpecialShot(
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<sf::Sprite>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp);
 
 };

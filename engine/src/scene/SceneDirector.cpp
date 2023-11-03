@@ -35,11 +35,10 @@ bool SceneDirector::ProcessComponent(
         return false;
     std::cout << " - " << component_name << std::endl;
     if (value_type == "Sprite") {
-        auto all_ptr = std::get<std::pair<std::shared_ptr<sf::Texture>, sf::Sprite>>(value);
-        scene_builder_.AddSprite( all_ptr.second);
-        scene_builder_.AddTexture(all_ptr.first);
-        arg_entity_builder.AddComponent(component,  all_ptr.second);
-    } else if (value_type == "Int") {
+        arg_entity_builder.AddComponent(component,  std::get<sf::Sprite>(value));
+    } else if (value_type == "Texture") {
+        arg_entity_builder.AddComponent(component, std::get<sf::Texture>(value));
+    }  else if (value_type == "Int") {
         arg_entity_builder.AddComponent(component, std::get<int>(value));
     } else if (value_type == "PairDouble") {
         arg_entity_builder.AddComponent(component, std::get<std::pair<double, double>>(value));

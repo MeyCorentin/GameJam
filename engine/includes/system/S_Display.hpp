@@ -2,6 +2,7 @@
 #include "../components/C_Sprite.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_Background.hpp"
+#include "../components/C_Texture.hpp"
 
 /**
  * @class S_Display
@@ -42,8 +43,6 @@ class S_Display : public System {
      * @param arg_window A shared pointer to the rendering window.
      * @param arg_inputs A list of input values.
      * @param arg_all_entities A list of all entities in the system.
-     * @param arg_sprites A list of sprite objects.
-     * @param arg_textures A list of texture objects.
      * @param event_ A shared pointer to the event object.
      */
         void Execute(
@@ -52,8 +51,6 @@ class S_Display : public System {
                 std::shared_ptr<sf::RenderWindow> arg_window,
                 std::vector<int> arg_inputs,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<sf::Sprite>& arg_sprites,
-                std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
                 std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
                 std::shared_ptr<sf::Event> event_) override;
 };

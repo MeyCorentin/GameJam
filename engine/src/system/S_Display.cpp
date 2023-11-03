@@ -18,11 +18,10 @@ void S_Display::Execute(
         std::shared_ptr<sf::RenderWindow> arg_window,
         std::vector<int> arg_inputs,
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-        std::vector<sf::Sprite>& arg_sprites,
-        std::vector<std::shared_ptr<sf::Texture>>& arg_textures,
         std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
         std::shared_ptr<sf::Event> event_) {
-    sf::Sprite sprite_comp;
+    std::shared_ptr<C_Sprite<sf::Sprite>>sprite_comp;
+    std::shared_ptr<C_Texture<sf::Texture>>texture_comp;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
     std::shared_ptr<C_Background<bool>> is_background;
     float x_position;
@@ -31,23 +30,43 @@ void S_Display::Execute(
         is_background = entity->template GetComponent<C_Background<bool>>();
         if (!is_background)
             continue;
-        sprite_comp = entity->template GetComponent<C_Sprite<sf::Sprite>>()->getValue();
+        sprite_comp = entity->template GetComponent<C_Sprite<sf::Sprite>>();
+        texture_comp = entity->template GetComponent<C_Texture<sf::Texture>>();
+        if (texture_comp)
+        {
+            std::cout << "(+)" << std::endl;
+            const sf::Texture* texture = sprite_comp->getValue().getTexture();
+            if (texture == nullptr)
+            {
+                sprite_comp->getValue().setTexture(texture_comp->getValue());
+            }
+        }
         position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         x_position = static_cast<float>(position_comp->getValue().first);
         y_position = static_cast<float>(position_comp->getValue().second);
-        sprite_comp.setPosition(x_position, y_position);
-        arg_window->draw(sprite_comp);
+        sprite_comp->getValue().setPosition(x_position, y_position);
+        arg_window->draw(sprite_comp->getValue());
     }
 
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         is_background = entity->template GetComponent<C_Background<bool>>();
         if (is_background)
             continue;
-        sprite_comp = entity->template GetComponent<C_Sprite<sf::Sprite>>()->getValue();
+        sprite_comp = entity->template GetComponent<C_Sprite<sf::Sprite>>();
         position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        texture_comp = entity->template GetComponent<C_Texture<sf::Texture>>();
+        if (texture_comp)
+        {
+            std::cout << "(+)" << std::endl;
+            const sf::Texture* texture = sprite_comp->getValue().getTexture();
+            if (texture == nullptr)
+            {
+                sprite_comp->getValue().setTexture(texture_comp->getValue());
+            }
+        }
         x_position = static_cast<float>(position_comp->getValue().first);
         y_position = static_cast<float>(position_comp->getValue().second);
-        sprite_comp.setPosition(x_position, y_position);
-        arg_window->draw(sprite_comp);
+        sprite_comp->getValue().setPosition(x_position, y_position);
+        arg_window->draw(sprite_comp->getValue());
     }
 }

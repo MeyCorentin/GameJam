@@ -29,7 +29,8 @@ struct SinusoidalFunction {
 };
 
 using Variant = std::variant<
-                std::pair<std::shared_ptr<sf::Texture>, sf::Sprite>,
+                sf::Sprite,
+                sf::Texture,
                 int, 
                 std::pair<double, double>, 
                 std::pair<int, int>, 
