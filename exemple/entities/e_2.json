@@ -1,0 +1,92 @@
+{
+    "components": [
+        {
+            "component_id": 1,
+            "value": "../../sprites/red_enemy.gif"
+        },
+        {
+            "component_id": 50,
+            "value": "../../sprites/red_enemy.gif"
+        },
+        {
+            "component_id": 2,
+            "value": 1
+        },
+        {
+            "component_id": 3,
+            "value": { "x": 1000, "y": 500 }
+        },
+        {
+            "component_id": 5,
+            "value": 0
+        },
+        {
+            "component_id": 6,
+            "value": { "x": 32, "y": 31 }
+        },
+        {
+            "component_id": 7,
+            "value": { "x": 1, "y": 0.2}
+        },
+        {
+            "component_id": 8,
+            "value": 0
+        },
+        {
+            "component_id": 11,
+            "value": 0
+        },
+        {
+            "component_id": 12,
+            "value": { "left": 0, "top": 4, "width": 33, "height": 31}
+        },
+        {
+            "component_id": 13,
+            "value": { "x": 264, "y": 31, "start_x": 0, "start_y": 4}
+        },
+        {
+            "component_id": 14,
+            "value": true
+        },
+        {
+            "component_id": 16,
+            "value": true
+        },
+        {
+            "component_id": 17,
+            "value": 1
+        },
+        {
+            "component_id": 19,
+            "value": 0
+        },
+        {
+            "component_id": 20,
+            "value": 0.5
+        },
+        {
+            "component_id": 21,
+            "value": 500
+        },
+        {
+            "component_id": 23,
+            "value": -1
+        },
+        {
+            "component_id": 27,
+            "value": { "a": 2.5, "f": 0.2, "p": 0}
+        },
+        {
+            "component_id": 28,
+            "value": 0
+        },
+        {
+            "component_id": 32,
+            "value": 17
+        },
+        {
+            "component_id": 33,
+            "value": false
+        }
+    ]
+}

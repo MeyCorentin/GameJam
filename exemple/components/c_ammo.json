@@ -1,4 +1,5 @@
+
 {
-    "type": "Player",
+    "type": "Ammo",
     "value_type": "Int"
 }

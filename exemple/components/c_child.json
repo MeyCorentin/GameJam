@@ -1,4 +1,5 @@
+
 {
-    "type": "Player",
+    "type": "Child",
     "value_type": "Int"
 }

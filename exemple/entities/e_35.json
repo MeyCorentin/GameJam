@@ -1,0 +1,50 @@
+{"components": [
+    {
+        "component_id": 1,
+        "value": "../../sprites/grey_man.png"
+    },
+    {
+        "component_id": 2,
+        "value": 1
+    },
+    {
+        "component_id": 3,
+        "value": { "x": 0, "y": 0 }
+    },
+    {
+        "component_id": 6,
+        "value": { "x": 45, "y": 43 }
+    },
+    {
+        "component_id": 11,
+        "value": 0
+    },
+    {
+        "component_id": 12,
+        "value": { "left": 0, "top": 0, "width": 45, "height": 43}
+    },
+    {
+        "component_id": 13,
+        "value": { "x": 45, "y": 43, "start_x": 0, "start_y": 0}
+    },
+    {
+        "component_id": 14,
+        "value": true
+    },
+    {
+        "component_id": 27,
+        "value": { "a": 3, "f": 0.5, "p": 0}
+    },
+    {
+        "component_id": 28,
+        "value": 0
+    },
+    {
+        "component_id": 32,
+        "value": 34
+    },
+    {
+        "component_id": 33,
+        "value": false
+    }
+]}

@@ -1,0 +1,94 @@
+{"components": [
+    {
+        "component_id": 1,
+        "value": "../../sprites/space_ship.gif"
+    },
+    {
+        "component_id": 50,
+        "value": "../../sprites/space_ship.gif"
+    },
+    {
+        "component_id": 2,
+        "value": 1
+    },
+    {
+        "component_id": 3,
+        "value": { "x": 125, "y": 125 }
+    },
+    {
+        "component_id": 4,
+        "value": 0
+    },
+    {
+        "component_id": 5,
+        "value": 0
+    },
+    {
+        "component_id": 6,
+        "value": { "x": 35, "y": 20 }
+    },
+    {
+        "component_id": 9,
+        "value": true
+    },
+    {
+        "component_id": 11,
+        "value": 0
+    },
+    {
+        "component_id": 12,
+        "value": { "left": 67, "top": 0, "width": 33, "height": 18}
+    },
+    {
+        "component_id": 13,
+        "value": { "x": 33, "y": 18, "start_x": 67, "start_y": 0}
+    },
+    {
+        "component_id": 14,
+        "value": true
+    },
+    {
+        "component_id": 24,
+        "value": 0
+    },
+    {
+        "component_id": 25,
+        "value": false
+    },
+    {
+        "component_id": 26,
+        "value": false
+    },
+    {
+        "component_id": 31,
+        "value": false
+    },
+    {
+        "component_id": 32,
+        "value": 16
+    },
+    {
+        "component_id": 33,
+        "value": false
+    },
+    {
+        "component_id": 37,
+        "value": false
+    },
+    {
+        "component_id": 39,
+        "value": []
+    },
+    {
+        "component_id": 40,
+        "value": -1
+    },
+    {
+        "component_id": 47,
+        "value": "../../sounds/stage_1.ogg"
+    },
+    {
+        "component_id": 48,
+        "value": false
+    }
+]}

@@ -1,0 +1,50 @@
+{"components": [
+    {
+        "component_id": 1,
+        "value": "../../sprites/bonus.png"
+    },
+    {
+        "component_id": 50,
+        "value": "../../sprites/bonus.png"
+    },
+    {
+        "component_id": 2,
+        "value": 1
+    },
+    {
+        "component_id": 3,
+        "value": { "x": 150, "y": 5 }
+    },
+    {
+        "component_id": 6,
+        "value": { "x": 25, "y": 23}
+    },
+    {
+        "component_id": 12,
+        "value": { "left": 0, "top": 0, "width": 25, "height": 23}
+    },
+    {
+        "component_id": 13,
+        "value": { "x": 25, "y": 23, "start_x": 0, "start_y": 0}
+    },
+    {
+        "component_id": 14,
+        "value": true
+    },
+    {
+        "component_id": 23,
+        "value": -1
+    },
+    {
+        "component_id": 49,
+        "value": 0
+    },
+    {
+        "component_id": 42,
+        "value": true
+    },
+    {
+        "component_id": 43,
+        "value": 26
+    }
+]}

@@ -1,4 +1,5 @@
+
 {
-    "type": "Player",
+    "type": "Parallax",
     "value_type": "Int"
 }

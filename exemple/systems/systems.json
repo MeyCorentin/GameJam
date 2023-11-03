@@ -1,32 +1,60 @@
 {
     "systems": [
         {
-            "id" : 1,
-            "path" : "s_collision.json"
+            "id": 4,
+            "type": "InputSystem"
         },
         {
-            "id" : 2,
-            "path" : "s_display.json"
+            "id": 2,
+            "type": "PositionSystem"
         },
         {
-            "id" : 3,
-            "path" : "s_hit.json"
+            "id": 8,
+            "type" : "S_Animation"
         },
         {
-            "id" : 4,
-            "path" : "s_input.json"
+            "id": 3,
+            "type": "DisplaySystem"
         },
         {
-            "id" : 5,
-            "path" : "s_mana.json"
+            "id": 5,
+            "type": "ManaSystem"
         },
         {
-            "id" : 6,
-            "path" : "s_mouvement.json"
+            "id": 6,
+            "type": "CollisionSystem"
         },
         {
-            "id" : 7,
-            "path" : "s_position.json"
+            "id": 7,
+            "type" : "MouvementSystem"
+        },
+        {
+            "id": 9,
+            "type" : "S_Target"
+        },
+        {
+            "id": 10,
+            "type" : "KillEntity"
+        },
+        {
+            "id": 11,
+            "type" : "ParallaxSystem"
+        },
+        {
+            "id": 12,
+            "type" : "SinMoovSystem"
+        },
+        {
+            "id": 13,
+            "type": "MakeBaby"
+        },
+        {
+            "id": 14,
+            "type": "PlaySound"
+        },
+        {
+            "id": 15,
+            "type": "PlayMusic"
         }
     ]
 }

@@ -1,0 +1,54 @@
+{"components": [
+    {
+        "component_id": 1,
+        "value": "../../sprites/robot.gif"
+    },
+    {
+        "component_id": 50,
+        "value": "../../sprites/robot.gif"
+    },
+    {
+        "component_id": 2,
+        "value": 1
+    },
+    {
+        "component_id": 3,
+        "value": { "x": 0, "y": 0 }
+    },
+    {
+        "component_id": 6,
+        "value": { "x": 33, "y": 34 }
+    },
+    {
+        "component_id": 11,
+        "value": 0
+    },
+    {
+        "component_id": 12,
+        "value": { "left": 0, "top": 0, "width": 33, "height": 34}
+    },
+    {
+        "component_id": 13,
+        "value": { "x": 99, "y": 34, "start_x": 0, "start_y": 0}
+    },
+    {
+        "component_id": 14,
+        "value": true
+    },
+    {
+        "component_id": 27,
+        "value": { "a": 2, "f": 3, "p": 0}
+    },
+    {
+        "component_id": 28,
+        "value": 0
+    },
+    {
+        "component_id": 32,
+        "value": 17
+    },
+    {
+        "component_id": 33,
+        "value": false
+    }
+]}

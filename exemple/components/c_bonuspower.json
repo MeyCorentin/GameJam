@@ -1,4 +1,5 @@
+
 {
-    "type": "Player",
+    "type": "BonusPower",
     "value_type": "Int"
 }
