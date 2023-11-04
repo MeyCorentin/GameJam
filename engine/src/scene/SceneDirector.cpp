@@ -80,10 +80,6 @@ std::shared_ptr<Entity> SceneDirector::CreateEntityFromConfig(
     EntityBuilder entity_builder(entity_id);
     const json& entity_components = arg_entity_config["components"];
 
-<<<<<<< HEAD
-=======
-    // std::cout << "Create Entity: " << entity_id << std::endl;
->>>>>>> 91132ef80ce82ca2b12423a7c533c33f5949ce86
     for (const auto& entity_component : entity_components) {
         component_id = entity_component["component_id"];
         const json& component_config = FindComponentConfigById(arg_components_config, component_id);
