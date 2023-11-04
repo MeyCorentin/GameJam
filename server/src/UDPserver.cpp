@@ -16,7 +16,7 @@ void UDPServer::run_server(Ecs &ecs)
 
     std::thread send_positions_thread([&]() {
         while (true) {
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
             send_player_positions(ecs);
         }
     });
