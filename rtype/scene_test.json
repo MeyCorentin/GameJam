@@ -292,6 +292,11 @@
             "id": 50,
             "type": "Texture",
             "value_type": "Texture"
+        },
+        {
+            "id": 51,
+            "type": "Invincibility",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -632,6 +637,10 @@
                 {
                     "component_id": 40,
                     "value": {"x": 30, "y": 41}
+                },
+                {
+                    "component_id": 51,
+                    "value": true
                 }
             ]
         },
@@ -1614,6 +1623,10 @@
                 {
                     "component_id": 40,
                     "value": {"x": -1, "y": -1}
+                },
+                {
+                    "component_id": 51,
+                    "value": true
                 }
             ]
         },
@@ -1679,6 +1692,10 @@
                 {
                     "component_id": 40,
                     "value": {"x": -1, "y": -1}
+                },
+                {
+                    "component_id": 51,
+                    "value": true
                 }
             ]
         },
@@ -1744,6 +1761,10 @@
                 {
                     "component_id": 40,
                     "value": {"x": -1, "y": -1}
+                },
+                {
+                    "component_id": 51,
+                    "value": true
                 }
             ]
         },
@@ -2053,6 +2074,10 @@
                 {
                     "component_id": 40,
                     "value": {"x": 31, "y": 42}
+                },
+                {
+                    "component_id": 51,
+                    "value": true
                 }
             ]
         },
@@ -2578,6 +2603,10 @@
                 {
                     "component_id": 40,
                     "value": {"x": -1, "y": -1}
+                },
+                {
+                    "component_id": 51,
+                    "value": true
                 }
             ]
         },
@@ -2643,6 +2672,10 @@
                 {
                     "component_id": 40,
                     "value": {"x": -1, "y": -1}
+                },
+                {
+                    "component_id": 51,
+                    "value": true
                 }
             ]
         },
@@ -2708,6 +2741,10 @@
                 {
                     "component_id": 40,
                     "value": {"x": -1, "y": -1}
+                },
+                {
+                    "component_id": 51,
+                    "value": true
                 }
             ]
         },

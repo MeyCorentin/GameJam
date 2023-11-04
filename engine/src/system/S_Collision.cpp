@@ -68,6 +68,8 @@ void S_Collision::Execute(
     std::shared_ptr<Entity> new_entity;
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities_1;
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities_2;
+    std::shared_ptr<C_Invincibility<bool>> is_invincible_1;
+    std::shared_ptr<C_Invincibility<bool>> is_invincible_2;
     float x1;
     float y1;
     float x2;
@@ -85,6 +87,7 @@ void S_Collision::Execute(
         x1 = static_cast<float>(position_comp_1->getValue().first);
         y1 = static_cast<float>(position_comp_1->getValue().second);
         vector_entities_1 = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+        is_invincible_1 = entity1->template GetComponent<C_Invincibility<bool>>();
         for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
             if (entity1 == entity2)
                 continue;
@@ -100,6 +103,7 @@ void S_Collision::Execute(
             x2 = static_cast<float>(position_comp_2->getValue().first);
             y2 = static_cast<float>(position_comp_2->getValue().second);
             vector_entities_2 = entity2->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+            is_invincible_2 = entity2->template GetComponent<C_Invincibility<bool>>();
             if (!position_comp_2 || !hitbox_comp_2)
                 continue;
             if (x1 < x2 + hitbox_comp_2->getValue().first &&
@@ -163,6 +167,15 @@ void S_Collision::Execute(
                     }
                     if ((!is_player && !is_player_2 && !is_player_ammo && !is_player_ammo_2 && !is_bonus && !is_bonus_2))
                         continue;
+
+                    if (is_player_ammo && is_invincible_1) {
+                        entity2->is_dead_ = true;
+                    }
+
+                    if (is_player_ammo_2 && is_invincible_2) {
+                        entity1->is_dead_ = true;
+                    }
+
                     if (life_1->getValue() != 0)
                         life_1->setValue(life_1->getValue() - 1);
                     if (life_2->getValue() != 0)

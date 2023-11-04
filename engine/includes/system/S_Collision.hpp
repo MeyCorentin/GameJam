@@ -12,6 +12,7 @@
 #include "../components/C_Weapon.hpp"
 #include "../components/C_BonusPower.hpp"
 #include "../components/C_PositionFollow.hpp"
+#include "../components/C_Invincibility.hpp"
 #include "S_Input.hpp"
 
 class S_Collision : public System {
