@@ -373,6 +373,27 @@ void S_Input::CheckTouchPressed(
     }
 }
 
+void S_Input::DropForce(
+    const std::shared_ptr<Entity>& entity)
+{
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+
+    std::list<int> my_list_1 = {22, 23, 24};
+    std::list<int> my_list_2 = {38, 39, 40};
+
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+        if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end()) || (std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+            std::shared_ptr<C_ClockAutoMove<sf::Clock>> clock = v_entity->template GetComponent<C_ClockAutoMove<sf::Clock>>();
+            std::shared_ptr<C_IsAutoMove<bool>> is_auto_move = v_entity->template GetComponent<C_IsAutoMove<bool>>();
+            std::shared_ptr<C_Follow<bool>> is_follow = v_entity->template GetComponent<C_Follow<bool>>();
+
+            is_follow->getValue() = false;
+            is_auto_move->getValue() = true;
+            clock->getValue().restart();
+        }
+    }    
+}
+
 void S_Input::CheckTouchReleased(
     const std::shared_ptr<Entity>& entity,
     std::vector<std::shared_ptr<Entity>>& arg_all_entities,
@@ -407,6 +428,9 @@ void S_Input::CheckTouchReleased(
             BasicShot(entity, arg_all_entities, position_comp);
             SpecialShot(entity, arg_all_entities, position_comp);
             is_charging->getValue() = false;
+        }
+        if (event_->key.code == sf::Keyboard::D) {
+            DropForce(entity);
         }
         ChangeAdminMode(entity, event_);
     }

@@ -23,6 +23,10 @@
 #include "../components/C_Sound.hpp"
 #include "../components/C_SoundBuffer.hpp"
 #include "../components/C_Music.hpp"
+#include "../components/C_Follow.hpp"
+#include "../includes/components/C_TimeAutoMove.hpp"
+#include "../includes/components/C_ClockAutoMove.hpp"
+#include "../includes/components/C_IsAutoMove.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
 #include "../scene/ComponentRegister.hpp"
@@ -93,5 +97,8 @@ class S_Input : public System {
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp);
+
+        void DropForce(
+                const std::shared_ptr<Entity>& entity);
 
 };

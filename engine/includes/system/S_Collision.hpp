@@ -13,6 +13,10 @@
 #include "../components/C_BonusPower.hpp"
 #include "../components/C_PositionFollow.hpp"
 #include "../components/C_Invincibility.hpp"
+#include "../includes/components/C_TimeAutoMove.hpp"
+#include "../includes/components/C_ClockAutoMove.hpp"
+#include "../includes/components/C_IsAutoMove.hpp"
+
 #include "S_Input.hpp"
 
 class S_Collision : public System {

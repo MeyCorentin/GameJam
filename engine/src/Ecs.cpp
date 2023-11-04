@@ -27,6 +27,7 @@ void Ecs::Create(int arg_is_server)
     SystemRegistry::Instance().RegisterSystem("MakeBaby", []() { return std::make_shared<S_MakeBaby>(); });
     SystemRegistry::Instance().RegisterSystem("PlaySound", []() { return std::make_shared<S_PlaySound>(); });
     SystemRegistry::Instance().RegisterSystem("PlayMusic", []() { return std::make_shared<S_PlayMusic>(); });
+    SystemRegistry::Instance().RegisterSystem("AutoMove", []() { return std::make_shared<S_AutoMove>(); });
 
     ComponentRegistry::Instance().RegisterComponent("Texture", []() { return std::make_shared<C_Texture<sf::Texture>>(); });
     ComponentRegistry::Instance().RegisterComponent("Sprite", []() { return std::make_shared<C_Sprite<sf::Sprite>>(); });
@@ -77,6 +78,9 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("MusicIsActive", []() { return std::make_shared<C_MusicIsActive<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("ParallaxClock", []() { return std::make_shared<C_ParallaxClock<sf::Clock>>(); });
     ComponentRegistry::Instance().RegisterComponent("Invincibility", []() { return std::make_shared<C_Invincibility<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("TimeAutoMove", []() { return std::make_shared<C_TimeAutoMove<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("ClockAutoMove", []() { return std::make_shared<C_ClockAutoMove<sf::Clock>>(); });
+    ComponentRegistry::Instance().RegisterComponent("IsAutoMove", []() { return std::make_shared<C_IsAutoMove<bool>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
     SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);

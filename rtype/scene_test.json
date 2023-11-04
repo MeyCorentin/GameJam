@@ -55,6 +55,10 @@
         {
             "id": 15,
             "type": "PlayMusic"
+        },
+        {
+            "id": 16,
+            "type": "AutoMove"
         }
     ],
     "components": [
@@ -297,6 +301,21 @@
             "id": 51,
             "type": "Invincibility",
             "value_type": "Bool"
+        },
+        {
+            "id": 52,
+            "type": "ClockAutoMove",
+            "value_type": "Clock"
+        },
+        {
+            "id": 53,
+            "type": "TimeAutoMove",
+            "value_type": "Int"
+        },
+        {
+            "id": 54,
+            "type": "IsAutoMove",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -313,7 +332,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 10000
+                    "value": 1
                 },
                 {
                     "component_id": 3,
@@ -1585,6 +1604,14 @@
                     "value": { "x": 24, "y": 18 }
                 },
                 {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0 }
+                },
+                {
+                    "component_id": 8,
+                    "value": 4
+                },
+                {
                     "component_id": 11,
                     "value": 0
                 },
@@ -1627,6 +1654,18 @@
                 {
                     "component_id": 51,
                     "value": true
+                },
+                {
+                    "component_id": 52,
+                    "value": 0
+                },
+                {
+                    "component_id": 53,
+                    "value": 1
+                },
+                {
+                    "component_id": 54,
+                    "value": false
                 }
             ]
         },
@@ -1652,6 +1691,14 @@
                 {
                     "component_id": 6,
                     "value": { "x": 30, "y": 18 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0 }
+                },
+                {
+                    "component_id": 8,
+                    "value": 4
                 },
                 {
                     "component_id": 11,
@@ -1696,6 +1743,18 @@
                 {
                     "component_id": 51,
                     "value": true
+                },
+                {
+                    "component_id": 52,
+                    "value": 0
+                },
+                {
+                    "component_id": 53,
+                    "value": 1
+                },
+                {
+                    "component_id": 54,
+                    "value": false
                 }
             ]
         },
@@ -1721,6 +1780,14 @@
                 {
                     "component_id": 6,
                     "value": { "x": 35, "y": 26 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": 1, "y": 0 }
+                },
+                {
+                    "component_id": 8,
+                    "value": 4
                 },
                 {
                     "component_id": 11,
@@ -1765,6 +1832,18 @@
                 {
                     "component_id": 51,
                     "value": true
+                },
+                {
+                    "component_id": 52,
+                    "value": 0
+                },
+                {
+                    "component_id": 53,
+                    "value": 1
+                },
+                {
+                    "component_id": 54,
+                    "value": false
                 }
             ]
         },
@@ -2565,6 +2644,14 @@
                     "value": { "x": 24, "y": 18 }
                 },
                 {
+                    "component_id": 7,
+                    "value": { "x": -1, "y": 0 }
+                },
+                {
+                    "component_id": 8,
+                    "value": 4
+                },
+                {
                     "component_id": 11,
                     "value": 0
                 },
@@ -2607,6 +2694,18 @@
                 {
                     "component_id": 51,
                     "value": true
+                },
+                {
+                    "component_id": 52,
+                    "value": 0
+                },
+                {
+                    "component_id": 53,
+                    "value": 1
+                },
+                {
+                    "component_id": 54,
+                    "value": false
                 }
             ]
         },
@@ -2632,6 +2731,15 @@
                 {
                     "component_id": 6,
                     "value": { "x": 30, "y": 18 }
+                },
+
+                {
+                    "component_id": 7,
+                    "value": { "x": -1, "y": 0 }
+                },
+                {
+                    "component_id": 8,
+                    "value": 4
                 },
                 {
                     "component_id": 11,
@@ -2676,6 +2784,18 @@
                 {
                     "component_id": 51,
                     "value": true
+                },
+                {
+                    "component_id": 52,
+                    "value": 0
+                },
+                {
+                    "component_id": 53,
+                    "value": 1
+                },
+                {
+                    "component_id": 54,
+                    "value": false
                 }
             ]
         },
@@ -2701,6 +2821,15 @@
                 {
                     "component_id": 6,
                     "value": { "x": 35, "y": 26 }
+                },
+
+                {
+                    "component_id": 7,
+                    "value": { "x": -1, "y": 0 }
+                },
+                {
+                    "component_id": 8,
+                    "value": 4
                 },
                 {
                     "component_id": 11,
@@ -2745,6 +2874,18 @@
                 {
                     "component_id": 51,
                     "value": true
+                },
+                {
+                    "component_id": 52,
+                    "value": 0
+                },
+                {
+                    "component_id": 53,
+                    "value": 1
+                },
+                {
+                    "component_id": 54,
+                    "value": false
                 }
             ]
         },

@@ -24,11 +24,18 @@ void S_Mouvement::Execute(
     std::shared_ptr<C_Direction<std::pair<double, double>>> direction;
     std::shared_ptr<C_Position<std::pair<double, double>>> position;
     std::shared_ptr<C_Speed<double>> speed;
+    std::shared_ptr<C_IsAutoMove<bool>> is_auto_move;
 
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         direction = entity->template GetComponent<C_Direction<std::pair<double, double>>>();
         position = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         speed = entity->template GetComponent<C_Speed<double>>();
+        is_auto_move = entity->template GetComponent<C_IsAutoMove<bool>>();
+
+        if (is_auto_move)
+            if (!is_auto_move->getValue())
+                continue;
+
         position->setValue(std::make_pair(  position->getValue().first + speed->getValue() * direction->getValue().first,
                                             position->getValue().second+ speed->getValue() * direction->getValue().second));
     }

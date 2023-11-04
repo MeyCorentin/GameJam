@@ -70,6 +70,7 @@ void S_Collision::Execute(
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities_2;
     std::shared_ptr<C_Invincibility<bool>> is_invincible_1;
     std::shared_ptr<C_Invincibility<bool>> is_invincible_2;
+    std::shared_ptr<C_IsAutoMove<bool>> is_auto_move;
     float x1;
     float y1;
     float x2;
@@ -104,6 +105,7 @@ void S_Collision::Execute(
             y2 = static_cast<float>(position_comp_2->getValue().second);
             vector_entities_2 = entity2->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
             is_invincible_2 = entity2->template GetComponent<C_Invincibility<bool>>();
+            is_auto_move = entity2->template GetComponent<C_IsAutoMove<bool>>();
             if (!position_comp_2 || !hitbox_comp_2)
                 continue;
             if (x1 < x2 + hitbox_comp_2->getValue().first &&
@@ -114,6 +116,9 @@ void S_Collision::Execute(
                     std::list<int> my_list = {22, 23, 24, 38, 39, 40};
 
                     if (is_player && is_player_ammo_2 && follow) {
+                        if (is_auto_move)
+                            if (is_auto_move->getValue())
+                                continue;
                         vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
                         if (!follow->getValue()) {
                             if ((std::find(my_list.begin(), my_list.end(), entity2->GetBaseId()) != my_list.end())) {
