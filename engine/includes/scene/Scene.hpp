@@ -10,6 +10,11 @@
 #include "../components/C_SpriteRect.hpp"
 #include "../components/C_Hitbox.hpp"
 #include "../components/C_Sprite.hpp"
+#include "../components/C_ShootCharging.hpp"
+#include "../components/C_Inventory.hpp"
+#include "../components/C_ChargedShoot.hpp"
+#include "../components/C_PositionShot.hpp"
+#include "../components/C_Target.hpp"
 
 class Scene {
     private:

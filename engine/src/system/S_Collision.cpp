@@ -59,6 +59,7 @@ void S_Collision::Execute(
     std::shared_ptr<C_Bonus<bool>> is_bonus_2;
     std::shared_ptr<C_Follow<bool>> follow;
     std::shared_ptr<C_Follow<bool>> new_follow;
+    std::shared_ptr<C_Target<int>> target;
     std::shared_ptr<C_Life<int>> life_1;
     std::shared_ptr<C_Life<int>> life_2;
     std::shared_ptr<C_BonusPower<std::pair<int, int>>> power_1;
@@ -137,6 +138,8 @@ void S_Collision::Execute(
                                     new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
                                 }
                                 new_follow = new_entity->template GetComponent<C_Follow<bool>>();
+                                target = new_entity->template GetComponent<C_Target<int>>();
+                                target->setValue(entity1->GetId());
                                 new_follow->getValue() = true;
 
                                 std::shared_ptr<C_Weapon<std::pair<int, int>>> old_weapon = entity2->template GetComponent<C_Weapon<std::pair<int, int>>>();
@@ -149,6 +152,8 @@ void S_Collision::Execute(
                                 entity2->is_dead_ = true;
                             } else {
                                 follow->getValue() = true;
+                                target = entity2->template GetComponent<C_Target<int>>();
+                                target->setValue(entity1->GetId());
                                 vector_entities->getValue().push_back(entity2);
                             }
                         }

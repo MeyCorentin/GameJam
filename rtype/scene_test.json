@@ -501,7 +501,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 19,
@@ -679,7 +679,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 25,
@@ -1194,7 +1194,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 19,
@@ -1769,7 +1769,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 25,
@@ -1862,7 +1862,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 25,
@@ -1955,7 +1955,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 25,
@@ -2174,7 +2174,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 33,
@@ -2308,7 +2308,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 25,
@@ -2893,7 +2893,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 25,
@@ -2987,7 +2987,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 25,
@@ -3081,7 +3081,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 1
+                    "value": 0
                 },
                 {
                     "component_id": 25,
@@ -3338,16 +3338,16 @@
             "tick" : 0,
             "mob_id": [
                 {
+                    "entity_id": 1,
+                    "position": { "x": 125, "y": 125 }
+                },
+                {
                     "entity_id": 4,
                     "position": { "x": 100, "y": 100 }
                 },
                 {
                     "entity_id": 22,
                     "position": { "x": 200, "y": 10 }
-                },
-                {
-                    "entity_id": 1,
-                    "position": { "x": 125, "y": 125 }
                 },
                 {
                     "entity_id": 13,

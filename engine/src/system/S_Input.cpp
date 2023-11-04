@@ -25,7 +25,7 @@ json S_Input::FindComponentConfigById(const json& arg_components_config, int arg
         if (component_config["id"] == arg_id)
             return component_config;
     return empty_json;
-}   
+}
 
 bool S_Input::ProcessComponent(
         const json& arg_entityComponent,
@@ -392,9 +392,8 @@ void S_Input::DropForce(
                 is_auto_move->getValue() = true;
                 clock->getValue().restart();
             }
-
         }
-    }    
+    }
 }
 
 void S_Input::CheckTouchReleased(
@@ -402,7 +401,7 @@ void S_Input::CheckTouchReleased(
     std::vector<std::shared_ptr<Entity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     std::shared_ptr<sf::Event> event_)
-{
+    {
     std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
     std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
     std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
