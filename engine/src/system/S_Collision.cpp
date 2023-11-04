@@ -32,6 +32,7 @@ std::shared_ptr<Entity> S_Collision::reCreateEntity(
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
+            new_entity->SetBaseId(entity_config["id"]);
             arg_all_entities.push_back(new_entity);
         }
     }
@@ -121,11 +122,16 @@ void S_Collision::Execute(
                                 continue;
                         vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
                         if (!follow->getValue()) {
+                            std::cout << "In follow : " << entity2->GetBaseId() << std::endl;
                             if ((std::find(my_list.begin(), my_list.end(), entity2->GetBaseId()) != my_list.end())) {
-                                if (x2 - x1 > 0)
+                                std::cout << "In first ifff" << std::endl;
+                                if (x2 - x1 > 0) {
+                                    std::cout << "In if" << std::endl;
                                     new_entity = reCreateEntity(arg_all_entities, 22, position_comp_2);
-                                else
+                                } else {
+                                    std::cout << "In else" << std::endl;
                                     new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
+                                }
                                 new_follow = new_entity->template GetComponent<C_Follow<bool>>();
                                 new_follow->getValue() = true;
                                 vector_entities->getValue().push_back(new_entity);
