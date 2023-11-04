@@ -268,6 +268,7 @@ void S_Input::SpecialShot(
 
     std::list<int> my_list_1 = {22, 23, 24};
     std::list<int> my_list_2 = {38, 39, 40};
+    std::list<int> my_list_3 = {4, 29};
 
     for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
         if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
@@ -303,13 +304,22 @@ void S_Input::SpecialShot(
     }
 
     //Drone attacks
-    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) { //Check if vector_entities contain a drone left or right
         if (v_entity->GetId() == 27)
             v_entity->is_dead_ = true;
-        if ((v_entity->GetBaseId() == 4  || v_entity->GetBaseId() == 29) && weapon_player->getValue().first == 26) {
+        if ((std::find(my_list_3.begin(), my_list_3.end(), v_entity->GetBaseId()) != my_list_3.end()) && weapon_player->getValue().first == 26) {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
-            createEntity(arg_all_entities, weapon->getValue().first, position_drone);
+            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+                if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
+                    createEntity(arg_all_entities, weapon->getValue().first, position_drone);
+                }
+            }
+            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+                if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+                    createEntity(arg_all_entities, weapon->getValue().second, position_drone);
+                }
+            }
         }
     }
 }
