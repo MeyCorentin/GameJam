@@ -10,12 +10,11 @@ UDPClient::UDPClient(boost::asio::io_context& io_context, const std::string& hos
     initial_msg = {1, 0, 1920, 1080, 100};
     send(initial_msg);
 }
-
 void UDPClient::run_game(Ecs &ecs)
 {
     while (true)
     {
-        std::pair<int, int> temp;
+        BinaryProtocole::BinaryMessage temp;
         int temp_index;
         int temp_value;
         int connected_client = 0;
@@ -26,40 +25,70 @@ void UDPClient::run_game(Ecs &ecs)
         auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
         if (elapsedTime < (1.0 / 60))
             std::this_thread::sleep_for(std::chrono::duration<double>((1.0 / 60) - elapsedTime));
-        if (!input_queue_.empty())
+        process_input_queue(ecs);
+    }
+}
+
+void UDPClient::process_input_queue(Ecs &ecs)
+{
+    if (!input_queue_.empty())
+    {
+        BinaryProtocole::BinaryMessage input = input_queue_.front();
+        if (input.data % 2 == 0)
         {
-            std::pair<int, int> input = input_queue_.front();
-            if (input.second % 2 == 0)
-            {
-                if (input.second == 100)
-                {
-                    if (input.first !=  clientId)
-                    {
-                        ecs.scene_.AddNewPlayer(input.first);
-                        std::cout << "---- ADD NEW PLAYER" << std::endl;
-                    }
-                } else {
-                    temp = input;
-                    input_queue_.push_back(std::make_pair(temp.first, temp.second));
-                }
-            } else {
-                for (auto it = input_queue_.begin(); it != input_queue_.end();) {
-                    if (it->first == input.first && it->second == input.second - 1) {
-                        it = input_queue_.erase(it);
-                    } else {
-                        ++it;
-                    }
-                }
-            }
+            process_even_input(input, ecs);
+        }
+        else
+        {
+            process_odd_input(input);
+        }
+        if (input.data != 1000 && input.data != 0 && input.data != 100)
+        {
             input_queue_.erase(input_queue_.begin());
-            for (auto it = input_queue_.begin(); it != input_queue_.end();++it)
-                if (it->second % 2 == 0)
-                {
-                    int value_1 = it->first;
-                    int value_2 = it->second;
-                    BinaryProtocole::BinaryMessage msg = {1, (uint32_t)it->first, 1920, 1080, (uint16_t)it->second};
-                    ecs.scene_.InputFromPlayer(*it);
-                }
+            process_remaining_input(ecs);
+        }
+    }
+}
+
+void UDPClient::process_even_input(const BinaryProtocole::BinaryMessage &input, Ecs &ecs)
+{
+    if (input.data == 100 && input.id != clientId)
+    {
+        ecs.scene_.AddNewPlayer(input.id);
+        input_queue_.erase(input_queue_.begin());
+    }
+    if (input.data == 1000)
+    {
+        ecs.scene_.SetClientPlayerId(input.id);
+        input_queue_.erase(input_queue_.begin());
+    }
+    if (input.data == 0)
+    {
+        ecs.scene_.SetPlayerPosition(input.id, input.x, input.y);
+        input_queue_.erase(input_queue_.begin());
+    }
+    if(input.data != 100 && input.data != 0 && input.data != 1000)
+    {
+        BinaryProtocole::BinaryMessage temp = input;
+        input_queue_.push_back(temp);
+    }
+}
+
+void UDPClient::process_odd_input(const BinaryProtocole::BinaryMessage &input)
+{
+    for (auto it = input_queue_.begin(); it != input_queue_.end();)
+        it = (it->id == input.id && it->data == input.data - 1) ? input_queue_.erase(it) : ++it;
+}
+
+void UDPClient::process_remaining_input(Ecs &ecs)
+{
+    for (auto it = input_queue_.begin(); it != input_queue_.end(); ++it)
+    {
+        if (it->data % 2 == 0)
+        {
+            int value_1 = it->id;
+            int value_2 = it->data;
+            ecs.scene_.InputFromPlayer(std::make_pair((int)it->id, (int)it->data));
         }
     }
 }
@@ -159,51 +188,57 @@ void UDPClient::read_data()
         [this](boost::system::error_code ec, std::size_t bytes_recvd) {
             BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
 
-            if (msg.data == 101)
+            if (msg.data == 1000)
                 setClientId(msg.id);
             switch (msg.data)
             {
+                case 0:
+                    input_queue_.push_back(msg);
+                    break;
                 case 100:
-                    input_queue_.push_back(std::make_pair(msg.id, 100));
+                    input_queue_.push_back(msg);
+                    break;
+                case 1000:
+                    input_queue_.push_back(msg); 
                     break;
                 case 200:
-                    input_queue_.push_back(std::make_pair(msg.id, 200));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " press up." << std::endl;
                     break;
                 case 210:
-                    input_queue_.push_back(std::make_pair(msg.id, 210));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " press left." << std::endl;
                     break;
                 case 220:
-                    input_queue_.push_back(std::make_pair(msg.id, 220));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " press down." << std::endl;
                     break;
                 case 230:
-                    input_queue_.push_back(std::make_pair(msg.id, 230));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " press right." << std::endl;
                     break;
                 case 300:
-                    input_queue_.push_back(std::make_pair(msg.id, 300));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " press shoot." << std::endl;
                     break;
                 case 201:
-                    input_queue_.push_back(std::make_pair(msg.id, 201));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " release up." << std::endl;
                     break;
                 case 211:
-                    input_queue_.push_back(std::make_pair(msg.id, 211));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " release left." << std::endl;
                     break;
                 case 221:
-                    input_queue_.push_back(std::make_pair(msg.id, 221));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " release down." << std::endl;
                     break;
                 case 231:
-                    input_queue_.push_back(std::make_pair(msg.id, 231));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " release right." << std::endl;
                     break;
                 case 301:
-                    input_queue_.push_back(std::make_pair(msg.id, 301));
+                    input_queue_.push_back(msg);
                     std::cout << "Client " << msg.id << " release shoot." << std::endl;
                     break;
                 default:

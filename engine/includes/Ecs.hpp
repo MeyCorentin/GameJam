@@ -63,6 +63,8 @@
 #include "../includes/components/C_SoundIsActive.hpp"
 #include "../includes/components/C_Music.hpp"
 #include "../includes/components/C_MusicIsActive.hpp"
+#include "../includes/components/C_PlayerMovementClock.hpp"
+#include "../includes/components/C_EntityMovementClock.hpp"
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"

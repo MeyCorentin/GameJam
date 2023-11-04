@@ -21,7 +21,11 @@ public:
     void start();
     void setClientId(uint32_t _clientId) { clientId = _clientId; }
     uint32_t getClientId() { return clientId; }
-    std::vector<std::pair<int,int>> input_queue_;   
+    std::vector<BinaryProtocole::BinaryMessage> input_queue_;
+    void process_input_queue(Ecs &ecs);
+    void process_even_input(const BinaryProtocole::BinaryMessage &input, Ecs &ecs);
+    void process_odd_input(const BinaryProtocole::BinaryMessage &input);
+    void process_remaining_input(Ecs &ecs);
 
 private:
     void read_data();

@@ -22,6 +22,7 @@
 #include "../components/C_PositionShot.hpp"
 #include "../components/C_Sound.hpp"
 #include "../components/C_SoundBuffer.hpp"
+#include "../components/C_PlayerMovementClock.hpp"
 #include "../components/C_Music.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
@@ -66,7 +67,8 @@ class S_Input : public System {
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& entity_list,
                 sf::Font arg_font,
-                sf::Text arg_entity_id);
+                sf::Text arg_entity_id,
+                sf::Time elapsed);
 
         void ChangeAdminMode(
                 const std::shared_ptr<Entity>& entity,

@@ -19,8 +19,13 @@ class UDPServer {
         void start();
         void send(BinaryProtocole::BinaryMessage msg);
         void send_to_all(BinaryProtocole::BinaryMessage msg);
+        void send_to_other(BinaryProtocole::BinaryMessage msg);
         void send_to_last(BinaryProtocole::BinaryMessage msg);
         void start_listening();
+        void create_players(int connected_client);
+        void send_entity_positions(Ecs &ecs);
+        void send_player_positions(Ecs &ecs);
+        void process_input_queue(Ecs &ecs);
 
     private:
         void read_data();
@@ -28,7 +33,6 @@ class UDPServer {
         void run_server(Ecs &_ecs);
         std::vector<std::pair<int,int>> input_queue_;
         std::mutex queue_mutex_;
-
         boost::asio::io_context& io_context_;
         udp::socket socket_;
         udp::endpoint remote_endpoint_;

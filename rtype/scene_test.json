@@ -292,6 +292,16 @@
             "id": 50,
             "type": "Texture",
             "value_type": "Texture"
+        },
+        {
+            "id": 55,
+            "type": "PlayerMovementClock",
+            "value_type": "Clock"
+        },
+        {
+            "id": 58,
+            "type": "EntityMovementClock",
+            "value_type": "Clock"
         }
     ],
     "entities": [
@@ -308,7 +318,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": 100000000
                 },
                 {
                     "component_id": 3,
@@ -389,12 +399,20 @@
                 {
                     "component_id": 48,
                     "value": false
+                },
+                {
+                    "component_id": 55,
+                    "value": -1
                 }
             ]
         },
         {
             "id": 2,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/red_enemy.gif"
@@ -489,6 +507,10 @@
             "id": 3,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
                 },
@@ -566,6 +588,10 @@
             "id": 4,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/drone.gif"
                 },
@@ -639,6 +665,10 @@
             "id": 5,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
                 },
@@ -703,6 +733,10 @@
         {
             "id": 6,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
@@ -769,6 +803,10 @@
             "id": 7,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
                 },
@@ -833,6 +871,10 @@
         {
             "id": 8,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
@@ -899,6 +941,10 @@
             "id": 9,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
                 },
@@ -964,6 +1010,10 @@
             "id": 10,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/red_enemy_particles.gif"
                 },
@@ -1020,6 +1070,10 @@
         {
             "id": 11,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/red_enemy.gif"
@@ -1114,6 +1168,10 @@
             "id": 12,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/ground.png"
                 },
@@ -1150,6 +1208,10 @@
         {
             "id": 13,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/background_star_1.png"
@@ -1188,6 +1250,10 @@
             "id": 14,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/background_star_2.png"
                 },
@@ -1225,6 +1291,10 @@
             "id": 15,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/background_star_3.png"
                 },
@@ -1261,6 +1331,10 @@
         {
             "id": 16,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
@@ -1311,6 +1385,10 @@
             "id": 17,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/explosion.gif"
                 },
@@ -1359,6 +1437,10 @@
         {
             "id": 18,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
@@ -1409,6 +1491,10 @@
             "id": 19,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/red_enemy_particles.gif"
                 },
@@ -1457,6 +1543,10 @@
         {
             "id": 20,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/blue.gif"
@@ -1507,6 +1597,10 @@
             "id": 21,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
                 },
@@ -1555,6 +1649,10 @@
         {
             "id": 22,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
@@ -1617,6 +1715,10 @@
             "id": 23,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
                 },
@@ -1677,6 +1779,10 @@
         {
             "id": 24,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
@@ -1739,6 +1845,10 @@
             "id": 25,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
                 },
@@ -1799,6 +1909,10 @@
         {
             "id": 26,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
@@ -1861,6 +1975,10 @@
             "id": 27,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/missiles.gif"
                 },
@@ -1918,6 +2036,10 @@
             "id": 28,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/robot.gif"
                 },
@@ -1974,6 +2096,10 @@
         {
             "id": 29,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/drone.gif"
@@ -2048,6 +2174,10 @@
             "id": 30,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
                 },
@@ -2112,6 +2242,10 @@
         {
             "id": 31,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
@@ -2178,6 +2312,10 @@
             "id": 32,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
                 },
@@ -2238,6 +2376,10 @@
         {
             "id": 33,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
@@ -2300,6 +2442,10 @@
             "id": 34,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/bonus.png"
                 },
@@ -2352,6 +2498,10 @@
         {
             "id": 35,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/grey_man.png"
@@ -2406,6 +2556,10 @@
             "id": 36,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/yellow_bonus.png"
                 },
@@ -2454,6 +2608,10 @@
         {
             "id": 37,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/grey_man.png"
@@ -2507,6 +2665,10 @@
         {
             "id": 38,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
@@ -2569,6 +2731,10 @@
             "id": 39,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
                 },
@@ -2630,6 +2796,10 @@
             "id": 40,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
                 },
@@ -2690,6 +2860,10 @@
         {
             "id": 41,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
@@ -2756,6 +2930,10 @@
             "id": 42,
             "components": [
                 {
+                    "component_id": 58,
+                    "value": -1
+                },
+                {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
                 },
@@ -2820,6 +2998,10 @@
         {
             "id": 43,
             "components": [
+                {
+                    "component_id": 58,
+                    "value": -1
+                },
                 {
                     "component_id": 1,
                     "value": "../../sprites/weapons.gif"
