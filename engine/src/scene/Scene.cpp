@@ -98,11 +98,9 @@ void Scene::AddNewPlayer(int arg_id)
         if (entity->GetId() == 1)
         {
             std::shared_ptr<C_Player<int>> index;
-            std::cout << "Add entity" << std::endl;
             entities_.push_back(std::make_shared<Entity>(*entity));
             index = entities_.back() ->template GetComponent<C_Player<int>>();
             index->setValue(arg_id);
-            std::cout << "SET INDEX : " <<index->getValue() << std::endl;
             std::cout << index->getValue() << std::endl;
         }
     }
@@ -112,11 +110,14 @@ void Scene::AddNewPlayer(int arg_id)
 std::vector<EntityPosition> Scene::GetPlayerPosition()
 {
     std::vector<EntityPosition> positions;
+    std::shared_ptr<C_Player<int>> index;
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
+    EntityPosition pos;
+
     for (const auto& entity : entities_) {
-        std::shared_ptr<C_Player<int>> index = entity->template GetComponent<C_Player<int>>();
-        std::shared_ptr<C_Position<std::pair<double, double>>> position_comp =  entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        index = entity->template GetComponent<C_Player<int>>();
+        position_comp =  entity->template GetComponent<C_Position<std::pair<double, double>>>();
         if (index && position_comp) {
-            EntityPosition pos;
             pos.id = index->getValue();
             pos.base_id = entity->GetBaseId();
             pos.x_position = position_comp->getValue().first;
@@ -144,6 +145,18 @@ std::vector<EntityPosition> Scene::GetEntityPosition()
         }
     }
     return positions;
+}
+
+
+void Scene::SetClientPlayerId(int arg_id)
+{
+    std::shared_ptr<C_Player<int>> index;
+    for (const std::shared_ptr<Entity>& entity : entities_) {
+        index = entity->template GetComponent<C_Player<int>>();
+        if (!index)
+            continue;
+        index->setValue(arg_id);
+    }
 }
 
 void Scene::SetPlayerPosition(int arg_id, float arg_x, float arg_y)

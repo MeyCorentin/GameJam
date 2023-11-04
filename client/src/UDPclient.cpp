@@ -42,8 +42,11 @@ void UDPClient::process_input_queue(Ecs &ecs)
         {
             process_odd_input(input);
         }
-        input_queue_.erase(input_queue_.begin());
-        process_remaining_input(ecs);
+        if (input.data != 1000 && input.data != 0 && input.data != 100)
+        {
+            input_queue_.erase(input_queue_.begin());
+            process_remaining_input(ecs);
+        }
     }
 }
 
@@ -52,12 +55,19 @@ void UDPClient::process_even_input(const BinaryProtocole::BinaryMessage &input, 
     if (input.data == 100 && input.id != clientId)
     {
         ecs.scene_.AddNewPlayer(input.id);
+        input_queue_.erase(input_queue_.begin());
+    }
+    if (input.data == 1000)
+    {
+        ecs.scene_.SetClientPlayerId(input.id);
+        input_queue_.erase(input_queue_.begin());
     }
     if (input.data == 0)
     {
         ecs.scene_.SetPlayerPosition(input.id, input.x, input.y);
+        input_queue_.erase(input_queue_.begin());
     }
-    if(input.data != 100 && input.data != 0)
+    if(input.data != 100 && input.data != 0 && input.data != 1000)
     {
         BinaryProtocole::BinaryMessage temp = input;
         input_queue_.push_back(temp);
@@ -178,15 +188,17 @@ void UDPClient::read_data()
         [this](boost::system::error_code ec, std::size_t bytes_recvd) {
             BinaryProtocole::BinaryMessage msg = protocole.BinToValue(this->recv_buffer_);
 
-            if (msg.data == 101)
+            if (msg.data == 1000)
                 setClientId(msg.id);
             switch (msg.data)
             {
                 case 0:
-                    std::cout << "TYPE : " <<  msg.data << " ID : " << msg.id << " POSITION X: " << msg.x << " POSITION Y: " << msg.y << std::endl;
                     input_queue_.push_back(msg);
                     break;
                 case 100:
+                    input_queue_.push_back(msg);
+                    break;
+                case 1000:
                     input_queue_.push_back(msg);
                     break;
                 case 200:

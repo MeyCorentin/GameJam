@@ -33,7 +33,6 @@ bool SceneDirector::ProcessComponent(
 
     if (!component)
         return false;
-    std::cout << " - " << component_name << std::endl;
     if (value_type == "Sprite") {
         arg_entity_builder.AddComponent(component,  std::get<sf::Sprite>(value));
     } else if (value_type == "Texture") {
@@ -81,7 +80,6 @@ std::shared_ptr<Entity> SceneDirector::CreateEntityFromConfig(
     EntityBuilder entity_builder(entity_id);
     const json& entity_components = arg_entity_config["components"];
 
-    std::cout << "Create Entity: " << entity_id << std::endl;
     for (const auto& entity_component : entity_components) {
         component_id = entity_component["component_id"];
         const json& component_config = FindComponentConfigById(arg_components_config, component_id);

@@ -14,6 +14,13 @@ void UDPServer::run_server(Ecs &ecs)
     int connected_client = 0;
     int loop_client = 0;
 
+    std::thread send_positions_thread([&]() {
+        while (true) {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            send_player_positions(ecs);
+        }
+    });
+
     while (true)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
@@ -27,16 +34,17 @@ void UDPServer::run_server(Ecs &ecs)
         {
             ecs.scene_.AddNewPlayer(clients_.size());
             BinaryProtocole::BinaryMessage msg_new_player = {1, static_cast<uint32_t>(clients_.size()), 1920, 1080, 100};
-            send_to_all(msg_new_player);
+            send_to_other(msg_new_player);
             connected_client++;
             create_players(connected_client);
             send_entity_positions(ecs);
             send_player_positions(ecs);
-
         }
         if (!input_queue_.empty())
             process_input_queue(ecs);
     }
+
+    send_positions_thread.join();
 }
 
 void UDPServer::create_players(int connected_client)
@@ -60,15 +68,18 @@ void UDPServer::send_entity_positions(Ecs &ecs)
 
 void UDPServer::send_player_positions(Ecs &ecs)
 {
-    std::cout << "-- PLAYER POSITION --" << std::endl;
     std::vector<EntityPosition> player_position_list = ecs.scene_.GetPlayerPosition();
+    BinaryProtocole::BinaryMessage msg_position_player;
     for (const auto& position : player_position_list)
     {
-        BinaryProtocole::BinaryMessage msg_position_player = {1, static_cast<uint32_t>(position.id) , static_cast<uint16_t>(position.x_position), static_cast<uint16_t>(position.y_position), 0};
+        msg_position_player.type = 1;
+        msg_position_player.id = static_cast<uint32_t>(position.id);
+        msg_position_player.x = static_cast<uint16_t>(position.x_position);
+        msg_position_player.y = static_cast<uint16_t>(position.y_position);
+        msg_position_player.data = 0;
         send_to_all(msg_position_player);
     }
 }
-
 void UDPServer::process_input_queue(Ecs &ecs)
 {
     std::pair<int, int> input = input_queue_.front();
@@ -137,59 +148,59 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
                 clients_[remote_endpoint_] = next_client_id_++;
                 std::cout << "New client with ID: " << clients_[remote_endpoint_] << std::endl;
                 // Send client ID back
-                BinaryProtocole::BinaryMessage response = {1, clients_[remote_endpoint_], 0, 0, 101};
+                BinaryProtocole::BinaryMessage response = {1, clients_[remote_endpoint_], 0, 0, 1000};
                 send(response);
             }
             break;
         case 200:
             input_queue_.push_back(std::make_pair(msg.id, 200));
             std::cout << "Client " << msg.id << " press up." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         case 210:
             input_queue_.push_back(std::make_pair(msg.id, 210));
             std::cout << "Client " << msg.id << " press left." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         case 220:
             input_queue_.push_back(std::make_pair(msg.id, 220));
             std::cout << "Client " << msg.id << " press down." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         case 230:
             input_queue_.push_back(std::make_pair(msg.id, 230));
             std::cout << "Client " << msg.id << " press right." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         case 300:
             input_queue_.push_back(std::make_pair(msg.id, 300));
             std::cout << "Client " << msg.id << " press shoot." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         case 201:
             input_queue_.push_back(std::make_pair(msg.id, 201));
             std::cout << "Client " << msg.id << " release up." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         case 211:
             input_queue_.push_back(std::make_pair(msg.id, 211));
             std::cout << "Client " << msg.id << " release left." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         case 221:
             input_queue_.push_back(std::make_pair(msg.id, 221));
             std::cout << "Client " << msg.id << " release down." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         case 231:
             input_queue_.push_back(std::make_pair(msg.id, 231));
             std::cout << "Client " << msg.id << " release right." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         case 301:
             input_queue_.push_back(std::make_pair(msg.id, 301));
             std::cout << "Client " << msg.id << " release shoot." << std::endl;
-            send_to_all(msg);
+            send_to_other(msg);
             break;
         default:
             std::cerr << "Unknown message data: " << msg.data << std::endl;
@@ -211,9 +222,16 @@ void UDPServer::send(BinaryProtocole::BinaryMessage msg)
     this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), this->remote_endpoint_);
 }
 
+
+
 void UDPServer::send_to_all(BinaryProtocole::BinaryMessage msg)
 {
-    std::cout << "SEND TO ALL : " << msg.data << std::endl;
+    for (const auto& [client_endpoint, id] : clients_)
+        this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), client_endpoint);
+}
+
+void UDPServer::send_to_other(BinaryProtocole::BinaryMessage msg)
+{
     for (const auto& [client_endpoint, id] : clients_)
     {
         if (id != msg.id)

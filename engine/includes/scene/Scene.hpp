@@ -69,5 +69,7 @@ class Scene {
 
         void SetPlayerPosition(int id, float x, float y);
 
+        void SetClientPlayerId(int arg_id);
+
         void Update(int arg_is_server);
 };
