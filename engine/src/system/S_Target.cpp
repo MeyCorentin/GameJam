@@ -16,7 +16,7 @@ void S_Target::Execute(
         std::vector<std::shared_ptr<Entity>>& arg_entities,
         std::shared_ptr<sf::RenderWindow> arg_window,
         std::vector<int> arg_input,
-        std::vector<std::shared_ptr<Entity>>& arg_all_Entities,
+        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
         std::shared_ptr<sf::Event> event_) {
     int current_mana;
@@ -43,8 +43,8 @@ void S_Target::Execute(
     file.close();
     S_Input input;
 
-    for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
-        for (const std::shared_ptr<Entity>& entity2 : arg_all_Entities) {
+    for (const std::shared_ptr<Entity>& entity1 : arg_all_entities) {
+        for (const std::shared_ptr<Entity>& entity2 : arg_all_entities) {
             target = entity1->template GetComponent<C_Target<int>>();
             follow = entity1->template GetComponent<C_Follow<bool>>();
             shoot = entity1->template GetComponent<C_Shoot<bool>>();
@@ -61,7 +61,7 @@ void S_Target::Execute(
             if (follow &&
                 position_comp_1 &&
                 position_comp_2 &&
-                target->getValue() == entity2->GetId())
+                target->getValue() == entity2->GetBaseId())
             {
                 if (follow->getValue() == true)
                 {
@@ -73,7 +73,7 @@ void S_Target::Execute(
                 ammo &&
                 position_comp_1 &&
                 position_comp_2 &&
-                target->getValue() == entity2->GetId() &&
+                target->getValue() == entity2->GetBaseId() &&
                 fire_rate &&
                 fire_rate_speed)
             {
@@ -111,6 +111,6 @@ void S_Target::Execute(
         }
     }
     for (const std::shared_ptr<Entity>& temp_entity : temp_entities) {
-        arg_all_Entities.push_back(temp_entity);
+        arg_all_entities.push_back(temp_entity);
     }
 }

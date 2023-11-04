@@ -40,7 +40,7 @@ bool S_Input::ProcessComponent(
     if (!component)
         return false;
 
-    std::cout << " - " << component_name << std::endl;
+    // std::cout << " - " << component_name << std::endl;
     if (value_type == "Sprite") {
         arg_entityBuilder.AddComponent(component,  std::get<sf::Sprite>(value));
     } else if (value_type == "Int") {
@@ -88,7 +88,7 @@ std::shared_ptr<Entity> S_Input::CreateEntityFromConfig(
     EntityBuilder entity_builder(entity_id);
     const json& entity_components = arg_entity_config["components"];
 
-    std::cout << "Create Entity: " << entity_id << std::endl;
+    // std::cout << "Create Entity: " << entity_id << std::endl;
     for (const auto& entity_component : entity_components) {
         component_id = entity_component["component_id"];
         component_config = FindComponentConfigById(arg_components_config, component_id);
@@ -120,7 +120,7 @@ std::shared_ptr<Entity> S_Input::createEntity(
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
-            std::cout << position_shot->getValue().first << std::endl;
+            // std::cout << position_shot->getValue().first << std::endl;
             position_new->setValue(std::make_pair(arg_position_comp->getValue().first + position_shot->getValue().first, arg_position_comp->getValue().second + position_shot->getValue().second));
             arg_all_entities.push_back(new_entity);
         }
@@ -271,7 +271,6 @@ void S_Input::SpecialShot(
 
     for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
         if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
-            std::cout << "In first if" << std::endl;
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
             std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             if (weapon->getValue().first != -1) {
@@ -287,7 +286,6 @@ void S_Input::SpecialShot(
             }
         }
         if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
-            std::cout << "In second if" << std::endl;
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
             std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             if (weapon->getValue().second != -1) {
@@ -308,7 +306,7 @@ void S_Input::SpecialShot(
     for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
         if (v_entity->GetId() == 27)
             v_entity->is_dead_ = true;
-        if ((v_entity->GetId() == 4  || v_entity->GetId() == 29) && weapon_player->getValue().first == 26) {
+        if ((v_entity->GetBaseId() == 4  || v_entity->GetBaseId() == 29) && weapon_player->getValue().first == 26) {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
             createEntity(arg_all_entities, weapon->getValue().first, position_drone);

@@ -73,8 +73,7 @@ void S_Collision::Execute(
     float x2;
     float y2;
 
-    for (const std::shared_ptr<Entity>& entity1 : arg_all_entities) {
-        std::cout << "Hre" << std::endl;
+    for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
         position_comp_1 = entity1->template GetComponent<C_Position<std::pair<double, double>>>();
         hitbox_comp_1 = entity1->template GetComponent<C_Hitbox<std::pair<int, int>>>();
         is_player = entity1->template GetComponent<C_Player<int>>();
@@ -86,8 +85,7 @@ void S_Collision::Execute(
         x1 = static_cast<float>(position_comp_1->getValue().first);
         y1 = static_cast<float>(position_comp_1->getValue().second);
         vector_entities_1 = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
-        for (const std::shared_ptr<Entity>& entity2 : arg_all_entities) {
-            std::cout << "Hre for" << std::endl;
+        for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
             if (entity1 == entity2)
                 continue;
             position_comp_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
@@ -115,19 +113,17 @@ void S_Collision::Execute(
                         vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
                         if (!follow->getValue()) {
                             if ((std::find(my_list.begin(), my_list.end(), entity2->GetBaseId()) != my_list.end())) {
-                                std::cout << "In if" << std::endl;
                                 if (x2 - x1 > 0)
                                     new_entity = reCreateEntity(arg_all_entities, 22, position_comp_2);
                                 else
                                     new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
-                                entity2->is_dead_ = true;
-                                vector_entities->getValue().push_back(new_entity);
                                 new_follow = new_entity->template GetComponent<C_Follow<bool>>();
                                 new_follow->getValue() = true;
+                                vector_entities->getValue().push_back(new_entity);
+                                entity2->is_dead_ = true;
                             } else {
-                                std::cout << "In else" << std::endl;
-                                vector_entities->getValue().push_back(entity2);
                                 follow->getValue() = true;
+                                vector_entities->getValue().push_back(entity2);
                             }
                         }
                     }
