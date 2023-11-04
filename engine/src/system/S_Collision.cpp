@@ -122,19 +122,22 @@ void S_Collision::Execute(
                                 continue;
                         vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
                         if (!follow->getValue()) {
-                            std::cout << "In follow : " << entity2->GetBaseId() << std::endl;
                             if ((std::find(my_list.begin(), my_list.end(), entity2->GetBaseId()) != my_list.end())) {
-                                std::cout << "In first ifff" << std::endl;
                                 if (x2 - x1 > 0) {
-                                    std::cout << "In if" << std::endl;
                                     new_entity = reCreateEntity(arg_all_entities, 22, position_comp_2);
                                 } else {
-                                    std::cout << "In else" << std::endl;
                                     new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
                                 }
                                 new_follow = new_entity->template GetComponent<C_Follow<bool>>();
                                 new_follow->getValue() = true;
+
+                                std::shared_ptr<C_Weapon<std::pair<int, int>>> old_weapon = entity2->template GetComponent<C_Weapon<std::pair<int, int>>>();
+                                std::shared_ptr<C_Weapon<std::pair<int, int>>> new_weapon = new_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+
+                                new_weapon->getValue() = old_weapon->getValue();
+
                                 vector_entities->getValue().push_back(new_entity);
+                                remove_copy(vector_entities->getValue().begin(), vector_entities->getValue().end(), vector_entities->getValue().begin(), entity2);
                                 entity2->is_dead_ = true;
                             } else {
                                 follow->getValue() = true;
