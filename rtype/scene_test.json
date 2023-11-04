@@ -331,6 +331,11 @@
             "id": 58,
             "type": "ClockSpeed",
             "value_type": "Double"
+        },
+        {
+            "id": 59,
+            "type": "SingleAnimation",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -1591,10 +1596,6 @@
                 {
                     "component_id": 14,
                     "value": true
-                },
-                {
-                    "component_id": 23,
-                    "value": -1
                 },
                 {
                     "component_id": 49,
@@ -3307,6 +3308,63 @@
                     "value": true
                 },
                 {
+                    "component_id": 32,
+                    "value": 21
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 59,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 47,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 23, "y": 21 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 576 , "top": 2063, "width": 23, "height": 21}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 92, "y": 21, "start_x": 576, "start_y": 2063}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
                     "component_id": 33,
                     "value": false
                 },
@@ -3328,6 +3386,10 @@
                 {
                     "entity_id": 45,
                     "position": { "x": 272, "y": 126 }
+                },
+                {
+                    "entity_id": 47,
+                    "position": { "x": 200, "y": 200 }
                 },
                 {
                     "entity_id": 4,

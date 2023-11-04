@@ -33,6 +33,7 @@ void S_Animation::Execute(
         std::shared_ptr<C_Life<int>> life = entity->template GetComponent<C_Life<int>>();
         std::pair<std::pair<int, int>, std::pair<int, int>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>()->getValue();
         std::shared_ptr<C_ClockSpeed<double>> clock_speed = entity->template GetComponent<C_ClockSpeed<double>>();
+        std::shared_ptr<C_SingleAnimation<bool>> single_animation = entity->template GetComponent<C_SingleAnimation<bool>>();
         bool animaion = entity->template GetComponent<C_Animation<bool>>()->getValue();
         if (clock->getValue().getElapsedTime().asSeconds() <= 0.1f + clock_speed->getValue())
             continue;

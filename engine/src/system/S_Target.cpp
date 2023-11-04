@@ -56,6 +56,8 @@ void S_Target::Execute(
             fire_rate_speed =  entity1->template GetComponent<C_FireRateSpeed<double>>();
             range =  entity1->template GetComponent<C_Range<int>>();
 
+            //TODO ! Kill le child si la target meurt
+
             if (entity1 == entity2)
                 continue;
             if (follow &&
