@@ -3297,11 +3297,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 636, "top": 1964, "width": 33, "height": 32}
+                    "value": { "left": 570, "top": 1964, "width": 33, "height": 32}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 33, "y": 32, "start_x": 636, "start_y": 1964}
+                    "value": { "x": 99, "y": 32, "start_x": 570, "start_y": 1964}
                 },
                 {
                     "component_id": 14,

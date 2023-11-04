@@ -31,17 +31,23 @@ void S_Animation::Execute(
         std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
         std::shared_ptr<C_UniqueAnimation<bool>> unique = entity->template GetComponent<C_UniqueAnimation<bool>>();
         std::shared_ptr<C_Life<int>> life = entity->template GetComponent<C_Life<int>>();
-        std::pair<std::pair<int, int>, std::pair<int, int>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>()->getValue();
+        std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
         std::shared_ptr<C_ClockSpeed<double>> clock_speed = entity->template GetComponent<C_ClockSpeed<double>>();
         std::shared_ptr<C_SingleAnimation<bool>> single_animation = entity->template GetComponent<C_SingleAnimation<bool>>();
         bool animaion = entity->template GetComponent<C_Animation<bool>>()->getValue();
         if (clock->getValue().getElapsedTime().asSeconds() <= 0.1f + clock_speed->getValue())
             continue;
-        if (rect->getValue().left >= (size.first.first - rect->getValue().width) + size.second.first) {
+        if (rect->getValue().left >= (size->getValue().first.first - rect->getValue().width) + size->getValue().second.first) {
             if (unique->getValue())
                 entity->is_dead_ = true;
-            else
-                rect->getValue().left = size.second.first;
+            else if (single_animation) {
+                if (single_animation->getValue()) {
+                    size->getValue().first.first = rect->getValue().width;
+                    size->getValue().first.second = rect->getValue().height;
+                    rect->getValue().left = size->getValue().second.first;
+                }
+            } else
+                rect->getValue().left = size->getValue().second.first;
         } else {
             rect->getValue().left += rect->getValue().width;
         }
