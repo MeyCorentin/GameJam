@@ -70,6 +70,7 @@
 #include "../includes/components/C_IsAutoMove.hpp"
 #include "../includes/components/C_Invisible.hpp"
 #include "../includes/components/C_EnemyAmmo.hpp"
+#include "../includes/components/C_ClockSpeed.hpp"
 
 #include "../includes/components/ComponentBase.hpp"
 

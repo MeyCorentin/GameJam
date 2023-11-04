@@ -7,6 +7,7 @@
 #include "../components/C_IsMoving.hpp"
 #include "../components/C_Life.hpp"
 #include "../components/C_UniqueAnimation.hpp"
+#include "../components/C_ClockSpeed.hpp"
 
 /**
  * @class S_Animation

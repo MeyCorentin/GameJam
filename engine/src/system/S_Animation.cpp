@@ -9,6 +9,7 @@ std::vector<std::shared_ptr<Entity>> S_Animation::Filter(const std::vector<std::
             !entity->HasComponent(typeid(C_IsMoving<bool>)) &&
             entity->HasComponent(typeid(C_UniqueAnimation<bool>)) &&
             entity->HasComponent(typeid(C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>)) &&
+            entity->HasComponent(typeid(C_ClockSpeed<double>)) &&
             entity->HasComponent(typeid(C_Animation<bool>))) {
             filteredEntities.push_back(entity);
         }
@@ -31,8 +32,9 @@ void S_Animation::Execute(
         std::shared_ptr<C_UniqueAnimation<bool>> unique = entity->template GetComponent<C_UniqueAnimation<bool>>();
         std::shared_ptr<C_Life<int>> life = entity->template GetComponent<C_Life<int>>();
         std::pair<std::pair<int, int>, std::pair<int, int>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>()->getValue();
+        std::shared_ptr<C_ClockSpeed<double>> clock_speed = entity->template GetComponent<C_ClockSpeed<double>>();
         bool animaion = entity->template GetComponent<C_Animation<bool>>()->getValue();
-        if (clock->getValue().getElapsedTime().asSeconds() <= 0.1f)
+        if (clock->getValue().getElapsedTime().asSeconds() <= 0.1f + clock_speed->getValue())
             continue;
         if (rect->getValue().left >= (size.first.first - rect->getValue().width) + size.second.first) {
             if (unique->getValue())
