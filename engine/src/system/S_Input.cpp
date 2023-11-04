@@ -9,7 +9,8 @@ std::vector<std::shared_ptr<Entity>> S_Input::Filter(const std::vector<std::shar
             entity->HasComponent(typeid(C_IsMoving<bool>)) &&
             entity->HasComponent(typeid(C_Admin<bool>)) &&
             entity->HasComponent(typeid(C_Weapon<int>)) &&
-            entity->HasComponent(typeid(C_ChargedShoot<sf::Clock>))
+            entity->HasComponent(typeid(C_ChargedShoot<sf::Clock>)) &&
+            entity->HasComponent(typeid(C_PlayerMovementClock<sf::Clock>))
             ) {
             filtered_entities.push_back(entity);
         }
@@ -163,30 +164,31 @@ void S_Input::Move(
     const std::shared_ptr<Entity>& entity,
     std::vector<std::shared_ptr<Entity>>& arg_entities,
     sf::Font arg_font,
-    sf::Text arg_entity_id)
+    sf::Text arg_entity_id,
+    sf::Time elapsed)
 {
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
 
-
+    int movement_elapsed = 5 * elapsed.asMilliseconds() / 30;
     if (inputs_[0] == 1)
     {
-        if (position_comp->getValue().second > 5)
-            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - 5));
+        if (position_comp->getValue().second > movement_elapsed)
+            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - movement_elapsed));
     }
     if (inputs_[1] == 1)
     {
-        if (position_comp->getValue().first > 5)
-            position_comp->setValue(std::make_pair(position_comp->getValue().first - 5, position_comp->getValue().second));
+        if (position_comp->getValue().first > movement_elapsed)
+            position_comp->setValue(std::make_pair(position_comp->getValue().first - movement_elapsed, position_comp->getValue().second));
     }
     if (inputs_[2] == 1)
     {
-        if (position_comp->getValue().second < arg_window->getSize().y - 5 - hitbox_size->getValue().second)
-            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + 5));
+        if (position_comp->getValue().second < arg_window->getSize().y - movement_elapsed - hitbox_size->getValue().second)
+            position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + movement_elapsed));
     }
     if (inputs_[3] == 1)
     {
-        if (position_comp->getValue().first < arg_window->getSize().x - 5- hitbox_size->getValue().first)
-            position_comp->setValue(std::make_pair(position_comp->getValue().first + 5, position_comp->getValue().second));
+        if (position_comp->getValue().first < arg_window->getSize().x - movement_elapsed- hitbox_size->getValue().first)
+            position_comp->setValue(std::make_pair(position_comp->getValue().first + movement_elapsed, position_comp->getValue().second));
     }
     if (inputs_[5] == 1)
     {
@@ -387,12 +389,16 @@ void S_Input::Execute(
     sf::Font font_arg_;
     font_arg_.loadFromFile("../../rtype/sources/fonts/arial.ttf");
     sf::Text entity_id;
+    std::shared_ptr<C_PlayerMovementClock<sf::Clock>> player_movement_clock;
     entity_id.setFillColor(sf::Color::Magenta);
     entity_id.setCharacterSize(10);
     entity_id.setFont(font_arg_);
+
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
+        player_movement_clock = entity->template GetComponent<C_PlayerMovementClock<sf::Clock>>();
+        sf::Time elapsed = player_movement_clock->getValue().getElapsedTime();
         if (arg_is_server == 1)
             continue;
         if (!player_id)
@@ -405,6 +411,7 @@ void S_Input::Execute(
             CheckTouchPressed(entity, arg_all_entities, position_comp, event_);
             CheckTouchReleased(entity, arg_all_entities, position_comp, event_);
         }
-        Move(position_comp, arg_window, entity, arg_all_entities, font_arg_, entity_id);
+        Move(position_comp, arg_window, entity, arg_all_entities, font_arg_, entity_id, elapsed);
+        player_movement_clock->getValue().restart();
     }
 }

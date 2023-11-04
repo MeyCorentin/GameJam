@@ -72,4 +72,12 @@ class Scene {
         void SetClientPlayerId(int arg_id);
 
         void Update(int arg_is_server);
+
+        void ComputeSystems(int arg_is_server);
+
+        std::vector<std::shared_ptr<Entity>> SpawnEntities(int arg_is_server);
+
+        void JumpTicks();
+
+        void RemoveOrCreateEntities();
 };

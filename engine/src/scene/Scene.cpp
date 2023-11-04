@@ -222,14 +222,37 @@ void Scene::Update(int arg_is_server)
 {
     this->ClearWindow();
 
+    ComputeSystems(arg_is_server);
+
+    std::vector<std::shared_ptr<Entity>> newEntities = SpawnEntities(arg_is_server);
+
+    for (const auto& newEntity : newEntities) {
+        entities_.push_back(newEntity);
+    }
+
+    JumpTicks();
+    DisplayTicks();
+    DisplayEntities(entities_.size());
+    DisplayCurrentTick();
+    RemoveOrCreateEntities();
+    window_->display();
+}
+void Scene::ComputeSystems(int arg_is_server)
+{
     for (const auto& system : systems_)
         system->Compute(arg_is_server, entities_, window_, inputs_, musics_, event_);
+}
+std::vector<std::shared_ptr<Entity>> Scene::SpawnEntities(int arg_is_server)
+{
+    std::vector<std::shared_ptr<Entity>> newEntities;
 
-    for (const auto& entity : entities_)
-    {
-        if (entity->GetId() == -1)
-            entity->SetId(id_store_++);
-    }
+    std::shared_ptr<C_Position<std::pair<double,double>>> position;
+    std::shared_ptr<C_SinClock<sf::Clock>> sin_clock;
+    std::shared_ptr<C_Clock<sf::Clock>> clock_basic;
+    int entity_id;
+    int x;
+    int y;
+
     for (const auto& spawn_info : spawn_index_)
     {
         if (spawn_info.first != total_ticks_)
@@ -237,9 +260,9 @@ void Scene::Update(int arg_is_server)
 
         for (const auto& entity_info : spawn_info.second)
         {
-            int entity_id = entity_info.first;
-            int x = entity_info.second.first;
-            int y = entity_info.second.second;
+            entity_id = entity_info.first;
+            x = entity_info.second.first;
+            y = entity_info.second.second;
 
             for (const auto& entity : list_entities_)
             {
@@ -247,35 +270,53 @@ void Scene::Update(int arg_is_server)
                     continue;
                 if (entity->GetId() == arg_is_server)
                     continue;
-                std::shared_ptr<C_Position<std::pair<double,double>>> position;
-                std::shared_ptr<C_SinClock<sf::Clock>> sin_clock;
-                std::shared_ptr<C_Clock<sf::Clock>> clock_basic;
-                entities_.push_back(std::make_shared<Entity>(*entity));
-                entities_.back()->SetId(id_store_++);
-                entities_.back()->SetBaseId(entity->GetId());
-                position = entities_.back()->template GetComponent<C_Position<std::pair<double,double>>>();
+                std::shared_ptr<Entity> newEntity = std::make_shared<Entity>(*entity);
+                newEntity->SetId(id_store_++);
+                newEntity->SetBaseId(entity->GetId());
+                position = newEntity->template GetComponent<C_Position<std::pair<double,double>>>();
                 position->setValue(std::make_pair(x,y));
 
-                sin_clock = entities_.back()->template GetComponent<C_SinClock<sf::Clock>>();
+                sin_clock = newEntity->template GetComponent<C_SinClock<sf::Clock>>();
                 if (sin_clock)
                     sin_clock->getValue().restart();
 
-                clock_basic = entities_.back()->template GetComponent<C_Clock<sf::Clock>>();
+                clock_basic = newEntity->template GetComponent<C_Clock<sf::Clock>>();
                 if (clock_basic)
                     clock_basic->getValue().restart();
+
+                newEntities.push_back(newEntity);
             }
         }
     }
+
+    return newEntities;
+}
+
+void Scene::JumpTicks()
+{
     for (const auto& jump_info : jump_index_)
     {
         if (jump_info.first == total_ticks_)
             total_ticks_ = jump_info.second;
     }
-    DisplayTicks();
-    DisplayEntities(entities_.size());
-    DisplayCurrentTick();
+}
+
+void Scene::RemoveOrCreateEntities()
+{
     auto it = entities_.begin();
     while (it != entities_.end())
-        ((*it)->is_dead_) ? it = entities_.erase(it) : ++it;
-    window_->display();
+    {
+        if ((*it)->is_dead_)
+        {
+            it = entities_.erase(it);
+        }
+        else
+        {
+            if ((*it)->GetId() == -1)
+            {
+                (*it)->SetId(id_store_++);
+            }
+            ++it;
+        }
+    }
 }
