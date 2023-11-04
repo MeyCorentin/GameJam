@@ -16,6 +16,7 @@
 #include "../includes/system/S_MakeBaby.hpp"
 #include "../includes/system/S_PlaySound.hpp"
 #include "../includes/system/S_PlayMusic.hpp"
+#include "../includes/system/S_AutoMove.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_Player.hpp"
@@ -65,6 +66,13 @@
 #include "../includes/components/C_MusicIsActive.hpp"
 #include "../includes/components/C_PlayerMovementClock.hpp"
 #include "../includes/components/C_EntityMovementClock.hpp"
+#include "../includes/components/C_Invincibility.hpp"
+#include "../includes/components/C_TimeAutoMove.hpp"
+#include "../includes/components/C_ClockAutoMove.hpp"
+#include "../includes/components/C_IsAutoMove.hpp"
+#include "../includes/components/C_Invisible.hpp"
+#include "../includes/components/C_EnemyAmmo.hpp"
+
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"

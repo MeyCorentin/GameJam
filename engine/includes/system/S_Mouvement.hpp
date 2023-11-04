@@ -5,6 +5,8 @@
 #include "../components/C_Speed.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_EntityMovementClock.hpp"
+#include "../components/C_IsAutoMove.hpp"
+
 /**
  * @class S_Mouvement
  * @brief A class responsible for managing entity movement in the system.

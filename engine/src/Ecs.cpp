@@ -27,6 +27,7 @@ void Ecs::Create(int arg_is_server)
     SystemRegistry::Instance().RegisterSystem("MakeBaby", []() { return std::make_shared<S_MakeBaby>(); });
     SystemRegistry::Instance().RegisterSystem("PlaySound", []() { return std::make_shared<S_PlaySound>(); });
     SystemRegistry::Instance().RegisterSystem("PlayMusic", []() { return std::make_shared<S_PlayMusic>(); });
+    SystemRegistry::Instance().RegisterSystem("AutoMove", []() { return std::make_shared<S_AutoMove>(); });
 
     ComponentRegistry::Instance().RegisterComponent("PlayerMovementClock", []() { return std::make_shared<C_PlayerMovementClock<sf::Clock>>(); });
     ComponentRegistry::Instance().RegisterComponent("EntityMovementClock", []() { return std::make_shared<C_EntityMovementClock<sf::Clock>>(); });
@@ -68,9 +69,9 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("PositionStart", []() { return std::make_shared<C_PositionStart<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("PositionFollow", []() { return std::make_shared<C_PositionFollow<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Inventory", []() { return std::make_shared<C_Inventory<std::vector<std::shared_ptr<Entity>>>>(); });
-    ComponentRegistry::Instance().RegisterComponent("Weapon", []() { return std::make_shared<C_Weapon<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Weapon", []() { return std::make_shared<C_Weapon<std::pair<int, int>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Bonus", []() { return std::make_shared<C_Bonus<bool>>(); });
-    ComponentRegistry::Instance().RegisterComponent("BonusPower", []() { return std::make_shared<C_BonusPower<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("BonusPower", []() { return std::make_shared<C_BonusPower<std::pair<int, int>>>(); });
     ComponentRegistry::Instance().RegisterComponent("PositionShot", []() { return std::make_shared<C_PositionShot<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Sound", []() { return std::make_shared<C_Sound<sf::Sound>>(); });
     ComponentRegistry::Instance().RegisterComponent("SoundBuffer", []() { return std::make_shared<C_SoundBuffer<sf::SoundBuffer>>(); });
@@ -78,6 +79,12 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("Music", []() { return std::make_shared<C_Music<std::string>>(); });
     ComponentRegistry::Instance().RegisterComponent("MusicIsActive", []() { return std::make_shared<C_MusicIsActive<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("ParallaxClock", []() { return std::make_shared<C_ParallaxClock<sf::Clock>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Invincibility", []() { return std::make_shared<C_Invincibility<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("TimeAutoMove", []() { return std::make_shared<C_TimeAutoMove<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("ClockAutoMove", []() { return std::make_shared<C_ClockAutoMove<sf::Clock>>(); });
+    ComponentRegistry::Instance().RegisterComponent("IsAutoMove", []() { return std::make_shared<C_IsAutoMove<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Invisible", []() { return std::make_shared<C_Invisible<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("EnemyAmmo", []() { return std::make_shared<C_EnemyAmmo<bool>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
     SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);

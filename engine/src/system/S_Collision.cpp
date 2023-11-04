@@ -26,10 +26,13 @@ std::shared_ptr<Entity> S_Collision::reCreateEntity(
 
     file >> data;
     file.close();
-    std::cout << "Before for" << std::endl;
     for (const auto& entity_config : data["entities"]) {
         if (entity_config["id"] == id) {
             new_entity = input.CreateEntityFromConfig(entity_config, data["components"]);
+            std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+            std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
+            sprite->getValue().setTextureRect(rect->getValue());
+            new_entity->SetBaseId(entity_config["id"]);
             arg_all_entities.push_back(new_entity);
         }
     }
@@ -58,12 +61,21 @@ void S_Collision::Execute(
     std::shared_ptr<C_Follow<bool>> new_follow;
     std::shared_ptr<C_Life<int>> life_1;
     std::shared_ptr<C_Life<int>> life_2;
-    std::shared_ptr<C_BonusPower<int>> power_1;
-    std::shared_ptr<C_BonusPower<int>> power_2;
-    std::shared_ptr<C_Weapon<int>> weapon_1;
-    std::shared_ptr<C_Weapon<int>> weapon_2;
+    std::shared_ptr<C_BonusPower<std::pair<int, int>>> power_1;
+    std::shared_ptr<C_BonusPower<std::pair<int, int>>> power_2;
+    std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon_1;
+    std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon_2;
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities;
     std::shared_ptr<Entity> new_entity;
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities_1;
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities_2;
+    std::shared_ptr<C_Invincibility<bool>> is_invincible_1;
+    std::shared_ptr<C_Invincibility<bool>> is_invincible_2;
+    std::shared_ptr<C_IsAutoMove<bool>> is_auto_move;
+    std::shared_ptr<C_Invisible<bool>> is_invisible_1;
+    std::shared_ptr<C_Invisible<bool>> is_invisible_2;
+    std::shared_ptr<C_EnemyAmmo<bool>> enemy_ammo_1;
+    std::shared_ptr<C_EnemyAmmo<bool>> enemy_ammo_2;
     float x1;
     float y1;
     float x2;
@@ -76,10 +88,14 @@ void S_Collision::Execute(
         is_bonus = entity1->template GetComponent<C_Bonus<bool>>();
         is_player_ammo = entity1->template GetComponent<C_PlayerAmmo<bool>>();
         life_1 = entity1->template GetComponent<C_Life<int>>();
-        power_1 = entity1->template GetComponent<C_BonusPower<int>>();
-        weapon_1 = entity1->template GetComponent<C_Weapon<int>>();
+        power_1 = entity1->template GetComponent<C_BonusPower<std::pair<int, int>>>();
+        weapon_1 = entity1->template GetComponent<C_Weapon<std::pair<int, int>>>();
         x1 = static_cast<float>(position_comp_1->getValue().first);
-        y1 = static_cast<float>(position_comp_1->getValue().second);        
+        y1 = static_cast<float>(position_comp_1->getValue().second);
+        vector_entities_1 = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+        is_invincible_1 = entity1->template GetComponent<C_Invincibility<bool>>();
+        is_invisible_1 = entity1->template GetComponent<C_Invisible<bool>>();
+        enemy_ammo_1 = entity1->template GetComponent<C_EnemyAmmo<bool>>();
         for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
             if (entity1 == entity2)
                 continue;
@@ -90,29 +106,54 @@ void S_Collision::Execute(
             is_player_ammo_2 = entity2->template GetComponent<C_PlayerAmmo<bool>>();
             follow = entity2->template GetComponent<C_Follow<bool>>();
             life_2 = entity2->template GetComponent<C_Life<int>>();
-            power_2 = entity2->template GetComponent<C_BonusPower<int>>();
-            weapon_2 = entity2->template GetComponent<C_Weapon<int>>();
+            power_2 = entity2->template GetComponent<C_BonusPower<std::pair<int, int>>>();
+            weapon_2 = entity2->template GetComponent<C_Weapon<std::pair<int, int>>>();
             x2 = static_cast<float>(position_comp_2->getValue().first);
             y2 = static_cast<float>(position_comp_2->getValue().second);
+            vector_entities_2 = entity2->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+            is_invincible_2 = entity2->template GetComponent<C_Invincibility<bool>>();
+            is_invisible_2 = entity2->template GetComponent<C_Invisible<bool>>();
+            enemy_ammo_2 = entity2->template GetComponent<C_EnemyAmmo<bool>>();
+            is_auto_move = entity2->template GetComponent<C_IsAutoMove<bool>>();
             if (!position_comp_2 || !hitbox_comp_2)
                 continue;
             if (x1 < x2 + hitbox_comp_2->getValue().first &&
                 x1 + hitbox_comp_1->getValue().first> x2 &&
                 y1 < y2 + hitbox_comp_2->getValue().second &&
                 y1 + hitbox_comp_1->getValue().second > y2) {
+
+                    std::list<int> my_list = {22, 23, 24, 38, 39, 40};
+
                     if (is_player && is_player_ammo_2 && follow) {
+                        if (is_auto_move)
+                            if (is_auto_move->getValue())
+                                continue;
                         vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
                         if (!follow->getValue()) {
-                            if (x2 - x1 > 0)
-                                new_entity = reCreateEntity(arg_all_entities, 22, position_comp_2);
-                            else
-                                new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
-                            entity2->is_dead_ = true;
-                            vector_entities->getValue().push_back(new_entity);
-                            new_follow = new_entity->template GetComponent<C_Follow<bool>>();
-                            new_follow->getValue() = true;
+                            if ((std::find(my_list.begin(), my_list.end(), entity2->GetBaseId()) != my_list.end())) {
+                                if (x2 - x1 > 0) {
+                                    new_entity = reCreateEntity(arg_all_entities, 22, position_comp_2);
+                                } else {
+                                    new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
+                                }
+                                new_follow = new_entity->template GetComponent<C_Follow<bool>>();
+                                new_follow->getValue() = true;
+
+                                std::shared_ptr<C_Weapon<std::pair<int, int>>> old_weapon = entity2->template GetComponent<C_Weapon<std::pair<int, int>>>();
+                                std::shared_ptr<C_Weapon<std::pair<int, int>>> new_weapon = new_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+
+                                new_weapon->getValue() = old_weapon->getValue();
+
+                                vector_entities->getValue().push_back(new_entity);
+                                remove_copy(vector_entities->getValue().begin(), vector_entities->getValue().end(), vector_entities->getValue().begin(), entity2);
+                                entity2->is_dead_ = true;
+                            } else {
+                                follow->getValue() = true;
+                                vector_entities->getValue().push_back(entity2);
+                            }
                         }
                     }
+
                     if ((is_player && is_player_2) ||
                         (is_player_ammo && is_player_ammo_2) ||
                         (is_player_ammo && is_player_2) ||
@@ -124,18 +165,42 @@ void S_Collision::Execute(
                         (is_bonus_2 && !is_player))
                     continue;
 
+                    if ((is_invisible_1 && enemy_ammo_2) || (is_invisible_2 && enemy_ammo_1))
+                        continue;
+
                     if (is_bonus && is_player_2) {
+                        for (std::shared_ptr<Entity>& v_entity: vector_entities_2->getValue()) {
+                            if ((std::find(my_list.begin(), my_list.end(), v_entity->GetId()) != my_list.end())) {
+                                std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+                                weapon->getValue() = power_1->getValue();
+                            }
+                        }
                         weapon_2->getValue() = power_1->getValue();
                         entity1->is_dead_ = true;
                         continue;
                     }
                     if (is_bonus_2 && is_player) {
+                        for (std::shared_ptr<Entity>& v_entity: vector_entities_1->getValue()) {
+                            if ((std::find(my_list.begin(), my_list.end(), v_entity->GetId()) != my_list.end())) {
+                                std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+                                weapon->getValue() = power_2->getValue();
+                            }
+                        }
                         weapon_1->getValue() = power_2->getValue();
                         entity2->is_dead_ = true;
                         continue;
                     }
                     if ((!is_player && !is_player_2 && !is_player_ammo && !is_player_ammo_2 && !is_bonus && !is_bonus_2))
                         continue;
+
+                    if (is_player_ammo && is_invincible_1) {
+                        entity2->is_dead_ = true;
+                    }
+
+                    if (is_player_ammo_2 && is_invincible_2) {
+                        entity1->is_dead_ = true;
+                    }
+
                     if (life_1->getValue() != 0)
                         life_1->setValue(life_1->getValue() - 1);
                     if (life_2->getValue() != 0)

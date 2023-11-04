@@ -8,9 +8,9 @@ std::vector<std::shared_ptr<Entity>> S_Input::Filter(const std::vector<std::shar
             entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
             entity->HasComponent(typeid(C_IsMoving<bool>)) &&
             entity->HasComponent(typeid(C_Admin<bool>)) &&
-            entity->HasComponent(typeid(C_Weapon<int>)) &&
+            entity->HasComponent(typeid(C_Weapon<std::pair<int, int>>)) &&
             entity->HasComponent(typeid(C_ChargedShoot<sf::Clock>)) &&
-            entity->HasComponent(typeid(C_PlayerMovementClock<sf::Clock>))
+            entity->HasComponent(typeid(C_PlayerMovementClock<sf::Clock>)) 
             ) {
             filtered_entities.push_back(entity);
         }
@@ -119,7 +119,7 @@ std::shared_ptr<Entity> S_Input::createEntity(
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
-            std::cout << position_shot->getValue().first << std::endl;
+            // std::cout << position_shot->getValue().first << std::endl;
             position_new->setValue(std::make_pair(arg_position_comp->getValue().first + position_shot->getValue().first, arg_position_comp->getValue().second + position_shot->getValue().second));
             arg_all_entities.push_back(new_entity);
         }
@@ -264,28 +264,62 @@ void S_Input::SpecialShot(
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
 
     //Player attacks
-    std::shared_ptr<C_Weapon<int>> weapon_player = entity->template GetComponent<C_Weapon<int>>();
-    if (weapon_player->getValue() != -1) {
-        if (weapon_player->getValue() == 25) {
-            for (int i = 0; i < 1; i++) { //TODO Set to 5
-                createEntity(arg_all_entities, weapon_player->getValue(), position_comp);
-                createEntity(arg_all_entities, 32, position_comp); //TODO Change that
+    std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon_player = entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+
+    std::list<int> my_list_1 = {22, 23, 24};
+    std::list<int> my_list_2 = {38, 39, 40};
+    std::list<int> my_list_3 = {4, 29};
+
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+        if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
+            std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            if (weapon->getValue().first != -1) {
+                if (weapon->getValue().first == 25) {
+                    for (int i = 0; i < 1; i++) { //TODO Set to 5
+                        createEntity(arg_all_entities, weapon->getValue().first, position_force);
+                        createEntity(arg_all_entities, 32, position_force); //TODO Change that
+                    }
+                }
+                if (weapon->getValue().first == 26) {
+                    createEntity(arg_all_entities, weapon->getValue().first, position_force);
+                }
             }
         }
-        if (weapon_player->getValue() == 26) {
-            createEntity(arg_all_entities, 33, position_comp);
-            createEntity(arg_all_entities, weapon_player->getValue(), position_comp);
+        if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+            std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            if (weapon->getValue().second != -1) {
+                if (weapon->getValue().second == 32) {
+                    for (int i = 0; i < 1; i++) { //TODO Set to 5
+                        createEntity(arg_all_entities, weapon->getValue().second, position_force);
+                        createEntity(arg_all_entities, 25, position_force); //TODO Change that
+                    }
+                }
+                if (weapon->getValue().second == 43) {
+                    createEntity(arg_all_entities, weapon->getValue().second, position_force);
+                }
+            }
         }
     }
 
     //Drone attacks
-    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) { //Check if vector_entities contain a drone left or right
         if (v_entity->GetId() == 27)
             v_entity->is_dead_ = true;
-        if ((v_entity->GetId() == 4  || v_entity->GetId() == 29) && weapon_player->getValue() == 26) {
+        if ((std::find(my_list_3.begin(), my_list_3.end(), v_entity->GetBaseId()) != my_list_3.end()) && weapon_player->getValue().first == 26) {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-            std::shared_ptr<C_Weapon<int>> weapon = v_entity->template GetComponent<C_Weapon<int>>();
-            createEntity(arg_all_entities, weapon->getValue(), position_drone);
+            std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+                if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
+                    createEntity(arg_all_entities, weapon->getValue().first, position_drone);
+                }
+            }
+            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+                if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+                    createEntity(arg_all_entities, weapon->getValue().second, position_drone);
+                }
+            }
         }
     }
 }
@@ -339,6 +373,30 @@ void S_Input::CheckTouchPressed(
     }
 }
 
+void S_Input::DropForce(
+    const std::shared_ptr<Entity>& entity)
+{
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+
+    std::list<int> my_list_1 = {22, 23, 24};
+    std::list<int> my_list_2 = {38, 39, 40};
+
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+        if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end()) || (std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+            std::shared_ptr<C_ClockAutoMove<sf::Clock>> clock = v_entity->template GetComponent<C_ClockAutoMove<sf::Clock>>();
+            std::shared_ptr<C_IsAutoMove<bool>> is_auto_move = v_entity->template GetComponent<C_IsAutoMove<bool>>();
+            std::shared_ptr<C_Follow<bool>> is_follow = v_entity->template GetComponent<C_Follow<bool>>();
+
+            if (is_follow->getValue()) {
+                is_follow->getValue() = false;
+                is_auto_move->getValue() = true;
+                clock->getValue().restart();
+            }
+
+        }
+    }    
+}
+
 void S_Input::CheckTouchReleased(
     const std::shared_ptr<Entity>& entity,
     std::vector<std::shared_ptr<Entity>>& arg_all_entities,
@@ -373,6 +431,9 @@ void S_Input::CheckTouchReleased(
             BasicShot(entity, arg_all_entities, position_comp);
             SpecialShot(entity, arg_all_entities, position_comp);
             is_charging->getValue() = false;
+        }
+        if (event_->key.code == sf::Keyboard::D) {
+            DropForce(entity);
         }
         ChangeAdminMode(entity, event_);
     }

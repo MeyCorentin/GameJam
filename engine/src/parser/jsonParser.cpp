@@ -45,7 +45,7 @@ Variant JsonParser::ParsePairDoubleValue(const json& arg_value) {
     std::pair<double, double> pair_value;
 
     if (!arg_value.is_object() || !arg_value.contains("x") || !arg_value.contains("y")) {
-        std::cerr << "Invalid value for Pair type." << std::endl;
+        std::cerr << "Invalid value for Pair Double type." << std::endl;
         return Variant();
     }
     x = arg_value["x"];
@@ -60,7 +60,7 @@ Variant JsonParser::ParsePairIntValue(const json& arg_value) {
     std::pair<int, int> pair_value;
 
     if (!arg_value.is_object() || !arg_value.contains("x") || !arg_value.contains("y")) {
-        std::cerr << "Invalid value for Pair type." << std::endl;
+        std::cerr << "Invalid value for Pair Int type." << std::endl;
         return Variant();
     }
     x = arg_value["x"];
