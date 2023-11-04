@@ -2,9 +2,9 @@
 
 #include "System.hpp"
 
-#include "../includes/components/C_TimeAutoMove.hpp"
-#include "../includes/components/C_ClockAutoMove.hpp"
-#include "../includes/components/C_IsAutoMove.hpp"
+#include "../components/C_TimeAutoMove.hpp"
+#include "../components/C_ClockAutoMove.hpp"
+#include "../components/C_IsAutoMove.hpp"
 
 class S_AutoMove : public System {
     public:

@@ -13,11 +13,11 @@
 #include "../components/C_BonusPower.hpp"
 #include "../components/C_PositionFollow.hpp"
 #include "../components/C_Invincibility.hpp"
-#include "../includes/components/C_TimeAutoMove.hpp"
-#include "../includes/components/C_ClockAutoMove.hpp"
-#include "../includes/components/C_IsAutoMove.hpp"
-#include "../includes/components/C_Invisible.hpp"
-#include "../includes/components/C_EnemyAmmo.hpp"
+#include "../components/C_TimeAutoMove.hpp"
+#include "../components/C_ClockAutoMove.hpp"
+#include "../components/C_IsAutoMove.hpp"
+#include "../components/C_Invisible.hpp"
+#include "../components/C_EnemyAmmo.hpp"
 
 #include "S_Input.hpp"
 
