@@ -387,9 +387,12 @@ void S_Input::DropForce(
             std::shared_ptr<C_IsAutoMove<bool>> is_auto_move = v_entity->template GetComponent<C_IsAutoMove<bool>>();
             std::shared_ptr<C_Follow<bool>> is_follow = v_entity->template GetComponent<C_Follow<bool>>();
 
-            is_follow->getValue() = false;
-            is_auto_move->getValue() = true;
-            clock->getValue().restart();
+            if (is_follow->getValue()) {
+                is_follow->getValue() = false;
+                is_auto_move->getValue() = true;
+                clock->getValue().restart();
+            }
+
         }
     }    
 }
