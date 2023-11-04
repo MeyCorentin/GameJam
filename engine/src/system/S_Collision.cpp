@@ -26,10 +26,12 @@ std::shared_ptr<Entity> S_Collision::reCreateEntity(
 
     file >> data;
     file.close();
-    std::cout << "Before for" << std::endl;
     for (const auto& entity_config : data["entities"]) {
         if (entity_config["id"] == id) {
             new_entity = input.CreateEntityFromConfig(entity_config, data["components"]);
+            std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+            std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
+            sprite->getValue().setTextureRect(rect->getValue());
             arg_all_entities.push_back(new_entity);
         }
     }
@@ -71,7 +73,8 @@ void S_Collision::Execute(
     float x2;
     float y2;
 
-    for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
+    for (const std::shared_ptr<Entity>& entity1 : arg_all_entities) {
+        std::cout << "Hre" << std::endl;
         position_comp_1 = entity1->template GetComponent<C_Position<std::pair<double, double>>>();
         hitbox_comp_1 = entity1->template GetComponent<C_Hitbox<std::pair<int, int>>>();
         is_player = entity1->template GetComponent<C_Player<int>>();
@@ -83,7 +86,8 @@ void S_Collision::Execute(
         x1 = static_cast<float>(position_comp_1->getValue().first);
         y1 = static_cast<float>(position_comp_1->getValue().second);
         vector_entities_1 = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
-        for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
+        for (const std::shared_ptr<Entity>& entity2 : arg_all_entities) {
+            std::cout << "Hre for" << std::endl;
             if (entity1 == entity2)
                 continue;
             position_comp_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
@@ -104,19 +108,30 @@ void S_Collision::Execute(
                 x1 + hitbox_comp_1->getValue().first> x2 &&
                 y1 < y2 + hitbox_comp_2->getValue().second &&
                 y1 + hitbox_comp_1->getValue().second > y2) {
+
+                    std::list<int> my_list = {22, 23, 24, 38, 39, 40};
+
                     if (is_player && is_player_ammo_2 && follow) {
                         vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
                         if (!follow->getValue()) {
-                            if (x2 - x1 > 0)
-                                new_entity = reCreateEntity(arg_all_entities, 22, position_comp_2);
-                            else
-                                new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
-                            entity2->is_dead_ = true;
-                            vector_entities->getValue().push_back(new_entity);
-                            new_follow = new_entity->template GetComponent<C_Follow<bool>>();
-                            new_follow->getValue() = true;
+                            if ((std::find(my_list.begin(), my_list.end(), entity2->GetBaseId()) != my_list.end())) {
+                                std::cout << "In if" << std::endl;
+                                if (x2 - x1 > 0)
+                                    new_entity = reCreateEntity(arg_all_entities, 22, position_comp_2);
+                                else
+                                    new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
+                                entity2->is_dead_ = true;
+                                vector_entities->getValue().push_back(new_entity);
+                                new_follow = new_entity->template GetComponent<C_Follow<bool>>();
+                                new_follow->getValue() = true;
+                            } else {
+                                std::cout << "In else" << std::endl;
+                                vector_entities->getValue().push_back(entity2);
+                                follow->getValue() = true;
+                            }
                         }
                     }
+
                     if ((is_player && is_player_2) ||
                         (is_player_ammo && is_player_ammo_2) ||
                         (is_player_ammo && is_player_2) ||
@@ -128,14 +143,11 @@ void S_Collision::Execute(
                         (is_bonus_2 && !is_player))
                     continue;
 
-                    std::list<int> my_list = {22, 23, 24, 38, 39, 40};
-
                     if (is_bonus && is_player_2) {
                         for (std::shared_ptr<Entity>& v_entity: vector_entities_2->getValue()) {
                             if ((std::find(my_list.begin(), my_list.end(), v_entity->GetId()) != my_list.end())) {
                                 std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
                                 weapon->getValue() = power_1->getValue();
-                                std::cout << weapon->getValue().first << " - " << weapon->getValue().second << std::endl;
                             }
                         }
                         weapon_2->getValue() = power_1->getValue();
@@ -147,7 +159,6 @@ void S_Collision::Execute(
                             if ((std::find(my_list.begin(), my_list.end(), v_entity->GetId()) != my_list.end())) {
                                 std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
                                 weapon->getValue() = power_2->getValue();
-                                std::cout << weapon->getValue().first << " - " << weapon->getValue().second << std::endl;
                             }
                         }
                         weapon_1->getValue() = power_2->getValue();

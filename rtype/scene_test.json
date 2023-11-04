@@ -2898,7 +2898,7 @@
                 },
                 {
                     "component_id": 41,
-                    "value": {"x": 30, "y": -5}
+                    "value": {"x": -30, "y": -5}
                 }
             ]
         }
@@ -2909,7 +2909,11 @@
             "mob_id": [
                 {
                     "entity_id": 22,
-                    "position": { "x": 300, "y": 100 }
+                    "position": { "x": 100, "y": 100 }
+                },
+                {
+                    "entity_id": 22,
+                    "position": { "x": 200, "y": 100 }
                 },
                 {
                     "entity_id": 1,
