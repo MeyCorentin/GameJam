@@ -36,7 +36,7 @@ void UDPServer::run_server(Ecs &ecs)
             BinaryProtocole::BinaryMessage msg_new_player = {1, static_cast<uint32_t>(clients_.size()), 1920, 1080, 100};
             send_to_all(msg_new_player);
             connected_client++;
-            for (loop_client = 0; loop_client != connected_client - 1; loop_client++)
+            for (loop_client = 1; loop_client != connected_client; loop_client++)
             {
                 BinaryProtocole::BinaryMessage msg_create_player = {1, static_cast<uint32_t>(loop_client), 1920, 1080, 100};
                 send_to_last(msg_create_player);
