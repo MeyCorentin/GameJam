@@ -68,6 +68,9 @@
 #include "../includes/components/C_TimeAutoMove.hpp"
 #include "../includes/components/C_ClockAutoMove.hpp"
 #include "../includes/components/C_IsAutoMove.hpp"
+#include "../includes/components/C_Invisible.hpp"
+#include "../includes/components/C_EnemyAmmo.hpp"
+
 #include "../includes/components/ComponentBase.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"

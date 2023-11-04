@@ -72,6 +72,10 @@ void S_Collision::Execute(
     std::shared_ptr<C_Invincibility<bool>> is_invincible_1;
     std::shared_ptr<C_Invincibility<bool>> is_invincible_2;
     std::shared_ptr<C_IsAutoMove<bool>> is_auto_move;
+    std::shared_ptr<C_Invisible<bool>> is_invisible_1;
+    std::shared_ptr<C_Invisible<bool>> is_invisible_2;
+    std::shared_ptr<C_EnemyAmmo<bool>> enemy_ammo_1;
+    std::shared_ptr<C_EnemyAmmo<bool>> enemy_ammo_2;
     float x1;
     float y1;
     float x2;
@@ -90,6 +94,8 @@ void S_Collision::Execute(
         y1 = static_cast<float>(position_comp_1->getValue().second);
         vector_entities_1 = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
         is_invincible_1 = entity1->template GetComponent<C_Invincibility<bool>>();
+        is_invisible_1 = entity1->template GetComponent<C_Invisible<bool>>();
+        enemy_ammo_1 = entity1->template GetComponent<C_EnemyAmmo<bool>>();
         for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
             if (entity1 == entity2)
                 continue;
@@ -106,6 +112,8 @@ void S_Collision::Execute(
             y2 = static_cast<float>(position_comp_2->getValue().second);
             vector_entities_2 = entity2->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
             is_invincible_2 = entity2->template GetComponent<C_Invincibility<bool>>();
+            is_invisible_2 = entity2->template GetComponent<C_Invisible<bool>>();
+            enemy_ammo_2 = entity2->template GetComponent<C_EnemyAmmo<bool>>();
             is_auto_move = entity2->template GetComponent<C_IsAutoMove<bool>>();
             if (!position_comp_2 || !hitbox_comp_2)
                 continue;
@@ -156,6 +164,9 @@ void S_Collision::Execute(
                         (is_bonus && !is_player_2) ||
                         (is_bonus_2 && !is_player))
                     continue;
+
+                    if ((is_invisible_1 && enemy_ammo_2) || (is_invisible_2 && enemy_ammo_1))
+                        continue;
 
                     if (is_bonus && is_player_2) {
                         for (std::shared_ptr<Entity>& v_entity: vector_entities_2->getValue()) {

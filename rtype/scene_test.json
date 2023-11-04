@@ -316,6 +316,16 @@
             "id": 54,
             "type": "IsAutoMove",
             "value_type": "Bool"
+        },
+        {
+            "id": 56,
+            "type": "Invisible",
+            "value_type": "Bool"
+        },
+        {
+            "id": 57,
+            "type": "EnemyAmmo",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -583,6 +593,10 @@
                 {
                     "component_id": 46,
                     "value": true
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -725,6 +739,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 30, "y": 5}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -790,6 +808,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 30, "y": 5}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -855,6 +877,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 30, "y": 5}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -920,6 +946,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 30, "y": 5}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -985,6 +1015,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 30, "y": 5}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -1042,6 +1076,10 @@
                 {
                     "component_id": 32,
                     "value": 19
+                },
+                {
+                    "component_id": 57,
+                    "value": true
                 }
             ]
         },
@@ -1905,6 +1943,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 0, "y": 0}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -1966,6 +2008,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 30, "y": -5}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -2222,6 +2268,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 0, "y": 2}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -2287,6 +2337,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 0, "y": 2}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -2348,6 +2402,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 0, "y": 0}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -2951,6 +3009,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 0, "y": 2}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -3016,6 +3078,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": 0, "y": 2}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         },
@@ -3077,6 +3143,10 @@
                 {
                     "component_id": 41,
                     "value": {"x": -30, "y": -5}
+                },
+                {
+                    "component_id": 56,
+                    "value": true
                 }
             ]
         }
