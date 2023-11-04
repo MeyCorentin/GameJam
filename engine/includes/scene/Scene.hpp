@@ -67,5 +67,7 @@ class Scene {
 
         void InputFromPlayer(std::pair<int,int> arg_message);
 
+        void SetPlayerPosition(int id, float x, float y);
+
         void Update(int arg_is_server);
 };

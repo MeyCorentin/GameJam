@@ -146,6 +146,22 @@ std::vector<EntityPosition> Scene::GetEntityPosition()
     return positions;
 }
 
+void Scene::SetPlayerPosition(int arg_id, float arg_x, float arg_y)
+{
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
+    std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size;
+    std::shared_ptr<C_Player<int>> index;
+    for (const std::shared_ptr<Entity>& entity : entities_) {
+        index = entity->template GetComponent<C_Player<int>>();
+        if (!index)
+            continue;
+        if (index->getValue() != arg_id)
+            continue;
+        position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
+        position_comp->setValue(std::make_pair(arg_x, arg_y));
+    }
+}
+
 void Scene::InputFromPlayer(std::pair<int,int> arg_message)
 {
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
@@ -160,6 +176,8 @@ void Scene::InputFromPlayer(std::pair<int,int> arg_message)
         position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
         if (!position_comp)
+            continue;
+        if (arg_message.second == 0 || arg_message.second == 100)
             continue;
         switch (arg_message.second) {
             case 200: // Up
@@ -184,7 +202,6 @@ void Scene::InputFromPlayer(std::pair<int,int> arg_message)
                 std::cerr << "Unknown message data: " << arg_message.second << std::endl;
                 break;
         }
-        std::cout << "MOVE" << std::endl;
     }
 }
 

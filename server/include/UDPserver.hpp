@@ -28,7 +28,6 @@ class UDPServer {
         void run_server(Ecs &_ecs);
         std::vector<std::pair<int,int>> input_queue_;
         std::mutex queue_mutex_;
-
         boost::asio::io_context& io_context_;
         udp::socket socket_;
         udp::endpoint remote_endpoint_;

@@ -14,6 +14,7 @@ void UDPServer::run_server(Ecs &ecs)
     int temp_value;
     int connected_client = 0;
     int loop_client = 0;
+
     while (true)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
@@ -25,22 +26,35 @@ void UDPServer::run_server(Ecs &ecs)
         if (connected_client < clients_.size())
         {
             ecs.scene_.AddNewPlayer(clients_.size());
-            std::vector<EntityPosition> player_position_list = ecs.scene_.GetPlayerPosition();
-            std::cout << "-- PLAYER POSITION --" << std::endl;
-            for (const auto& position : player_position_list)
-                std::cout  << position.id << " | " << position.base_id << " | " << position.x_position << " | " << position.y_position << std::endl;
-            std::cout << "-- ENTITY POSITION --" << std::endl;
-            std::vector<EntityPosition> entity_position_list = ecs.scene_.GetEntityPosition();
-            for (const auto& position : entity_position_list)
-                std::cout << position.id << " | " << position.base_id << " | " << position.x_position << " | "<< position.y_position << std::endl;
+
+
+
+
             BinaryProtocole::BinaryMessage msg_new_player = {1, static_cast<uint32_t>(clients_.size()), 1920, 1080, 100};
             send_to_all(msg_new_player);
             connected_client++;
+
+
             for (loop_client = 1; loop_client != connected_client; loop_client++)
             {
                 BinaryProtocole::BinaryMessage msg_create_player = {1, static_cast<uint32_t>(loop_client), 1920, 1080, 100};
                 send_to_last(msg_create_player);
             }
+
+            std::cout << "-- ENTITY POSITION --" << std::endl;
+            std::vector<EntityPosition> entity_position_list = ecs.scene_.GetEntityPosition();
+            for (const auto& position : entity_position_list)
+            {
+                std::cout << position.id << " | " << position.base_id << " | " << position.x_position << " | "<< position.y_position << std::endl;
+            }
+            std::cout << "-- PLAYER POSITION --" << std::endl;
+            std::vector<EntityPosition> player_position_list = ecs.scene_.GetPlayerPosition();
+            for (const auto& position : player_position_list)
+            {
+                BinaryProtocole::BinaryMessage msg_position_player = {1, static_cast<uint32_t>(position.id) , static_cast<uint16_t>(position.x_position), static_cast<uint16_t>(position.y_position), 0};
+                send_to_all(msg_position_player);
+            }
+
         }
         if (!input_queue_.empty())
         {
