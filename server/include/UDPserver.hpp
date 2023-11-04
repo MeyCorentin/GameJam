@@ -21,6 +21,10 @@ class UDPServer {
         void send_to_all(BinaryProtocole::BinaryMessage msg);
         void send_to_last(BinaryProtocole::BinaryMessage msg);
         void start_listening();
+        void create_players(int connected_client);
+        void send_entity_positions(Ecs &ecs);
+        void send_player_positions(Ecs &ecs);
+        void process_input_queue(Ecs &ecs);
 
     private:
         void read_data();

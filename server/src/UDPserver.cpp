@@ -5,7 +5,6 @@ UDPServer::UDPServer(boost::asio::io_context& io_context, unsigned short port)
 {
 
 }
-
 void UDPServer::run_server(Ecs &ecs)
 {
     std::pair<int, int> temp;
@@ -21,70 +20,87 @@ void UDPServer::run_server(Ecs &ecs)
         ecs.Update(1);
         auto endTime =  std::chrono::high_resolution_clock::now();
         auto elapsedTime = std::chrono::duration_cast<std::chrono::duration<double>>(endTime - startTime).count();
+
         if (elapsedTime < (1.0 / 60))
             std::this_thread::sleep_for(std::chrono::duration<double>((1.0 / 60) - elapsedTime));
         if (connected_client < clients_.size())
         {
             ecs.scene_.AddNewPlayer(clients_.size());
-
-
-
-
             BinaryProtocole::BinaryMessage msg_new_player = {1, static_cast<uint32_t>(clients_.size()), 1920, 1080, 100};
             send_to_all(msg_new_player);
             connected_client++;
-
-
-            for (loop_client = 1; loop_client != connected_client; loop_client++)
-            {
-                BinaryProtocole::BinaryMessage msg_create_player = {1, static_cast<uint32_t>(loop_client), 1920, 1080, 100};
-                send_to_last(msg_create_player);
-            }
-
-            std::cout << "-- ENTITY POSITION --" << std::endl;
-            std::vector<EntityPosition> entity_position_list = ecs.scene_.GetEntityPosition();
-            for (const auto& position : entity_position_list)
-            {
-                std::cout << position.id << " | " << position.base_id << " | " << position.x_position << " | "<< position.y_position << std::endl;
-            }
-            std::cout << "-- PLAYER POSITION --" << std::endl;
-            std::vector<EntityPosition> player_position_list = ecs.scene_.GetPlayerPosition();
-            for (const auto& position : player_position_list)
-            {
-                BinaryProtocole::BinaryMessage msg_position_player = {1, static_cast<uint32_t>(position.id) , static_cast<uint16_t>(position.x_position), static_cast<uint16_t>(position.y_position), 0};
-                send_to_all(msg_position_player);
-            }
+            create_players(connected_client);
+            send_entity_positions(ecs);
+            send_player_positions(ecs);
 
         }
         if (!input_queue_.empty())
+            process_input_queue(ecs);
+    }
+}
+
+void UDPServer::create_players(int connected_client)
+{
+    int loop_client;
+
+    for (loop_client = 1; loop_client != connected_client; loop_client++)
+    {
+        BinaryProtocole::BinaryMessage msg_create_player = {1, static_cast<uint32_t>(loop_client), 1920, 1080, 100};
+        send_to_last(msg_create_player);
+    }
+}
+
+void UDPServer::send_entity_positions(Ecs &ecs)
+{
+    std::cout << "-- ENTITY POSITION --" << std::endl;
+    std::vector<EntityPosition> entity_position_list = ecs.scene_.GetEntityPosition();
+    for (const auto& position : entity_position_list)
+        std::cout << position.id << " | " << position.base_id << " | " << position.x_position << " | "<< position.y_position << std::endl;
+}
+
+void UDPServer::send_player_positions(Ecs &ecs)
+{
+    std::cout << "-- PLAYER POSITION --" << std::endl;
+    std::vector<EntityPosition> player_position_list = ecs.scene_.GetPlayerPosition();
+    for (const auto& position : player_position_list)
+    {
+        BinaryProtocole::BinaryMessage msg_position_player = {1, static_cast<uint32_t>(position.id) , static_cast<uint16_t>(position.x_position), static_cast<uint16_t>(position.y_position), 0};
+        send_to_all(msg_position_player);
+    }
+}
+
+void UDPServer::process_input_queue(Ecs &ecs)
+{
+    std::pair<int, int> input = input_queue_.front();
+    std::pair<int, int> temp;
+
+    if (input.second % 2 == 0)
+    {
+        temp = input;
+        input_queue_.erase(input_queue_.begin());
+        input_queue_.push_back(std::make_pair(temp.first, temp.second));
+    }
+    else
+    {
+        for (auto it = input_queue_.begin(); it != input_queue_.end();)
         {
-            std::pair<int, int> input = input_queue_.front();
-            if (input.second % 2 == 0)
-            {
-                temp = input;
-                input_queue_.erase(input_queue_.begin());
-                input_queue_.push_back(std::make_pair(temp.first, temp.second));
-            } else {
-                for (auto it = input_queue_.begin(); it != input_queue_.end();) {
-                    if (it->first == input.first && it->second == input.second - 1) {
-                        it = input_queue_.erase(it);
-                    } else {
-                        ++it;
-                    }
-                }
-                input_queue_.erase(input_queue_.begin());
-            }
-            for (auto it = input_queue_.begin(); it != input_queue_.end();++it)
-            {
-                if (it->second % 2 == 0)
-                {
-                    BinaryProtocole::BinaryMessage msg = {1, static_cast<uint32_t>(it->first), 1920, 1080, static_cast<uint16_t>(it->second)};
-                    ecs.scene_.InputFromPlayer(*it);
-                }
-            }
+            if (it->first == input.first && it->second == input.second - 1)
+                it = input_queue_.erase(it);
+            else
+                ++it;
+        }
+        input_queue_.erase(input_queue_.begin());
+    }
+    for (auto it = input_queue_.begin(); it != input_queue_.end(); ++it)
+    {
+        if (it->second % 2 == 0)
+        {
+            BinaryProtocole::BinaryMessage msg = {1, static_cast<uint32_t>(it->first), 1920, 1080, static_cast<uint16_t>(it->second)};
+            ecs.scene_.InputFromPlayer(*it);
         }
     }
 }
+
 
 void UDPServer::start_listening()
 {
