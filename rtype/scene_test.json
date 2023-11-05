@@ -1106,11 +1106,11 @@
                 },
                 {
                     "component_id": 7,
-                    "value": { "x": 1, "y": 0.2}
+                    "value": { "x": -1, "y": 0}
                 },
                 {
                     "component_id": 8,
-                    "value": 0
+                    "value": 4
                 },
                 {
                     "component_id": 11,
@@ -2222,6 +2222,14 @@
                     "value": { "x": 33, "y": 34 }
                 },
                 {
+                    "component_id": 7,
+                    "value": { "x": -1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 5
+                },
+                {
                     "component_id": 11,
                     "value": 0
                 },
@@ -2660,6 +2668,14 @@
                     "value": { "x": 45, "y": 43 }
                 },
                 {
+                    "component_id": 7,
+                    "value": { "x": -1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 6
+                },
+                {
                     "component_id": 11,
                     "value": 0
                 },
@@ -2784,6 +2800,14 @@
                 {
                     "component_id": 6,
                     "value": { "x": 45, "y": 43 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": -1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 6
                 },
                 {
                     "component_id": 11,
@@ -3608,7 +3632,7 @@
                 },
                 {
                     "component_id": 27,
-                    "value": { "a": 1.5, "f": 0.5, "p": 0}
+                    "value": { "a": 0.5, "f": 3, "p": 0}
                 },
                 {
                     "component_id": 28,
@@ -3790,6 +3814,396 @@
                     "value": 0
                 }
             ]
+        },
+        {
+            "id": 52,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -0.3, "f": 0.5, "p": 0}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 53,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -1, "f": 1, "p": 0}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 54,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -1.5, "f": 1, "p": 0.5}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 55,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -2, "f": 1, "p": 1}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -2.5, "f": 1, "p": 1.5}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 57,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -4, "f": 1, "p": 1.5}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
         }
     ],
     "spawn": [
@@ -3806,7 +4220,31 @@
                 },
                 {
                     "entity_id": 48,
-                    "position": { "x": 200, "y": 150 }
+                    "position": { "x": 245, "y": 205 }
+                },
+                {
+                    "entity_id": 52,
+                    "position": { "x": 235, "y": 205 }
+                },
+                {
+                    "entity_id": 53,
+                    "position": { "x": 225, "y": 205 }
+                },
+                {
+                    "entity_id": 54,
+                    "position": { "x": 215, "y": 205 }
+                },
+                {
+                    "entity_id": 55,
+                    "position": { "x": 205, "y": 205 }
+                },
+                {
+                    "entity_id": 56,
+                    "position": { "x": 195, "y": 205 }
+                },
+                {
+                    "entity_id": 57,
+                    "position": { "x": 185, "y": 205 }
                 },
                 {
                     "entity_id": 4,
