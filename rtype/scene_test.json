@@ -336,6 +336,11 @@
             "id": 59,
             "type": "SingleAnimation",
             "value_type": "Bool"
+        },
+        {
+            "id": 60,
+            "type": "AnimationDirection",
+            "value_type": "Int"
         }
     ],
     "entities": [
@@ -437,6 +442,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -522,6 +531,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -603,6 +616,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -675,6 +692,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -749,6 +770,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -821,6 +846,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -895,6 +924,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -968,6 +1001,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1032,6 +1069,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -1130,6 +1171,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1170,6 +1215,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -1212,6 +1261,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1253,6 +1306,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1293,6 +1350,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -1347,6 +1408,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1399,6 +1464,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -1453,6 +1522,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1505,6 +1578,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -1559,6 +1636,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1607,6 +1688,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -1701,6 +1786,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1793,6 +1882,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -1887,6 +1980,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1955,6 +2052,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -2025,6 +2126,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2086,6 +2191,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2146,6 +2255,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -2228,6 +2341,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2300,6 +2417,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -2374,6 +2495,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2443,6 +2568,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2499,6 +2628,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -2557,6 +2690,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2609,6 +2746,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -2666,6 +2807,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -2759,6 +2904,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -2854,6 +3003,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2948,6 +3101,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -3020,6 +3177,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -3094,6 +3255,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -3163,6 +3328,10 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -3212,6 +3381,10 @@
                 {
                     "component_id": 58,
                     "value": 0.3
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -3244,11 +3417,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 470, "top": 1928, "width": 33, "height": 32}
+                    "value": { "left": 636, "top": 1928, "width": 33, "height": 32}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 198, "y": 32, "start_x": 470, "start_y": 1928}
+                    "value": { "x": -132, "y": 32, "start_x": 636, "start_y": 1928}
                 },
                 {
                     "component_id": 14,
@@ -3264,6 +3437,10 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
                     "value": 1
                 }
             ]
@@ -3297,11 +3474,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 570, "top": 1964, "width": 33, "height": 32}
+                    "value": { "left": 636, "top": 1964, "width": 33, "height": 32}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 99, "y": 32, "start_x": 570, "start_y": 1964}
+                    "value": { "x": -33, "y": 32, "start_x": 636, "start_y": 1964}
                 },
                 {
                     "component_id": 14,
@@ -3309,7 +3486,7 @@
                 },
                 {
                     "component_id": 32,
-                    "value": 21
+                    "value": 50
                 },
                 {
                     "component_id": 33,
@@ -3322,6 +3499,10 @@
                 {
                     "component_id": 59,
                     "value": true
+                },
+                {
+                    "component_id": 60,
+                    "value": 1
                 }
             ]
         },
@@ -3371,6 +3552,226 @@
                 {
                     "component_id": 58,
                     "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 48,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 18, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 651, "top": 2045, "width": 18, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": -117, "y": 16, "start_x": 651, "start_y": 2045}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 130, "top": 38, "width": 64, "height": 55}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 192, "y": 55, "start_x": 130, "start_y": 38}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 51
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 51,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 97, "width": 65, "height": 67}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 350, "y": 67, "start_x": 0, "start_y": 97}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         }
@@ -3386,10 +3787,6 @@
                 {
                     "entity_id": 45,
                     "position": { "x": 272, "y": 126 }
-                },
-                {
-                    "entity_id": 47,
-                    "position": { "x": 200, "y": 200 }
                 },
                 {
                     "entity_id": 4,

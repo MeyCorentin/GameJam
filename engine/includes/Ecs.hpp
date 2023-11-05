@@ -72,6 +72,7 @@
 #include "../includes/components/C_EnemyAmmo.hpp"
 #include "../includes/components/C_ClockSpeed.hpp"
 #include "../includes/components/C_SingleAnimation.hpp"
+#include "../includes/components/C_AnimationDirection.hpp"
 
 #include "../includes/components/ComponentBase.hpp"
 
