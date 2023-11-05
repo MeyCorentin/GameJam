@@ -42,6 +42,13 @@ Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
         for (int i = 0; i < sf::Keyboard::KeyCount; ++i) {
             key_states_[static_cast<sf::Keyboard::Key>(i)] = false;
         }
+
+         std::string filepath = "../../rtype/scene_test.json";
+        std::ifstream file(filepath);
+        std::pair<double, double> direction;
+        double length;
+        file >> data_;
+        file.close();
     }
 
 void Scene::ClearWindow()

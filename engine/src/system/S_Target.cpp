@@ -30,13 +30,8 @@ void S_Target::Execute(
     std::shared_ptr<C_Range<int>>  range;
     std::shared_ptr<Entity> new_entity;
     std::vector<std::shared_ptr<Entity>> temp_entities;
-    std::string filepath = "../../rtype/scene_test.json";
-    std::ifstream file(filepath);
     std::pair<double, double> direction;
     double length;
-    json data;
-    file >> data;
-    file.close();
 
     for (const std::shared_ptr<Entity>& entity1 : arg_scene->entities_) {
         for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
@@ -78,7 +73,8 @@ void S_Target::Execute(
                     continue;
                 if (fire_rate->getValue().getElapsedTime().asSeconds() < fire_rate_speed->getValue())
                     continue;
-                for (const auto& entity_config : data["entities"]) {
+
+                for (const auto& entity_config : arg_scene->data_["entities"]) {
                     if (entity_config["id"] != ammo->getValue())
                         continue;
                     direction.first = position_comp_2->getValue().first - position_comp_1->getValue().first;
@@ -86,7 +82,7 @@ void S_Target::Execute(
                     length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
                     if (length > range->getValue())
                         continue;
-                    new_entity = arg_scene->CreateEntityFromConfig(entity_config, data["components"]);
+                    new_entity = arg_scene->CreateEntityFromConfig(entity_config, arg_scene->data_["components"]);
                     direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
                     if (!direction_new || !position_new)

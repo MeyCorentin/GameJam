@@ -40,6 +40,7 @@ class Scene {
         std::shared_ptr<sf::Text> entities_nbr_;
         std::shared_ptr<sf::Font> font_;
         std::shared_ptr<sf::Text> current_tick_;
+        json data_;
 
         int time_pressed_;
         bool is_pressed_ = false;
