@@ -2644,6 +2644,10 @@
                     "value": "../../sprites/grey_man.png"
                 },
                 {
+                    "component_id": 50,
+                    "value": "../../sprites/grey_man.png"
+                },
+                {
                     "component_id": 2,
                     "value": 1
                 },
@@ -2705,6 +2709,10 @@
                     "value": "../../sprites/yellow_bonus.png"
                 },
                 {
+                    "component_id": 50,
+                    "value": "../../sprites/yellow_bonus.png"
+                },
+                {
                     "component_id": 2,
                     "value": 1
                 },
@@ -2759,6 +2767,10 @@
             "components": [
                 {
                     "component_id": 1,
+                    "value": "../../sprites/grey_man.png"
+                },
+                {
+                    "component_id": 50,
                     "value": "../../sprites/grey_man.png"
                 },
                 {
@@ -3355,10 +3367,6 @@
                     "value": { "x": 200, "y": 100 }
                 },
                 {
-                    "component_id": 6,
-                    "value": { "x": 32, "y": 31 }
-                },
-                {
                     "component_id": 11,
                     "value": 0
                 },
@@ -3599,6 +3607,14 @@
                     "value": true
                 },
                 {
+                    "component_id": 27,
+                    "value": { "a": 1.5, "f": 0.5, "p": 0}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
                     "component_id": 32,
                     "value": 17
                 },
@@ -3787,6 +3803,10 @@
                 {
                     "entity_id": 45,
                     "position": { "x": 272, "y": 126 }
+                },
+                {
+                    "entity_id": 48,
+                    "position": { "x": 200, "y": 150 }
                 },
                 {
                     "entity_id": 4,

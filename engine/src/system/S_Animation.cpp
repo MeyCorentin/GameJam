@@ -37,8 +37,9 @@ void S_Animation::Execute(
         std::shared_ptr<C_SingleAnimation<bool>> single_animation = entity->template GetComponent<C_SingleAnimation<bool>>();
         std::shared_ptr<C_AnimationDirection<int>> animation_direction = entity->template GetComponent<C_AnimationDirection<int>>();
         bool animaion = entity->template GetComponent<C_Animation<bool>>()->getValue();
-        if (clock->getValue().getElapsedTime().asSeconds() <= 0.1f + clock_speed->getValue())
+        if (clock->getValue().getElapsedTime().asSeconds() <= 0.1f + clock_speed->getValue()) {
             continue;
+        }
         if (animation_direction->getValue() == 0) {
             if (rect->getValue().left >= (size->getValue().first.first - rect->getValue().width) + size->getValue().second.first) {
                 if (unique->getValue())
