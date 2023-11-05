@@ -14,7 +14,6 @@ std::vector<std::shared_ptr<Entity>> S_Target::Filter(const std::vector<std::sha
 void S_Target::Execute(
         int arg_is_server,
         Scene * arg_scene) {
-    
     std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
     int current_mana;
     std::shared_ptr<C_Target<int>> target;
@@ -38,7 +37,6 @@ void S_Target::Execute(
     json data;
     file >> data;
     file.close();
-    S_Input input;
 
     for (const std::shared_ptr<Entity>& entity1 : arg_scene->entities_) {
         for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
@@ -86,7 +84,7 @@ void S_Target::Execute(
                     length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
                     if (length > range->getValue())
                         continue;
-                    new_entity = input.CreateEntityFromConfig(entity_config, data["components"]);
+                    new_entity = arg_scene->CreateEntityFromConfig(entity_config, data["components"]);
                     direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
                     if (!direction_new || !position_new)

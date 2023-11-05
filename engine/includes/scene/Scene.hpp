@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ComponentRegister.hpp"
 #include "../main.hpp"
 #include "../entity/EntityBuilder.hpp"
 #include "../system/System.hpp"
@@ -15,6 +16,7 @@
 #include "../components/C_ChargedShoot.hpp"
 #include "../components/C_PositionShot.hpp"
 #include "../components/C_Target.hpp"
+#include "../parser/jsonParser.hpp"
 
 class Scene {
     private:
@@ -51,6 +53,23 @@ class Scene {
                 std::vector<std::shared_ptr<sf::Music>> arg_music_list,
                 std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index,
                 std::vector<std::pair<int,int>> arg_jump_index);
+
+        json FindComponentConfigById(const json& arg_components_config, int arg_id);
+
+        bool ProcessComponent(
+                const json& arg_entityComponent,
+                const json& arg_componentConfig,
+                JsonParser& arg_parser,
+                EntityBuilder& arg_entityBuilder);
+
+        std::shared_ptr<Entity> CreateEntityFromConfig(
+                const json& arg_entity_config,
+                const json& arg_components_config);
+
+        std::shared_ptr<Entity> createEntity(
+                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+                int id,
+                std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp);
 
         void ClearWindow();
 

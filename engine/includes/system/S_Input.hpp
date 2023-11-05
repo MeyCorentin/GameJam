@@ -40,23 +40,6 @@ class S_Input : public System {
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
 
-        json FindComponentConfigById(const json& arg_components_config, int arg_id);
-
-        bool ProcessComponent(
-                const json& arg_entityComponent,
-                const json& arg_componentConfig,
-                JsonParser& arg_parser,
-                EntityBuilder& arg_entityBuilder);
-
-        std::shared_ptr<Entity> CreateEntityFromConfig(
-                const json& arg_entity_config,
-                const json& arg_components_config);
-
-        std::shared_ptr<Entity> createEntity(
-                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                int id,
-                std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp);
-
         void Execute(
                 int arg_is_server,
                 Scene * arg_scene) override;
@@ -78,23 +61,27 @@ class S_Input : public System {
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
-                std::shared_ptr<sf::Event> event_);
+                std::shared_ptr<sf::Event> event_,
+                Scene * arg_scene);
 
         void CheckTouchReleased(
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
-                std::shared_ptr<sf::Event> event_);
+                std::shared_ptr<sf::Event> event_,
+                Scene * arg_scene);
 
         void BasicShot(
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::shared_ptr<C_Position<std::pair<double, double>>> position_comp);
+                std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
+                Scene * arg_scene);
 
         void SpecialShot(
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::shared_ptr<C_Position<std::pair<double, double>>> position_comp);
+                std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
+                Scene * arg_scene);
 
         void DropForce(
                 const std::shared_ptr<Entity>& entity);

@@ -80,18 +80,26 @@ void UDPServer::send_player_positions(Ecs &ecs)
         send_to_all(msg_position_player);
     }
 }
+
 void UDPServer::process_input_queue(Ecs &ecs)
 {
     std::pair<int, int> input = input_queue_.front();
     std::pair<int, int> temp;
-
+    for (auto it = input_queue_.begin(); it != input_queue_.end(); ++it)
+    {
+        if (it->second % 2 == 0 || it->second == 301)
+        {
+            BinaryProtocole::BinaryMessage msg = {1, static_cast<uint32_t>(it->first), 1920, 1080, static_cast<uint16_t>(it->second)};
+            ecs.scene_.InputFromPlayer(*it);
+        }
+    }
     if (input.second % 2 == 0)
     {
-        temp = input;
-        input_queue_.erase(input_queue_.begin());
-        input_queue_.push_back(std::make_pair(temp.first, temp.second));
+            temp = input;
+            input_queue_.erase(input_queue_.begin());
+            input_queue_.push_back(std::make_pair(temp.first, temp.second));
     }
-    else
+    if (input.second % 2 == 1)
     {
         for (auto it = input_queue_.begin(); it != input_queue_.end();)
         {
@@ -101,14 +109,6 @@ void UDPServer::process_input_queue(Ecs &ecs)
                 ++it;
         }
         input_queue_.erase(input_queue_.begin());
-    }
-    for (auto it = input_queue_.begin(); it != input_queue_.end(); ++it)
-    {
-        if (it->second % 2 == 0)
-        {
-            BinaryProtocole::BinaryMessage msg = {1, static_cast<uint32_t>(it->first), 1920, 1080, static_cast<uint16_t>(it->second)};
-            ecs.scene_.InputFromPlayer(*it);
-        }
     }
 }
 

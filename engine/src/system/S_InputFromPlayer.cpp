@@ -2,6 +2,137 @@
 #include "system/S_InputFromPlayer.hpp"
 
 
+void S_InputFromPlayer::BasicShot(
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
+    Scene * arg_scene)
+{
+    std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
+
+    if (clock->getValue().getElapsedTime().asSeconds() > 1)
+        arg_scene->createEntity(arg_all_entities, 9, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.6)
+        arg_scene->createEntity(arg_all_entities, 8, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.4)
+        arg_scene->createEntity(arg_all_entities, 7, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.2)
+        arg_scene->createEntity(arg_all_entities, 6, position_comp);
+    else if (clock->getValue().getElapsedTime().asSeconds() > 0.1)
+        arg_scene->createEntity(arg_all_entities, 5, position_comp);
+    else
+        arg_scene->createEntity(arg_all_entities, 3, position_comp);
+}
+
+
+bool S_InputFromPlayer::IsInInventory(
+    int base_id,
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
+    Scene * arg_scene)
+{
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+        std::cout << "ID : " << v_entity->GetBaseId() << std::endl;
+        if (v_entity->GetBaseId() == base_id)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+void S_InputFromPlayer::DeleteFromInventory(
+    int base_id,
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
+    Scene * arg_scene)
+{
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    for (auto it = vector_entities->getValue().begin(); it != vector_entities->getValue().end();)
+    {
+        if ((*it)->GetBaseId() == 27)
+        {
+            (*it)->is_dead_ = true;
+            it = vector_entities->getValue().erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+}
+
+void S_InputFromPlayer::SpecialShot(
+    const std::shared_ptr<Entity>& entity,
+    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
+    Scene * arg_scene)
+{
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+
+    //Player attacks
+    std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon_player = entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+
+    std::list<int> my_list_1 = {22, 23, 24};
+    std::list<int> my_list_2 = {38, 39, 40};
+    std::list<int> my_list_3 = {4, 29};
+
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+        if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
+            std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            if (weapon->getValue().first != -1) {
+                if (weapon->getValue().first == 25) {
+                    for (int i = 0; i < 1; i++) { //TODO Set to 5
+                        arg_scene->createEntity(arg_all_entities, weapon->getValue().first, position_force);
+                        arg_scene->createEntity(arg_all_entities, 32, position_force); //TODO Change that
+                    }
+                }
+                if (weapon->getValue().first == 26) {
+                    arg_scene->createEntity(arg_all_entities, weapon->getValue().first, position_force);
+                }
+            }
+        }
+        if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+            std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            if (weapon->getValue().second != -1) {
+                if (weapon->getValue().second == 32) {
+                    for (int i = 0; i < 1; i++) { //TODO Set to 5
+                        arg_scene->createEntity(arg_all_entities, weapon->getValue().second, position_force);
+                        arg_scene->createEntity(arg_all_entities, 25, position_force); //TODO Change that
+                    }
+                }
+                if (weapon->getValue().second == 43) {
+                    arg_scene->createEntity(arg_all_entities, weapon->getValue().second, position_force);
+                }
+            }
+        }
+    }
+
+    //Drone attacks
+    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+        if ((std::find(my_list_3.begin(), my_list_3.end(), v_entity->GetId()) != my_list_3.end()) && weapon_player->getValue().first == 26) {
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
+            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+                if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
+                    arg_scene->createEntity(arg_all_entities, weapon->getValue().first, position_drone);
+                }
+            }
+            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+                if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+                    arg_scene->createEntity(arg_all_entities, weapon->getValue().second, position_drone);
+                }
+            }
+        }
+    }
+}
+
 std::vector<std::shared_ptr<Entity>> S_InputFromPlayer::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
     std::vector<std::shared_ptr<Entity>> filtered_entities;
 
@@ -67,33 +198,16 @@ void S_InputFromPlayer::Execute(
                         arg_scene->messages_.erase(arg_scene->messages_.begin());
                     break;
                 case 300:
-                    std::cout << " CHARGING SHOOT " << std::endl;
-                    if (is_charging->getValue() == false) {
-                        std::cout << " CHARGING SHOOT 1 " << std::endl;
+                    if (is_charging->getValue() == false && !IsInInventory(27,entity, arg_scene->entities_, position_comp, arg_scene)) {
                         clock->getValue().restart();
-                        for (const auto& entity_pick : arg_scene->list_entities_)
-                        {
-                            std::shared_ptr<Entity> new_entity = std::make_shared<Entity>(*entity_pick);
-                            std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
-                            if (entity_pick->GetId() != 27)
-                                continue;
-                            std::cout << " CHARGING SHOOT 2 " << std::endl;
-                            new_entity->SetId(arg_scene->id_store_++);
-                            new_entity->SetBaseId(entity_pick->GetId());
-                            position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                            std::shared_ptr<C_PositionShot<std::pair<double, double>>> position_shot = new_entity->template GetComponent<C_PositionShot<std::pair<double, double>>>();
-                            std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
-                            std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
-                            std::shared_ptr<C_Target<int>> target = new_entity->template GetComponent<C_Target<int>>();
-                            target->setValue(entity->GetId());
-                            sprite->getValue().setTextureRect(rect->getValue());
-                            position_new->setValue(std::make_pair(position_comp->getValue().first + position_shot->getValue().first, position_comp->getValue().second + position_shot->getValue().second));
-                            arg_scene->entities_.push_back(new_entity);
-                            vector_entities->getValue().push_back(new_entity);
-                        }
-                        std::cout << " CHARGING SHOOT 3 " << std::endl;
                         is_charging->getValue() = true;
                     }
+                    arg_scene->messages_.erase(arg_scene->messages_.begin());
+                    break;
+                case 301:
+                    BasicShot(entity, arg_scene->entities_, position_comp, arg_scene);
+                    SpecialShot(entity, arg_scene->entities_, position_comp, arg_scene);
+                    is_charging->getValue() = false;
                     arg_scene->messages_.erase(arg_scene->messages_.begin());
                     break;
                 default:

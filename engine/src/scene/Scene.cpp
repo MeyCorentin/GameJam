@@ -106,6 +106,117 @@ void Scene::AddNewPlayer(int arg_id)
 }
 
 
+json Scene::FindComponentConfigById(const json& arg_components_config, int arg_id) {
+    static json empty_json;
+
+    for (auto component_config : arg_components_config)
+        if (component_config["id"] == arg_id)
+            return component_config;
+    return empty_json;
+}
+
+bool Scene::ProcessComponent(
+        const json& arg_entityComponent,
+        const json& arg_componentConfig,
+        JsonParser& arg_parser,
+        EntityBuilder& arg_entityBuilder) {
+    std::string component_name = arg_componentConfig["type"];
+    std::string value_type = arg_componentConfig["value_type"];
+    json component_value = arg_entityComponent["value"];
+    std::shared_ptr<ComponentBase> component = ComponentRegistry::Instance().CreateComponent(component_name);
+    Variant value = arg_parser.ParseValue(value_type, component_value);
+
+    if (!component)
+        return false;
+
+    if (value_type == "Sprite") {
+        arg_entityBuilder.AddComponent(component,  std::get<sf::Sprite>(value));
+    } else if (value_type == "Int") {
+        arg_entityBuilder.AddComponent(component, std::get<int>(value));
+    } else if (value_type == "Texture") {
+        arg_entityBuilder.AddComponent(component, std::get<sf::Texture>(value));
+    } else if (value_type == "PairDouble") {
+        arg_entityBuilder.AddComponent(component, std::get<std::pair<double, double>>(value));
+    } else if (value_type == "PairInt") {
+        arg_entityBuilder.AddComponent(component, std::get<std::pair<int, int>>(value));
+    } else if (value_type == "Bool") {
+        arg_entityBuilder.AddComponent(component, std::get<bool>(value));
+    } else if (value_type == "Double") {
+        arg_entityBuilder.AddComponent(component, std::get<double>(value));
+    } else if (value_type == "Clock") {
+        arg_entityBuilder.AddComponent(component, std::get<sf::Clock>(value));
+    } else if (value_type == "IntRect") {
+        arg_entityBuilder.AddComponent(component, std::get<sf::IntRect>(value));
+    } else if (value_type == "PairPairInt") {
+        arg_entityBuilder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
+    } else if (value_type == "VectorEntity") {
+        arg_entityBuilder.AddComponent(component, std::get<std::vector<std::shared_ptr<Entity>>>(value));
+    } else if (value_type == "SinFunc") {
+        arg_entityBuilder.AddComponent(component, std::get<SinusoidalFunction>(value));
+    } else if (value_type == "Sound") {
+        arg_entityBuilder.AddComponent(component, std::get<sf::Sound>(value));
+    } else if (value_type == "SoundBuffer") {
+        arg_entityBuilder.AddComponent(component, std::get<sf::SoundBuffer>(value));
+    } else if (value_type == "String") {
+        arg_entityBuilder.AddComponent(component, std::get<std::string>(value));
+    } else {
+        std::cerr << "Unsupported component type: " << value_type << std::endl;
+        return false;
+    }
+    return true;
+}
+
+std::shared_ptr<Entity> Scene::CreateEntityFromConfig(
+        const json& arg_entity_config,
+        const json& arg_components_config) {
+    JsonParser parser;
+    json component_config;
+    int component_id;
+    int entity_id = arg_entity_config["id"];
+    EntityBuilder entity_builder(entity_id);
+    const json& entity_components = arg_entity_config["components"];
+
+    for (const auto& entity_component : entity_components) {
+        component_id = entity_component["component_id"];
+        component_config = FindComponentConfigById(arg_components_config, component_id);
+        if (component_config.is_null())
+            return entity_builder.Build();
+        if (!ProcessComponent(entity_component, component_config, parser, entity_builder))
+            return entity_builder.Build();
+    }
+    return entity_builder.Build();
+}
+
+std::shared_ptr<Entity> Scene::createEntity(
+        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+        int id,
+        std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp) {
+    std::shared_ptr<Entity> new_entity;
+    std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
+    std::string filepath = "../../rtype/scene_test.json";
+    std::ifstream file(filepath);
+    json data;
+
+    file >> data;
+    file.close();
+    for (const auto& entity_config : data["entities"]) {
+        if (entity_config["id"] == id) {
+
+            new_entity = CreateEntityFromConfig(entity_config, data["components"]);
+            new_entity->SetBaseId(entity_config["id"]);
+            position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_PositionShot<std::pair<double, double>>> position_shot = new_entity->template GetComponent<C_PositionShot<std::pair<double, double>>>();
+            std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
+            std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
+            sprite->getValue().setTextureRect(rect->getValue());
+            position_new->setValue(std::make_pair(arg_position_comp->getValue().first + position_shot->getValue().first, arg_position_comp->getValue().second + position_shot->getValue().second));
+            arg_all_entities.push_back(new_entity);
+        }
+    }
+    return new_entity;
+}
+
+
 std::vector<EntityPosition> Scene::GetPlayerPosition()
 {
     std::vector<EntityPosition> positions;

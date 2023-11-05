@@ -17,7 +17,6 @@ void S_MakeBaby::Execute(
         int arg_is_server,
         Scene * arg_scene) {
     std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
-    S_Input input;
     std::shared_ptr<Entity> new_entity;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
     std::shared_ptr<C_Child<int>> id_child;
@@ -35,7 +34,7 @@ void S_MakeBaby::Execute(
             if (entity_config["id"] != id_child->getValue())
                 continue;
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
-            new_entity = input.CreateEntityFromConfig(entity_config, data["components"]);
+            new_entity = arg_scene->CreateEntityFromConfig(entity_config, data["components"]);
             position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();

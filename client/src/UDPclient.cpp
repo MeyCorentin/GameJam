@@ -34,6 +34,10 @@ void UDPClient::process_input_queue(Ecs &ecs)
     if (!input_queue_.empty())
     {
         BinaryProtocole::BinaryMessage input = input_queue_.front();
+        if (input.data == 301)
+        {
+            process_even_input(input, ecs);
+        }
         if (input.data % 2 == 0)
         {
             process_even_input(input, ecs);
@@ -69,6 +73,7 @@ void UDPClient::process_even_input(const BinaryProtocole::BinaryMessage &input, 
     }
     if(input.data != 100 && input.data != 0 && input.data != 1000)
     {
+        
         BinaryProtocole::BinaryMessage temp = input;
         input_queue_.push_back(temp);
     }

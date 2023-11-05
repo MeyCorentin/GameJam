@@ -16,19 +16,19 @@ std::vector<std::shared_ptr<Entity>> S_Collision::Filter(const std::vector<std::
 std::shared_ptr<Entity> S_Collision::reCreateEntity(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         int id,
-        std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp) {
+        std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp,
+        Scene * arg_scene) {
     std::shared_ptr<Entity> new_entity;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
     std::string filepath = "../../rtype/scene_test.json";
     std::ifstream file(filepath);
     json data;
-    S_Input input;
 
     file >> data;
     file.close();
     for (const auto& entity_config : data["entities"]) {
         if (entity_config["id"] == id) {
-            new_entity = input.CreateEntityFromConfig(entity_config, data["components"]);
+            new_entity = arg_scene->CreateEntityFromConfig(entity_config, data["components"]);
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
@@ -129,9 +129,9 @@ void S_Collision::Execute(
                         if (!follow->getValue()) {
                             if ((std::find(my_list.begin(), my_list.end(), entity2->GetBaseId()) != my_list.end())) {
                                 if (x2 - x1 > 0) {
-                                    new_entity = reCreateEntity(arg_scene->entities_, 22, position_comp_2);
+                                    new_entity = reCreateEntity(arg_scene->entities_, 22, position_comp_2, arg_scene);
                                 } else {
-                                    new_entity = reCreateEntity(arg_scene->entities_, 38, position_comp_2);
+                                    new_entity = reCreateEntity(arg_scene->entities_, 38, position_comp_2, arg_scene);
                                 }
                                 new_follow = new_entity->template GetComponent<C_Follow<bool>>();
                                 target = new_entity->template GetComponent<C_Target<int>>();

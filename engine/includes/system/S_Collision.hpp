@@ -29,7 +29,8 @@ class S_Collision : public System {
         std::shared_ptr<Entity> reCreateEntity(
                 std::vector<std::shared_ptr<Entity>>& arg_all_entities,
                 int id,
-                std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp);
+                std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp,
+                Scene * arg_scene);
 
         void Execute(
                 int arg_is_server,
