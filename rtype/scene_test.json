@@ -340,6 +340,21 @@
             "id": 57,
             "type": "EnemyAmmo",
             "value_type": "Bool"
+        },
+        {
+            "id": 58,
+            "type": "ClockSpeed",
+            "value_type": "Double"
+        },
+        {
+            "id": 59,
+            "type": "SingleAnimation",
+            "value_type": "Bool"
+        },
+        {
+            "id": 60,
+            "type": "AnimationDirection",
+            "value_type": "Int"
         }
     ],
     "entities": [
@@ -445,103 +460,6 @@
             ]
         },
         {
-            "id": 2,
-            "components": [
-                {
-                    "component_id": 58,
-                    "value": -1
-                },
-                {
-                    "component_id": 1,
-                    "value": "../../sprites/red_enemy.gif"
-                },
-                {
-                    "component_id": 50,
-                    "value": "../../sprites/red_enemy.gif"
-                },
-                {
-                    "component_id": 2,
-                    "value": 1
-                },
-                {
-                    "component_id": 3,
-                    "value": { "x": 1000, "y": 500 }
-                },
-                {
-                    "component_id": 5,
-                    "value": 0
-                },
-                {
-                    "component_id": 6,
-                    "value": { "x": 32, "y": 31 }
-                },
-                {
-                    "component_id": 7,
-                    "value": { "x": 1, "y": 0.2}
-                },
-                {
-                    "component_id": 8,
-                    "value": 0
-                },
-                {
-                    "component_id": 11,
-                    "value": 0
-                },
-                {
-                    "component_id": 12,
-                    "value": { "left": 0, "top": 4, "width": 33, "height": 31}
-                },
-                {
-                    "component_id": 13,
-                    "value": { "x": 264, "y": 31, "start_x": 0, "start_y": 4}
-                },
-                {
-                    "component_id": 14,
-                    "value": true
-                },
-                {
-                    "component_id": 16,
-                    "value": true
-                },
-                {
-                    "component_id": 17,
-                    "value": 0
-                },
-                {
-                    "component_id": 19,
-                    "value": 0
-                },
-                {
-                    "component_id": 20,
-                    "value": 0.5
-                },
-                {
-                    "component_id": 21,
-                    "value": 500
-                },
-                {
-                    "component_id": 23,
-                    "value": -1
-                },
-                {
-                    "component_id": 27,
-                    "value": { "a": 2.5, "f": 0.2, "p": 0}
-                },
-                {
-                    "component_id": 28,
-                    "value": 0
-                },
-                {
-                    "component_id": 32,
-                    "value": 17
-                },
-                {
-                    "component_id": 33,
-                    "value": false
-                }
-            ]
-        },
-        {
             "id": 3,
             "components": [
                 {
@@ -623,6 +541,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -704,6 +630,14 @@
                 {
                     "component_id": 51,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -777,6 +711,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -850,6 +792,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -923,6 +873,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -996,6 +954,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1069,6 +1035,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1134,6 +1108,14 @@
                 {
                     "component_id": 57,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1170,11 +1152,11 @@
                 },
                 {
                     "component_id": 7,
-                    "value": { "x": 1, "y": 0.2}
+                    "value": { "x": -1, "y": 0}
                 },
                 {
                     "component_id": 8,
-                    "value": 0
+                    "value": 4
                 },
                 {
                     "component_id": 11,
@@ -1231,6 +1213,14 @@
                 {
                     "component_id": 36,
                     "value": 10
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1272,6 +1262,14 @@
                 {
                     "component_id": 49,
                     "value": -1
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1312,6 +1310,14 @@
                 },
                 {
                     "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -1354,6 +1360,14 @@
                 {
                     "component_id": 49,
                     "value": 0
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1394,6 +1408,14 @@
                 },
                 {
                     "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
                     "value": 0
                 }
             ]
@@ -1448,6 +1470,14 @@
                 {
                     "component_id": 33,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1501,6 +1531,14 @@
                 {
                     "component_id": 33,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1554,6 +1592,14 @@
                 {
                     "component_id": 33,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1607,6 +1653,14 @@
                 {
                     "component_id": 33,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1660,6 +1714,14 @@
                 {
                     "component_id": 33,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1703,16 +1765,20 @@
                     "value": true
                 },
                 {
-                    "component_id": 23,
-                    "value": -1
-                },
-                {
                     "component_id": 49,
                     "value": 0
                 },
                 {
                     "component_id": 33,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1806,6 +1872,14 @@
                 {
                     "component_id": 54,
                     "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1899,6 +1973,14 @@
                 {
                     "component_id": 54,
                     "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -1992,6 +2074,14 @@
                 {
                     "component_id": 54,
                     "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2061,6 +2151,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2130,6 +2228,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2191,6 +2297,14 @@
                 {
                     "component_id": 41,
                     "value": {"x": 0, "y": 0}
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2220,6 +2334,14 @@
                 {
                     "component_id": 6,
                     "value": { "x": 33, "y": 34 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": -1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 5
                 },
                 {
                     "component_id": 11,
@@ -2252,6 +2374,14 @@
                 {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2333,6 +2463,14 @@
                 {
                     "component_id": 51,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2406,6 +2544,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2479,6 +2625,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2548,71 +2702,14 @@
                 {
                     "component_id": 56,
                     "value": true
-                }
-            ]
-        },
-        {
-            "id": 33,
-            "components": [
+                },
                 {
                     "component_id": 58,
-                    "value": -1
-                },
-                {
-                    "component_id": 1,
-                    "value": "../../sprites/weapons.gif"
-                },
-                {
-                    "component_id": 50,
-                    "value": "../../sprites/weapons.gif"
-                },
-                {
-                    "component_id": 2,
-                    "value": 1
-                },
-                {
-                    "component_id": 3,
-                    "value": { "x": 0, "y": 0 }
-                },
-                {
-                    "component_id": 6,
-                    "value": { "x": 66, "y": 32 }
-                },
-                {
-                    "component_id": 7,
-                    "value": { "x": 0, "y": 0}
-                },
-                {
-                    "component_id": 8,
-                    "value": 10
-                },
-                {
-                    "component_id": 11,
                     "value": 0
                 },
                 {
-                    "component_id": 12,
-                    "value": { "left": 36, "top": 607, "width": 65, "height": 58}
-                },
-                {
-                    "component_id": 13,
-                    "value": { "x": 260, "y": 58, "start_x": 36, "start_y": 607}
-                },
-                {
-                    "component_id": 14,
-                    "value": true
-                },
-                {
-                    "component_id": 25,
-                    "value": true
-                },
-                {
-                    "component_id": 33,
-                    "value": true
-                },
-                {
-                    "component_id": 41,
-                    "value": {"x": 10, "y": -20}
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2670,6 +2767,14 @@
                 {
                     "component_id": 43,
                     "value": {"x": 26, "y": 43}
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2685,6 +2790,10 @@
                     "value": "../../sprites/grey_man.png"
                 },
                 {
+                    "component_id": 50,
+                    "value": "../../sprites/grey_man.png"
+                },
+                {
                     "component_id": 2,
                     "value": 1
                 },
@@ -2695,6 +2804,14 @@
                 {
                     "component_id": 6,
                     "value": { "x": 45, "y": 43 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": -1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 6
                 },
                 {
                     "component_id": 11,
@@ -2727,6 +2844,14 @@
                 {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2739,6 +2864,10 @@
                 },
                 {
                     "component_id": 1,
+                    "value": "../../sprites/yellow_bonus.png"
+                },
+                {
+                    "component_id": 50,
                     "value": "../../sprites/yellow_bonus.png"
                 },
                 {
@@ -2780,6 +2909,14 @@
                 {
                     "component_id": 43,
                     "value": {"x": 25, "y": 32}
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2795,6 +2932,10 @@
                     "value": "../../sprites/grey_man.png"
                 },
                 {
+                    "component_id": 50,
+                    "value": "../../sprites/grey_man.png"
+                },
+                {
                     "component_id": 2,
                     "value": 1
                 },
@@ -2805,6 +2946,14 @@
                 {
                     "component_id": 6,
                     "value": { "x": 45, "y": 43 }
+                },
+                {
+                    "component_id": 7,
+                    "value": { "x": -1, "y": 0}
+                },
+                {
+                    "component_id": 8,
+                    "value": 6
                 },
                 {
                     "component_id": 11,
@@ -2837,6 +2986,14 @@
                 {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -2930,6 +3087,14 @@
                 {
                     "component_id": 54,
                     "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -3024,6 +3189,14 @@
                 {
                     "component_id": 54,
                     "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -3118,6 +3291,14 @@
                 {
                     "component_id": 54,
                     "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -3191,6 +3372,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -3264,6 +3453,14 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -3333,6 +3530,1270 @@
                 {
                     "component_id": 56,
                     "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 44,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 27, "top": 0, "width": 162, "height": 212}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 486, "y": 212, "start_x": 27, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0.3
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 33, "y": 32 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 636, "top": 1928, "width": 33, "height": 32}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": -132, "y": 32, "start_x": 636, "start_y": 1928}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 46
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": 46,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 5
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 33, "y": 32 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 636, "top": 1964, "width": 33, "height": 32}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": -33, "y": 32, "start_x": 636, "start_y": 1964}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 2
+                },
+                {
+                    "component_id": 21,
+                    "value": 500
+                },
+                {
+                    "component_id": 32,
+                    "value": 50
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 36,
+                    "value": 47
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 59,
+                    "value": true
+                },
+                {
+                    "component_id": 60,
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": 47,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 23, "y": 21 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 576 , "top": 2063, "width": 23, "height": 21}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 92, "y": 21, "start_x": 576, "start_y": 2063}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 48,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": 0.5, "f": 3, "p": 0}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 18, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 651, "top": 2045, "width": 18, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": -117, "y": 16, "start_x": 651, "start_y": 2045}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -5, "f": 1, "p": 1}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 130, "top": 38, "width": 64, "height": 55}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 192, "y": 55, "start_x": 130, "start_y": 38}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 51
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 51,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 97, "width": 65, "height": 67}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 350, "y": 67, "start_x": 0, "start_y": 97}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 52,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -0.3, "f": 0.5, "p": 0}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 53,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -1, "f": 1, "p": 0}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 54,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -1.5, "f": 1, "p": 0.5}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 55,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -2, "f": 1, "p": 1}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -2.5, "f": 1, "p": 1.5}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 57,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 17, "y": 16 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 652, "top": 2000, "width": 17, "height": 16}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 17, "y": 16, "start_x": 652, "start_y": 2000}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -4, "f": 1, "p": 1.5}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 58,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 15, "y": 14 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 654, "top": 2016, "width": 15, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 15, "y": 14, "start_x": 654, "start_y": 2016}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -4, "f": 1, "p": 1.5}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 59,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 15, "y": 14 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 654, "top": 2016, "width": 15, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 15, "y": 14, "start_x": 654, "start_y": 2016}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -3.7, "f": 1, "p": 1.4}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 60,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 15, "y": 14 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 654, "top": 2016, "width": 15, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 15, "y": 14, "start_x": 654, "start_y": 2016}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -3.7, "f": 1, "p": 1.3}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 61,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 15, "y": 14 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 654, "top": 2016, "width": 15, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 15, "y": 14, "start_x": 654, "start_y": 2016}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -4, "f": 1, "p": 1.2}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 62,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 15, "y": 14 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 654, "top": 2016, "width": 15, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 15, "y": 14, "start_x": 654, "start_y": 2016}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -4.5, "f": 1, "p": 1.1}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 63,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/boss_1.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 15, "y": 14 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 654, "top": 2016, "width": 15, "height": 14}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 15, "y": 14, "start_x": 654, "start_y": 2016}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 27,
+                    "value": { "a": -5, "f": 1, "p": 1}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         }
@@ -3346,12 +4807,77 @@
                     "position": { "x": 125, "y": 125 }
                 },
                 {
+                    "entity_id": 44,
+                    "position": { "x": 200, "y": 30 }
+                },
+                {
+                    "entity_id": 45,
+                    "position": { "x": 272, "y": 126 }
+                },
+                {
+                    "entity_id": 48,
+                    "position": { "x": 245, "y": 205 }
+                },
+                {
+                    "entity_id": 52,
+                    "position": { "x": 235, "y": 205 }
+                },
+                {
+                    "entity_id": 53,
+                    "position": { "x": 225, "y": 205 }
+                },
+                {
+                    "entity_id": 54,
+                    "position": { "x": 215, "y": 205 }
+                },
+                {
+                    "entity_id": 55,
+                    "position": { "x": 205, "y": 205 }
+                },
+                {
+                    "entity_id": 56,
+                    "position": { "x": 195, "y": 205 }
+                },
+                {
+                    "entity_id": 57,
+                    "position": { "x": 185, "y": 205 }
+                },
+                {
+                    "entity_id": 58,
+                    "position": { "x": 180, "y": 200 }
+                },
+                {
+                    "entity_id": 59,
+                    "position": { "x": 170, "y": 195 }
+                },
+                {
+                    "entity_id": 60,
+                    "position": { "x": 160, "y": 190 }
+                },
+                {
+                    "entity_id": 61,
+                    "position": { "x": 150, "y": 190 }
+                },
+                {
+                    "entity_id": 62,
+                    "position": { "x": 140, "y": 190 }
+                },
+                {
+                    "entity_id": 63,
+                    "position": { "x": 130, "y": 190 }
+                },
+
+                {
+                    "entity_id": 49,
+                    "position": { "x": 120, "y": 180 }
+                },
+                {
                     "entity_id": 4,
                     "position": { "x": 100, "y": 100 }
                 },
                 {
                     "entity_id": 22,
-                    "position": { "x": 200, "y": 10 }
+                    "position": { "x": 100, "y": 10 }
                 },
                 {
                     "entity_id": 13,

@@ -36,7 +36,7 @@ void S_SinMoov::Execute(
         double player_x = position->getValue().first;
         double player_y = position->getValue().second;
 
-        double x = player_x - 3;
+        double x = player_x;
         double y = amplitude * std::sin(2 * M_PI * sin_clock->getValue().getElapsedTime().asSeconds() * frequency + phase) + player_y;
         position->setValue(std::make_pair(x, y));
     }

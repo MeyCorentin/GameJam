@@ -8,6 +8,9 @@
 #include "../components/C_IsMoving.hpp"
 #include "../components/C_Life.hpp"
 #include "../components/C_UniqueAnimation.hpp"
+#include "../components/C_ClockSpeed.hpp"
+#include "../components/C_SingleAnimation.hpp"
+#include "../components/C_AnimationDirection.hpp"
 
 /**
  * @class S_Animation

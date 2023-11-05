@@ -86,6 +86,9 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("IsAutoMove", []() { return std::make_shared<C_IsAutoMove<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("Invisible", []() { return std::make_shared<C_Invisible<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("EnemyAmmo", []() { return std::make_shared<C_EnemyAmmo<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("ClockSpeed", []() { return std::make_shared<C_ClockSpeed<double>>(); });
+    ComponentRegistry::Instance().RegisterComponent("SingleAnimation", []() { return std::make_shared<C_SingleAnimation<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("AnimationDirection", []() { return std::make_shared<C_AnimationDirection<int>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
     SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);
