@@ -74,29 +74,37 @@ void S_Target::Execute(
                 fire_rate &&
                 fire_rate_speed)
             {
+                // std::cout << "In if" << std::endl;
                 if (shoot->getValue() == false)
                     continue;
                 if (fire_rate->getValue().getElapsedTime().asSeconds() < fire_rate_speed->getValue())
                     continue;
                 for (const auto& entity_config : data["entities"]) {
-                    if (entity_config["id"] != ammo->getValue())
+                    if (entity_config["id"] != ammo->getValue()) {
+                        std::cout << "Fail" << std::endl;
                         continue;
+                    }
                     direction.first = position_comp_2->getValue().first - position_comp_1->getValue().first;
                     direction.second = position_comp_2->getValue().second - position_comp_1->getValue().second;
                     length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
-                    if (length > range->getValue())
+                    if (length > range->getValue()) {
+                        std::cout << "Fail 2" << std::endl;
                         continue;
+                    }
                     new_entity = arg_scene->CreateEntityFromConfig(entity_config, data["components"]);
                     direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                    if (!direction_new || !position_new)
+                    if (!direction_new || !position_new) {
+                        std::cout << "Fail 3" << std::endl;
                         continue;
+                    }
                     if (new_entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
                         new_entity->HasComponent(typeid(C_Sprite<sf::Sprite>))) {
                         std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
                         std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
                         sprite->getValue().setTextureRect(rect->getValue());
                     }
+                    std::cout << "La" << std::endl;
                     position_new->setValue(std::make_pair(position_comp_1->getValue().first, position_comp_1->getValue().second));
                     direction_new->setValue(std::make_pair(direction.first /= length, direction.second /= length));
                     new_entity->SetId(-1);
@@ -104,6 +112,7 @@ void S_Target::Execute(
                     temp_entities.push_back(new_entity);
                     fire_rate->getValue().restart();
                 }
+                // std::cout << "Of" << std::endl;
             }
         }
     }
