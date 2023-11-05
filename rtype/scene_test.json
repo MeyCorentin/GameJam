@@ -3517,12 +3517,36 @@
                     "value": true
                 },
                 {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 2
+                },
+                {
+                    "component_id": 21,
+                    "value": 500
+                },
+                {
                     "component_id": 32,
                     "value": 50
                 },
                 {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 36,
+                    "value": 47
                 },
                 {
                     "component_id": 58,
