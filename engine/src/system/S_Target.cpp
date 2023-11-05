@@ -37,8 +37,6 @@ void S_Target::Execute(
         for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
             if (entity1 == entity2)
                 continue;
-            if ( entity2->GetBaseId() != 1)
-                continue;
             target = entity1->template GetComponent<C_Target<int>>();
             follow = entity1->template GetComponent<C_Follow<bool>>();
             shoot = entity1->template GetComponent<C_Shoot<bool>>();
@@ -61,6 +59,9 @@ void S_Target::Execute(
                     position_comp_1->getValue().second = position_comp_2->getValue().second + position_follow->getValue().second;
                 }
             }
+
+            if ( entity2->GetBaseId() != 1)
+                continue;
             if (shoot &&
                 ammo &&
                 position_comp_1 &&
@@ -73,7 +74,7 @@ void S_Target::Execute(
                     continue;
                 if (fire_rate->getValue().getElapsedTime().asSeconds() < fire_rate_speed->getValue())
                     continue;
-    
+
                 for (const auto& entity_config : arg_scene->data_["entities"]) {
                     if (entity_config["id"] != ammo->getValue())
                         continue;
