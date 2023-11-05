@@ -3696,6 +3696,14 @@
                     "value": true
                 },
                 {
+                    "component_id": 27,
+                    "value": { "a": -5, "f": 1, "p": 1}
+                },
+                {
+                    "component_id": 28,
+                    "value": 0
+                },
+                {
                     "component_id": 32,
                     "value": 17
                 },
@@ -4659,6 +4667,11 @@
                 {
                     "entity_id": 63,
                     "position": { "x": 130, "y": 190 }
+                },
+
+                {
+                    "entity_id": 49,
+                    "position": { "x": 120, "y": 180 }
                 },
                 {
                     "entity_id": 4,
