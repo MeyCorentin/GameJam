@@ -36,8 +36,8 @@ void S_Mouvement::Execute(
             if (!is_auto_move->getValue())
                 continue;
 
-        position->setValue(std::make_pair(  position->getValue().first  + (speed->getValue() * ((elapsed.asMilliseconds() / 20))) * direction->getValue().first,
-                                            position->getValue().second + (speed->getValue() * ((elapsed.asMilliseconds() / 20))) * direction->getValue().second));
+        position->setValue(std::make_pair(  position->getValue().first  + (speed->getValue()) * direction->getValue().first,
+                                            position->getValue().second + (speed->getValue()) * direction->getValue().second));
         entities_clock->getValue().restart();
     }
 }
