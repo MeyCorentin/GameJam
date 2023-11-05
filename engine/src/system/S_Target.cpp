@@ -68,7 +68,7 @@ void S_Target::Execute(
                 ammo &&
                 position_comp_1 &&
                 position_comp_2 &&
-                target->getValue() == entity2->GetBaseId() &&
+                entity2->GetBaseId() == 1,
                 fire_rate &&
                 fire_rate_speed)
             {
