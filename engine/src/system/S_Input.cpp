@@ -164,7 +164,7 @@ void S_Input::SpecialShot(
     std::list<int> my_list_3 = {4, 29};
 
     for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
-        if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
+        if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetBaseId()) != my_list_1.end())) {
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
             std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             if (weapon->getValue().first != -1) {
@@ -179,7 +179,7 @@ void S_Input::SpecialShot(
                 }
             }
         }
-        if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+        if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetBaseId()) != my_list_2.end())) {
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
             std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             if (weapon->getValue().second != -1) {
@@ -204,12 +204,12 @@ void S_Input::SpecialShot(
             std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
             for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
-                if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
+                if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetBaseId()) != my_list_1.end())) {
                     arg_scene->createEntity(arg_all_entities, weapon->getValue().first, position_drone);
                 }
             }
             for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
-                if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+                if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetBaseId()) != my_list_2.end())) {
                     arg_scene->createEntity(arg_all_entities, weapon->getValue().second, position_drone);
                 }
             }
@@ -270,18 +270,22 @@ void S_Input::CheckTouchPressed(
 void S_Input::DropForce(
     const std::shared_ptr<Entity>& entity)
 {
+    std::shared_ptr<C_EntityMovementClock<sf::Clock>> entities_clock;
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
 
     std::list<int> my_list_1 = {22, 23, 24};
     std::list<int> my_list_2 = {38, 39, 40};
 
     for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
-        if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end()) || (std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
+        entities_clock = v_entity->template GetComponent<C_EntityMovementClock<sf::Clock>>();
+
+        if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetBaseId()) != my_list_1.end()) || (std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetBaseId()) != my_list_2.end())) {
             std::shared_ptr<C_ClockAutoMove<sf::Clock>> clock = v_entity->template GetComponent<C_ClockAutoMove<sf::Clock>>();
             std::shared_ptr<C_IsAutoMove<bool>> is_auto_move = v_entity->template GetComponent<C_IsAutoMove<bool>>();
             std::shared_ptr<C_Follow<bool>> is_follow = v_entity->template GetComponent<C_Follow<bool>>();
 
             if (is_follow->getValue()) {
+                entities_clock->getValue().restart();
                 is_follow->getValue() = false;
                 is_auto_move->getValue() = true;
                 clock->getValue().restart();

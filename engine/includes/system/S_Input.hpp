@@ -12,6 +12,7 @@
 #include "../components/C_Size.hpp"
 #include "../components/C_Admin.hpp"
 #include "../components/C_Bonus.hpp"
+#include "../components/C_EntityMovementClock.hpp"
 #include "../components/C_PlayerAmmo.hpp"
 #include "../components/C_Sprite.hpp"
 #include "../components/C_Player.hpp"
