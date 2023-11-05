@@ -73,32 +73,20 @@ void S_Target::Execute(
                     continue;
                 if (fire_rate->getValue().getElapsedTime().asSeconds() < fire_rate_speed->getValue())
                     continue;
-<<<<<<< HEAD
-
+    
                 for (const auto& entity_config : arg_scene->data_["entities"]) {
                     if (entity_config["id"] != ammo->getValue())
-=======
-                for (const auto& entity_config : data["entities"]) {
-                    if (entity_config["id"] != ammo->getValue()) {
->>>>>>> d3936ec9e44a76408bd1d1326a833073968354ce
                         continue;
-                    }
                     direction.first = position_comp_2->getValue().first - position_comp_1->getValue().first;
                     direction.second = position_comp_2->getValue().second - position_comp_1->getValue().second;
                     length = std::sqrt(direction.first * direction.first + direction.second * direction.second);
-                    if (length > range->getValue()) {
+                    if (length > range->getValue())
                         continue;
-<<<<<<< HEAD
                     new_entity = arg_scene->CreateEntityFromConfig(entity_config, arg_scene->data_["components"]);
-=======
-                    }
-                    new_entity = arg_scene->CreateEntityFromConfig(entity_config, data["components"]);
->>>>>>> d3936ec9e44a76408bd1d1326a833073968354ce
                     direction_new = new_entity->template GetComponent<C_Direction<std::pair<double, double>>>();
                     position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                    if (!direction_new || !position_new) {
+                    if (!direction_new || !position_new)
                         continue;
-                    }
                     if (new_entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
                         new_entity->HasComponent(typeid(C_Sprite<sf::Sprite>))) {
                         std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();

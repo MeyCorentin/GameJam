@@ -375,7 +375,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1000000000
+                    "value": 10000
                 },
                 {
                     "component_id": 3,
@@ -4976,7 +4976,6 @@
                     "position": { "x": 100, "y": 10 }
                 },
                 {
-<<<<<<< HEAD
                     "entity_id": 13,
                     "position": { "x": 0, "y": 0 }
                 },
@@ -5023,10 +5022,6 @@
                 {
                     "entity_id": 12,
                     "position": { "x": 330, "y": 240 }
-=======
-                    "entity_id": 1,
-                    "position": { "x": 100, "y": 100 }
->>>>>>> d3936ec9e44a76408bd1d1326a833073968354ce
                 }
             ]
         }
