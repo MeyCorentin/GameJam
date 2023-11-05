@@ -15,12 +15,8 @@ std::vector<std::shared_ptr<Entity>> S_MakeBaby::Filter(const std::vector<std::s
 
 void S_MakeBaby::Execute(
         int arg_is_server,
-        std::vector<std::shared_ptr<Entity>>& arg_entities,
-        std::shared_ptr<sf::RenderWindow> arg_window,
-        std::vector<int> arg_inputs,
-        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-        std::shared_ptr<sf::Event> event_) {
+        Scene * arg_scene) {
+    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
     S_Input input;
     std::shared_ptr<Entity> new_entity;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
@@ -45,7 +41,7 @@ void S_MakeBaby::Execute(
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
             position_new->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second));
-            arg_all_entities.push_back(new_entity);
+            arg_scene->entities_.push_back(new_entity);
             }
         }
 }

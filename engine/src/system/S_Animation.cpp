@@ -18,13 +18,9 @@ std::vector<std::shared_ptr<Entity>> S_Animation::Filter(const std::vector<std::
 
 void S_Animation::Execute(
         int arg_is_server,
-        std::vector<std::shared_ptr<Entity>>& _entities,
-        std::shared_ptr<sf::RenderWindow> _window,
-        std::vector<int> _inputs,
-        std::vector<std::shared_ptr<Entity>>& allEntities,
-        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-        std::shared_ptr<sf::Event> event_) {
-    for (const std::shared_ptr<Entity>& entity : _entities) {
+        Scene * arg_scene) {
+    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
+    for (const std::shared_ptr<Entity>& entity : arg_entities) {
         std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
         std::shared_ptr<C_Clock<sf::Clock>> clock = entity->template GetComponent<C_Clock<sf::Clock>>();
         std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();

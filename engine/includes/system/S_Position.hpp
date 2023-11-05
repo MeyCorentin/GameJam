@@ -1,4 +1,5 @@
 #include "System.hpp"
+#include "../scene/Scene.hpp"
 #include "../components/C_Position.hpp"
 /**
  * @class S_Position
@@ -41,10 +42,5 @@ class S_Position : public System {
      */
         void Execute(
                 int arg_is_server,
-                std::vector<std::shared_ptr<Entity>>& arg_entities,
-                std::shared_ptr<sf::RenderWindow> arg_window,
-                std::vector<int> arg_input,
-                std::vector<std::shared_ptr<Entity>>& arg_all_Entities,
-                std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-                std::shared_ptr<sf::Event> event_) override;
+                Scene * arg_scene) override;
 };

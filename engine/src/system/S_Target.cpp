@@ -13,12 +13,9 @@ std::vector<std::shared_ptr<Entity>> S_Target::Filter(const std::vector<std::sha
 
 void S_Target::Execute(
         int arg_is_server,
-        std::vector<std::shared_ptr<Entity>>& arg_entities,
-        std::shared_ptr<sf::RenderWindow> arg_window,
-        std::vector<int> arg_input,
-        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-        std::shared_ptr<sf::Event> event_) {
+        Scene * arg_scene) {
+    
+    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
     int current_mana;
     std::shared_ptr<C_Target<int>> target;
     std::shared_ptr<C_Ammo<int>> ammo;
@@ -43,8 +40,8 @@ void S_Target::Execute(
     file.close();
     S_Input input;
 
-    for (const std::shared_ptr<Entity>& entity1 : arg_all_entities) {
-        for (const std::shared_ptr<Entity>& entity2 : arg_all_entities) {
+    for (const std::shared_ptr<Entity>& entity1 : arg_scene->entities_) {
+        for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
             target = entity1->template GetComponent<C_Target<int>>();
             follow = entity1->template GetComponent<C_Follow<bool>>();
             shoot = entity1->template GetComponent<C_Shoot<bool>>();
@@ -111,6 +108,6 @@ void S_Target::Execute(
         }
     }
     for (const std::shared_ptr<Entity>& temp_entity : temp_entities) {
-        arg_all_entities.push_back(temp_entity);
+        arg_scene->entities_.push_back(temp_entity);
     }
 }

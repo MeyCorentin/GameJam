@@ -13,6 +13,7 @@ void Ecs::Update(int arg_is_server)
 void Ecs::Create(int arg_is_server)
 {
     SystemRegistry::Instance().RegisterSystem("InputSystem", []() { return std::make_shared<S_Input>(); });
+    SystemRegistry::Instance().RegisterSystem("InputFromPlayer", []() { return std::make_shared<S_InputFromPlayer>(); });
     SystemRegistry::Instance().RegisterSystem("CollisionSystem", []() { return std::make_shared<S_Collision>(); });
     SystemRegistry::Instance().RegisterSystem("HitSystem", []() { return std::make_shared<S_Hit>(); });
     SystemRegistry::Instance().RegisterSystem("PositionSystem", []() { return std::make_shared<S_Position>(); });

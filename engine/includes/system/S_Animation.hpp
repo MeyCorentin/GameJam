@@ -1,4 +1,5 @@
 #include "System.hpp"
+#include "../scene/Scene.hpp"
 #include "../components/C_Sprite.hpp"
 #include "../components/C_Clock.hpp"
 #include "../components/C_SpriteRect.hpp"
@@ -66,11 +67,6 @@ class S_Animation : public System {
 
         void Execute(
                 int arg_is_server,
-                std::vector<std::shared_ptr<Entity>>& _entities,
-                std::shared_ptr<sf::RenderWindow> _window,
-                std::vector<int> _inputs,
-                std::vector<std::shared_ptr<Entity>>& allEntities,
-                std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-                std::shared_ptr<sf::Event> event_) override;
+                Scene * arg_scene) override;
 };
 

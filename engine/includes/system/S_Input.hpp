@@ -1,6 +1,7 @@
 #pragma once
 
 #include "System.hpp"
+#include "../scene/Scene.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_Player.hpp"
 #include "../components/C_SpriteRect.hpp"
@@ -58,12 +59,7 @@ class S_Input : public System {
 
         void Execute(
                 int arg_is_server,
-                std::vector<std::shared_ptr<Entity>>& arg_entities,
-                std::shared_ptr<sf::RenderWindow> arg_window,
-                std::vector<int> arg_inputs,
-                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-                std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-                std::shared_ptr<sf::Event> event_) override;
+                Scene * arg_scene) override;
 
         void Move(
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,

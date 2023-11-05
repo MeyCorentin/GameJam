@@ -14,12 +14,8 @@ std::vector<std::shared_ptr<Entity>> S_Display::Filter(const std::vector<std::sh
 
 void S_Display::Execute(
         int arg_is_server,
-        std::vector<std::shared_ptr<Entity>>& arg_entities,
-        std::shared_ptr<sf::RenderWindow> arg_window,
-        std::vector<int> arg_inputs,
-        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-        std::shared_ptr<sf::Event> event_) {
+        Scene * arg_scene) {
+    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
     std::shared_ptr<C_Sprite<sf::Sprite>>sprite_comp;
     std::shared_ptr<C_Texture<sf::Texture>>texture_comp;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
@@ -44,7 +40,7 @@ void S_Display::Execute(
         x_position = static_cast<float>(position_comp->getValue().first);
         y_position = static_cast<float>(position_comp->getValue().second);
         sprite_comp->getValue().setPosition(x_position, y_position);
-        arg_window->draw(sprite_comp->getValue());
+        arg_scene->window_->draw(sprite_comp->getValue());
     }
 
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
@@ -65,6 +61,6 @@ void S_Display::Execute(
         x_position = static_cast<float>(position_comp->getValue().first);
         y_position = static_cast<float>(position_comp->getValue().second);
         sprite_comp->getValue().setPosition(x_position, y_position);
-        arg_window->draw(sprite_comp->getValue());
+        arg_scene->window_->draw(sprite_comp->getValue());
     }
 }

@@ -41,12 +41,8 @@ std::shared_ptr<Entity> S_Collision::reCreateEntity(
 
 void S_Collision::Execute(
         int arg_is_server,
-        std::vector<std::shared_ptr<Entity>>& arg_entities,
-        std::shared_ptr<sf::RenderWindow> arg_window,
-        std::vector<int> arg_inputs,
-        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-        std::shared_ptr<sf::Event> event_) {
+        Scene * arg_scene) {
+    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_1;
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp_1;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_2;
@@ -133,9 +129,9 @@ void S_Collision::Execute(
                         if (!follow->getValue()) {
                             if ((std::find(my_list.begin(), my_list.end(), entity2->GetBaseId()) != my_list.end())) {
                                 if (x2 - x1 > 0) {
-                                    new_entity = reCreateEntity(arg_all_entities, 22, position_comp_2);
+                                    new_entity = reCreateEntity(arg_scene->entities_, 22, position_comp_2);
                                 } else {
-                                    new_entity = reCreateEntity(arg_all_entities, 38, position_comp_2);
+                                    new_entity = reCreateEntity(arg_scene->entities_, 38, position_comp_2);
                                 }
                                 new_follow = new_entity->template GetComponent<C_Follow<bool>>();
                                 target = new_entity->template GetComponent<C_Target<int>>();

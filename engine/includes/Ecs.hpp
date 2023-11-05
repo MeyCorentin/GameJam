@@ -5,6 +5,7 @@
 #include "../includes/system/S_Hit.hpp"
 #include "../includes/system/S_Display.hpp"
 #include "../includes/system/S_Input.hpp"
+#include "../includes/system/S_InputFromPlayer.hpp"
 #include "../includes/system/S_Mana.hpp"
 #include "../includes/system/S_Collision.hpp"
 #include "../includes/system/S_Mouvement.hpp"

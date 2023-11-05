@@ -119,7 +119,6 @@ std::shared_ptr<Entity> S_Input::createEntity(
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
-            // std::cout << position_shot->getValue().first << std::endl;
             position_new->setValue(std::make_pair(arg_position_comp->getValue().first + position_shot->getValue().first, arg_position_comp->getValue().second + position_shot->getValue().second));
             arg_all_entities.push_back(new_entity);
         }
@@ -330,11 +329,11 @@ void S_Input::CheckTouchPressed(
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     std::shared_ptr<sf::Event> event_)
 {
-    std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
     std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
     std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
     std::shared_ptr<C_IsMoving<bool>> moving = entity->template GetComponent<C_IsMoving<bool>>();
     std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
+    std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
     std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
 
@@ -440,12 +439,8 @@ void S_Input::CheckTouchReleased(
 
 void S_Input::Execute(
         int arg_is_server,
-        std::vector<std::shared_ptr<Entity>>& arg_entities,
-        std::shared_ptr<sf::RenderWindow> arg_window,
-        std::vector<int> arg_inputs,
-        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-        std::shared_ptr<sf::Event> event_)  {
+        Scene * arg_scene)  {
+    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
     sf::Font font_arg_;
     font_arg_.loadFromFile("../../rtype/sources/fonts/arial.ttf");
     sf::Text entity_id;
@@ -465,13 +460,13 @@ void S_Input::Execute(
             continue;
         if (&entity != &arg_entities.front())
             continue;
-        while (arg_window->pollEvent(*event_)) {
-            if (event_->type == sf::Event::Closed)
-                arg_window->close();
-            CheckTouchPressed(entity, arg_all_entities, position_comp, event_);
-            CheckTouchReleased(entity, arg_all_entities, position_comp, event_);
+        while (arg_scene->window_->pollEvent(*arg_scene->event_)) {
+            if (arg_scene->event_->type == sf::Event::Closed)
+                arg_scene->window_->close();
+            CheckTouchPressed(entity, arg_scene->entities_, position_comp, arg_scene->event_);
+            CheckTouchReleased(entity, arg_scene->entities_, position_comp, arg_scene->event_);
         }
-        Move(position_comp, arg_window, entity, arg_all_entities, font_arg_, entity_id, elapsed);
+        Move(position_comp, arg_scene->window_, entity, arg_scene->entities_, font_arg_, entity_id, elapsed);
         player_movement_clock->getValue().restart();
     }
 }

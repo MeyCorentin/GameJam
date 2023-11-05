@@ -14,18 +14,14 @@ std::vector<std::shared_ptr<Entity>> S_PlayMusic::Filter(const std::vector<std::
 
 void S_PlayMusic::Execute(
         int arg_is_server,
-        std::vector<std::shared_ptr<Entity>>& arg_entities,
-        std::shared_ptr<sf::RenderWindow> arg_window,
-        std::vector<int> arg_inputs,
-        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
-        std::vector<std::shared_ptr<sf::Music>>& arg_music_list,
-        std::shared_ptr<sf::Event> event_)  {
+        Scene * arg_scene)  {
+    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
 
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         std::shared_ptr<C_Music<std::string>> music_path = entity->template GetComponent<C_Music<std::string>>();
         std::shared_ptr<C_MusicIsActive<bool>> is_active = entity->template GetComponent<C_MusicIsActive<bool>>();
 
-        auto music = arg_music_list.begin();
+        auto music = arg_scene->musics_.begin();
 
         if (!is_active->getValue()) {
             (*music)->setVolume(30);

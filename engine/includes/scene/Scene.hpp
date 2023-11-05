@@ -18,12 +18,14 @@
 
 class Scene {
     private:
+    public:
         std::shared_ptr<sf::RenderWindow> window_;
         std::shared_ptr<sf::Event> event_;
         std::vector<std::shared_ptr<Entity>> list_entities_;
         std::vector<std::shared_ptr<Entity>> entities_;
         std::vector<std::shared_ptr<System>> systems_;
         std::vector<sf::Sprite> sprites_;
+        std::vector<std::pair<int,int>> messages_;
         std::vector<std::shared_ptr<sf::Music>> musics_;
         std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> spawn_index_;
         std::vector<std::pair<int,int>> jump_index_;
@@ -40,7 +42,6 @@ class Scene {
         bool is_pressed_ = false;
         std::vector<int> inputs_ = {0, 0, 0, 0, 0};
         int id_store_ = 0;
-    public:
         bool running = true;
         double targetFrameTime = (1.0 / 60);
         Scene();
