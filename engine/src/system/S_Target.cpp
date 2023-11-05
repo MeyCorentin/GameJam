@@ -40,6 +40,10 @@ void S_Target::Execute(
 
     for (const std::shared_ptr<Entity>& entity1 : arg_scene->entities_) {
         for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
+            if (entity1 == entity2)
+                continue;
+            if ( entity2->GetBaseId() != 1)
+                continue;
             target = entity1->template GetComponent<C_Target<int>>();
             follow = entity1->template GetComponent<C_Follow<bool>>();
             shoot = entity1->template GetComponent<C_Shoot<bool>>();
@@ -51,8 +55,6 @@ void S_Target::Execute(
             fire_rate_speed =  entity1->template GetComponent<C_FireRateSpeed<double>>();
             range =  entity1->template GetComponent<C_Range<int>>();
 
-            if (entity1 == entity2)
-                continue;
             if (follow &&
                 position_comp_1 &&
                 position_comp_2 &&
