@@ -5427,6 +5427,35 @@
                     "value": "3"
                 }
             ]
+        },
+        {
+            "id": 78,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 100, "y": 15, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Infinit Mode"
+                },
+                {
+                    "component_id": 82,
+                    "value": true
+                },
+                {
+                    "component_id": 83,
+                    "value": "8"
+                }
+            ]
         }
     ],
     "timeline": [
@@ -5444,6 +5473,9 @@
         },
         {
             "7": "timeline_level_2.json"
+        },
+        {
+            "8": "infinit_level.json"
         }
     ]
 }
