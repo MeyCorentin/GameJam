@@ -20,8 +20,7 @@ std::shared_ptr<Entity> S_Collision::reCreateEntity(
         Scene * arg_scene) {
     std::shared_ptr<Entity> new_entity;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
-    std::string filepath = "../../rtype/scene_test.json";
-    std::ifstream file(filepath);
+    std::ifstream file(arg_scene->filepath_);
     json data;
 
     file >> data;

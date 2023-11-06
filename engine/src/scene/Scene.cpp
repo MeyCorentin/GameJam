@@ -6,13 +6,15 @@ Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
         std::vector<sf::Sprite> arg_sprite_list,
         std::vector<std::shared_ptr<sf::Music>> arg_music_list,
         std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index,
-        std::vector<std::pair<int,int>> arg_jump_index) :
+        std::vector<std::pair<int,int>> arg_jump_index,
+        std::string arg_file_path) :
     systems_(arg_system_list),
     list_entities_(arg_entity_list),
     sprites_(arg_sprite_list),
     musics_(arg_music_list),
     spawn_index_(arg_spawn_index),
-    jump_index_(arg_jump_index)  {
+    jump_index_(arg_jump_index),
+    filepath_(arg_file_path)  {
         window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(384, 256), "R-Type"));
         frames_this_second_ = 0;
         total_ticks_ = 0;
@@ -43,8 +45,7 @@ Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
             key_states_[static_cast<sf::Keyboard::Key>(i)] = false;
         }
 
-         std::string filepath = "../../rtype/scene_test.json";
-        std::ifstream file(filepath);
+        std::ifstream file(filepath_);
         std::pair<double, double> direction;
         double length;
         file >> data_;
@@ -200,8 +201,7 @@ std::shared_ptr<Entity> Scene::createEntity(
         std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp) {
     std::shared_ptr<Entity> new_entity;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
-    std::string filepath = "../../rtype/scene_test.json";
-    std::ifstream file(filepath);
+    std::ifstream file(filepath_);
     json data;
 
     file >> data;

@@ -177,11 +177,11 @@ void UDPClient::start_listening()
     this->io_context_.run();
 }
 
-void UDPClient::start()
+void UDPClient::start(char* arg_game_path)
 {
     Ecs ecs;
 
-    ecs.Create(0);
+    ecs.Create(0, arg_game_path);
     std::thread t1(&UDPClient::start_listening, this);
     run_game(ecs);
 }

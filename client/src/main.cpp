@@ -2,8 +2,8 @@
 
 int main(int ac, char **av)
 {
-    if (ac != 3) {
-        std::cerr << "Usage: client <host> <port>" << std::endl;
+    if (ac != 4) {
+        std::cerr << "Usage: client <host> <port> <path_game>" << std::endl;
         return 1;
     }
 
@@ -12,7 +12,7 @@ int main(int ac, char **av)
 
         UDPClient client(io_context, av[1], std::stoi(av[2]));
         std::cout << "Client running" << std::endl;
-        client.start();
+        client.start(av[3]);
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }

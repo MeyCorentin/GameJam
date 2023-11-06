@@ -2,7 +2,7 @@
 
 int main(int ac, char **av)
 {
-    if (ac != 2) {
+    if (ac != 3) {
         std::cerr << "Usage: server <port>\n";
         return 1;
     }
@@ -12,7 +12,7 @@ int main(int ac, char **av)
         boost::asio::io_context io_context;
         UDPServer server(io_context, port);
         std::cout << "Server running" << std::endl;
-        server.start();
+        server.start(av[2]);
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }

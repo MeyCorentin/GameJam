@@ -36,5 +36,7 @@ class SceneBuilder {
 
         std::vector<std::shared_ptr<System>> GetSystems();
 
+        SceneBuilder& AddPath(std::string arg_file_path);
+
         Scene Build();
 };

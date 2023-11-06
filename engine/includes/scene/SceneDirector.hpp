@@ -40,5 +40,5 @@ class SceneDirector {
 
         SceneDirector(std::string arg_file_path, int value);
 
-        Scene ConstructScene();
+        Scene ConstructScene(std::string arg_file_path);
 };

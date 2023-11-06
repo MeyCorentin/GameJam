@@ -1,6 +1,13 @@
 #include "scene/SceneBuilder.hpp"
 
 
+
+SceneBuilder& SceneBuilder::AddPath(std::string arg_file_path) {
+    path_ = arg_file_path;
+    return *this;
+}
+
+
 SceneBuilder& SceneBuilder::AddSystem(std::shared_ptr<System> arg_system) {
     systems_.push_back(arg_system);
     return *this;
@@ -50,6 +57,6 @@ std::vector<std::shared_ptr<System>> SceneBuilder::GetSystems()
 
 Scene SceneBuilder::Build() {
     std::cout << "[BUILDER] Scene build" << std::endl;
-    Scene scene(systems_, entities_, sprites_, music_, spawn_index_, jump_index_);
+    Scene scene(systems_, entities_, sprites_, music_, spawn_index_, jump_index_, path_);
     return scene;
 }

@@ -40,6 +40,7 @@ class Scene {
         std::shared_ptr<sf::Text> entities_nbr_;
         std::shared_ptr<sf::Font> font_;
         std::shared_ptr<sf::Text> current_tick_;
+        std::string filepath_;
         json data_;
 
         int time_pressed_;
@@ -54,7 +55,8 @@ class Scene {
                 std::vector<sf::Sprite> arg_sprite_list,
                 std::vector<std::shared_ptr<sf::Music>> arg_music_list,
                 std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index,
-                std::vector<std::pair<int,int>> arg_jump_index);
+                std::vector<std::pair<int,int>> arg_jump_index,
+                std::string arg_file_path);
 
         json FindComponentConfigById(const json& arg_components_config, int arg_id);
 

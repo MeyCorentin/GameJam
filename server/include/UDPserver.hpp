@@ -16,7 +16,7 @@ class UDPServer {
         UDPServer(boost::asio::io_context& io_context, unsigned short port);
         ~UDPServer();
 
-        void start();
+        void start(char *arg_path);
         void send(BinaryProtocole::BinaryMessage msg);
         void send_to_all(BinaryProtocole::BinaryMessage msg);
         void send_to_other(BinaryProtocole::BinaryMessage msg);

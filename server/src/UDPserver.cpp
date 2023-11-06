@@ -208,12 +208,12 @@ void UDPServer::handleClientMessage(const BinaryProtocole::BinaryMessage& msg)
     }
 }
 
-void UDPServer::start()
+void UDPServer::start(char *arg_path)
 {
     std::thread t1(&UDPServer::start_listening, this);
     while (clients_.size() == 0);
     Ecs ecs;
-    ecs.Create(1);
+    ecs.Create(1, arg_path);
     run_server(ecs);
 }
 

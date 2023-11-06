@@ -95,5 +95,5 @@ class Ecs
 
         void Update(int arg_is_server);
 
-        void Create(int arg_is_server);
+        void Create(int arg_is_server, char *game_path);
 };

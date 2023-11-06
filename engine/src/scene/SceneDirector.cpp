@@ -184,7 +184,8 @@ SceneDirector::SceneDirector(std::string arg_file_path, int value) {
     scene_builder_.AddJumpIndex(CreateJump(data["spawn"]));
 }
 
-Scene SceneDirector::ConstructScene() {
+Scene SceneDirector::ConstructScene(std::string arg_file_path) {
     std::cout << "[CONSTRUCTOR] Scene construct" << std::endl;
+    scene_builder_.AddPath(arg_file_path);
     return scene_builder_.Build();
 }

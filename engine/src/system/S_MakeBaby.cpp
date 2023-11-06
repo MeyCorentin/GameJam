@@ -20,8 +20,7 @@ void S_MakeBaby::Execute(
     std::shared_ptr<Entity> new_entity;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
     std::shared_ptr<C_Child<int>> id_child;
-    std::string filepath = "../../rtype/scene_test.json";
-    std::ifstream file(filepath);
+    std::ifstream file(arg_scene->filepath_);
     json data;
 
     file >> data;

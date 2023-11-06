@@ -10,7 +10,7 @@ void Ecs::Update(int arg_is_server)
 {
     scene_.Update(arg_is_server);
 }
-void Ecs::Create(int arg_is_server)
+void Ecs::Create(int arg_is_server, char *game_path)
 {
     SystemRegistry::Instance().RegisterSystem("InputSystem", []() { return std::make_shared<S_Input>(); });
     SystemRegistry::Instance().RegisterSystem("InputFromPlayer", []() { return std::make_shared<S_InputFromPlayer>(); });
@@ -91,7 +91,10 @@ void Ecs::Create(int arg_is_server)
     ComponentRegistry::Instance().RegisterComponent("AnimationDirection", []() { return std::make_shared<C_AnimationDirection<int>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
-    SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);
 
-    scene_ = SceneDirector.ConstructScene();
+    std::string json_path = std::string(game_path) + "/game.json";
+
+    SceneDirector SceneDirector(json_path.c_str(), arg_is_server);
+    // SceneDirector SceneDirector("../../rtype/scene_test.json", arg_is_server);
+    scene_ = SceneDirector.ConstructScene(json_path.c_str());
 }

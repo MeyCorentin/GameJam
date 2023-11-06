@@ -18,7 +18,7 @@ public:
 
     void send(BinaryProtocole::BinaryMessage msg);
     void start_listening();
-    void start();
+    void start(char* arg_game_path);
     void setClientId(uint32_t _clientId) { clientId = _clientId; }
     uint32_t getClientId() { return clientId; }
     std::vector<BinaryProtocole::BinaryMessage> input_queue_;

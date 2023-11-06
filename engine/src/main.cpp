@@ -5,12 +5,14 @@
 
 int main(int argc, char **argv)
 {
+    if (argc != 2)
+        std::cout << "Incorrect usage" << std::endl;
     Ecs ecs(argc, argv);
     std::chrono::high_resolution_clock::time_point start_time;
     std::chrono::high_resolution_clock::time_point end_time;
     std::chrono::high_resolution_clock::time_point elapsed_time;
 
-    ecs.Create(0);
+    ecs.Create(0, argv[1]);
     srand(time(NULL));
     while(true)
     {
