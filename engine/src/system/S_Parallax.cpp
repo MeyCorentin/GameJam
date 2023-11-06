@@ -28,7 +28,8 @@ void S_Parallax::Execute(
         parallax = entity->template GetComponent<C_Parallax<int>>();
         parallax_clock = entity->template GetComponent<C_ParallaxClock<sf::Clock>>();
         sf::Time elapsed1 = parallax_clock->getValue().getElapsedTime();
-        position->setValue(std::make_pair(  position->getValue().first + ((parallax->getValue() * elapsed1.asMilliseconds() / 10)),
+        // position->setValue(std::make_pair(  position->getValue().first + ((parallax->getValue() * elapsed1.asMilliseconds() / 10)),
+        position->setValue(std::make_pair(  position->getValue().first + ((parallax->getValue())), //TODO Replace that
                                             position->getValue().second));
         parallax_clock->getValue().restart();
         position_start = entity->template GetComponent<C_PositionStart<std::pair<double, double>>>();

@@ -20,6 +20,7 @@
 #include "../includes/system/S_PlayMusic.hpp"
 #include "../includes/system/S_AutoMove.hpp"
 #include "../includes/system/S_Gravity.hpp"
+#include "../includes/system/S_WriteText.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_JumpHeight.hpp"
@@ -85,6 +86,10 @@
 #include "../includes/components/C_Jump.hpp"
 #include "../includes/components/C_Velocity.hpp"
 
+#include "../includes/components/C_Text.hpp"
+#include "../includes/components/C_TextMessage.hpp"
+#include "../includes/components/C_IsClickable.hpp"
+#include "../includes/components/C_NextTimeline.hpp"
 
 #include "../includes/components/ComponentBase.hpp"
 

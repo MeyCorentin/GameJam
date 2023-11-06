@@ -11,6 +11,7 @@
 #include "../components/C_ClockSpeed.hpp"
 #include "../components/C_SingleAnimation.hpp"
 #include "../components/C_AnimationDirection.hpp"
+#include "../components/C_NextTimeline.hpp"
 
 /**
  * @class S_Animation

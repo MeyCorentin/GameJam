@@ -257,7 +257,7 @@ void S_Input::CheckTouchPressed(
         if (event_->key.code == sf::Keyboard::Space) {
             if (is_charging->getValue() == false) {
                 clock->getValue().restart();
-                vector_entities->getValue().push_back(arg_scene->createEntity(arg_all_entities, 27, position_comp));
+                // vector_entities->getValue().push_back(arg_scene->createEntity(arg_all_entities, 27, position_comp));
                 is_charging->getValue() = true;
             }
         }
@@ -335,6 +335,14 @@ void S_Input::CheckTouchReleased(
             arg_scene->need_switch_ = true;
             arg_scene->next_timeline_ = "3";
         }
+        if (event_->key.code == sf::Keyboard::Num5) {
+            arg_scene->need_switch_ = true;
+            arg_scene->next_timeline_ = "5";
+        }
+        if (event_->key.code == sf::Keyboard::Num7) {
+            arg_scene->need_switch_ = true;
+            arg_scene->next_timeline_ = "7";
+        }
         if (event_->key.code == sf::Keyboard::Left)
             arg_scene->inputs_[1] = 0;
         if (event_->key.code == sf::Keyboard::Down) {
@@ -369,11 +377,14 @@ void S_Input::Execute(
     entity_id.setCharacterSize(10);
     entity_id.setFont(font_arg_);
 
+    sf::Vector2u size = arg_scene->window_->getSize();
+
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
         player_movement_clock = entity->template GetComponent<C_PlayerMovementClock<sf::Clock>>();
         sf::Time elapsed = player_movement_clock->getValue().getElapsedTime();
+
         if (arg_is_server == 1)
             continue;
         if (!player_id)
@@ -385,8 +396,29 @@ void S_Input::Execute(
                 arg_scene->window_->close();
             CheckTouchPressed(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
             CheckTouchReleased(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
+            sf::Vector2i position = sf::Mouse::getPosition(*arg_scene->window_);
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                for (const std::shared_ptr<Entity>& my_entity : arg_scene->entities_) {
+                    std::shared_ptr<C_IsClickable<bool>> is_clickable =  my_entity->template GetComponent<C_IsClickable<bool>>();
+                    std::shared_ptr<C_NextTimeline<std::string>> next_timeline =  my_entity->template GetComponent<C_NextTimeline<std::string>>();
+                    if (is_clickable) {
+                        if (is_clickable->getValue() == true) {
+                            if (next_timeline) {
+                                std::shared_ptr<C_Position<std::pair<double, double>>> position_target = my_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                                std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = my_entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
+                                if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
+                                    arg_scene->need_switch_ = true;
+                                    arg_scene->next_timeline_ = next_timeline->getValue();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         Move(position_comp, arg_scene, entity, arg_scene->entities_, font_arg_, entity_id, elapsed);
         player_movement_clock->getValue().restart();
     }
 }
+
+// 604361

@@ -61,12 +61,12 @@
             "type": "AutoMove"
         },
         {
-            "id": 17,
-            "type": "InputFromPlayer"
+            "id": 18,
+            "type": "WriteText"
         },
         {
-            "id": 20,
-            "type": "Gravity"
+            "id": 17,
+            "type": "InputFromPlayer"
         }
     ],
     "components": [
@@ -384,6 +384,26 @@
             "id": 74,
             "type": "PositionStorage",
             "value_type": "PairDouble"
+        },
+        {
+            "id": 80,
+            "type": "Text",
+            "value_type": "Text"
+        },
+        {
+            "id": 81,
+            "type": "TextMessage",
+            "value_type": "String"
+        },
+        {
+            "id": 82,
+            "type": "IsClickable",
+            "value_type": "Bool"
+        },
+        {
+            "id": 83,
+            "type": "NextTimeline",
+            "value_type": "String"
         }
     ],
     "entities": [
@@ -1539,6 +1559,10 @@
                 {
                     "component_id": 60,
                     "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "1"
                 }
             ]
         },
@@ -4144,6 +4168,10 @@
                 {
                     "component_id": 60,
                     "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "7"
                 }
             ]
         },
@@ -5022,15 +5050,481 @@
                     "value": 0
                 }
             ]
+        },
+        {
+            "id": 64,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/menu_title.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/menu_title.png"
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 259, "height": 60}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 259, "y": 60, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 65,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/menu_copyright.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/menu_copyright.png"
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 144, "height": 18}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 144, "y": 18, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 66,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/menu_phrase.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/menu_phrase.png"
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 131, "height": 19}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 131, "y": 19, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 67,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/menu_player.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/menu_player.png"
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 53, "height": 7}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 53, "y": 7, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 82,
+                    "value": true
+                },
+                {
+                    "component_id": 83,
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": 68,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Key up ; Go up"
+                }
+            ]
+        },
+        {
+            "id": 69,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Key left ; Go left"
+                }
+            ]
+        },
+        {
+            "id": 70,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Key right ; Go right"
+                }
+            ]
+        },
+        {
+            "id": 71,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Key down ; Go down"
+                }
+            ]
+        },
+        {
+            "id": 72,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Key space ; Shot"
+                }
+            ]
+        },
+        {
+            "id": 73,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Maintain space ; Big shoot"
+                }
+            ]
+        },
+        {
+            "id": 74,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "TUTORIAL"
+                }
+            ]
+        },
+        {
+            "id": 75,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 40, "y": 15, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Back"
+                },
+                {
+                    "component_id": 82,
+                    "value": true
+                },
+                {
+                    "component_id": 83,
+                    "value": "1"
+                }
+            ]
+        },
+        {
+            "id": 76,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 80, "y": 15, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Tutorial"
+                },
+                {
+                    "component_id": 82,
+                    "value": true
+                },
+                {
+                    "component_id": 83,
+                    "value": "5"
+                }
+            ]
+        },
+        {
+            "id": 77,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 67, "top": 342, "width": 33, "height": 30}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 198, "y": 30, "start_x": 67, "start_y": 342}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": 78,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 100, "y": 15, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Infinit Mode"
+                },
+                {
+                    "component_id": 82,
+                    "value": true
+                },
+                {
+                    "component_id": 83,
+                    "value": "8"
+                }
+            ]
         }
     ],
     "timeline": [
         {
-            "1": "timeline_1.json"
+            "1": "timeline_menu.json"
         },
         {
-            "2": "timeline_2.json"
+            "2": "timeline_level_1.json"
+        },
+        {
+            "3": "timeline_boss.json"
+        },
+        {
+            "5": "timeline_tutorial.json"
+        },
+        {
+            "7": "timeline_level_2.json"
+        },
+        {
+            "8": "infinit_level.json"
         }
     ]
 }
-

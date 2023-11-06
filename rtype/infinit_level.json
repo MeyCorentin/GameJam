@@ -1,0 +1,59 @@
+{
+    "spawn": 
+    [
+        {
+            "tick": 0,
+            "mob_id": [
+                {
+                    "entity_id": 1,
+                    "position": {
+                        "x": 20,
+                        "y": 125
+                    }
+                },
+                {
+                    "entity_id": 13,
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 14,
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 15,
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 13,
+                    "position": {
+                        "x": 426,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 14,
+                    "position": {
+                        "x": 426,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 15,
+                    "position": {
+                        "x": 426,
+                        "y": 0
+                    }
+                }
+            ]
+        }
+    ]
+}

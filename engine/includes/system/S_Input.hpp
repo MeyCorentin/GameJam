@@ -30,6 +30,8 @@
 #include "../components/C_TimeAutoMove.hpp"
 #include "../components/C_ClockAutoMove.hpp"
 #include "../components/C_IsAutoMove.hpp"
+#include "../components/C_IsClickable.hpp"
+#include "../components/C_NextTimeline.hpp"
 #include "../parser/jsonParser.hpp"
 #include "../scene/SystemRegister.hpp"
 #include "../scene/ComponentRegister.hpp"

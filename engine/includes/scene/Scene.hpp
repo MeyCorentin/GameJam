@@ -17,6 +17,7 @@
 #include "../components/C_ChargedShoot.hpp"
 #include "../components/C_PositionShot.hpp"
 #include "../components/C_Target.hpp"
+#include "../components/C_ParallaxClock.hpp"
 #include "../parser/jsonParser.hpp"
 
 class Scene {

@@ -104,7 +104,7 @@ Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
         second_clock_ = std::shared_ptr<sf::Clock>(new sf::Clock());
         entities_nbr_ = std::shared_ptr<sf::Text>(new sf::Text());
         font_ = std::shared_ptr<sf::Font>(new sf::Font());
-        font_->loadFromFile("../../rtype/sources/fonts/arial.ttf");
+        font_->loadFromFile("../../rtype/sources/fonts/r-type.ttf");
         tick_ = std::shared_ptr<sf::Text>(new sf::Text());
         tick_->setPosition(0, 0);
         tick_->setFillColor(sf::Color::White);
@@ -150,17 +150,16 @@ std::vector<std::shared_ptr<System>> Scene::GetSystems()
 }
 
 void Scene::DisplayCurrentTick() {
-    int &ref = total_ticks_;
+    total_ticks_++;
     std::string tick_string;
 
-    ref += 1;
-    tick_string = std::to_string(ref) + " (ticks)";
+    tick_string = std::to_string(total_ticks_) + " ticks";
     current_tick_->setString(tick_string);
     window_->draw(*current_tick_);
 }
 
 void Scene::DisplayEntities(int nbr) {
-    std::string nbr_string = std::to_string(nbr) + " (enttities)";
+    std::string nbr_string = std::to_string(nbr) + " enttities";
 
     this->entities_nbr_->setString(nbr_string);
     window_->draw(*entities_nbr_);
@@ -172,7 +171,7 @@ void Scene::DisplayTicks() {
 
     ref += 1;
     if (second_clock_->getElapsedTime().asSeconds() >= 1.0) {
-        tick_string = std::to_string(ref) + " (t/s)";
+        tick_string = std::to_string(ref) + " t/s";
         tick_->setString(tick_string);
         ref= 0;
         second_clock_->restart();
@@ -247,6 +246,8 @@ bool Scene::ProcessComponent(
         arg_entityBuilder.AddComponent(component, std::get<sf::Sound>(value));
     } else if (value_type == "SoundBuffer") {
         arg_entityBuilder.AddComponent(component, std::get<sf::SoundBuffer>(value));
+    } else if (value_type == "Text") {
+        arg_entityBuilder.AddComponent(component, std::get<sf::Text>(value));
     } else if (value_type == "String") {
         arg_entityBuilder.AddComponent(component, std::get<std::string>(value));
     } else {
@@ -296,7 +297,8 @@ void Scene::LoadTimeline(
 
     spawn_index_ = CreateMap(timeline_data["spawn"]);
     jump_index_ = CreateJump(timeline_data["spawn"]);
-    total_ticks_ = -1;
+    total_ticks_ = 0;
+    second_clock_->restart();
     id_store_ = 0;
     entities_.clear();
 }
@@ -445,6 +447,7 @@ std::vector<std::shared_ptr<Entity>> Scene::SpawnEntities(int arg_is_server)
     std::shared_ptr<C_Position<std::pair<double,double>>> position;
     std::shared_ptr<C_SinClock<sf::Clock>> sin_clock;
     std::shared_ptr<C_Clock<sf::Clock>> clock_basic;
+    std::shared_ptr<C_ParallaxClock<sf::Clock>> parallax_clock;
     int entity_id;
     int x;
     int y;
@@ -479,6 +482,10 @@ std::vector<std::shared_ptr<Entity>> Scene::SpawnEntities(int arg_is_server)
                 clock_basic = newEntity->template GetComponent<C_Clock<sf::Clock>>();
                 if (clock_basic)
                     clock_basic->getValue().restart();
+
+                parallax_clock = newEntity->template GetComponent<C_ParallaxClock<sf::Clock>>();
+                if (parallax_clock)
+                    parallax_clock->getValue().restart();
 
                 newEntities.push_back(newEntity);
             }
