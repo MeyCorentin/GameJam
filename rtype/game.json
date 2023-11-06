@@ -63,6 +63,10 @@
         {
             "id": 17,
             "type": "InputFromPlayer"
+        },
+        {
+            "id": 20,
+            "type": "Gravity"
         }
     ],
     "components": [
@@ -355,12 +359,57 @@
             "id": 61,
             "type": "EntityMovementClock",
             "value_type": "Clock"
+        },
+        {
+            "id": 70,
+            "type": "Velocity",
+            "value_type": "PairInt"
+        },
+        {
+            "id": 71,
+            "type": "Gravity",
+            "value_type": "Double"
+        },
+        {
+            "id": 72,
+            "type": "Grounded",
+            "value_type": "Bool"
+        },
+        {
+            "id": 73,
+            "type": "Jump",
+            "value_type": "Bool"
+        },
+        {
+            "id": 74,
+            "type": "PositionStorage",
+            "value_type": "PairDouble"
         }
     ],
     "entities": [
         {
             "id": 1,
             "components": [
+                {
+                    "component_id": 74,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 70,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 71,
+                    "value": 1
+                },
+                {
+                    "component_id": 72,
+                    "value": false
+                },
+                {
+                    "component_id": 73,
+                    "value": false
+                },
                 {
                     "component_id": 55,
                     "value": -1
@@ -4977,10 +5026,10 @@
     ],
     "timeline": [
         {
-            "1": "timeline_2.json"
+            "1": "timeline_1.json"
         },
         {
-            "2": "timeline_1.json"
+            "2": "timeline_2.json"
         }
     ]
 }

@@ -51,7 +51,7 @@ void DrawEntityHitbox(
 
 void S_Input::Move(
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp, 
-    std::shared_ptr<sf::RenderWindow> arg_window,
+    Scene * arg_scene,
     const std::shared_ptr<Entity>& entity,
     std::vector<std::shared_ptr<Entity>>& arg_entities,
     sf::Font arg_font,
@@ -61,27 +61,27 @@ void S_Input::Move(
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
 
     int movement_elapsed = 5 * elapsed.asMilliseconds() / 30;
-    if (inputs_[0] == 1)
+    if (arg_scene->inputs_[0] == 1)
     {
         if (position_comp->getValue().second > movement_elapsed)
             position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - movement_elapsed));
     }
-    if (inputs_[1] == 1)
+    if (arg_scene->inputs_[1] == 1)
     {
         if (position_comp->getValue().first > movement_elapsed)
             position_comp->setValue(std::make_pair(position_comp->getValue().first - movement_elapsed, position_comp->getValue().second));
     }
-    if (inputs_[2] == 1)
+    if (arg_scene->inputs_[2] == 1)
     {
-        if (position_comp->getValue().second < arg_window->getSize().y - movement_elapsed - hitbox_size->getValue().second)
+        if (position_comp->getValue().second < arg_scene->window_->getSize().y - movement_elapsed - hitbox_size->getValue().second)
             position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + movement_elapsed));
     }
-    if (inputs_[3] == 1)
+    if (arg_scene->inputs_[3] == 1)
     {
-        if (position_comp->getValue().first < arg_window->getSize().x - movement_elapsed- hitbox_size->getValue().first)
+        if (position_comp->getValue().first < arg_scene->window_->getSize().x - movement_elapsed- hitbox_size->getValue().first)
             position_comp->setValue(std::make_pair(position_comp->getValue().first + movement_elapsed, position_comp->getValue().second));
     }
-    if (inputs_[5] == 1)
+    if (arg_scene->inputs_[5] == 1)
     {
         for (const std::shared_ptr<Entity>& entity : arg_entities) {
             std::shared_ptr<C_Player<int>> is_player = entity->template GetComponent<C_Player<int>>();
@@ -101,8 +101,8 @@ void S_Input::Move(
             else {
                 outlineColor = sf::Color::Red;
             }
-            DrawEntityHitbox(arg_window, entity, outlineColor);
-            DrawEntityID(arg_window, entity, arg_font, arg_entity_id);
+            DrawEntityHitbox(arg_scene->window_, entity, outlineColor);
+            DrawEntityID(arg_scene->window_, entity, arg_font, arg_entity_id);
         }
 
     }
@@ -227,6 +227,7 @@ void S_Input::CheckTouchPressed(
     std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
     std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
     std::shared_ptr<C_IsMoving<bool>> moving = entity->template GetComponent<C_IsMoving<bool>>();
+    std::shared_ptr<C_Grounded<bool>> grounded = entity->template GetComponent<C_Grounded<bool>>();
     std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
     std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
     std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
@@ -234,7 +235,7 @@ void S_Input::CheckTouchPressed(
 
     if (event_->type == sf::Event::KeyPressed) {
         if (event_->key.code == sf::Keyboard::Up) {
-            inputs_[0] = 1;
+            arg_scene->inputs_[0] = 1;
             if (moving->getValue() == false) {
                 moving->getValue() = true;
                 rect->getValue().left = size->getValue().second.first + (rect->getValue().width * 2);
@@ -242,9 +243,9 @@ void S_Input::CheckTouchPressed(
             }
         }
         if (event_->key.code == sf::Keyboard::Left)
-            inputs_[1] = 1;
+            arg_scene->inputs_[1] = 1;
         if (event_->key.code == sf::Keyboard::Down) {
-            inputs_[2] = 1;
+            arg_scene->inputs_[2] = 1;
             if (moving->getValue() == false) {
                 moving->getValue() = true;
                 rect->getValue().left = size->getValue().second.first - (rect->getValue().width * 2);
@@ -252,7 +253,7 @@ void S_Input::CheckTouchPressed(
             }
         }
         if (event_->key.code == sf::Keyboard::Right)
-            inputs_[3] = 1;
+            arg_scene->inputs_[3] = 1;
         if (event_->key.code == sf::Keyboard::Space) {
             if (is_charging->getValue() == false) {
                 clock->getValue().restart();
@@ -260,10 +261,17 @@ void S_Input::CheckTouchPressed(
                 is_charging->getValue() = true;
             }
         }
-        if (event_->key.code == sf::Keyboard::Z && inputs_[5] == 1)
-            inputs_[5] = 0;
-        else if (event_->key.code == sf::Keyboard::Z && inputs_[5] == 0)
-            inputs_[5] = 1;
+        if (grounded)
+        {
+            if (event_->key.code == sf::Keyboard::V && arg_scene->inputs_[6] == 0 && grounded->getValue() == true) {
+                arg_scene->inputs_[6] = 1;
+                std::cout << " PRESS JUMP " << std::endl;
+            }
+        }
+        if (event_->key.code == sf::Keyboard::Z && arg_scene->inputs_[5] == 1)
+            arg_scene->inputs_[5] = 0;
+        else if (event_->key.code == sf::Keyboard::Z && arg_scene->inputs_[5] == 0)
+            arg_scene->inputs_[5] = 1;
     }
 }
 
@@ -310,7 +318,7 @@ void S_Input::CheckTouchReleased(
 
     if (event_->type == sf::Event::KeyReleased) {
         if (event_->key.code == sf::Keyboard::Up) {
-            inputs_[0] = 0;
+            arg_scene->inputs_[0] = 0;
             moving->getValue() = false;
             rect->getValue().left = size->getValue().second.first;
             sprite->getValue().setTextureRect(rect->getValue());
@@ -328,15 +336,15 @@ void S_Input::CheckTouchReleased(
             arg_scene->next_timeline_ = "3";
         }
         if (event_->key.code == sf::Keyboard::Left)
-            inputs_[1] = 0;
+            arg_scene->inputs_[1] = 0;
         if (event_->key.code == sf::Keyboard::Down) {
-            inputs_[2] = 0;
+            arg_scene->inputs_[2] = 0;
             moving->getValue() = false;
             rect->getValue().left = size->getValue().second.first;
             sprite->getValue().setTextureRect(rect->getValue());
         }
         if (event_->key.code == sf::Keyboard::Right)
-            inputs_[3] = 0;
+            arg_scene->inputs_[3] = 0;
         if (event_->key.code == sf::Keyboard::Space) {
             BasicShot(entity, arg_all_entities, position_comp, arg_scene);
             SpecialShot(entity, arg_all_entities, position_comp, arg_scene);
@@ -378,7 +386,7 @@ void S_Input::Execute(
             CheckTouchPressed(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
             CheckTouchReleased(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
         }
-        Move(position_comp, arg_scene->window_, entity, arg_scene->entities_, font_arg_, entity_id, elapsed);
+        Move(position_comp, arg_scene, entity, arg_scene->entities_, font_arg_, entity_id, elapsed);
         player_movement_clock->getValue().restart();
     }
 }

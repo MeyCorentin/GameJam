@@ -18,9 +18,11 @@
 #include "../includes/system/S_PlaySound.hpp"
 #include "../includes/system/S_PlayMusic.hpp"
 #include "../includes/system/S_AutoMove.hpp"
+#include "../includes/system/S_Gravity.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_Player.hpp"
+#include "../includes/components/C_PositionStorage.hpp"
 #include "../includes/components/C_Sprite.hpp"
 #include "../includes/components/C_Position.hpp"
 #include "../includes/components/C_Direction.hpp"
@@ -76,6 +78,11 @@
 #include "../includes/components/C_ClockSpeed.hpp"
 #include "../includes/components/C_SingleAnimation.hpp"
 #include "../includes/components/C_AnimationDirection.hpp"
+#include "../includes/components/C_Gravity.hpp"
+#include "../includes/components/C_Grounded.hpp"
+#include "../includes/components/C_Jump.hpp"
+#include "../includes/components/C_Velocity.hpp"
+
 
 #include "../includes/components/ComponentBase.hpp"
 

@@ -47,7 +47,7 @@ class Scene {
 
         int time_pressed_;
         bool is_pressed_ = false;
-        std::vector<int> inputs_ = {0, 0, 0, 0, 0};
+        std::vector<int> inputs_ = {0, 0, 0, 0, 0, 0, 0};
         int id_store_ = 0;
         bool running = true;
         double targetFrameTime = (1.0 / 60);

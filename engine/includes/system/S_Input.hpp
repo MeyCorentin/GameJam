@@ -34,10 +34,10 @@
 #include "../scene/SystemRegister.hpp"
 #include "../scene/ComponentRegister.hpp"
 #include "../scene/SceneBuilder.hpp"
+#include "../components/C_Grounded.hpp"
 
 class S_Input : public System {
     private:
-        std::vector<int> inputs_ = {0, 0, 0, 0, 0, 0};
     public:
         std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
 
@@ -47,7 +47,7 @@ class S_Input : public System {
 
         void Move(
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
-                std::shared_ptr<sf::RenderWindow> arg_window,
+                Scene * arg_scene,
                 const std::shared_ptr<Entity>& entity,
                 std::vector<std::shared_ptr<Entity>>& entity_list,
                 sf::Font arg_font,

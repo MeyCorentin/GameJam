@@ -29,6 +29,7 @@ void Ecs::Create(int arg_is_server, char *game_path)
     SystemRegistry::Instance().RegisterSystem("PlaySound", []() { return std::make_shared<S_PlaySound>(); });
     SystemRegistry::Instance().RegisterSystem("PlayMusic", []() { return std::make_shared<S_PlayMusic>(); });
     SystemRegistry::Instance().RegisterSystem("AutoMove", []() { return std::make_shared<S_AutoMove>(); });
+    SystemRegistry::Instance().RegisterSystem("Gravity", []() { return std::make_shared<S_Gravity>(); });
 
     ComponentRegistry::Instance().RegisterComponent("PlayerMovementClock", []() { return std::make_shared<C_PlayerMovementClock<sf::Clock>>(); });
     ComponentRegistry::Instance().RegisterComponent("EntityMovementClock", []() { return std::make_shared<C_EntityMovementClock<sf::Clock>>(); });
@@ -89,6 +90,12 @@ void Ecs::Create(int arg_is_server, char *game_path)
     ComponentRegistry::Instance().RegisterComponent("ClockSpeed", []() { return std::make_shared<C_ClockSpeed<double>>(); });
     ComponentRegistry::Instance().RegisterComponent("SingleAnimation", []() { return std::make_shared<C_SingleAnimation<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("AnimationDirection", []() { return std::make_shared<C_AnimationDirection<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Velocity", []() { return std::make_shared<C_Velocity<std::pair<int, int>>>(); });
+    ComponentRegistry::Instance().RegisterComponent("PositionStorage", []() { return std::make_shared<C_PositionStorage<std::pair<double, double>>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Gravity", []() { return std::make_shared<C_Gravity<double>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Grounded", []() { return std::make_shared<C_Grounded<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Jump", []() { return std::make_shared<C_Jump<bool>>(); });
+
 
     std::cout << "[ECS] start create scene" << std::endl;
 
