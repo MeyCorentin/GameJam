@@ -150,11 +150,10 @@ std::vector<std::shared_ptr<System>> Scene::GetSystems()
 }
 
 void Scene::DisplayCurrentTick() {
-    int &ref = total_ticks_;
+    total_ticks_++;
     std::string tick_string;
 
-    ref += 1;
-    tick_string = std::to_string(ref) + " ticks";
+    tick_string = std::to_string(total_ticks_) + " ticks";
     current_tick_->setString(tick_string);
     window_->draw(*current_tick_);
 }
@@ -298,7 +297,8 @@ void Scene::LoadTimeline(
 
     spawn_index_ = CreateMap(timeline_data["spawn"]);
     jump_index_ = CreateJump(timeline_data["spawn"]);
-    total_ticks_ = -1;
+    total_ticks_ = 0;
+    second_clock_->restart();
     id_store_ = 0;
     entities_.clear();
 }
@@ -447,6 +447,7 @@ std::vector<std::shared_ptr<Entity>> Scene::SpawnEntities(int arg_is_server)
     std::shared_ptr<C_Position<std::pair<double,double>>> position;
     std::shared_ptr<C_SinClock<sf::Clock>> sin_clock;
     std::shared_ptr<C_Clock<sf::Clock>> clock_basic;
+    std::shared_ptr<C_ParallaxClock<sf::Clock>> parallax_clock;
     int entity_id;
     int x;
     int y;
@@ -481,6 +482,10 @@ std::vector<std::shared_ptr<Entity>> Scene::SpawnEntities(int arg_is_server)
                 clock_basic = newEntity->template GetComponent<C_Clock<sf::Clock>>();
                 if (clock_basic)
                     clock_basic->getValue().restart();
+
+                parallax_clock = newEntity->template GetComponent<C_ParallaxClock<sf::Clock>>();
+                if (parallax_clock)
+                    parallax_clock->getValue().restart();
 
                 newEntities.push_back(newEntity);
             }

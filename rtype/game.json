@@ -1510,6 +1510,10 @@
                 {
                     "component_id": 60,
                     "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "1"
                 }
             ]
         },
@@ -4115,6 +4119,10 @@
                 {
                     "component_id": 60,
                     "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "7"
                 }
             ]
         },
@@ -5309,6 +5317,10 @@
                     "value": { "x": 100, "y": 100 }
                 },
                 {
+                    "component_id": 13,
+                    "value": { "x": 40, "y": 15, "start_x": 0, "start_y": 0}
+                },
+                {
                     "component_id": 80,
                     "value": true
                 },
@@ -5323,6 +5335,96 @@
                 {
                     "component_id": 83,
                     "value": "1"
+                }
+            ]
+        },
+        {
+            "id": 76,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 80, "y": 15, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Tutorial"
+                },
+                {
+                    "component_id": 82,
+                    "value": true
+                },
+                {
+                    "component_id": 83,
+                    "value": "5"
+                }
+            ]
+        },
+        {
+            "id": 77,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/missiles.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 67, "top": 342, "width": 33, "height": 30}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 198, "y": 30, "start_x": 67, "start_y": 342}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "3"
                 }
             ]
         }
@@ -5341,8 +5443,7 @@
             "5": "timeline_tutorial.json"
         },
         {
-            "7": "timeline_7.json"
+            "7": "timeline_level_2.json"
         }
     ]
 }
-

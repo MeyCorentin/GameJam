@@ -32,14 +32,20 @@ void S_Animation::Execute(
         std::shared_ptr<C_ClockSpeed<double>> clock_speed = entity->template GetComponent<C_ClockSpeed<double>>();
         std::shared_ptr<C_SingleAnimation<bool>> single_animation = entity->template GetComponent<C_SingleAnimation<bool>>();
         std::shared_ptr<C_AnimationDirection<int>> animation_direction = entity->template GetComponent<C_AnimationDirection<int>>();
+        std::shared_ptr<C_NextTimeline<std::string>> next_timeline =  entity->template GetComponent<C_NextTimeline<std::string>>();
         bool animaion = entity->template GetComponent<C_Animation<bool>>()->getValue();
         if (clock->getValue().getElapsedTime().asSeconds() <= 0.1f + clock_speed->getValue()) {
             continue;
         }
         if (animation_direction->getValue() == 0) {
             if (rect->getValue().left >= (size->getValue().first.first - rect->getValue().width) + size->getValue().second.first) {
-                if (unique->getValue())
+                if (unique->getValue()) {
                     entity->is_dead_ = true;
+                    if (next_timeline) {
+                        arg_scene->need_switch_ = true;
+                        arg_scene->next_timeline_ = next_timeline->getValue();
+                    }
+                }
                 else if (single_animation) {
                     if (single_animation->getValue()) {
                         size->getValue().first.first = rect->getValue().width;
@@ -53,8 +59,13 @@ void S_Animation::Execute(
             }
         } else if (animation_direction->getValue() == 1) {
             if (rect->getValue().left <= (size->getValue().first.first - rect->getValue().width) + size->getValue().second.first) {
-                if (unique->getValue())
+                if (unique->getValue()) {
                     entity->is_dead_ = true;
+                    if (next_timeline) {
+                        arg_scene->need_switch_ = true;
+                        arg_scene->next_timeline_ = next_timeline->getValue();
+                    }
+                }
                 else if (single_animation) {
                     if (single_animation->getValue()) {
                         size->getValue().first.first = rect->getValue().width;

@@ -369,6 +369,8 @@ void S_Input::Execute(
     entity_id.setCharacterSize(10);
     entity_id.setFont(font_arg_);
 
+    sf::Vector2u size = arg_scene->window_->getSize();
+
     for (const std::shared_ptr<Entity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
@@ -395,7 +397,7 @@ void S_Input::Execute(
                         if (is_clickable->getValue() == true) {
                             if (next_timeline) {
                                 std::shared_ptr<C_Position<std::pair<double, double>>> position_target = my_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                                std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
+                                std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = my_entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
                                 if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
                                     arg_scene->need_switch_ = true;
                                     arg_scene->next_timeline_ = next_timeline->getValue();
@@ -410,3 +412,5 @@ void S_Input::Execute(
         player_movement_clock->getValue().restart();
     }
 }
+
+// 604361
