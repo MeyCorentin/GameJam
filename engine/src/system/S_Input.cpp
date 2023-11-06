@@ -315,6 +315,18 @@ void S_Input::CheckTouchReleased(
             rect->getValue().left = size->getValue().second.first;
             sprite->getValue().setTextureRect(rect->getValue());
         }
+        if (event_->key.code == sf::Keyboard::Num1) {
+            arg_scene->need_switch_ = true;
+            arg_scene->next_timeline_ = "1";
+        }
+        if (event_->key.code == sf::Keyboard::Num2) {
+            arg_scene->need_switch_ = true;
+            arg_scene->next_timeline_ = "2";
+        }
+        if (event_->key.code == sf::Keyboard::Num3) {
+            arg_scene->need_switch_ = true;
+            arg_scene->next_timeline_ = "3";
+        }
         if (event_->key.code == sf::Keyboard::Left)
             inputs_[1] = 0;
         if (event_->key.code == sf::Keyboard::Down) {

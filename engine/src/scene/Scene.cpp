@@ -1,5 +1,69 @@
 #include "scene/Scene.hpp"
 
+
+template <typename T>
+T Scene::getRandomInRange(T min, T max)
+{
+    if (max <= min)
+        return min;
+
+    std::mt19937_64 gen(std::chrono::system_clock::now().time_since_epoch().count());
+    std::uniform_int_distribution<long long> distribution(min, max);
+
+    T nbr = (T)distribution(gen);
+
+    return nbr;
+}
+
+std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> Scene::CreateMap(const json& arg_spawn_config)
+{
+    std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> map;
+    for (const auto& spawn_entry : arg_spawn_config)
+    {
+        int tick = spawn_entry.at("tick").get<int>();
+        std::vector<std::pair<int, std::pair<int, int>> > entities;
+
+        if (spawn_entry.find("mob_id") == spawn_entry.end())
+            continue;
+        for (const auto& entity : spawn_entry.at("mob_id"))
+        {
+            int id_value = entity.at("entity_id").get<int>();
+            int x;
+            int y;
+            if (entity.find("position") != entity.end())
+            {
+                x = entity.at("position").at("x").get<int>();
+                y = entity.at("position").at("y").get<int>();
+            } else {
+                x = 384;
+                y = Scene::getRandomInRange(0,180);
+            }
+            entities.push_back(std::make_pair(id_value, std::make_pair(x, y)));
+        }
+
+        map.push_back(std::make_pair(tick, entities));
+    }
+    return map;
+}
+
+
+std::vector<std::pair<int,int>> Scene::CreateJump(const json& arg_spawn_config)
+{
+    std::vector<std::pair<int, int>> jump;
+    for (const auto& spawn_entry : arg_spawn_config)
+    {
+
+
+        if (spawn_entry.find("jump") == spawn_entry.end())
+            continue;
+        int tick = spawn_entry.at("tick").get<int>();
+        int jump_value = spawn_entry.at("jump").get<int>();
+
+        jump.push_back(std::make_pair(tick, jump_value));
+    }
+    return jump;
+}
+
 Scene::Scene() {}
 Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
         std::vector<std::shared_ptr<Entity>> arg_entity_list,
@@ -195,6 +259,30 @@ std::shared_ptr<Entity> Scene::CreateEntityFromConfig(
     return entity_builder.Build();
 }
 
+void Scene::LoadTimeline(
+    const std::string& timeline_id)
+{
+
+    std::string directory = filepath_.substr(0, filepath_.find_last_of("/\\"));
+    std::string timeline_file_path;
+    for (const auto& timeline : data_["timeline"]) {
+        if (timeline.find(timeline_id) != timeline.end()) {
+            timeline_file_path = directory + "/" + timeline[timeline_id].get<std::string>();
+            break;
+        }
+    }
+    std::ifstream timeline_file(timeline_file_path);
+    json timeline_data;
+    timeline_file >> timeline_data;
+    timeline_file.close();
+
+    spawn_index_ = CreateMap(timeline_data["spawn"]);
+    jump_index_ = CreateJump(timeline_data["spawn"]);
+    total_ticks_ = -1;
+    id_store_ = 0;
+    entities_.clear();
+}
+
 std::shared_ptr<Entity> Scene::createEntity(
         std::vector<std::shared_ptr<Entity>>& arg_all_entities,
         int id,
@@ -297,6 +385,13 @@ void Scene::InputFromPlayer(std::pair<int,int> arg_message)
     messages_.push_back(arg_message);
 }
 
+void Scene::CheckSwitchTimeline() {
+    if (need_switch_) {
+        LoadTimeline(next_timeline_);
+        need_switch_ = false;
+    }
+}
+
 void Scene::Update(int arg_is_server)
 {
     this->ClearWindow();
@@ -315,6 +410,7 @@ void Scene::Update(int arg_is_server)
     DisplayCurrentTick();
     RemoveOrCreateEntities();
     window_->display();
+    CheckSwitchTimeline();
 }
 
 void Scene::ComputeSystems(int arg_is_server)

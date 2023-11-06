@@ -42,6 +42,8 @@ class Scene {
         std::shared_ptr<sf::Text> current_tick_;
         std::string filepath_;
         json data_;
+        bool need_switch_;
+        std::string next_timeline_;
 
         int time_pressed_;
         bool is_pressed_ = false;
@@ -49,6 +51,10 @@ class Scene {
         int id_store_ = 0;
         bool running = true;
         double targetFrameTime = (1.0 / 60);
+
+
+        void CheckSwitchTimeline();
+
         Scene();
         Scene( std::vector<std::shared_ptr<System>> arg_system_list,
                 std::vector<std::shared_ptr<Entity>> arg_entity_list,
@@ -109,4 +115,15 @@ class Scene {
         void JumpTicks();
 
         void RemoveOrCreateEntities();
+
+
+        template <typename T>
+        T getRandomInRange(T min, T max);
+
+        std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> CreateMap(const json& arg_spawn_config);
+
+        std::vector<std::pair<int,int>> CreateJump(const json& arg_spawn_config);
+
+        void LoadTimeline(
+                const std::string& timeline_id);
 };

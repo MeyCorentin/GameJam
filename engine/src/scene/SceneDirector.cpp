@@ -165,6 +165,14 @@ SceneDirector::SceneDirector(std::string arg_file_path, int value) {
 
     file >> data;
     file.close();
+
+    std::string directory = arg_file_path.substr(0, arg_file_path.find_last_of("/\\"));
+    std::string timeline_file_path = directory + "/" + data["timeline"][0]["1"].get<std::string>();
+    std::ifstream timeline_file(timeline_file_path);
+    json timeline_data;
+    timeline_file >> timeline_data;
+    timeline_file.close();
+
     std::cout << "------[LOAD SYSTEMS]-------" << std::endl;
     for (const auto& system_config : data["systems"])
         scene_builder_.AddSystem(CreateSystemFromConfig(system_config));
@@ -180,8 +188,8 @@ SceneDirector::SceneDirector(std::string arg_file_path, int value) {
         scene_builder_.AddEntity(new_entity);
     }
 
-    scene_builder_.AddSpawnIndex(CreateMap(data["spawn"]));
-    scene_builder_.AddJumpIndex(CreateJump(data["spawn"]));
+    scene_builder_.AddSpawnIndex(CreateMap(timeline_data["spawn"]));
+    scene_builder_.AddJumpIndex(CreateJump(timeline_data["spawn"]));
 }
 
 Scene SceneDirector::ConstructScene(std::string arg_file_path) {
