@@ -59,6 +59,10 @@
         {
             "id": 16,
             "type": "AutoMove"
+        },
+        {
+            "id": 17,
+            "type": "InputFromPlayer"
         }
     ],
     "components": [
@@ -375,7 +379,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": 10000
                 },
                 {
                     "component_id": 3,
@@ -4973,10 +4977,10 @@
     ],
     "timeline": [
         {
-            "1": "timeline_1.json"
+            "1": "timeline_2.json"
         },
         {
-            "2": "timeline_2.json"
+            "2": "timeline_1.json"
         }
     ]
 }
