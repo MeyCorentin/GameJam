@@ -3,6 +3,13 @@
 [![Client Compil](https://github.com/EpitechPromo2026/B-CPP-500-LYN-5-1-rtype-keziah.picq/actions/workflows/client_compilation.yml/badge.svg)](https://github.com/EpitechPromo2026/B-CPP-500-LYN-5-1-rtype-keziah.picq/actions/workflows/client_compilation.yml)
 # R-Type Project
 
+
+### Documentation
+
+- [Engine Documentation](engine/docs/DOCUMENTATION.md)
+- [Client Documentation](client/docs/DOCUMENTATION.md)
+- [Server Documentation](server/docs/DOCUMENTATION.md)
+
 ### How to build project ?
 
 git clone git@github.com:EpitechPromo2026/B-CPP-500-LYN-5-1-rtype-keziah.picq.git
