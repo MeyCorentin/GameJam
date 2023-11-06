@@ -37,7 +37,16 @@ void S_Target::Execute(
         for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
             if (entity1 == entity2)
                 continue;
+
             target = entity1->template GetComponent<C_Target<int>>();
+
+            if (target) {
+                if (target->getValue() == entity2->GetId() && entity2->is_dead_) {
+                    entity1->is_dead_ = true;
+                }
+            }
+
+            
             follow = entity1->template GetComponent<C_Follow<bool>>();
             shoot = entity1->template GetComponent<C_Shoot<bool>>();
             ammo = entity1->template GetComponent<C_Ammo<int>>();

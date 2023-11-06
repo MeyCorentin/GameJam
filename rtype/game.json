@@ -375,7 +375,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 10000
+                    "value": 1
                 },
                 {
                     "component_id": 3,
@@ -3589,6 +3589,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 33,
                     "value": false
                 },
@@ -3644,6 +3648,11 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 32,
@@ -3720,7 +3729,7 @@
                 },
                 {
                     "component_id": 20,
-                    "value": 2
+                    "value": 1
                 },
                 {
                     "component_id": 21,
@@ -3804,6 +3813,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 33,
                     "value": false
                 },
@@ -3859,6 +3872,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -3930,6 +3947,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -5, "f": 1, "p": 1}
                 },
@@ -3995,6 +4016,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 32,
                     "value": 51
                 },
@@ -4052,6 +4077,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 33,
                     "value": true
                 },
@@ -4107,6 +4136,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4178,6 +4211,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -1, "f": 1, "p": 0}
                 },
@@ -4245,6 +4282,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4316,6 +4357,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -2, "f": 1, "p": 1}
                 },
@@ -4383,6 +4428,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4454,6 +4503,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -4, "f": 1, "p": 1.5}
                 },
@@ -4521,6 +4574,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4592,6 +4649,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -3.7, "f": 1, "p": 1.4}
                 },
@@ -4659,6 +4720,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4730,6 +4795,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -4, "f": 1, "p": 1.2}
                 },
@@ -4799,6 +4868,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -4.5, "f": 1, "p": 1.1}
                 },
@@ -4866,6 +4939,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
