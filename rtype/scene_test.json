@@ -3589,6 +3589,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 33,
                     "value": false
                 },
@@ -3644,6 +3648,11 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 32,
@@ -3804,6 +3813,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 33,
                     "value": false
                 },
@@ -3859,6 +3872,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -3930,6 +3947,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -5, "f": 1, "p": 1}
                 },
@@ -3995,6 +4016,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 32,
                     "value": 51
                 },
@@ -4052,6 +4077,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 33,
                     "value": true
                 },
@@ -4107,6 +4136,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4178,6 +4211,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -1, "f": 1, "p": 0}
                 },
@@ -4245,6 +4282,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4316,6 +4357,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -2, "f": 1, "p": 1}
                 },
@@ -4383,6 +4428,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4454,6 +4503,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -4, "f": 1, "p": 1.5}
                 },
@@ -4521,6 +4574,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4592,6 +4649,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -3.7, "f": 1, "p": 1.4}
                 },
@@ -4659,6 +4720,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -4730,6 +4795,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -4, "f": 1, "p": 1.2}
                 },
@@ -4799,6 +4868,10 @@
                     "value": true
                 },
                 {
+                    "component_id": 17,
+                    "value": 46
+                },
+                {
                     "component_id": 27,
                     "value": { "a": -4.5, "f": 1, "p": 1.1}
                 },
@@ -4866,6 +4939,10 @@
                 {
                     "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 46
                 },
                 {
                     "component_id": 27,
@@ -5024,240 +5101,6 @@
                     "position": { "x": 330, "y": 240 }
                 }
             ]
-        },
-        {
-            "tick" : 14,
-            "mob_id": [
-                    {
-                        "entity_id": 12,
-                        "position": { "x": 384, "y": 240 }
-                    }
-                ]
-        },
-        {
-            "tick" : 80,
-            "mob_id": [
-                    {
-                        "entity_id": 12,
-                        "position": { "x": 384, "y": 240 }
-                    }
-                ]
-        },
-        {
-            "tick" : 146,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 212,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 225 }
-                }
-            ]
-        },
-        {
-            "tick" : 278,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 344,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 210 }
-                }
-            ]
-        },
-        {
-            "tick" : 410,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 476,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 542,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 608,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 674,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 740,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 806,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 872,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 225 }
-                }
-            ]
-        },
-        {
-            "tick" : 938,
-            "mob_id": [
-                {
-                    "entity_id": 12,
-                    "position": { "x": 384, "y": 240 }
-                }
-            ]
-        },
-        {
-            "tick" : 220,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 240,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 260,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                },
-                {
-                    "entity_id": 28,
-                    "position": { "x": 384, "y": 200 }
-                },
-                {
-                    "entity_id": 35,
-                    "position": { "x": 384, "y": 50 }
-                }
-            ]
-        },
-        {
-            "tick" : 280,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 300,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 320,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                }
-            ]
-        },
-        {
-            "tick" : 340,
-            "mob_id": [
-                {
-                    "entity_id": 11,
-                    "position": { "x": 384, "y": 128 }
-                },
-                {
-                    "entity_id": 28,
-                    "position": { "x": 384, "y": 100 }
-                },
-                {
-                    "entity_id": 37,
-                    "position": { "x": 384, "y": 150 }
-                }
-            ]
-        },
-        {
-            "tick" : 100,
-            "mob_id": [
-                {
-                    "entity_id": 11
-                }
-            ]
-        },
-        {
-            "tick" : 200,
-            "mob_id": [
-                {
-                    "entity_id": 11
-                }
-            ]
-        },
-        {
-            "tick" : 500,
-            "jump": 100
         }
     ]
 }
