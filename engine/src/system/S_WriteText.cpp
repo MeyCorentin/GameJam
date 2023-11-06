@@ -33,7 +33,7 @@ void S_WriteText::Execute(
         std::shared_ptr<sf::Font> font = std::shared_ptr<sf::Font>(new sf::Font());
         font->loadFromFile("../../rtype/sources/fonts/r-type.ttf");
         my_text->getValue().setFont(*font);
-        my_text->getValue().setFillColor(sf::Color::White);
+        my_text->getValue().setFillColor(sf::Color::Cyan);
         my_text->getValue().setCharacterSize(10);
 
         arg_scene->window_->draw(my_text->getValue());

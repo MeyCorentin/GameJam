@@ -5171,6 +5171,14 @@
                 {
                     "component_id": 60,
                     "value": 0
+                },
+                {
+                    "component_id": 82,
+                    "value": true
+                },
+                {
+                    "component_id": 83,
+                    "value": "2"
                 }
             ]
         },
@@ -5321,16 +5329,16 @@
     ],
     "timeline": [
         {
-            "1": "timeline_3.json"
+            "1": "timeline_menu.json"
         },
         {
-            "2": "timeline_2.json"
+            "2": "timeline_level_1.json"
         },
         {
-            "3": "timeline_1.json"
+            "3": "timeline_boss.json"
         },
         {
-            "5": "timeline_5.json"
+            "5": "timeline_tutorial.json"
         },
         {
             "7": "timeline_7.json"
