@@ -1,5 +1,6 @@
 
 #include "../include/UDPclient.hpp"
+#include <regex>
 
 UDPClient::UDPClient(boost::asio::io_context& io_context, const std::string& host, unsigned short port)
     : io_context_(io_context), socket_(io_context, udp::endpoint(udp::v4(), 0)), server_endpoint_(boost::asio::ip::address::from_string(host), port)
@@ -257,4 +258,35 @@ void UDPClient::read_data()
 UDPClient::~UDPClient()
 {
     this->socket_.close();
+}
+
+bool isValidLobbyFormat(const std::string& line) {
+    std::regex pattern("^Lobby : [1-4]$");  
+    return std::regex_match(line, pattern);
+}
+
+int getValidLobbyNumber() {
+    std::string line;
+    while (true) {
+        std::cout << "Enter lobby number (Lobby : 1 to Lobby : 4): ";
+        std::getline(std::cin, line);
+        if (isValidLobbyFormat(line)) {
+            int lobbyNumber = std::stoi(line.substr(line.find(":") + 2));
+            return lobbyNumber;
+        } else {
+            std::cout << "Invalid format or lobby number. Please try again." << std::endl;
+        }
+    }
+}
+
+void UDPClient::handle_lobbys()
+{
+    //to handle the different lobbys the data cases are:
+    // Lobby 1 = 1000
+    // Lobby 2 = 2000
+    // Lobby 3 = 3000
+    // Lobby 4 = 4000
+    int lobbyNumber = getValidLobbyNumber();
+    std::cout << "You entered a valid lobby: " << lobbyNumber << std::endl;
+    BinaryProtocole::BinaryMessage msg = {1, getClientId(), 1920, 1080, static_cast<uint16_t>(lobbyNumber * 1000)};
 }

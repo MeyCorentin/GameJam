@@ -41,6 +41,7 @@ int main(int ac, char **av)
 
             UDPClient client(io_context, av[1], std::stoi(av[2]));
             std::cout << "Client running" << std::endl;
+            client.handle_lobbys();
             client.start(av[3]);
         } catch (std::exception& e) {
             std::cerr << "Exception: " << e.what() << std::endl;

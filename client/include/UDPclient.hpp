@@ -26,6 +26,7 @@ public:
     void process_even_input(const BinaryProtocole::BinaryMessage &input, Ecs &ecs);
     void process_odd_input(const BinaryProtocole::BinaryMessage &input);
     void process_remaining_input(Ecs &ecs);
+    void handle_lobbys();
 
 private:
     void read_data();

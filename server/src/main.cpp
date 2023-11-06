@@ -12,7 +12,10 @@ int main(int ac, char **av)
         boost::asio::io_context io_context;
         UDPServer server(io_context, port);
         std::cout << "Server running" << std::endl;
-        server.start(av[2]);
+        server.start(av[2], 1);
+        server.start(av[2], 2);
+        server.start(av[2], 3);
+        server.start(av[2], 4);
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
