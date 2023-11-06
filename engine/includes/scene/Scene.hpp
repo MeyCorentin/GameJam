@@ -55,6 +55,9 @@ class Scene {
 
         void CheckSwitchTimeline();
 
+
+        void LoadSettings();
+
         Scene();
         Scene( std::vector<std::shared_ptr<System>> arg_system_list,
                 std::vector<std::shared_ptr<Entity>> arg_entity_list,

@@ -64,6 +64,24 @@ std::vector<std::pair<int,int>> Scene::CreateJump(const json& arg_spawn_config)
     return jump;
 }
 
+void Scene::LoadSettings() {
+    std::string directory = filepath_.substr(0, filepath_.find_last_of("/\\"));
+
+    std::string settings_file_path = directory + "/settings.json";
+
+    std::ifstream settings_file(settings_file_path);
+    json settings_data;
+
+    settings_file >> settings_data;
+    settings_file.close();
+
+    std::string window_name = settings_data["settings"]["name"];
+    int window_x = settings_data["settings"]["window"]["x"];
+    int window_y = settings_data["settings"]["window"]["y"];
+
+    window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(window_x, window_y), window_name));
+}
+
 Scene::Scene() {}
 Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
         std::vector<std::shared_ptr<Entity>> arg_entity_list,
@@ -79,7 +97,7 @@ Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
     spawn_index_(arg_spawn_index),
     jump_index_(arg_jump_index),
     filepath_(arg_file_path)  {
-        window_ = std::shared_ptr<sf::RenderWindow>(new sf::RenderWindow(sf::VideoMode(384, 256), "R-Type"));
+        LoadSettings();
         frames_this_second_ = 0;
         total_ticks_ = 0;
         event_ = std::shared_ptr<sf::Event>(new sf::Event());
