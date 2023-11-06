@@ -403,7 +403,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 10000
+                    "value": 1
                 },
                 {
                     "component_id": 3,
@@ -5441,7 +5441,7 @@
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 100, "y": 15, "start_x": 0, "start_y": 0}
+                    "value": { "x": 130, "y": 15, "start_x": 0, "start_y": 0}
                 },
                 {
                     "component_id": 80,
