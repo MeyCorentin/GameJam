@@ -61,6 +61,8 @@ bool SceneDirector::ProcessComponent(
         arg_entity_builder.AddComponent(component, std::get<sf::Sound>(value));
     } else if (value_type == "SoundBuffer") {
         arg_entity_builder.AddComponent(component, std::get<sf::SoundBuffer>(value));
+    } else if (value_type == "Text") {
+        arg_entity_builder.AddComponent(component, std::get<sf::Text>(value));
     } else if (value_type == "String") {
         std::shared_ptr<sf::Music> music = std::make_shared<sf::Music>();
         scene_builder_.AddMusic(music);

@@ -46,6 +46,7 @@ using Variant = std::variant<
                 sf::Clock,
                 sf::Sound,
                 sf::SoundBuffer,
+                sf::Text,
                 sf::IntRect, 
                 std::string,
                 std::pair<std::pair<int, int>, std::pair<int, int>>,

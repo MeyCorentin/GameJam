@@ -327,6 +327,14 @@ void S_Input::CheckTouchReleased(
             arg_scene->need_switch_ = true;
             arg_scene->next_timeline_ = "3";
         }
+        if (event_->key.code == sf::Keyboard::Num5) {
+            arg_scene->need_switch_ = true;
+            arg_scene->next_timeline_ = "5";
+        }
+        if (event_->key.code == sf::Keyboard::Num7) {
+            arg_scene->need_switch_ = true;
+            arg_scene->next_timeline_ = "7";
+        }
         if (event_->key.code == sf::Keyboard::Left)
             inputs_[1] = 0;
         if (event_->key.code == sf::Keyboard::Down) {

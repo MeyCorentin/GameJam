@@ -104,7 +104,7 @@ Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
         second_clock_ = std::shared_ptr<sf::Clock>(new sf::Clock());
         entities_nbr_ = std::shared_ptr<sf::Text>(new sf::Text());
         font_ = std::shared_ptr<sf::Font>(new sf::Font());
-        font_->loadFromFile("../../rtype/sources/fonts/arial.ttf");
+        font_->loadFromFile("../../rtype/sources/fonts/r-type.ttf");
         tick_ = std::shared_ptr<sf::Text>(new sf::Text());
         tick_->setPosition(0, 0);
         tick_->setFillColor(sf::Color::White);
@@ -154,13 +154,13 @@ void Scene::DisplayCurrentTick() {
     std::string tick_string;
 
     ref += 1;
-    tick_string = std::to_string(ref) + " (ticks)";
+    tick_string = std::to_string(ref) + " ticks";
     current_tick_->setString(tick_string);
     window_->draw(*current_tick_);
 }
 
 void Scene::DisplayEntities(int nbr) {
-    std::string nbr_string = std::to_string(nbr) + " (enttities)";
+    std::string nbr_string = std::to_string(nbr) + " enttities";
 
     this->entities_nbr_->setString(nbr_string);
     window_->draw(*entities_nbr_);
@@ -172,7 +172,7 @@ void Scene::DisplayTicks() {
 
     ref += 1;
     if (second_clock_->getElapsedTime().asSeconds() >= 1.0) {
-        tick_string = std::to_string(ref) + " (t/s)";
+        tick_string = std::to_string(ref) + " t/s";
         tick_->setString(tick_string);
         ref= 0;
         second_clock_->restart();
@@ -247,6 +247,8 @@ bool Scene::ProcessComponent(
         arg_entityBuilder.AddComponent(component, std::get<sf::Sound>(value));
     } else if (value_type == "SoundBuffer") {
         arg_entityBuilder.AddComponent(component, std::get<sf::SoundBuffer>(value));
+    } else if (value_type == "Text") {
+        arg_entityBuilder.AddComponent(component, std::get<sf::Text>(value));
     } else if (value_type == "String") {
         arg_entityBuilder.AddComponent(component, std::get<std::string>(value));
     } else {

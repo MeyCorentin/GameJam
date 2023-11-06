@@ -37,4 +37,6 @@ public:
     static Variant ParseStringValue(const json& arg_value);
 
     static Variant ParseTextureValue(const json& arg_value);
+
+    static Variant ParseTextValue(const json& arg_value);
 };

@@ -59,6 +59,10 @@
         {
             "id": 16,
             "type": "AutoMove"
+        },
+        {
+            "id": 18,
+            "type": "WriteText"
         }
     ],
     "components": [
@@ -351,6 +355,16 @@
             "id": 61,
             "type": "EntityMovementClock",
             "value_type": "Clock"
+        },
+        {
+            "id": 80,
+            "type": "Text",
+            "value_type": "Text"
+        },
+        {
+            "id": 81,
+            "type": "TextMessage",
+            "value_type": "String"
         }
     ],
     "entities": [
@@ -4969,6 +4983,203 @@
                     "value": 0
                 }
             ]
+        },
+        {
+            "id": 64,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/menu_title.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/menu_title.png"
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 259, "height": 60}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 259, "y": 60, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 65,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/menu_copyright.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/menu_copyright.png"
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 144, "height": 18}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 144, "y": 18, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 66,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/menu_phrase.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/menu_phrase.png"
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 131, "height": 19}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 131, "y": 19, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 67,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/menu_player.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/menu_player.png"
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 53, "height": 7}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 53, "y": 7, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 68,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 100, "y": 100 }
+                },
+                {
+                    "component_id": 80,
+                    "value": true
+                },
+                {
+                    "component_id": 81,
+                    "value": "Up Key : Go up"
+                }
+            ]
         }
     ],
     "timeline": [
@@ -4977,6 +5188,15 @@
         },
         {
             "2": "timeline_2.json"
+        },
+        {
+            "3": "timeline_3.json"
+        },
+        {
+            "5": "timeline_5.json"
+        },
+        {
+            "7": "timeline_7.json"
         }
     ]
 }
