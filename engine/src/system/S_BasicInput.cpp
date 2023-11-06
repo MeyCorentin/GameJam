@@ -79,7 +79,7 @@ void S_BasicInput::Move(
                     if ( position_comp->getValue().first < position_2->getValue().first + hitbox_size_2->getValue().first + movement_elapsed &&
                         position_comp->getValue().first + hitbox_size->getValue().first > position_2->getValue().first  &&
                         position_comp->getValue().second < position_2->getValue().second + hitbox_size_2->getValue().second &&
-                        position_comp->getValue().second + hitbox_size->getValue().second > position_2->getValue().second)  {*
+                        position_comp->getValue().second + hitbox_size->getValue().second > position_2->getValue().second)  {
                         block_left = 1;
                         break;
                     }
