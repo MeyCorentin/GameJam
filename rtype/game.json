@@ -63,6 +63,10 @@
         {
             "id": 18,
             "type": "WriteText"
+        },
+        {
+            "id": 17,
+            "type": "InputFromPlayer"
         }
     ],
     "components": [
@@ -399,7 +403,7 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
+                    "value": 10000
                 },
                 {
                     "component_id": 3,

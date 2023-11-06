@@ -17,18 +17,10 @@ find_package(SFML 2.5 COMPONENTS graphics window audio system REQUIRED)
 find_package(Boost REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
-find_library(RTYPE_LIBRARY r-type_library HINTS ../engine/build)
-
 target_include_directories(r-type_server PRIVATE includes)
 target_include_directories(r-type_server PUBLIC ${SFML_INCLUDE_DIR} ${Boost_INCLUDE_DIR} ${nlohmann_json_INCLUDE_DIRS})
 
-if (UNIX OR APPLE)
 find_library(RTYPE_LIBRARY r-type_library HINTS ../engine/build)
-endif ()
-
-if (WIN32)
-find_library(RTYPE_LIBRARY r-type_library HINTS ../engine/build/Release)
-endif ()
 
 if(UNIX)
     target_link_libraries(r-type_server pthread)
