@@ -98,11 +98,11 @@ void Ecs::Create(int arg_is_server, char *game_path)
     ComponentRegistry::Instance().RegisterComponent("Grounded", []() { return std::make_shared<C_Grounded<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("Jump", []() { return std::make_shared<C_Jump<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("JumpHeight", []() { return std::make_shared<C_JumpHeight<double>>(); });
-
     ComponentRegistry::Instance().RegisterComponent("Text", []() { return std::make_shared<C_Text<sf::Text>>(); });
     ComponentRegistry::Instance().RegisterComponent("TextMessage", []() { return std::make_shared<C_TextMessage<std::string>>(); });
     ComponentRegistry::Instance().RegisterComponent("IsClickable", []() { return std::make_shared<C_IsClickable<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("NextTimeline", []() { return std::make_shared<C_NextTimeline<std::string>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Breakable", []() { return std::make_shared<C_Breakable<bool>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
 

@@ -19,6 +19,7 @@
 #include "../components/C_IsAutoMove.hpp"
 #include "../components/C_Invisible.hpp"
 #include "../components/C_EnemyAmmo.hpp"
+#include "../components/C_Breakable.hpp"
 
 #include "S_Input.hpp"
 

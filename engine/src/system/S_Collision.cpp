@@ -72,6 +72,8 @@ void S_Collision::Execute(
     std::shared_ptr<C_Invisible<bool>> is_invisible_2;
     std::shared_ptr<C_EnemyAmmo<bool>> enemy_ammo_1;
     std::shared_ptr<C_EnemyAmmo<bool>> enemy_ammo_2;
+    std::shared_ptr<C_Breakable<bool>> is_breakable_1;
+    std::shared_ptr<C_Breakable<bool>> is_breakable_2;
     float x1;
     float y1;
     float x2;
@@ -92,6 +94,7 @@ void S_Collision::Execute(
         is_invincible_1 = entity1->template GetComponent<C_Invincibility<bool>>();
         is_invisible_1 = entity1->template GetComponent<C_Invisible<bool>>();
         enemy_ammo_1 = entity1->template GetComponent<C_EnemyAmmo<bool>>();
+        is_breakable_1 = entity1->template GetComponent<C_Breakable<bool>>();
         for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
             if (entity1 == entity2)
                 continue;
@@ -111,13 +114,23 @@ void S_Collision::Execute(
             is_invisible_2 = entity2->template GetComponent<C_Invisible<bool>>();
             enemy_ammo_2 = entity2->template GetComponent<C_EnemyAmmo<bool>>();
             is_auto_move = entity2->template GetComponent<C_IsAutoMove<bool>>();
+            is_breakable_2 = entity2->template GetComponent<C_Breakable<bool>>();
             if (!position_comp_2 || !hitbox_comp_2)
                 continue;
             if (x1 < x2 + hitbox_comp_2->getValue().first &&
                 x1 + hitbox_comp_1->getValue().first> x2 &&
                 y1 < y2 + hitbox_comp_2->getValue().second &&
                 y1 + hitbox_comp_1->getValue().second > y2) {
-
+                    if (is_breakable_2)
+                    {
+                        entity2->is_dead_ = true;
+                        break;
+                    }
+                    if (is_breakable_1)
+                    {
+                        entity1->is_dead_ = true;
+                        break;
+                    }
                     std::list<int> my_list = {22, 23, 24, 38, 39, 40};
 
                     if (is_player && is_player_ammo_2 && follow) {

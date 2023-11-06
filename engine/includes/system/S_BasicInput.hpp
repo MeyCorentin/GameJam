@@ -35,6 +35,7 @@
 #include "../scene/ComponentRegister.hpp"
 #include "../scene/SceneBuilder.hpp"
 #include "../components/C_Grounded.hpp"
+#include "../components/C_PlayerAmmo.hpp"
 
 class S_BasicInput : public System {
     private:

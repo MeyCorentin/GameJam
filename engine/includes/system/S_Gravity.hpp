@@ -11,6 +11,7 @@
 #include "../components/C_Hitbox.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_PositionStorage.hpp"
+#include "../components/C_PlayerAmmo.hpp"
 
 class S_Gravity : public System {
     public:

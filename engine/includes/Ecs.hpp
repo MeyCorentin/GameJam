@@ -85,6 +85,7 @@
 #include "../includes/components/C_Grounded.hpp"
 #include "../includes/components/C_Jump.hpp"
 #include "../includes/components/C_Velocity.hpp"
+#include "../includes/components/C_Breakable.hpp"
 
 #include "../includes/components/C_Text.hpp"
 #include "../includes/components/C_TextMessage.hpp"

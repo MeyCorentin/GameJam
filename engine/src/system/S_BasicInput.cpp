@@ -61,6 +61,7 @@ void S_BasicInput::Move(
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size_2;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_2;
+    std::shared_ptr<C_PlayerAmmo<bool>> is_friendly;
     int block_left = 0;
     int block_right = 0;
     int movement_elapsed = 10 * elapsed.asMilliseconds() / 30;
@@ -70,15 +71,15 @@ void S_BasicInput::Move(
     if (arg_scene->inputs_[1] == 1) {
         for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
             block_left = 0;
-            if (entity != entity2) {
+            is_friendly = entity2->template GetComponent<C_PlayerAmmo<bool>>();
+            if (entity != entity2 && is_friendly) {
                 std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size_2 = entity2->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
                 if (hitbox_size_2 && position_2) {
                     if ( position_comp->getValue().first < position_2->getValue().first + hitbox_size_2->getValue().first + movement_elapsed &&
                         position_comp->getValue().first + hitbox_size->getValue().first > position_2->getValue().first  &&
                         position_comp->getValue().second < position_2->getValue().second + hitbox_size_2->getValue().second &&
-                        position_comp->getValue().second + hitbox_size->getValue().second > position_2->getValue().second)  {
-                        std::cout << "BLOCK LEFT" << entity2->GetId() << std::endl;
+                        position_comp->getValue().second + hitbox_size->getValue().second > position_2->getValue().second)  {*
                         block_left = 1;
                         break;
                     }
@@ -91,9 +92,10 @@ void S_BasicInput::Move(
     }
 
     if (arg_scene->inputs_[3] == 1) {
-            for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
+        for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
             block_right = 0;
-            if (entity != entity2) {
+            is_friendly = entity2->template GetComponent<C_PlayerAmmo<bool>>();
+            if (entity != entity2 && is_friendly) {
                 std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size_2 = entity2->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
                 if (hitbox_size_2 && position_2) {

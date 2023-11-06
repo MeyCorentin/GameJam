@@ -384,6 +384,16 @@
             "id": 74,
             "type": "PositionStorage",
             "value_type": "PairDouble"
+        },
+        {
+            "id": 83,
+            "type": "NextTimeline",
+            "value_type": "String"
+        },
+        {
+            "id": 90,
+            "type": "Breakable",
+            "value_type": "Bool"
         }
     ],
     "entities": [
@@ -483,10 +493,6 @@
                     "value": false
                 },
                 {
-                    "component_id": 32,
-                    "value": 16
-                },
-                {
                     "component_id": 33,
                     "value": false
                 },
@@ -517,6 +523,10 @@
                 {
                     "component_id": 60,
                     "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 10
                 }
             ]
         },
@@ -719,7 +729,7 @@
                 },
                 {
                     "component_id": 32,
-                    "value": 7
+                    "value": 6
                 },
                 {
                     "component_id": 57,
@@ -791,11 +801,202 @@
                     "value": 0
                 }
             ]
+        },
+        {
+            "id": 7,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 800 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 50, "y": 100 }
+                },
+                {
+                    "component_id": 51,
+                    "value": true
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 90,
+                    "value": true
+                },
+                {
+                    "component_id": 32,
+                    "value": 8
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/red_enemy.gif"
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 4, "width": 33, "height": 31}
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 128, "top": 0, "width": 33, "height": 33}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 198, "y": 33, "start_x": 128, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "2"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 800 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 50, "y": 50 }
+                },
+                {
+                    "component_id": 51,
+                    "value": true
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/red_enemy.gif"
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 4, "width": 33, "height": 31}
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/explosion.gif"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 128, "top": 0, "width": 33, "height": 33}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 198, "y": 33, "start_x": 128, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "1"
+                }
+            ]
         }
     ],
     "timeline": [
         {
             "1": "timeline_1.json"
+        },
+        {
+            "2": "timeline_2.json"
         }
     ]
 }

@@ -27,6 +27,7 @@ void S_Gravity::Execute(int arg_is_server, Scene* arg_scene) {
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp_2;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_2;
     std::shared_ptr<C_PositionStorage<std::pair<double, double>>> position_storage_1;
+    std::shared_ptr<C_PlayerAmmo<bool>> is_friendly;
 
     for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
         velocity_1 = entity1->template GetComponent<C_Velocity<std::pair<int, int>>>();
@@ -47,10 +48,8 @@ void S_Gravity::Execute(int arg_is_server, Scene* arg_scene) {
                         velocity_1->getValue().second  = gravity_1->getValue() * 20;
                     if (velocity_1->getValue().second != 0)
                     {
-                        std::cout << "VELOCITY:  " << velocity_1->getValue().second << std::endl;
-                        std::cout << "gravity_1:  " << gravity_1->getValue() << std::endl;
                         velocity_1->getValue().second -= gravity_1->getValue();
-                        position_1->getValue().second -= velocity_1->getValue().second; // POID
+                        position_1->getValue().second -= velocity_1->getValue().second;
                     }
                     else
                     {
@@ -67,7 +66,8 @@ void S_Gravity::Execute(int arg_is_server, Scene* arg_scene) {
 
                 hitbox_comp_2 = entity2->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                 position_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
-                if (hitbox_comp_2 && position_2) {
+                is_friendly = entity2->template GetComponent<C_PlayerAmmo<bool>>();
+                if (hitbox_comp_2 && position_2 && is_friendly) {
                     if (position_1->getValue().second + hitbox_comp_1->getValue().second <= position_2->getValue().second &&
                         position_1->getValue().second + hitbox_comp_1->getValue().second + (velocity_1->getValue().second / 4) >= position_2->getValue().second && // FLOTTY
                         position_1->getValue().first + hitbox_comp_1->getValue().first >= position_2->getValue().first &&
