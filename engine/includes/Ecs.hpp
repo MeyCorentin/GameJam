@@ -79,6 +79,8 @@
 #include "../includes/components/C_AnimationDirection.hpp"
 #include "../includes/components/C_Text.hpp"
 #include "../includes/components/C_TextMessage.hpp"
+#include "../includes/components/C_IsClickable.hpp"
+#include "../includes/components/C_NextTimeline.hpp"
 
 #include "../includes/components/ComponentBase.hpp"
 

@@ -92,6 +92,8 @@ void Ecs::Create(int arg_is_server, char *game_path)
     ComponentRegistry::Instance().RegisterComponent("AnimationDirection", []() { return std::make_shared<C_AnimationDirection<int>>(); });
     ComponentRegistry::Instance().RegisterComponent("Text", []() { return std::make_shared<C_Text<sf::Text>>(); });
     ComponentRegistry::Instance().RegisterComponent("TextMessage", []() { return std::make_shared<C_TextMessage<std::string>>(); });
+    ComponentRegistry::Instance().RegisterComponent("IsClickable", []() { return std::make_shared<C_IsClickable<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("NextTimeline", []() { return std::make_shared<C_NextTimeline<std::string>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
 
