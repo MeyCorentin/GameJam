@@ -5,6 +5,7 @@
 #include "../includes/system/S_Hit.hpp"
 #include "../includes/system/S_Display.hpp"
 #include "../includes/system/S_Input.hpp"
+#include "../includes/system/S_BasicInput.hpp"
 #include "../includes/system/S_InputFromPlayer.hpp"
 #include "../includes/system/S_Mana.hpp"
 #include "../includes/system/S_Collision.hpp"
@@ -21,6 +22,7 @@
 #include "../includes/system/S_Gravity.hpp"
 
 #include "../includes/components/C_Life.hpp"
+#include "../includes/components/C_JumpHeight.hpp"
 #include "../includes/components/C_Player.hpp"
 #include "../includes/components/C_PositionStorage.hpp"
 #include "../includes/components/C_Sprite.hpp"

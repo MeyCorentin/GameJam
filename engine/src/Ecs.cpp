@@ -13,6 +13,7 @@ void Ecs::Update(int arg_is_server)
 void Ecs::Create(int arg_is_server, char *game_path)
 {
     SystemRegistry::Instance().RegisterSystem("InputSystem", []() { return std::make_shared<S_Input>(); });
+    SystemRegistry::Instance().RegisterSystem("BasicInputSystem", []() { return std::make_shared<S_BasicInput>(); });
     SystemRegistry::Instance().RegisterSystem("InputFromPlayer", []() { return std::make_shared<S_InputFromPlayer>(); });
     SystemRegistry::Instance().RegisterSystem("CollisionSystem", []() { return std::make_shared<S_Collision>(); });
     SystemRegistry::Instance().RegisterSystem("HitSystem", []() { return std::make_shared<S_Hit>(); });
@@ -95,6 +96,7 @@ void Ecs::Create(int arg_is_server, char *game_path)
     ComponentRegistry::Instance().RegisterComponent("Gravity", []() { return std::make_shared<C_Gravity<double>>(); });
     ComponentRegistry::Instance().RegisterComponent("Grounded", []() { return std::make_shared<C_Grounded<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("Jump", []() { return std::make_shared<C_Jump<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("JumpHeight", []() { return std::make_shared<C_JumpHeight<double>>(); });
 
 
     std::cout << "[ECS] start create scene" << std::endl;

@@ -38,31 +38,38 @@ void S_Gravity::Execute(int arg_is_server, Scene* arg_scene) {
         position_storage_1 = entity1->template GetComponent<C_PositionStorage<std::pair<double, double>>>();
 
         if (velocity_1 && gravity_1 && grounded_1 && position_1) {
-            for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
-
-                if(arg_scene->inputs_[6] == 1)
+            if(arg_scene->inputs_[6] == 1)
+            {
+                if (jump_1->getValue() == false)
                 {
-                    if (jump_1->getValue() == false)
-                        position_storage_1->setValue(position_1->getValue());
-                    jump_1->setValue(true);
-                    grounded_1->setValue(false);
-                    if (position_1->getValue().second > position_storage_1->getValue().second - 50)
+                    position_storage_1->setValue(position_1->getValue());
+                    if (velocity_1->getValue().second == 0 && grounded_1->getValue())
+                        velocity_1->getValue().second  = gravity_1->getValue() * 20;
+                    if (velocity_1->getValue().second != 0)
                     {
-                        if (velocity_1->getValue().second == 0)
-                            velocity_1->getValue().second  = gravity_1->getValue() * 3;
+                        std::cout << "VELOCITY:  " << velocity_1->getValue().second << std::endl;
+                        std::cout << "gravity_1:  " << gravity_1->getValue() << std::endl;
                         velocity_1->getValue().second -= gravity_1->getValue();
-                        position_1->getValue().second -= velocity_1->getValue().second;
-                    } else {
-                        jump_1->setValue(false);
-                        velocity_1->getValue().second = 0;
-                        arg_scene->inputs_[6] = 0;
+                        position_1->getValue().second -= velocity_1->getValue().second; // POID
+                    }
+                    else
+                    {
+                        jump_1->setValue(true);
                     }
                 }
+                else {
+                    jump_1->setValue(false);
+                    velocity_1->getValue().second = 0;
+                    arg_scene->inputs_[6] = 0;
+                }
+            }
+            for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
+
                 hitbox_comp_2 = entity2->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                 position_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
                 if (hitbox_comp_2 && position_2) {
                     if (position_1->getValue().second + hitbox_comp_1->getValue().second <= position_2->getValue().second &&
-                        position_1->getValue().second + hitbox_comp_1->getValue().second + velocity_1->getValue().second >= position_2->getValue().second &&
+                        position_1->getValue().second + hitbox_comp_1->getValue().second + (velocity_1->getValue().second / 4) >= position_2->getValue().second && // FLOTTY
                         position_1->getValue().first + hitbox_comp_1->getValue().first >= position_2->getValue().first &&
                         position_1->getValue().first <= position_2->getValue().first + hitbox_comp_2->getValue().first) {
                         grounded_1->setValue(true);
@@ -73,9 +80,9 @@ void S_Gravity::Execute(int arg_is_server, Scene* arg_scene) {
                     }
                 }
             }
-            if (!grounded_1->getValue()) {
+            if (!grounded_1->getValue() && arg_scene->inputs_[6] != 1) {
                 velocity_1->getValue().second += gravity_1->getValue();
-                position_1->getValue().second += velocity_1->getValue().second;
+                position_1->getValue().second += velocity_1->getValue().second / 4;
             }
         }
     }

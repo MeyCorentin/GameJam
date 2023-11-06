@@ -1,0 +1,9 @@
+{
+    "settings": {
+        "name" : "meetboy",
+        "window": {
+            "x" : 1920,
+            "y" : 1080
+        }
+    }
+}
