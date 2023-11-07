@@ -1,0 +1,128 @@
+{
+    "spawn": [
+        {
+            "tick": 0,
+            "mob_id": [
+                {
+                    "entity_id": 1,
+                    "position": {
+                        "x": 20,
+                        "y": 125
+                    }
+                },
+                {
+                    "entity_id": 44,
+                    "position": {
+                        "x": 200,
+                        "y": 30
+                    }
+                },
+                {
+                    "entity_id": 45,
+                    "position": {
+                        "x": 272,
+                        "y": 126
+                    }
+                },
+                {
+                    "entity_id": 48,
+                    "position": {
+                        "x": 245,
+                        "y": 205
+                    }
+                },
+                {
+                    "entity_id": 52,
+                    "position": {
+                        "x": 235,
+                        "y": 205
+                    }
+                },
+                {
+                    "entity_id": 53,
+                    "position": {
+                        "x": 225,
+                        "y": 205
+                    }
+                },
+                {
+                    "entity_id": 54,
+                    "position": {
+                        "x": 215,
+                        "y": 205
+                    }
+                },
+                {
+                    "entity_id": 55,
+                    "position": {
+                        "x": 205,
+                        "y": 205
+                    }
+                },
+                {
+                    "entity_id": 56,
+                    "position": {
+                        "x": 195,
+                        "y": 205
+                    }
+                },
+                {
+                    "entity_id": 57,
+                    "position": {
+                        "x": 185,
+                        "y": 205
+                    }
+                },
+                {
+                    "entity_id": 58,
+                    "position": {
+                        "x": 180,
+                        "y": 200
+                    }
+                },
+                {
+                    "entity_id": 59,
+                    "position": {
+                        "x": 170,
+                        "y": 195
+                    }
+                },
+                {
+                    "entity_id": 60,
+                    "position": {
+                        "x": 160,
+                        "y": 190
+                    }
+                },
+                {
+                    "entity_id": 61,
+                    "position": {
+                        "x": 150,
+                        "y": 190
+                    }
+                },
+                {
+                    "entity_id": 62,
+                    "position": {
+                        "x": 140,
+                        "y": 190
+                    }
+                },
+                {
+                    "entity_id": 63,
+                    "position": {
+                        "x": 130,
+                        "y": 190
+                    }
+                },
+                {
+                    "entity_id": 49,
+                    "position": {
+                        "x": 120,
+                        "y": 180
+                    }
+                }
+            ]
+        }
+    ]
+}

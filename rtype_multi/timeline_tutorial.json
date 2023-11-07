@@ -1,0 +1,72 @@
+{
+    "spawn": [
+        {
+            "tick": 0,
+            "mob_id": [
+                {
+                    "entity_id": 1,
+                    "position": {
+                        "x": 300,
+                        "y": 30
+                    }
+                },
+                {
+                    "entity_id": 68,
+                    "position": {
+                        "x": 50,
+                        "y": 60
+                    }
+                },
+                {
+                    "entity_id": 69,
+                    "position": {
+                        "x": 50,
+                        "y": 90
+                    }
+                },
+                {
+                    "entity_id": 70,
+                    "position": {
+                        "x": 50,
+                        "y": 120
+                    }
+                },
+                {
+                    "entity_id": 71,
+                    "position": {
+                        "x": 50,
+                        "y": 150
+                    }
+                },
+                {
+                    "entity_id": 72,
+                    "position": {
+                        "x": 50,
+                        "y": 180
+                    }
+                },
+                {
+                    "entity_id": 73,
+                    "position": {
+                        "x": 50,
+                        "y": 210
+                    }
+                },
+                {
+                    "entity_id": 74,
+                    "position": {
+                        "x": 150,
+                        "y": 10
+                    }
+                },
+                {
+                    "entity_id": 75,
+                    "position": {
+                        "x": 300,
+                        "y": 10
+                    }
+                }
+            ]
+        }
+    ]
+}
