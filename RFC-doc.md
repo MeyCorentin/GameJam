@@ -35,22 +35,46 @@ y    =  position
 data =  Message codes
 
 
-Exemple for connection:
+*Exemple for connection:*
 ```
 BinaryProtocole::BinaryMessage initial_msg;
 initial_msg = {0, 0, 0, 0, 100};
 send(initial_msg);
 ```
+
 ## Command Codes
 
+**Client to server:**
 | Code | Description |
 |------|-------------|
 | `100` | Client connection request |
-| `200` | Move up |
-| `210` | Move left |
-| `220` | Move down |
-| `230` | Move right |
-| `300` | Shoot action |
+| `200` | Press up |
+| `210` | Press left |
+| `220` | Press down |
+| `230` | Press right |
+| `300` | Press Shoot |
+| `201` | Release up |
+| `211` | Release left |
+| `221` | Release down |
+| `231` | Release right |
+| `301` | Release Shoot |
+
+**Server to client:**
+| Code | Description |
+|------|-------------|
+| `100` | Client connection request |
+| `200` | Press up |
+| `210` | Press left |
+| `220` | Press down |
+| `230` | Press right |
+| `300` | Press Shoot |
+| `201` | Release up |
+| `211` | Release left |
+| `221` | Release down |
+| `231` | Release right |
+| `301` | Release Shoot |
+| `1000` | Client ID |
+
 
 ## Communication Examples
 
