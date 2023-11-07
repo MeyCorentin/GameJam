@@ -1262,14 +1262,449 @@
                     "value": 0
                 }
             ]
+        },
+        {
+            "id": 12,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 800 }
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/door_close.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/door_close.png"
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 87, "y": 86 }
+                },
+                {
+                    "component_id": 51,
+                    "value": true
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 87, "height": 86}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 87, "y": 86, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 13
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
+                },
+                {
+                    "component_id": 32,
+                    "value": 13
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 90,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/door_open.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/door_open.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 85, "height": 83}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 85, "y": 83, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "3"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 800 }
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/door_close.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/door_close.png"
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 87, "y": 86 }
+                },
+                {
+                    "component_id": 51,
+                    "value": true
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 87, "height": 86}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 87, "y": 86, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 2
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
+                },
+                {
+                    "component_id": 32,
+                    "value": 15
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 90,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/door_open.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/door_open.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 85, "height": 83}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 85, "y": 83, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "4"
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 800 }
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/door_close.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/door_close.png"
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 87, "y": 86 }
+                },
+                {
+                    "component_id": 51,
+                    "value": true
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 87, "height": 86}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 87, "y": 86, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 2
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
+                },
+                {
+                    "component_id": 32,
+                    "value": 17
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 90,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/door_open.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/door_open.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 85, "height": 83}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 85, "y": 83, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "5"
+                }
+            ]
         }
     ],
     "timeline": [
         {
-            "1": "timeline_1.json"
+            "1": "timeline_3.json"
         },
         {
             "2": "timeline_2.json"
+        },
+        {
+            "3": "timeline_3.json"
+        },
+        {
+            "4": "timeline_4.json"
+        },
+        {
+            "5": "timeline_5.json"
         }
     ]
 }

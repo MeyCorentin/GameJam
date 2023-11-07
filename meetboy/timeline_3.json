@@ -34,46 +34,40 @@
                         "y": 43
                     }
                 },{
-                    "entity_id": 12,
+                    "entity_id": 14,
                     "position": {
-                        "x": 1600,
-                        "y": 894
+                        "x": 1320,
+                        "y": 264
                     }
                 },{
                     "entity_id": 3,
                     "position": {
-                        "x": 895,
+                        "x": 1195,
                         "y": 855
                     }
                 },{
                     "entity_id": 3,
                     "position": {
-                        "x": 1150,
-                        "y": 728
+                        "x": 800,
+                        "y": 700
                     }
                 },{
                     "entity_id": 3,
                     "position": {
-                        "x": 1405,
-                        "y": 601
+                        "x": 400,
+                        "y": 600
                     }
                 },{
-                    "entity_id": 9,
+                    "entity_id": 3,
                     "position": {
-                        "x": 1445,
-                        "y": 556
+                        "x": 800,
+                        "y": 500
                     }
                 },{
-                    "entity_id": 9,
+                    "entity_id": 3,
                     "position": {
-                        "x": 1193,
-                        "y": 683
-                    }
-                },{
-                    "entity_id": 9,
-                    "position": {
-                        "x": 938,
-                        "y": 810
+                        "x": 1195,
+                        "y": 350
                     }
                 }
             ]
