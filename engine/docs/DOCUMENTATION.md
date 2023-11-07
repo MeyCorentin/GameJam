@@ -10,8 +10,8 @@
 ## Developer Documenttion
 - [Project Information](INFORMATION.md)
 - [Achitecture](ARCHITECTURE.md)
-- [Entity](SYSTEM.md)
-- [System](ENTITY.md)
+- [Entity](ENTITY.md)
+- [System](SYSTEM.md)
 - [Component](COMPONENT.md)
 - [Type](TYPE.md)
 - [Json](JSON.md)
