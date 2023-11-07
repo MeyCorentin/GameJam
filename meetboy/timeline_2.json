@@ -7,61 +7,37 @@
                     "entity_id": 1,
                     "position": {
                         "x": 100,
-                        "y": 500
+                        "y": 700
+                    }
+                },{
+                    "entity_id": 11,
+                    "position": {
+                        "x": 0,
+                        "y": 43
                     }
                 },{
                     "entity_id": 2,
                     "position": {
                         "x": 0,
-                        "y": 1060
+                        "y": 980
                     }
                 },{
                     "entity_id": 2,
                     "position": {
-                        "x": -1900,
+                        "x": 0,
                         "y": 0
                     }
                 },{
-                    "entity_id": 2,
+                    "entity_id": 11,
                     "position": {
-                        "x": 1900,
-                        "y": 0
-                    }
-                },{
-                    "entity_id": 3,
-                    "position": {
-                        "x": 1500,
-                        "y": 1000
-                    }
-                },{
-                    "entity_id": 3,
-                    "position": {
-                        "x": 300,
-                        "y": 1000
-                    }
-                },{
-                    "entity_id": 3,
-                    "position": {
-                        "x": 810,
-                        "y": 500
-                    }
-                },{
-                    "entity_id": 4,
-                    "position": {
-                        "x": 500,
-                        "y": 500
+                        "x": 1877,
+                        "y": 43
                     }
                 },{
                     "entity_id": 7,
                     "position": {
                         "x": 1600,
-                        "y": 900
-                    }
-                },{
-                    "entity_id": 9,
-                    "position": {
-                        "x": 1200,
-                        "y": 1010
+                        "y": 894
                     }
                 }
             ]

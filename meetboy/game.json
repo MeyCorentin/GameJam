@@ -430,11 +430,11 @@
                 },
                 {
                     "component_id": 1,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/man.png"
                 },
                 {
                     "component_id": 50,
-                    "value": "../../sprites/space_ship.gif"
+                    "value": "../../sprites/man.png"
                 },
                 {
                     "component_id": 2,
@@ -454,7 +454,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 50, "y": 100 }
+                    "value": { "x": 58, "y": 59 }
                 },
                 {
                     "component_id": 9,
@@ -466,11 +466,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 67, "top": 0, "width": 33, "height": 18}
+                    "value": { "left": 0, "top": 0, "width": 58, "height": 59}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 33, "y": 18, "start_x": 67, "start_y": 0}
+                    "value": { "x": 58, "y": 59, "start_x": 0, "start_y": 0}
                 },
                 {
                     "component_id": 14,
@@ -538,8 +538,16 @@
                     "value": { "x": 0, "y": 800 }
                 },
                 {
+                    "component_id": 1,
+                    "value": "../../sprites/top.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/top.png"
+                },
+                {
                     "component_id": 6,
-                    "value": { "x": 1920, "y": 1080 }
+                    "value": { "x": 1920, "y": 43 }
                 },
                 {
                     "component_id": 25,
@@ -552,6 +560,50 @@
                 {
                     "component_id": 2,
                     "value": -1
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 1920, "height": 43}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 1920, "y": 43, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 2
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -563,8 +615,16 @@
                     "value": { "x": 0, "y": 800 }
                 },
                 {
+                    "component_id": 1,
+                    "value": "../../sprites/bloc.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/bloc.png"
+                },
+                {
                     "component_id": 6,
-                    "value": { "x": 300, "y": 200 }
+                    "value": { "x": 255, "y": 127 }
                 },
                 {
                     "component_id": 25,
@@ -577,6 +637,50 @@
                 {
                     "component_id": 2,
                     "value": -1
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 255, "height": 127}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 255, "y": 127, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 2
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         },
@@ -589,11 +693,11 @@
                 },
                 {
                     "component_id": 1,
-                    "value": "../../sprites/red_enemy.gif"
+                    "value": "../../sprites/tourelle.png"
                 },
                 {
                     "component_id": 50,
-                    "value": "../../sprites/red_enemy.gif"
+                    "value": "../../sprites/tourelle.png"
                 },
                 {
                     "component_id": 2,
@@ -609,7 +713,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 32, "y": 31 }
+                    "value": { "x": 16, "y": 25 }
                 },
                 {
                     "component_id": 8,
@@ -621,11 +725,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 0, "top": 4, "width": 33, "height": 31}
+                    "value": { "left": 0, "top": 0, "width": 16, "height": 25}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 264, "y": 31, "start_x": 0, "start_y": 4}
+                    "value": { "x": 16, "y": 25, "start_x": 0, "start_y": 0}
                 },
                 {
                     "component_id": 14,
@@ -810,8 +914,16 @@
                     "value": { "x": 0, "y": 800 }
                 },
                 {
+                    "component_id": 1,
+                    "value": "../../sprites/door_close.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/door_close.png"
+                },
+                {
                     "component_id": 6,
-                    "value": { "x": 50, "y": 100 }
+                    "value": { "x": 87, "y": 86 }
                 },
                 {
                     "component_id": 51,
@@ -822,20 +934,56 @@
                     "value": 1
                 },
                 {
-                    "component_id": 90,
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 87, "height": 86}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 87, "y": 86, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 2
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
                 },
                 {
                     "component_id": 32,
                     "value": 8
                 },
                 {
-                    "component_id": 1,
-                    "value": "../../sprites/red_enemy.gif"
+                    "component_id": 33,
+                    "value": false
                 },
                 {
-                    "component_id": 12,
-                    "value": { "left": 0, "top": 4, "width": 33, "height": 31}
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 90,
+                    "value": true
                 }
             ]
         },
@@ -848,11 +996,11 @@
                 },
                 {
                     "component_id": 1,
-                    "value": "../../sprites/explosion.gif"
+                    "value": "../../sprites/door_open.png"
                 },
                 {
                     "component_id": 50,
-                    "value": "../../sprites/explosion.gif"
+                    "value": "../../sprites/door_open.png"
                 },
                 {
                     "component_id": 2,
@@ -868,11 +1016,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 128, "top": 0, "width": 33, "height": 33}
+                    "value": { "left": 0, "top": 0, "width": 85, "height": 83}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 198, "y": 33, "start_x": 128, "start_y": 0}
+                    "value": { "x": 85, "y": 83, "start_x": 0, "start_y": 0}
                 },
                 {
                     "component_id": 14,
@@ -908,8 +1056,16 @@
                     "value": { "x": 0, "y": 800 }
                 },
                 {
+                    "component_id": 1,
+                    "value": "../../sprites/pics.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/pics.png"
+                },
+                {
                     "component_id": 6,
-                    "value": { "x": 50, "y": 50 }
+                    "value": { "x": 43, "y": 45 }
                 },
                 {
                     "component_id": 51,
@@ -917,15 +1073,55 @@
                 },
                 {
                     "component_id": 2,
-                    "value": 1
-                },
-                {
-                    "component_id": 1,
-                    "value": "../../sprites/red_enemy.gif"
+                    "value": -1
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 0, "top": 4, "width": 33, "height": 31}
+                    "value": { "left": 0, "top": 0, "width": 43, "height": 45}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 43, "y": 45, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 2
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 90,
+                    "value": true
                 }
             ]
         },
@@ -987,6 +1183,83 @@
                 {
                     "component_id": 83,
                     "value": "1"
+                }
+            ]
+        },
+        {
+            "id":11,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 800 }
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/right.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/right.png"
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 43, "y": 1080 }
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                },
+                {
+                    "component_id": 51,
+                    "value": true
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 43, "height": 852}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 43, "y": 852, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 2
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         }
