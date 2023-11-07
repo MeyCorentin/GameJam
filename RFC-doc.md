@@ -16,6 +16,31 @@ The R-Type Game Protocol (RTGP) is designed to facilitate communication between 
 
 Each message sent according to this protocol consists of a command code followed, if necessary, by additional information. Each message ends with a newline character (`\n`).
 
+## Message format
+
+```
+struct BinaryMessage {
+    uint16_t type; // 0: Player, 1: Other
+    uint32_t id; // Id of element
+    uint16_t x; // X position
+    uint16_t y; // Y position
+    uint16_t data; // Data
+};
+```
+
+type =  0: Player, 1: Other
+id   =  Id of element
+x    =  X position
+y    =  position
+data =  Message codes
+
+
+Exemple for connection:
+```
+BinaryProtocole::BinaryMessage initial_msg;
+initial_msg = {0, 0, 0, 0, 100};
+send(initial_msg);
+```
 ## Command Codes
 
 | Code | Description |
