@@ -7,8 +7,8 @@ Basics informations about this project.
 
 Language: C++ <br>
 Author: MEY Corentin <br>
-Date: 18/10/2023 <br>
-Version: 1.0<br>
+Date: 07/11/2023 <br>
+Version: 2.0<br>
 
 Compiled with: CMake 3.0<br>
 External Libraries:<br>
