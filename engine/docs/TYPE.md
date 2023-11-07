@@ -1,5 +1,8 @@
 # Type
 
+## Documentation Menu
+- [Documentation Menu](DOCUMENTATION.md)
+
 This documentation elaborates on the essence of "type" as it relates to component values within the engine.
 
 ## The Significance of "Type" in Component Values

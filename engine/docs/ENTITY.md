@@ -1,5 +1,8 @@
 # Entity
 
+## Documentation Menu
+- [Documentation Menu](DOCUMENTATION.md)
+
 The Entity class is a fundamental building block within the application, representing in-game entities such as characters, objects, or creatures. Each Entity is identified by a unique ID and can be equipped with various components that define its behavior, properties, and functionalities. This documentation provides a comprehensive overview of the Entity class, its properties, and methods.
 
 ## Files

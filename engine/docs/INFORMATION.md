@@ -1,5 +1,8 @@
 ## Project Informations
 
+## Documentation Menu
+- [Documentation Menu](DOCUMENTATION.md)
+
 Basics informations about this project.
 
 Language: C++ <br>

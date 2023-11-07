@@ -1,4 +1,8 @@
 # Your first game !
+
+## Documentation Menu
+- [Documentation Menu](DOCUMENTATION.md)
+
 In this section, you will be guided through the process of creating your first game using the provided game engine. We'll begin by creating a game configuration in JSON format and progressively define systems, components, entities, and the spawning of those entities based on ticks. Let's get started!
 ### Step 1: Game Configuration
 First, you need to set up the basic configuration for your game. We'll use a JSON file to define your game's structure. Below is an example of a minimal game configuration JSON:
@@ -84,7 +88,7 @@ component, an entity, and entity spawning:
     "value_type": "PairDouble"
   }
 ],
-"entities": [
+"entities": [gi
   {
     "id": 1,
     "components": [

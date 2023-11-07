@@ -1,5 +1,8 @@
 # Component
 
+## Documentation Menu
+- [Documentation Menu](DOCUMENTATION.md)
+
 ## Class ComponentBase
 ### Files:
 - ComponentBase.hpp: Header file for the ComponentBase class.

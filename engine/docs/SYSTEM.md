@@ -1,4 +1,8 @@
 # System
+
+## Documentation Menu
+- [Documentation Menu](DOCUMENTATION.md)
+
 The System class is a fundamental component within the application's architecture that controls and manages various aspects of the game world. Systems are responsible for executing logic and rendering entities. This documentation provides an overview of the System class, including its purpose, methods, and a sample implementation of the S_Display system.
 
 ## Files

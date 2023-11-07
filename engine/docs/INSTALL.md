@@ -1,5 +1,8 @@
 # INSTALL
 
+## Documentation Menu
+- [Documentation Menu](DOCUMENTATION.md)
+
 ### How to install from repository
 
 

@@ -1,4 +1,8 @@
 # Json
+
+## Documentation Menu
+- [Documentation Menu](DOCUMENTATION.md)
+
 The JSON structure can be divided into several major components:
 1. Systems:
 This section contains a list of system objects, each representing a specific system within the game.
