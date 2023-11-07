@@ -21,6 +21,7 @@
 #include "../includes/system/S_AutoMove.hpp"
 #include "../includes/system/S_Gravity.hpp"
 #include "../includes/system/S_WriteText.hpp"
+#include "../includes/system/S_Score.hpp"
 
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_JumpHeight.hpp"
@@ -86,6 +87,9 @@
 #include "../includes/components/C_Jump.hpp"
 #include "../includes/components/C_Velocity.hpp"
 #include "../includes/components/C_Breakable.hpp"
+#include "../includes/components/C_Point.hpp"
+#include "../includes/components/C_Score.hpp"
+#include "../includes/components/C_ScoreText.hpp"
 
 #include "../includes/components/C_Text.hpp"
 #include "../includes/components/C_TextMessage.hpp"

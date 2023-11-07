@@ -67,6 +67,10 @@
         {
             "id": 17,
             "type": "InputFromPlayer"
+        },
+        {
+            "id": 18,
+            "type": "Score"
         }
     ],
     "components": [
@@ -404,12 +408,35 @@
             "id": 83,
             "type": "NextTimeline",
             "value_type": "String"
+        },
+        {
+            "id": 91,
+            "type": "Point",
+            "value_type": "Int"
+        },
+        {
+            "id": 92,
+            "type": "Score",
+            "value_type": "Int"
+        },
+        {
+            "id": 93,
+            "type": "ScoreText",
+            "value_type": "Text"
         }
     ],
     "entities": [
         {
             "id": 1,
             "components": [
+                {
+                    "component_id": 93,
+                    "value": true
+                },
+                {
+                    "component_id": 92,
+                    "value": 0
+                },
                 {
                     "component_id": 74,
                     "value": { "x": 0, "y": 0 }
@@ -3752,6 +3779,10 @@
         {
             "id": 46,
             "components": [
+                {
+                    "component_id": 91,
+                    "value": 100
+                },
                 {
                     "component_id": 61,
                     "value": -1

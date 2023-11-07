@@ -32,6 +32,7 @@ void Ecs::Create(int arg_is_server, char *game_path)
     SystemRegistry::Instance().RegisterSystem("AutoMove", []() { return std::make_shared<S_AutoMove>(); });
     SystemRegistry::Instance().RegisterSystem("Gravity", []() { return std::make_shared<S_Gravity>(); });
     SystemRegistry::Instance().RegisterSystem("WriteText", []() { return std::make_shared<S_WriteText>(); });
+    SystemRegistry::Instance().RegisterSystem("Score", []() { return std::make_shared<S_Score>(); });
 
     ComponentRegistry::Instance().RegisterComponent("PlayerMovementClock", []() { return std::make_shared<C_PlayerMovementClock<sf::Clock>>(); });
     ComponentRegistry::Instance().RegisterComponent("EntityMovementClock", []() { return std::make_shared<C_EntityMovementClock<sf::Clock>>(); });
@@ -102,7 +103,9 @@ void Ecs::Create(int arg_is_server, char *game_path)
     ComponentRegistry::Instance().RegisterComponent("TextMessage", []() { return std::make_shared<C_TextMessage<std::string>>(); });
     ComponentRegistry::Instance().RegisterComponent("IsClickable", []() { return std::make_shared<C_IsClickable<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("NextTimeline", []() { return std::make_shared<C_NextTimeline<std::string>>(); });
-    ComponentRegistry::Instance().RegisterComponent("Breakable", []() { return std::make_shared<C_Breakable<bool>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Score", []() { return std::make_shared<C_Score<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Point", []() { return std::make_shared<C_Point<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("ScoreText", []() { return std::make_shared<C_ScoreText<sf::Text>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
 
