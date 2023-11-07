@@ -1,6 +1,10 @@
 # R-Type Game Protocol (RTGP) - Version 1.0
 
-c
+
+## Main Documentation
+
+- [Main Documentation](README.md)
+
 ## Table of Contents
 
 - [Introduction](#introduction)
