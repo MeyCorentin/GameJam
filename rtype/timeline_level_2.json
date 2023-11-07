@@ -132,6 +132,15 @@
             ]
         },
         {
+            "tick" : 550,
+            "mob_id": [
+                {
+                    "entity_id": 81,
+                    "position": { "x": 50, "y": -40 }
+                }
+            ]
+        },
+        {
             "tick" : 560,
             "mob_id": [
                 {
@@ -283,10 +292,19 @@
             ]
         },
         {
-            "tick" : 115,
+            "tick" : 1150,
             "mob_id": [
                 {
                     "entity_id": 80
+                }
+            ]
+        },
+        {
+            "tick" : 1160,
+            "mob_id": [
+                {
+                    "entity_id": 81,
+                    "position": { "x": 250, "y": -40 }
                 }
             ]
         },
