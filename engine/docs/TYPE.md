@@ -54,4 +54,24 @@ Here's a more in-depth look at the meaning and handling of component types:
   - Type: std::vector<std::shared_ptr<Entity>>
   - Description: Stores a collection of entities.
 
+- Sound
+  - Type: sf::Sound
+  - Description: Represents a sound in the game.
+
+- SoundBuffer
+  - Type: sf::SoundBuffer
+  - Description: Stores the audio data for a sound.
+
+- Text
+  - Type: sf::Text
+  - Description: Represents a text string for rendering.
+
+- String
+  - Type: std::string
+  - Description: Stores a sequence of characters.
+
+- Texture
+  - Type: sf::Texture
+  - Description: Stores the pixel data for a texture.
+
 This detailed clarification of component types aids in the accurate processing of component data by the engine, ensuring that each component is correctly handled based on its inherent nature
