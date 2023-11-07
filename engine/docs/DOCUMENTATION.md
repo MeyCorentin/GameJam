@@ -4,14 +4,14 @@
 
 ## Getting Started
 
-- [Installation](INSTALL.MD)
-- [Your First Game](FIRSTGAME.MD)
+- [Installation](INSTALL.md)
+- [Your First Game](FIRSTGAME.md)
 
 ## Developer Documenttion
-- [Project Information](INFORMATION.MD)
-- [Achitecture](ARCHITECTURE.MD)
-- [Entity](SYSTEM.MD)
-- [System](ENTITY.MD)
-- [Component](COMPONENT.MD)
-- [Type](TYPE.MD)
-- [Json](JSON.MD)
+- [Project Information](INFORMATION.md)
+- [Achitecture](ARCHITECTURE.md)
+- [Entity](SYSTEM.md)
+- [System](ENTITY.md)
+- [Component](COMPONENT.md)
+- [Type](TYPE.md)
+- [Json](JSON.md)
