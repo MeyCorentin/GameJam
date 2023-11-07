@@ -23,29 +23,34 @@ mkdir client/build server/build engine/build
 
 ### Build Engine:
 
+```
 cd engine/build
 cmake ..
 make
-
+```
 
 ### Build client:
 
+```
 cd client/build
 cmake ..
 make
 
-**Run Game Solo**
+Run Game Solo:
 
 ./r-type_client {GAME_PATH}
 
 
-**Run Game Multiplayer**
+Run Game Multiplayer:
 
 ./r-type_client {SERVER_IP} {PORT} {GAME_PATH}
+```
 
 ### Build server:
 
+```
 cd server/build
 cmake ..
 make
 ./r-type_server {PORT} {GAME_PATG}
+```
