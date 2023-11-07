@@ -1,19 +1,19 @@
 #pragma once
 
 #include "../main.hpp"
-#include "ComponentBase.hpp"
+#include "IComponent.hpp"
 
 template <class T>
-class Component: public ComponentBase {
+class AComponent: public IComponent {
     private:
         T value_;
         const std::type_info& original_type_;
 
     public:
-        Component(T arg_n) :
+        AComponent(T arg_n) :
             value_(arg_n), original_type_(typeid(*this)) {}
 
-        Component() :
+        AComponent() :
             value_(), original_type_(typeid(*this)) {}
 
         const std::type_info& GetType() const override {
@@ -26,7 +26,7 @@ class Component: public ComponentBase {
         void setValue(T arg_new_value) {
             value_ = arg_new_value;
         };
-        std::shared_ptr<ComponentBase> Clone() const override {
-            return std::make_shared<Component>(*this);
+        std::shared_ptr<IComponent> Clone() const override {
+            return std::make_shared<AComponent>(*this);
         }
 };

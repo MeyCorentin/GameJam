@@ -10,7 +10,7 @@ void ComponentRegistry::RegisterComponent(const std::string& arg_name, Component
     components[arg_name] = arg_constructor;
 }
 
-std::shared_ptr<ComponentBase> ComponentRegistry::CreateComponent(const std::string& arg_name) {
+std::shared_ptr<IComponent> ComponentRegistry::CreateComponent(const std::string& arg_name) {
     std::unordered_map<std::string, ComponentRegistry::ComponentConstructor>::iterator it = components.find(arg_name);
 
     if (it != components.end())

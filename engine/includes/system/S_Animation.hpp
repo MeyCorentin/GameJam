@@ -1,4 +1,4 @@
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Sprite.hpp"
 #include "../components/C_Clock.hpp"
@@ -21,7 +21,7 @@
  * specific components. It controls the animation frames and timing for entities, allowing them to display
  * dynamic animations during gameplay.
  */
-class S_Animation : public System {
+class S_Animation : public ISystem {
     public:
     /**
      * @brief Manages sprite animations for filtered entities.
@@ -45,7 +45,7 @@ class S_Animation : public System {
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
      * @brief Executes the sinusoidal movement for selected entities.

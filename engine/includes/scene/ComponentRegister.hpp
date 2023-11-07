@@ -5,13 +5,13 @@
 
 class ComponentRegistry {
     public:
-        using ComponentConstructor = std::function<std::shared_ptr<ComponentBase>()>;
+        using ComponentConstructor = std::function<std::shared_ptr<IComponent>()>;
 
         static ComponentRegistry& Instance();
 
         void RegisterComponent(const std::string& arg_name, ComponentConstructor arg_constructor);
 
-        std::shared_ptr<ComponentBase> CreateComponent(const std::string& arg_name);
+        std::shared_ptr<IComponent> CreateComponent(const std::string& arg_name);
 
         ComponentRegistry();
 

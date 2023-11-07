@@ -1,8 +1,8 @@
 #include "system/S_Gravity.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_Gravity::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+std::vector<std::shared_ptr<IEntity>> S_Gravity::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Velocity<std::pair<int, int>>)) &&
             entity->HasComponent(typeid(C_Gravity<double>)) &&
             entity->HasComponent(typeid(C_Grounded<bool>)) &&
@@ -17,7 +17,7 @@ std::vector<std::shared_ptr<Entity>> S_Gravity::Filter(const std::vector<std::sh
 }
 
 void S_Gravity::Execute(int arg_is_server, Scene* arg_scene) {
-    std::vector<std::shared_ptr<Entity>> arg_entities = Filter(arg_scene->entities_);
+    std::vector<std::shared_ptr<IEntity>> arg_entities = Filter(arg_scene->entities_);
     std::shared_ptr<C_Velocity<std::pair<int, int>>> velocity_1;
     std::shared_ptr<C_Gravity<double>> gravity_1;
     std::shared_ptr<C_Grounded<bool>> grounded_1;
@@ -29,7 +29,7 @@ void S_Gravity::Execute(int arg_is_server, Scene* arg_scene) {
     std::shared_ptr<C_PositionStorage<std::pair<double, double>>> position_storage_1;
     std::shared_ptr<C_PlayerAmmo<bool>> is_friendly;
 
-    for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity1 : arg_entities) {
         velocity_1 = entity1->template GetComponent<C_Velocity<std::pair<int, int>>>();
         gravity_1 = entity1->template GetComponent<C_Gravity<double>>();
         grounded_1 = entity1->template GetComponent<C_Grounded<bool>>();
@@ -62,7 +62,7 @@ void S_Gravity::Execute(int arg_is_server, Scene* arg_scene) {
                     arg_scene->inputs_[6] = 0;
                 }
             }
-            for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
+            for (const std::shared_ptr<IEntity>& entity2 : arg_scene->entities_) {
 
                 hitbox_comp_2 = entity2->template GetComponent<C_Hitbox<std::pair<int, int>>>();
                 position_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();

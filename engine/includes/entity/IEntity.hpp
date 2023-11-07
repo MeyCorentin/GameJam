@@ -1,16 +1,16 @@
 #pragma once
 
-#include "../components/ComponentBase.hpp"
+#include "../components/IComponent.hpp"
 
-class Entity {
+class IEntity {
     public:
         int id_;
         int base_id_;
         bool is_dead_ = false;;
-        std::vector<std::shared_ptr<ComponentBase>> components_;
-        Entity(int arg_id, std::vector<std::shared_ptr<ComponentBase>> arg_components);
+        std::vector<std::shared_ptr<IComponent>> components_;
+        IEntity(int arg_id, std::vector<std::shared_ptr<IComponent>> arg_components);
 
-        Entity(const Entity& other);
+        IEntity(const IEntity& other);
 
         int GetId();
 
@@ -20,7 +20,7 @@ class Entity {
 
         void SetBaseId(int arg_id);
 
-        std::shared_ptr<Entity> Clone() const;
+        std::shared_ptr<IEntity> Clone() const;
 
         bool HasComponent(const std::type_info& arg_type) const;
 

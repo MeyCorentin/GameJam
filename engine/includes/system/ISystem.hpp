@@ -1,19 +1,19 @@
 #pragma once
 
 #include "../main.hpp"
-#include "../entity/Entity.hpp"
+#include "../entity/IEntity.hpp"
 
 class Scene;
-class System {
+class ISystem {
 public:
-    virtual ~System() {}
+    virtual ~ISystem() {}
 
     void Compute(
         int arg_is_server,
         Scene * arg_scene
     );
 
-    virtual std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) = 0;
+    virtual std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) = 0;
     virtual void Execute(
         int arg_is_server,
         Scene * arg_scene

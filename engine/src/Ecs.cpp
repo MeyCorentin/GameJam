@@ -72,7 +72,7 @@ void Ecs::Create(int arg_is_server, char *game_path)
     ComponentRegistry::Instance().RegisterComponent("PositionEnd", []() { return std::make_shared<C_PositionEnd<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("PositionStart", []() { return std::make_shared<C_PositionStart<std::pair<double, double>>>(); });
     ComponentRegistry::Instance().RegisterComponent("PositionFollow", []() { return std::make_shared<C_PositionFollow<std::pair<double, double>>>(); });
-    ComponentRegistry::Instance().RegisterComponent("Inventory", []() { return std::make_shared<C_Inventory<std::vector<std::shared_ptr<Entity>>>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Inventory", []() { return std::make_shared<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Weapon", []() { return std::make_shared<C_Weapon<std::pair<int, int>>>(); });
     ComponentRegistry::Instance().RegisterComponent("Bonus", []() { return std::make_shared<C_Bonus<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("BonusPower", []() { return std::make_shared<C_BonusPower<std::pair<int, int>>>(); });

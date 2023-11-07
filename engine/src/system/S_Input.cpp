@@ -1,9 +1,9 @@
 #include "system/S_Input.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_Input::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
+std::vector<std::shared_ptr<IEntity>> S_Input::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Player<int>)) &&
             entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
             entity->HasComponent(typeid(C_IsMoving<bool>)) &&
@@ -20,7 +20,7 @@ std::vector<std::shared_ptr<Entity>> S_Input::Filter(const std::vector<std::shar
 
 void DrawEntityID(
     std::shared_ptr<sf::RenderWindow> arg_window,
-    const std::shared_ptr<Entity>& entity,
+    const std::shared_ptr<IEntity>& entity,
     sf::Font arg_font,
     sf::Text arg_entity_id) {
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
@@ -35,7 +35,7 @@ void DrawEntityID(
 
 void DrawEntityHitbox(
     std::shared_ptr<sf::RenderWindow> arg_window,
-    const std::shared_ptr<Entity>& entity,
+    const std::shared_ptr<IEntity>& entity,
     sf::Color outlineColor) {
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
@@ -52,8 +52,8 @@ void DrawEntityHitbox(
 void S_Input::Move(
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp, 
     Scene * arg_scene,
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_entities,
     sf::Font arg_font,
     sf::Text arg_entity_id,
     sf::Time elapsed)
@@ -83,7 +83,7 @@ void S_Input::Move(
     }
     if (arg_scene->inputs_[5] == 1)
     {
-        for (const std::shared_ptr<Entity>& entity : arg_entities) {
+        for (const std::shared_ptr<IEntity>& entity : arg_entities) {
             std::shared_ptr<C_Player<int>> is_player = entity->template GetComponent<C_Player<int>>();
             std::shared_ptr<C_PlayerAmmo<bool>> is_player_ammo = entity->template GetComponent<C_PlayerAmmo<bool>>();
             std::shared_ptr<C_Bonus<bool>> is_bonus =  entity->template GetComponent<C_Bonus<bool>>();
@@ -109,7 +109,7 @@ void S_Input::Move(
 }
 
 void S_Input::ChangeAdminMode(
-    const std::shared_ptr<Entity>& entity,
+    const std::shared_ptr<IEntity>& entity,
     std::shared_ptr<sf::Event> event_)
 {
     std::shared_ptr<C_Life<int>> life = entity->template GetComponent<C_Life<int>>();
@@ -127,8 +127,8 @@ void S_Input::ChangeAdminMode(
 }
 
 void S_Input::BasicShot(
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     Scene * arg_scene)
 {
@@ -149,12 +149,12 @@ void S_Input::BasicShot(
 }
 
 void S_Input::SpecialShot(
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     Scene * arg_scene)
 {
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
 
     //Player attacks
     std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon_player = entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
@@ -163,7 +163,7 @@ void S_Input::SpecialShot(
     std::list<int> my_list_2 = {38, 39, 40};
     std::list<int> my_list_3 = {4, 29};
 
-    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+    for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) {
         if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetBaseId()) != my_list_1.end())) {
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
             std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
@@ -197,18 +197,18 @@ void S_Input::SpecialShot(
     }
 
     //Drone attacks
-    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) { //Check if vector_entities contain a drone left or right
+    for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) { //Check if vector_entities contain a drone left or right
         if (v_entity->GetBaseId() == 27)
             v_entity->is_dead_ = true;
         if ((std::find(my_list_3.begin(), my_list_3.end(), v_entity->GetBaseId()) != my_list_3.end()) && weapon_player->getValue().first == 26) {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
-            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+            for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) {
                 if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetBaseId()) != my_list_1.end())) {
                     arg_scene->createEntity(arg_all_entities, weapon->getValue().first, position_drone);
                 }
             }
-            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+            for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) {
                 if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetBaseId()) != my_list_2.end())) {
                     arg_scene->createEntity(arg_all_entities, weapon->getValue().second, position_drone);
                 }
@@ -218,8 +218,8 @@ void S_Input::SpecialShot(
 }
 
 void S_Input::CheckTouchPressed(
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     std::shared_ptr<sf::Event> event_,
     Scene * arg_scene)
@@ -230,7 +230,7 @@ void S_Input::CheckTouchPressed(
     std::shared_ptr<C_Grounded<bool>> grounded = entity->template GetComponent<C_Grounded<bool>>();
     std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
     std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
     std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
 
     if (event_->type == sf::Event::KeyPressed) {
@@ -276,15 +276,15 @@ void S_Input::CheckTouchPressed(
 }
 
 void S_Input::DropForce(
-    const std::shared_ptr<Entity>& entity)
+    const std::shared_ptr<IEntity>& entity)
 {
     std::shared_ptr<C_EntityMovementClock<sf::Clock>> entities_clock;
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
 
     std::list<int> my_list_1 = {22, 23, 24};
     std::list<int> my_list_2 = {38, 39, 40};
 
-    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+    for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) {
         entities_clock = v_entity->template GetComponent<C_EntityMovementClock<sf::Clock>>();
 
         if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetBaseId()) != my_list_1.end()) || (std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetBaseId()) != my_list_2.end())) {
@@ -303,8 +303,8 @@ void S_Input::DropForce(
 }
 
 void S_Input::CheckTouchReleased(
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     std::shared_ptr<sf::Event> event_,
     Scene * arg_scene)
@@ -368,7 +368,7 @@ void S_Input::CheckTouchReleased(
 void S_Input::Execute(
         int arg_is_server,
         Scene * arg_scene)  {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
     sf::Font font_arg_;
     font_arg_.loadFromFile("../../rtype/sources/fonts/arial.ttf");
     sf::Text entity_id;
@@ -379,7 +379,7 @@ void S_Input::Execute(
 
     sf::Vector2u size = arg_scene->window_->getSize();
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
         player_movement_clock = entity->template GetComponent<C_PlayerMovementClock<sf::Clock>>();
@@ -398,7 +398,7 @@ void S_Input::Execute(
             CheckTouchReleased(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
             sf::Vector2i position = sf::Mouse::getPosition(*arg_scene->window_);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                for (const std::shared_ptr<Entity>& my_entity : arg_scene->entities_) {
+                for (const std::shared_ptr<IEntity>& my_entity : arg_scene->entities_) {
                     std::shared_ptr<C_IsClickable<bool>> is_clickable =  my_entity->template GetComponent<C_IsClickable<bool>>();
                     std::shared_ptr<C_NextTimeline<std::string>> next_timeline =  my_entity->template GetComponent<C_NextTimeline<std::string>>();
                     if (is_clickable) {

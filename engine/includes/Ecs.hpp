@@ -1,6 +1,6 @@
 
 #include "../includes/main.hpp"
-#include "../includes/system/System.hpp"
+#include "../includes/system/ISystem.hpp"
 #include "../includes/system/S_Position.hpp"
 #include "../includes/system/S_Hit.hpp"
 #include "../includes/system/S_Display.hpp"
@@ -92,7 +92,7 @@
 #include "../includes/components/C_IsClickable.hpp"
 #include "../includes/components/C_NextTimeline.hpp"
 
-#include "../includes/components/ComponentBase.hpp"
+#include "../includes/components/IComponent.hpp"
 
 #include "../includes/scene/SystemRegister.hpp"
 #include "../includes/scene/ComponentRegister.hpp"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Direction.hpp"
 #include "../components/C_Speed.hpp"
@@ -18,7 +18,7 @@
  * parallax effects and to execute actions related to parallax scrolling. It is responsible for simulating
  * the visual depth and movement of objects within the system, creating a parallax effect.
  */
-class S_Parallax : public System {
+class S_Parallax : public ISystem {
     public:
     /**
      * @brief Filters a list of entities based on their components.
@@ -31,7 +31,7 @@ class S_Parallax : public System {
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
      * @brief Manages parallax scrolling effects for entities with parallax components.

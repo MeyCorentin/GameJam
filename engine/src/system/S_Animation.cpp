@@ -1,8 +1,8 @@
 #include "system/S_Animation.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_Animation::Filter(const std::vector<std::shared_ptr<Entity>>& _entities)  {
-    std::vector<std::shared_ptr<Entity>> filteredEntities;
-    for (const std::shared_ptr<Entity>& entity : _entities) {
+std::vector<std::shared_ptr<IEntity>> S_Animation::Filter(const std::vector<std::shared_ptr<IEntity>>& _entities)  {
+    std::vector<std::shared_ptr<IEntity>> filteredEntities;
+    for (const std::shared_ptr<IEntity>& entity : _entities) {
         if (entity->HasComponent(typeid(C_Sprite<sf::Sprite>)) &&
             entity->HasComponent(typeid(C_Clock<sf::Clock>)) &&
             entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
@@ -21,8 +21,8 @@ std::vector<std::shared_ptr<Entity>> S_Animation::Filter(const std::vector<std::
 void S_Animation::Execute(
         int arg_is_server,
         Scene * arg_scene) {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         std::shared_ptr<C_Sprite<sf::Sprite>> sprite = entity->template GetComponent<C_Sprite<sf::Sprite>>();
         std::shared_ptr<C_Clock<sf::Clock>> clock = entity->template GetComponent<C_Clock<sf::Clock>>();
         std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = entity->template GetComponent<C_SpriteRect<sf::IntRect>>();

@@ -1,4 +1,4 @@
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Position.hpp"
 /**
@@ -9,7 +9,7 @@
  * their positions as needed. It serves as part of the core functionality for managing entity
  * positions within the system.
  */
-class S_Position : public System {
+class S_Position : public ISystem {
     public:
     /**
      * @brief Filters a list of entities based on their components.
@@ -21,7 +21,7 @@ class S_Position : public System {
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
      * @brief Updates the positions of entities with position components.

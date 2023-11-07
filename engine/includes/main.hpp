@@ -20,7 +20,7 @@
 
 #pragma once
 
-class Entity;
+class IEntity;
 
 struct SinusoidalFunction {
     double amplitude;
@@ -50,6 +50,6 @@ using Variant = std::variant<
                 sf::IntRect, 
                 std::string,
                 std::pair<std::pair<int, int>, std::pair<int, int>>,
-                std::vector<std::shared_ptr<Entity>>,
+                std::vector<std::shared_ptr<IEntity>>,
                 SinusoidalFunction>;
 using json = nlohmann::json;

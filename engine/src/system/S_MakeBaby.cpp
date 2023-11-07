@@ -1,9 +1,9 @@
 #include "system/S_MakeBaby.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_MakeBaby::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
+std::vector<std::shared_ptr<IEntity>> S_MakeBaby::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Child<int>)) &&
             entity->HasComponent(typeid(C_Sprite<sf::Sprite>)) &&
             entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>))) {
@@ -16,8 +16,8 @@ std::vector<std::shared_ptr<Entity>> S_MakeBaby::Filter(const std::vector<std::s
 void S_MakeBaby::Execute(
         int arg_is_server,
         Scene * arg_scene) {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
-    std::shared_ptr<Entity> new_entity;
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
+    std::shared_ptr<IEntity> new_entity;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
     std::shared_ptr<C_Child<int>> id_child;
     std::ifstream file(arg_scene->filepath_);
@@ -25,7 +25,7 @@ void S_MakeBaby::Execute(
 
     file >> data;
     file.close();
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (!entity->is_dead_ ||!entity->HasComponent(typeid(C_Child<int>)))
             continue;
         id_child = entity->template GetComponent<C_Child<int>>();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_Player.hpp"
@@ -31,37 +31,37 @@
 #include "../components/C_IsAutoMove.hpp"
 
 
-class S_InputFromPlayer : public System {
+class S_InputFromPlayer : public ISystem {
     private:
     public:
-        std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities);
+        std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities);
         void Execute(
                 int arg_is_server,
                 Scene * arg_scene);
 
         void BasicShot(
-                const std::shared_ptr<Entity>& entity,
-                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+                const std::shared_ptr<IEntity>& entity,
+                std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 Scene * arg_scene);
 
         void SpecialShot(
-                const std::shared_ptr<Entity>& entity,
-                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+                const std::shared_ptr<IEntity>& entity,
+                std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 Scene * arg_scene);
 
         void DeleteFromInventory(
                 int base_id,
-                const std::shared_ptr<Entity>& entity,
-                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+                const std::shared_ptr<IEntity>& entity,
+                std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 Scene * arg_scene);
 
         bool IsInInventory(
             int base_id,
-            const std::shared_ptr<Entity>& entity,
-            std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+            const std::shared_ptr<IEntity>& entity,
+            std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
             Scene * arg_scene);
 };

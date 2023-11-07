@@ -1,4 +1,4 @@
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Life.hpp"
 #include "../components/C_Shield.hpp"
@@ -10,7 +10,7 @@
  * The S_Hit system is designed to filter entities with life components and manage actions related to taking damage.
  * It handles reducing shield and life points of entities, reflecting hits and damage management within the system.
  */
-class S_Hit : public System {
+class S_Hit : public ISystem {
     public:
     /**
      * @brief Filters a list of entities based on their components.
@@ -22,7 +22,7 @@ class S_Hit : public System {
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
      * @brief Manages the reduction of shield and life points for entities taking damage.

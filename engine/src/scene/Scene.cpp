@@ -83,8 +83,8 @@ void Scene::LoadSettings() {
 }
 
 Scene::Scene() {}
-Scene::Scene( std::vector<std::shared_ptr<System>> arg_system_list,
-        std::vector<std::shared_ptr<Entity>> arg_entity_list,
+Scene::Scene( std::vector<std::shared_ptr<ISystem>> arg_system_list,
+        std::vector<std::shared_ptr<IEntity>> arg_entity_list,
         std::vector<sf::Sprite> arg_sprite_list,
         std::vector<std::shared_ptr<sf::Music>> arg_music_list,
         std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index,
@@ -139,12 +139,12 @@ void Scene::ClearWindow()
     window_->clear();
 }
 
-std::vector<std::shared_ptr<Entity>> Scene::GetEntities()
+std::vector<std::shared_ptr<IEntity>> Scene::GetEntities()
 {
     return  entities_;
 }
 
-std::vector<std::shared_ptr<System>> Scene::GetSystems()
+std::vector<std::shared_ptr<ISystem>> Scene::GetSystems()
 {
     return systems_;
 }
@@ -186,7 +186,7 @@ void Scene::AddNewPlayer(int arg_id)
         if (entity->GetId() == 1)
         {
             std::shared_ptr<C_Player<int>> index;
-            entities_.push_back(std::make_shared<Entity>(*entity));
+            entities_.push_back(std::make_shared<IEntity>(*entity));
             index = entities_.back() ->template GetComponent<C_Player<int>>();
             index->setValue(arg_id);
             std::cout << index->getValue() << std::endl;
@@ -212,7 +212,7 @@ bool Scene::ProcessComponent(
     std::string component_name = arg_componentConfig["type"];
     std::string value_type = arg_componentConfig["value_type"];
     json component_value = arg_entityComponent["value"];
-    std::shared_ptr<ComponentBase> component = ComponentRegistry::Instance().CreateComponent(component_name);
+    std::shared_ptr<IComponent> component = ComponentRegistry::Instance().CreateComponent(component_name);
     Variant value = arg_parser.ParseValue(value_type, component_value);
 
     if (!component)
@@ -239,7 +239,7 @@ bool Scene::ProcessComponent(
     } else if (value_type == "PairPairInt") {
         arg_entityBuilder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
     } else if (value_type == "VectorEntity") {
-        arg_entityBuilder.AddComponent(component, std::get<std::vector<std::shared_ptr<Entity>>>(value));
+        arg_entityBuilder.AddComponent(component, std::get<std::vector<std::shared_ptr<IEntity>>>(value));
     } else if (value_type == "SinFunc") {
         arg_entityBuilder.AddComponent(component, std::get<SinusoidalFunction>(value));
     } else if (value_type == "Sound") {
@@ -257,7 +257,7 @@ bool Scene::ProcessComponent(
     return true;
 }
 
-std::shared_ptr<Entity> Scene::CreateEntityFromConfig(
+std::shared_ptr<IEntity> Scene::CreateEntityFromConfig(
         const json& arg_entity_config,
         const json& arg_components_config) {
     JsonParser parser;
@@ -303,11 +303,11 @@ void Scene::LoadTimeline(
     entities_.clear();
 }
 
-std::shared_ptr<Entity> Scene::createEntity(
-        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+std::shared_ptr<IEntity> Scene::createEntity(
+        std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
         int id,
         std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp) {
-    std::shared_ptr<Entity> new_entity;
+    std::shared_ptr<IEntity> new_entity;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
     std::ifstream file(filepath_);
     json data;
@@ -376,7 +376,7 @@ std::vector<EntityPosition> Scene::GetEntityPosition()
 void Scene::SetClientPlayerId(int arg_id)
 {
     std::shared_ptr<C_Player<int>> index;
-    for (const std::shared_ptr<Entity>& entity : entities_) {
+    for (const std::shared_ptr<IEntity>& entity : entities_) {
         index = entity->template GetComponent<C_Player<int>>();
         if (!index)
             continue;
@@ -389,7 +389,7 @@ void Scene::SetPlayerPosition(int arg_id, float arg_x, float arg_y)
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size;
     std::shared_ptr<C_Player<int>> index;
-    for (const std::shared_ptr<Entity>& entity : entities_) {
+    for (const std::shared_ptr<IEntity>& entity : entities_) {
         index = entity->template GetComponent<C_Player<int>>();
         if (!index)
             continue;
@@ -418,7 +418,7 @@ void Scene::Update(int arg_is_server)
 
     ComputeSystems(arg_is_server);
 
-    std::vector<std::shared_ptr<Entity>> newEntities = SpawnEntities(arg_is_server);
+    std::vector<std::shared_ptr<IEntity>> newEntities = SpawnEntities(arg_is_server);
 
     for (const auto& newEntity : newEntities) {
         entities_.push_back(newEntity);
@@ -440,9 +440,9 @@ void Scene::ComputeSystems(int arg_is_server)
         system->Compute(arg_is_server, scene_ptr);
 }
 
-std::vector<std::shared_ptr<Entity>> Scene::SpawnEntities(int arg_is_server)
+std::vector<std::shared_ptr<IEntity>> Scene::SpawnEntities(int arg_is_server)
 {
-    std::vector<std::shared_ptr<Entity>> newEntities;
+    std::vector<std::shared_ptr<IEntity>> newEntities;
 
     std::shared_ptr<C_Position<std::pair<double,double>>> position;
     std::shared_ptr<C_SinClock<sf::Clock>> sin_clock;
@@ -469,7 +469,7 @@ std::vector<std::shared_ptr<Entity>> Scene::SpawnEntities(int arg_is_server)
                     continue;
                 if (entity->GetId() == arg_is_server)
                     continue;
-                std::shared_ptr<Entity> newEntity = std::make_shared<Entity>(*entity);
+                std::shared_ptr<IEntity> newEntity = std::make_shared<IEntity>(*entity);
                 newEntity->SetId(id_store_++);
                 newEntity->SetBaseId(entity->GetId());
                 position = newEntity->template GetComponent<C_Position<std::pair<double,double>>>();

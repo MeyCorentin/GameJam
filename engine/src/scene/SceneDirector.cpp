@@ -1,6 +1,6 @@
 #include "scene/SceneDirector.hpp"
 
-std::shared_ptr<System> SceneDirector::CreateSystemFromConfig(const json& arg_systemConfig)
+std::shared_ptr<ISystem> SceneDirector::CreateSystemFromConfig(const json& arg_systemConfig)
 {
     std::string type = arg_systemConfig["type"];
 
@@ -28,7 +28,7 @@ bool SceneDirector::ProcessComponent(
     std::string component_name = arg_component_config["type"];
     std::string value_type = arg_component_config["value_type"];
     json component_value = arg_entity_component["value"];
-    std::shared_ptr<ComponentBase> component = ComponentRegistry::Instance().CreateComponent(component_name);
+    std::shared_ptr<IComponent> component = ComponentRegistry::Instance().CreateComponent(component_name);
     Variant value = arg_parser.ParseValue(value_type, component_value);
 
     if (!component)
@@ -54,7 +54,7 @@ bool SceneDirector::ProcessComponent(
     } else if (value_type == "PairPairInt") {
         arg_entity_builder.AddComponent(component, std::get<std::pair<std::pair<int, int>, std::pair<int, int>>>(value));
     } else if (value_type == "VectorEntity") {
-        arg_entity_builder.AddComponent(component, std::get<std::vector<std::shared_ptr<Entity>>>(value));
+        arg_entity_builder.AddComponent(component, std::get<std::vector<std::shared_ptr<IEntity>>>(value));
     } else if (value_type == "SinFunc") {
         arg_entity_builder.AddComponent(component, std::get<SinusoidalFunction>(value));
     } else if (value_type == "Sound") {
@@ -73,7 +73,7 @@ bool SceneDirector::ProcessComponent(
     }
     return true;
 }
-std::shared_ptr<Entity> SceneDirector::CreateEntityFromConfig(
+std::shared_ptr<IEntity> SceneDirector::CreateEntityFromConfig(
         const json& arg_entity_config,
         const json& arg_components_config) {
     JsonParser parser;
@@ -180,7 +180,7 @@ SceneDirector::SceneDirector(std::string arg_file_path, int value) {
         scene_builder_.AddSystem(CreateSystemFromConfig(system_config));
     std::cout << "------[LOAD ENTITIES]-------" << std::endl;
     for (const auto& entity_config : data["entities"]) {
-        std::shared_ptr<Entity> new_entity = CreateEntityFromConfig(entity_config, data["components"]);
+        std::shared_ptr<IEntity> new_entity = CreateEntityFromConfig(entity_config, data["components"]);
         if (new_entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
             new_entity->HasComponent(typeid(C_Sprite<sf::Sprite>))) {
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_PlayerAmmo.hpp"
@@ -23,12 +23,12 @@
 
 #include "S_Input.hpp"
 
-class S_Collision : public System {
+class S_Collision : public ISystem {
     public:
-        std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+        std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
-        std::shared_ptr<Entity> reCreateEntity(
-                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+        std::shared_ptr<IEntity> reCreateEntity(
+                std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
                 int id,
                 std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp,
                 Scene * arg_scene);

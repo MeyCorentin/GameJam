@@ -1,9 +1,9 @@
 #include "system/S_Collision.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_Collision::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
+std::vector<std::shared_ptr<IEntity>> S_Collision::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Hitbox<std::pair<int, int>>)) &&
             entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
             entity->HasComponent(typeid(C_Life<int>))) {
@@ -13,12 +13,12 @@ std::vector<std::shared_ptr<Entity>> S_Collision::Filter(const std::vector<std::
     return filtered_entities;
 }
 
-std::shared_ptr<Entity> S_Collision::reCreateEntity(
-        std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+std::shared_ptr<IEntity> S_Collision::reCreateEntity(
+        std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
         int id,
         std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp,
         Scene * arg_scene) {
-    std::shared_ptr<Entity> new_entity;
+    std::shared_ptr<IEntity> new_entity;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_new;
     std::ifstream file(arg_scene->filepath_);
     json data;
@@ -41,7 +41,7 @@ std::shared_ptr<Entity> S_Collision::reCreateEntity(
 void S_Collision::Execute(
         int arg_is_server,
         Scene * arg_scene) {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_1;
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp_1;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp_2;
@@ -61,10 +61,10 @@ void S_Collision::Execute(
     std::shared_ptr<C_BonusPower<std::pair<int, int>>> power_2;
     std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon_1;
     std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon_2;
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities;
-    std::shared_ptr<Entity> new_entity;
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities_1;
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities_2;
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities;
+    std::shared_ptr<IEntity> new_entity;
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities_1;
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities_2;
     std::shared_ptr<C_Invincibility<bool>> is_invincible_1;
     std::shared_ptr<C_Invincibility<bool>> is_invincible_2;
     std::shared_ptr<C_IsAutoMove<bool>> is_auto_move;
@@ -79,7 +79,7 @@ void S_Collision::Execute(
     float x2;
     float y2;
 
-    for (const std::shared_ptr<Entity>& entity1 : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity1 : arg_entities) {
         position_comp_1 = entity1->template GetComponent<C_Position<std::pair<double, double>>>();
         hitbox_comp_1 = entity1->template GetComponent<C_Hitbox<std::pair<int, int>>>();
         is_player = entity1->template GetComponent<C_Player<int>>();
@@ -90,12 +90,12 @@ void S_Collision::Execute(
         weapon_1 = entity1->template GetComponent<C_Weapon<std::pair<int, int>>>();
         x1 = static_cast<float>(position_comp_1->getValue().first);
         y1 = static_cast<float>(position_comp_1->getValue().second);
-        vector_entities_1 = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+        vector_entities_1 = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
         is_invincible_1 = entity1->template GetComponent<C_Invincibility<bool>>();
         is_invisible_1 = entity1->template GetComponent<C_Invisible<bool>>();
         enemy_ammo_1 = entity1->template GetComponent<C_EnemyAmmo<bool>>();
         is_breakable_1 = entity1->template GetComponent<C_Breakable<bool>>();
-        for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
+        for (const std::shared_ptr<IEntity>& entity2 : arg_entities) {
             if (entity1 == entity2)
                 continue;
             position_comp_2 = entity2->template GetComponent<C_Position<std::pair<double, double>>>();
@@ -109,7 +109,7 @@ void S_Collision::Execute(
             weapon_2 = entity2->template GetComponent<C_Weapon<std::pair<int, int>>>();
             x2 = static_cast<float>(position_comp_2->getValue().first);
             y2 = static_cast<float>(position_comp_2->getValue().second);
-            vector_entities_2 = entity2->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+            vector_entities_2 = entity2->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
             is_invincible_2 = entity2->template GetComponent<C_Invincibility<bool>>();
             is_invisible_2 = entity2->template GetComponent<C_Invisible<bool>>();
             enemy_ammo_2 = entity2->template GetComponent<C_EnemyAmmo<bool>>();
@@ -137,7 +137,7 @@ void S_Collision::Execute(
                         if (is_auto_move)
                             if (is_auto_move->getValue())
                                 continue;
-                        vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+                        vector_entities = entity1->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
                         if (!follow->getValue()) {
                             if ((std::find(my_list.begin(), my_list.end(), entity2->GetBaseId()) != my_list.end())) {
                                 if (x2 - x1 > 0) {
@@ -182,7 +182,7 @@ void S_Collision::Execute(
                         continue;
 
                     if (is_bonus && is_player_2) {
-                        for (std::shared_ptr<Entity>& v_entity: vector_entities_2->getValue()) {
+                        for (std::shared_ptr<IEntity>& v_entity: vector_entities_2->getValue()) {
                             if ((std::find(my_list.begin(), my_list.end(), v_entity->GetId()) != my_list.end())) {
                                 std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
                                 weapon->getValue() = power_1->getValue();
@@ -193,7 +193,7 @@ void S_Collision::Execute(
                         continue;
                     }
                     if (is_bonus_2 && is_player) {
-                        for (std::shared_ptr<Entity>& v_entity: vector_entities_1->getValue()) {
+                        for (std::shared_ptr<IEntity>& v_entity: vector_entities_1->getValue()) {
                             if ((std::find(my_list.begin(), my_list.end(), v_entity->GetId()) != my_list.end())) {
                                 std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
                                 weapon->getValue() = power_2->getValue();

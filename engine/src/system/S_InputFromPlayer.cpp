@@ -3,8 +3,8 @@
 
 
 void S_InputFromPlayer::BasicShot(
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     Scene * arg_scene)
 {
@@ -27,13 +27,13 @@ void S_InputFromPlayer::BasicShot(
 
 bool S_InputFromPlayer::IsInInventory(
     int base_id,
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     Scene * arg_scene)
 {
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
-    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
+    for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) {
         std::cout << "ID : " << v_entity->GetBaseId() << std::endl;
         if (v_entity->GetBaseId() == base_id)
         {
@@ -46,12 +46,12 @@ bool S_InputFromPlayer::IsInInventory(
 
 void S_InputFromPlayer::DeleteFromInventory(
     int base_id,
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     Scene * arg_scene)
 {
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
     for (auto it = vector_entities->getValue().begin(); it != vector_entities->getValue().end();)
     {
         if ((*it)->GetBaseId() == 27)
@@ -67,12 +67,12 @@ void S_InputFromPlayer::DeleteFromInventory(
 }
 
 void S_InputFromPlayer::SpecialShot(
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     Scene * arg_scene)
 {
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
 
     //Player attacks
     std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon_player = entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
@@ -81,7 +81,7 @@ void S_InputFromPlayer::SpecialShot(
     std::list<int> my_list_2 = {38, 39, 40};
     std::list<int> my_list_3 = {4, 29};
 
-    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+    for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) {
         if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
             std::shared_ptr<C_Position<std::pair<double, double>>> position_force = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
@@ -115,16 +115,16 @@ void S_InputFromPlayer::SpecialShot(
     }
 
     //Drone attacks
-    for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+    for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) {
         if ((std::find(my_list_3.begin(), my_list_3.end(), v_entity->GetId()) != my_list_3.end()) && weapon_player->getValue().first == 26) {
             std::shared_ptr<C_Position<std::pair<double, double>>> position_drone = v_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             std::shared_ptr<C_Weapon<std::pair<int, int>>> weapon = v_entity->template GetComponent<C_Weapon<std::pair<int, int>>>();
-            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+            for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) {
                 if ((std::find(my_list_1.begin(), my_list_1.end(), v_entity->GetId()) != my_list_1.end())) {
                     arg_scene->createEntity(arg_all_entities, weapon->getValue().first, position_drone);
                 }
             }
-            for (std::shared_ptr<Entity>& v_entity: vector_entities->getValue()) {
+            for (std::shared_ptr<IEntity>& v_entity: vector_entities->getValue()) {
                 if ((std::find(my_list_2.begin(), my_list_2.end(), v_entity->GetId()) != my_list_2.end())) {
                     arg_scene->createEntity(arg_all_entities, weapon->getValue().second, position_drone);
                 }
@@ -133,15 +133,15 @@ void S_InputFromPlayer::SpecialShot(
     }
 }
 
-std::vector<std::shared_ptr<Entity>> S_InputFromPlayer::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
+std::vector<std::shared_ptr<IEntity>> S_InputFromPlayer::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
             entity->HasComponent(typeid(C_Hitbox<std::pair<int, int>>)) &&
             entity->HasComponent(typeid(C_Player<int>)) &&
             entity->HasComponent(typeid(C_ShootCharging<bool>)) &&
-            entity->HasComponent(typeid(C_Inventory<std::vector<std::shared_ptr<Entity>>>)) &&
+            entity->HasComponent(typeid(C_Inventory<std::vector<std::shared_ptr<IEntity>>>)) &&
             entity->HasComponent(typeid(C_ChargedShoot<sf::Clock>))) {
             filtered_entities.push_back(entity);
         }
@@ -153,15 +153,15 @@ void S_InputFromPlayer::Execute(
         int arg_is_server,
         Scene * arg_scene)
 {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size;
     std::shared_ptr<C_Player<int>> index;
     std::shared_ptr<C_ShootCharging<bool>> is_charging;
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities;
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities;
     std::shared_ptr<C_ChargedShoot<sf::Clock>> clock;
     for (std::pair<int, int> current_message: arg_scene->messages_) {
-        for (const std::shared_ptr<Entity>& entity : arg_scene->entities_) {
+        for (const std::shared_ptr<IEntity>& entity : arg_scene->entities_) {
             index = entity->template GetComponent<C_Player<int>>();
             if (!index)
                 continue;
@@ -170,7 +170,7 @@ void S_InputFromPlayer::Execute(
             position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
             hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
             is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
-            vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+            vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
             clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
             if (!position_comp)
                 continue;

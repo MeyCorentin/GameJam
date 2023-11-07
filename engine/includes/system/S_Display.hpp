@@ -1,4 +1,4 @@
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Sprite.hpp"
 #include "../components/C_Position.hpp"
@@ -13,7 +13,7 @@
  * on the game window. It is responsible for rendering both background and foreground entities, providing
  * the visual representation of the entities within the system.
  */
-class S_Display : public System {
+class S_Display : public ISystem {
     public:
     /**
      * @brief Filters a list of entities based on their components.
@@ -26,7 +26,7 @@ class S_Display : public System {
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
      * @brief Renders and displays entities on the game window.

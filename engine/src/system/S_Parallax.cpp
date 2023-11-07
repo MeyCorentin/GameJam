@@ -1,9 +1,9 @@
 #include "system/S_Parallax.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_Parallax::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
+std::vector<std::shared_ptr<IEntity>> S_Parallax::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
             entity->HasComponent(typeid(C_Parallax<int>)) &&
             entity->HasComponent(typeid(C_ParallaxClock<sf::Clock>))) {
@@ -16,14 +16,14 @@ std::vector<std::shared_ptr<Entity>> S_Parallax::Filter(const std::vector<std::s
 void S_Parallax::Execute(
         int arg_is_server,
         Scene * arg_scene) {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
     std::shared_ptr<C_Position<std::pair<double, double>>> position;
     std::shared_ptr<C_PositionStart<std::pair<double, double>>> position_start;
     std::shared_ptr<C_PositionEnd<std::pair<double, double>>> position_end;
     std::shared_ptr<C_Parallax<int>> parallax;
     std::shared_ptr<C_ParallaxClock<sf::Clock>> parallax_clock;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         position = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         parallax = entity->template GetComponent<C_Parallax<int>>();
         parallax_clock = entity->template GetComponent<C_ParallaxClock<sf::Clock>>();

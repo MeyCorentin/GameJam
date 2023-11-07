@@ -8,12 +8,12 @@
 class SceneDirector {
     private:
         SceneBuilder scene_builder_;
-        std::vector<std::shared_ptr<System>> systems_;
-        std::vector<std::shared_ptr<Entity>> entities_;
+        std::vector<std::shared_ptr<ISystem>> systems_;
+        std::vector<std::shared_ptr<IEntity>> entities_;
 
     public:
 
-        std::shared_ptr<System> CreateSystemFromConfig(const json& arg_systemConfig);
+        std::shared_ptr<ISystem> CreateSystemFromConfig(const json& arg_systemConfig);
 
         const json& FindComponentConfigById(
                 const json& arg_componentsConfig,
@@ -25,7 +25,7 @@ class SceneDirector {
                 JsonParser& arg_parser,
                 EntityBuilder& arg_entity_builder);
 
-        std::shared_ptr<Entity> CreateEntityFromConfig(
+        std::shared_ptr<IEntity> CreateEntityFromConfig(
                 const json& arg_entity_config,
                 const json& arg_components_config);
 

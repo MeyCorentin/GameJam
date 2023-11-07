@@ -11,7 +11,7 @@ void SystemRegistry::RegisterSystem(
     systems[arg_name] = arg_constructor;
 }
 
-std::shared_ptr<System> SystemRegistry::CreateSystem(const std::string& arg_name) {
+std::shared_ptr<ISystem> SystemRegistry::CreateSystem(const std::string& arg_name) {
     std::unordered_map<std::string, SystemRegistry::SystemConstructor>::iterator it = systems.find(arg_name);
 
     if (it != systems.end())

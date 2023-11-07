@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Component.hpp"
+#include "AComponent.hpp"
 
 /**
  * @brief A template class representing life value as a component.
@@ -9,19 +9,19 @@
  * to associate a life value with an entity in a game or simulation.
  */
 template <class T>
-class C_Mana : public Component<T> {
+class C_Mana : public AComponent<T> {
     public:
         C_Mana(T arg_n) :
-            Component<T>(arg_n) {}
+            AComponent<T>(arg_n) {}
 
         C_Mana() :
-            Component<T>() {}
+            AComponent<T>() {}
 
         const std::type_info& GetType() const override {
             return typeid(C_Mana);
         }
 
-        std::shared_ptr<ComponentBase> Clone() const override {
+        std::shared_ptr<IComponent> Clone() const override {
             return std::make_shared<C_Mana>(*this);
         }
 };

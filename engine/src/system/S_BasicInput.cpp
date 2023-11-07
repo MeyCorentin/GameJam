@@ -1,9 +1,9 @@
 #include "system/S_BasicInput.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_BasicInput::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
+std::vector<std::shared_ptr<IEntity>> S_BasicInput::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Player<int>)) &&
             entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
             entity->HasComponent(typeid(C_IsMoving<bool>)) &&
@@ -20,7 +20,7 @@ std::vector<std::shared_ptr<Entity>> S_BasicInput::Filter(const std::vector<std:
 
 void S_BasicInput::DrawEntityID(
     std::shared_ptr<sf::RenderWindow> arg_window,
-    const std::shared_ptr<Entity>& entity,
+    const std::shared_ptr<IEntity>& entity,
     sf::Font arg_font,
     sf::Text arg_entity_id) {
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
@@ -35,7 +35,7 @@ void S_BasicInput::DrawEntityID(
 
 void S_BasicInput::DrawEntityHitbox(
     std::shared_ptr<sf::RenderWindow> arg_window,
-    const std::shared_ptr<Entity>& entity,
+    const std::shared_ptr<IEntity>& entity,
     sf::Color outlineColor) {
     std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_comp = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
@@ -52,8 +52,8 @@ void S_BasicInput::DrawEntityHitbox(
 void S_BasicInput::Move(
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     Scene * arg_scene,
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_entities,
     sf::Font arg_font,
     sf::Text arg_entity_id,
     sf::Time elapsed)
@@ -69,7 +69,7 @@ void S_BasicInput::Move(
 
 
     if (arg_scene->inputs_[1] == 1) {
-        for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
+        for (const std::shared_ptr<IEntity>& entity2 : arg_entities) {
             block_left = 0;
             is_friendly = entity2->template GetComponent<C_PlayerAmmo<bool>>();
             if (entity != entity2 && is_friendly) {
@@ -92,7 +92,7 @@ void S_BasicInput::Move(
     }
 
     if (arg_scene->inputs_[3] == 1) {
-        for (const std::shared_ptr<Entity>& entity2 : arg_entities) {
+        for (const std::shared_ptr<IEntity>& entity2 : arg_entities) {
             block_right = 0;
             is_friendly = entity2->template GetComponent<C_PlayerAmmo<bool>>();
             if (entity != entity2 && is_friendly) {
@@ -116,7 +116,7 @@ void S_BasicInput::Move(
     }
     if (arg_scene->inputs_[5] == 1)
     {
-        for (const std::shared_ptr<Entity>& entity : arg_entities) {
+        for (const std::shared_ptr<IEntity>& entity : arg_entities) {
             std::shared_ptr<C_Player<int>> is_player = entity->template GetComponent<C_Player<int>>();
             std::shared_ptr<C_PlayerAmmo<bool>> is_player_ammo = entity->template GetComponent<C_PlayerAmmo<bool>>();
             std::shared_ptr<C_Bonus<bool>> is_bonus =  entity->template GetComponent<C_Bonus<bool>>();
@@ -142,7 +142,7 @@ void S_BasicInput::Move(
 }
 
 void S_BasicInput::ChangeAdminMode(
-    const std::shared_ptr<Entity>& entity,
+    const std::shared_ptr<IEntity>& entity,
     std::shared_ptr<sf::Event> event_)
 {
     std::shared_ptr<C_Life<int>> life = entity->template GetComponent<C_Life<int>>();
@@ -160,8 +160,8 @@ void S_BasicInput::ChangeAdminMode(
 }
 
 void S_BasicInput::BasicShot(
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     Scene * arg_scene)
 {
@@ -182,8 +182,8 @@ void S_BasicInput::BasicShot(
 }
 
 void S_BasicInput::CheckTouchPressed(
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     std::shared_ptr<sf::Event> event_,
     Scene * arg_scene)
@@ -194,7 +194,7 @@ void S_BasicInput::CheckTouchPressed(
     std::shared_ptr<C_Grounded<bool>> grounded = entity->template GetComponent<C_Grounded<bool>>();
     std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
     std::shared_ptr<C_ShootCharging<bool>> is_charging = entity->template GetComponent<C_ShootCharging<bool>>();
-    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<Entity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<Entity>>>>();
+    std::shared_ptr<C_Inventory<std::vector<std::shared_ptr<IEntity>>>> vector_entities = entity->template GetComponent<C_Inventory<std::vector<std::shared_ptr<IEntity>>>>();
     std::shared_ptr<C_ChargedShoot<sf::Clock>> clock = entity->template GetComponent<C_ChargedShoot<sf::Clock>>();
 
     if (event_->type == sf::Event::KeyPressed) {
@@ -225,8 +225,8 @@ void S_BasicInput::CheckTouchPressed(
 
 
 void S_BasicInput::CheckTouchReleased(
-    const std::shared_ptr<Entity>& entity,
-    std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+    const std::shared_ptr<IEntity>& entity,
+    std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
     std::shared_ptr<sf::Event> event_,
     Scene * arg_scene)
@@ -273,7 +273,7 @@ void S_BasicInput::CheckTouchReleased(
 void S_BasicInput::Execute(
         int arg_is_server,
         Scene * arg_scene)  {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
     sf::Font font_arg_;
     font_arg_.loadFromFile("../../rtype/sources/fonts/arial.ttf");
     sf::Text entity_id;
@@ -282,7 +282,7 @@ void S_BasicInput::Execute(
     entity_id.setCharacterSize(10);
     entity_id.setFont(font_arg_);
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
         player_movement_clock = entity->template GetComponent<C_PlayerMovementClock<sf::Clock>>();

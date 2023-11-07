@@ -4,13 +4,13 @@
 
 class SystemRegistry {
     public:
-        using SystemConstructor = std::function<std::shared_ptr<System>()>;
+        using SystemConstructor = std::function<std::shared_ptr<ISystem>()>;
 
         static SystemRegistry& Instance();
 
         void RegisterSystem(const std::string& arg_name, SystemConstructor arg_constructor);
 
-        std::shared_ptr<System> CreateSystem(const std::string& arg_name);
+        std::shared_ptr<ISystem> CreateSystem(const std::string& arg_name);
 
         SystemRegistry();
 

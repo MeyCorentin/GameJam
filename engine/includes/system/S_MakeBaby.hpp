@@ -1,6 +1,6 @@
 #pragma once
 
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "S_Input.hpp"
 #include "../components/C_Child.hpp"
@@ -15,7 +15,7 @@
  * The S_MakeBaby system is designed to filter entities that meet certain conditions and create new entities
  * based on those conditions. It is responsible for managing the creation of "baby" entities within the system.
  */
-class S_MakeBaby : public System {
+class S_MakeBaby : public ISystem {
     public:
     /**
      * @brief Filters a list of entities based on their components.
@@ -29,7 +29,7 @@ class S_MakeBaby : public System {
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
      * @brief Creates new entities based on specified conditions.

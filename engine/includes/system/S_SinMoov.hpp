@@ -1,6 +1,6 @@
 #pragma once
 
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Direction.hpp"
 #include "../components/C_Speed.hpp"
@@ -13,7 +13,7 @@
  * @class S_SinMoov
  * @brief A class that represents a system for sinusoidal movement of entities.
  */
-class S_SinMoov : public System {
+class S_SinMoov : public ISystem {
 public:
     /**
      * @brief Filters a list of entities based on their components.
@@ -26,7 +26,7 @@ public:
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
      * @brief Executes the sinusoidal movement for selected entities.

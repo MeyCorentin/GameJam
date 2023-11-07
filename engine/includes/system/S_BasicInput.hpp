@@ -1,6 +1,6 @@
 #pragma once
 
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Position.hpp"
 #include "../components/C_Player.hpp"
@@ -37,23 +37,23 @@
 #include "../components/C_Grounded.hpp"
 #include "../components/C_PlayerAmmo.hpp"
 
-class S_BasicInput : public System {
+class S_BasicInput : public ISystem {
     private:
     public:
-        std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+        std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
 
 
         void DrawEntityID(
             std::shared_ptr<sf::RenderWindow> arg_window,
-            const std::shared_ptr<Entity>& entity,
+            const std::shared_ptr<IEntity>& entity,
             sf::Font arg_font,
             sf::Text arg_entity_id);
 
 
         void DrawEntityHitbox(
             std::shared_ptr<sf::RenderWindow> arg_window,
-            const std::shared_ptr<Entity>& entity,
+            const std::shared_ptr<IEntity>& entity,
             sf::Color outlineColor);
 
         void Execute(
@@ -63,33 +63,33 @@ class S_BasicInput : public System {
         void Move(
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 Scene * arg_scene,
-                const std::shared_ptr<Entity>& entity,
-                std::vector<std::shared_ptr<Entity>>& entity_list,
+                const std::shared_ptr<IEntity>& entity,
+                std::vector<std::shared_ptr<IEntity>>& entity_list,
                 sf::Font arg_font,
                 sf::Text arg_entity_id,
                 sf::Time elapsed);
 
         void ChangeAdminMode(
-                const std::shared_ptr<Entity>& entity,
+                const std::shared_ptr<IEntity>& entity,
                 std::shared_ptr<sf::Event> event_);
 
         void CheckTouchReleased(
-            const std::shared_ptr<Entity>& entity,
-            std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+            const std::shared_ptr<IEntity>& entity,
+            std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
             std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
             std::shared_ptr<sf::Event> event_,
             Scene * arg_scene);
 
         void CheckTouchPressed(
-                const std::shared_ptr<Entity>& entity,
-                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+                const std::shared_ptr<IEntity>& entity,
+                std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 std::shared_ptr<sf::Event> event_,
                 Scene * arg_scene);
 
         void BasicShot(
-                const std::shared_ptr<Entity>& entity,
-                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+                const std::shared_ptr<IEntity>& entity,
+                std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
                 std::shared_ptr<C_Position<std::pair<double, double>>> position_comp,
                 Scene * arg_scene);
 

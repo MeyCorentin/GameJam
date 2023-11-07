@@ -1,4 +1,4 @@
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Position.hpp"
 
@@ -9,7 +9,7 @@
  * The S_KillEntity system is designed to filter entities and remove them from the system when they move outside a
  * specified area. It is responsible for managing the removal of entities based on their positions.
  */
-class S_KillEntity : public System {
+class S_KillEntity : public ISystem {
     public:
     /**
      * @brief Filters a list of entities based on their components.
@@ -20,7 +20,7 @@ class S_KillEntity : public System {
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
      * @brief Manages the removal of entities that move outside a specified area.

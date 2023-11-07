@@ -1,6 +1,6 @@
 #pragma once
 
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Target.hpp"
 #include "../components/C_Follow.hpp"
@@ -23,7 +23,7 @@
  * for entities, such as following and shooting at specified targets. It processes entities
  * with components related to targeting and takes appropriate actions based on their configurations.
  */
-class S_Target : public System {
+class S_Target : public ISystem {
     public:
     /**
      * @brief Filters a list of entities based on their components.
@@ -35,7 +35,7 @@ class S_Target : public System {
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
     * @brief Executes target-related actions for entities.

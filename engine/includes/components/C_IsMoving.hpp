@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Component.hpp"
+#include "AComponent.hpp"
 
 template <class T>
-class C_IsMoving : public Component<T> {
+class C_IsMoving : public AComponent<T> {
 public:
-    C_IsMoving(T n) : Component<T>(n) {}
-    C_IsMoving() : Component<T>() {}
+    C_IsMoving(T n) : AComponent<T>(n) {}
+    C_IsMoving() : AComponent<T>() {}
     const std::type_info& GetType() const override {
         return typeid(C_IsMoving);
     }
-    std::shared_ptr<ComponentBase> Clone() const override {
+    std::shared_ptr<IComponent> Clone() const override {
         return std::make_shared<C_IsMoving>(*this);
     }
 };

@@ -1,9 +1,9 @@
 #include "system/S_Display.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_Display::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
+std::vector<std::shared_ptr<IEntity>> S_Display::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Sprite<sf::Sprite>)) &&
             entity->HasComponent(typeid(C_Position<std::pair<double, double>>))) {
             filtered_entities.push_back(entity);
@@ -15,14 +15,14 @@ std::vector<std::shared_ptr<Entity>> S_Display::Filter(const std::vector<std::sh
 void S_Display::Execute(
         int arg_is_server,
         Scene * arg_scene) {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
     std::shared_ptr<C_Sprite<sf::Sprite>>sprite_comp;
     std::shared_ptr<C_Texture<sf::Texture>>texture_comp;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
     std::shared_ptr<C_Background<bool>> is_background;
     float x_position;
     float y_position;
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         is_background = entity->template GetComponent<C_Background<bool>>();
         if (!is_background)
             continue;
@@ -43,7 +43,7 @@ void S_Display::Execute(
         arg_scene->window_->draw(sprite_comp->getValue());
     }
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         is_background = entity->template GetComponent<C_Background<bool>>();
         if (is_background)
             continue;

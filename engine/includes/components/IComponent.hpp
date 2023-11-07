@@ -1,12 +1,12 @@
 #pragma once
 #include "../main.hpp"
-class ComponentBase {
+class IComponent {
 public:
-    virtual ~ComponentBase() {}
+    virtual ~IComponent() {}
     virtual const std::type_info& GetType() const {
-        return typeid(ComponentBase);
+        return typeid(IComponent);
     };
-    virtual std::shared_ptr<ComponentBase> Clone() const = 0;
+    virtual std::shared_ptr<IComponent> Clone() const = 0;
     template <typename T>
     void SetValue(T arg_new_value) {};
 };

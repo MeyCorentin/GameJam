@@ -135,7 +135,7 @@ Variant JsonParser::ParseSinFuncValue(const json& arg_value) {
 }
 
 Variant JsonParser::ParseVectorEntityValue(const json& arg_value) {
-    std::vector<std::shared_ptr<Entity>> entities;
+    std::vector<std::shared_ptr<IEntity>> entities;
     return entities;
 }
 

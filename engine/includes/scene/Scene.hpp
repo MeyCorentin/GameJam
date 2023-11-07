@@ -3,7 +3,7 @@
 #include "ComponentRegister.hpp"
 #include "../main.hpp"
 #include "../entity/EntityBuilder.hpp"
-#include "../system/System.hpp"
+#include "../system/ISystem.hpp"
 #include "../components/C_SinClock.hpp"
 #include "../components/C_Clock.hpp"
 #include "../components/C_Player.hpp"
@@ -25,16 +25,14 @@ class Scene {
     public:
         std::shared_ptr<sf::RenderWindow> window_;
         std::shared_ptr<sf::Event> event_;
-        std::vector<std::shared_ptr<Entity>> list_entities_;
-        std::vector<std::shared_ptr<Entity>> entities_;
-        std::vector<std::shared_ptr<System>> systems_;
+        std::vector<std::shared_ptr<IEntity>> list_entities_;
+        std::vector<std::shared_ptr<IEntity>> entities_;
+        std::vector<std::shared_ptr<ISystem>> systems_;
         std::vector<sf::Sprite> sprites_;
         std::vector<std::pair<int,int>> messages_;
         std::vector<std::shared_ptr<sf::Music>> musics_;
         std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> spawn_index_;
         std::vector<std::pair<int,int>> jump_index_;
-        int frames_this_second_;
-        int total_ticks_;
         std::unordered_map<sf::Keyboard::Key, int> key_states_;
         std::shared_ptr<sf::Clock> second_clock_;
         std::shared_ptr<sf::Text> tick_;
@@ -43,9 +41,11 @@ class Scene {
         std::shared_ptr<sf::Text> current_tick_;
         std::string filepath_;
         json data_;
+
         bool need_switch_;
         std::string next_timeline_;
-
+        int frames_this_second_;
+        int total_ticks_;
         int time_pressed_;
         bool is_pressed_ = false;
         std::vector<int> inputs_ = {0, 0, 0, 0, 0, 0, 0};
@@ -60,8 +60,8 @@ class Scene {
         void LoadSettings();
 
         Scene();
-        Scene( std::vector<std::shared_ptr<System>> arg_system_list,
-                std::vector<std::shared_ptr<Entity>> arg_entity_list,
+        Scene( std::vector<std::shared_ptr<ISystem>> arg_system_list,
+                std::vector<std::shared_ptr<IEntity>> arg_entity_list,
                 std::vector<sf::Sprite> arg_sprite_list,
                 std::vector<std::shared_ptr<sf::Music>> arg_music_list,
                 std::vector<std::pair<int, std::vector<std::pair<int, std::pair<int, int>>>>> arg_spawn_index,
@@ -76,27 +76,26 @@ class Scene {
                 JsonParser& arg_parser,
                 EntityBuilder& arg_entityBuilder);
 
-        std::shared_ptr<Entity> CreateEntityFromConfig(
+        std::shared_ptr<IEntity> CreateEntityFromConfig(
                 const json& arg_entity_config,
                 const json& arg_components_config);
 
-        std::shared_ptr<Entity> createEntity(
-                std::vector<std::shared_ptr<Entity>>& arg_all_entities,
+        std::shared_ptr<IEntity> createEntity(
+                std::vector<std::shared_ptr<IEntity>>& arg_all_entities,
                 int id,
                 std::shared_ptr<C_Position<std::pair<double, double>>> arg_position_comp);
 
         void ClearWindow();
 
-        std::vector<std::shared_ptr<Entity>> GetEntities();
+        std::vector<std::shared_ptr<IEntity>> GetEntities();
 
-        std::vector<std::shared_ptr<System>> GetSystems();
+        std::vector<std::shared_ptr<ISystem>> GetSystems();
 
         void DisplayCurrentTick();
 
         void DisplayEntities(int nbr);
 
         void DisplayTicks();
-
 
         void AddNewPlayer(int arg_id);
 
@@ -114,12 +113,11 @@ class Scene {
 
         void ComputeSystems(int arg_is_server);
 
-        std::vector<std::shared_ptr<Entity>> SpawnEntities(int arg_is_server);
+        std::vector<std::shared_ptr<IEntity>> SpawnEntities(int arg_is_server);
 
         void JumpTicks();
 
         void RemoveOrCreateEntities();
-
 
         template <typename T>
         T getRandomInRange(T min, T max);

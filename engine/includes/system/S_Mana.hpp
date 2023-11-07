@@ -1,4 +1,4 @@
-#include "System.hpp"
+#include "ISystem.hpp"
 #include "../scene/Scene.hpp"
 #include "../components/C_Mana.hpp"
 
@@ -10,7 +10,7 @@
  * to mana management. It tracks and updates mana values for entities, allowing for mana-related functionality
  * within the system.
  */
-class S_Mana : public System {
+class S_Mana : public ISystem {
     public:
     /**
      * @brief Filters a list of entities based on their components.
@@ -22,7 +22,7 @@ class S_Mana : public System {
      * @param arg_entities The list of entities to filter.
      * @return A filtered list of entities.
      */
-    std::vector<std::shared_ptr<Entity>> Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) override;
+    std::vector<std::shared_ptr<IEntity>> Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) override;
 
     /**
      * @brief Manages mana-related actions for entities with mana components.

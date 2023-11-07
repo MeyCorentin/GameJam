@@ -8,12 +8,12 @@ SceneBuilder& SceneBuilder::AddPath(std::string arg_file_path) {
 }
 
 
-SceneBuilder& SceneBuilder::AddSystem(std::shared_ptr<System> arg_system) {
+SceneBuilder& SceneBuilder::AddSystem(std::shared_ptr<ISystem> arg_system) {
     systems_.push_back(arg_system);
     return *this;
 }
 
-SceneBuilder& SceneBuilder::AddEntity(std::shared_ptr<Entity> arg_entity) {
+SceneBuilder& SceneBuilder::AddEntity(std::shared_ptr<IEntity> arg_entity) {
     entities_.push_back(arg_entity);
     return *this;
 }
@@ -45,12 +45,12 @@ SceneBuilder& SceneBuilder::AddMusic(std::shared_ptr<sf::Music> arg_music) {
     return *this;
 }
 
-std::vector<std::shared_ptr<Entity>> SceneBuilder::GetEntities()
+std::vector<std::shared_ptr<IEntity>> SceneBuilder::GetEntities()
 {
     return  entities_;
 }
 
-std::vector<std::shared_ptr<System>> SceneBuilder::GetSystems()
+std::vector<std::shared_ptr<ISystem>> SceneBuilder::GetSystems()
 {
     return systems_;
 }

@@ -1,8 +1,8 @@
 #include "entity/EntityBuilder.hpp"
 
 EntityBuilder::EntityBuilder(int arg_id) {
-    Entity* temp = new Entity(arg_id, std::vector<std::shared_ptr<ComponentBase>>());
-    entity_ = std::shared_ptr<Entity>(temp);
+    IEntity* temp = new IEntity(arg_id, std::vector<std::shared_ptr<IComponent>>());
+    entity_ = std::shared_ptr<IEntity>(temp);
 }
 
 EntityBuilder& EntityBuilder::SetID(int arg_id) {
@@ -10,6 +10,6 @@ EntityBuilder& EntityBuilder::SetID(int arg_id) {
     return *this;
 }
 
-std::shared_ptr<Entity> EntityBuilder::Build() {
+std::shared_ptr<IEntity> EntityBuilder::Build() {
     return entity_;
 }

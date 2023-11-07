@@ -1,9 +1,9 @@
 #include "system/S_Target.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_Target::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities)  {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
+std::vector<std::shared_ptr<IEntity>> S_Target::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities)  {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Target<int>))) {
             filtered_entities.push_back(entity);
         }
@@ -14,7 +14,7 @@ std::vector<std::shared_ptr<Entity>> S_Target::Filter(const std::vector<std::sha
 void S_Target::Execute(
         int arg_is_server,
         Scene * arg_scene) {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
     int current_mana;
     std::shared_ptr<C_Target<int>> target;
     std::shared_ptr<C_Ammo<int>> ammo;
@@ -28,13 +28,13 @@ void S_Target::Execute(
     std::shared_ptr<C_FireRate<sf::Clock>>  fire_rate;
     std::shared_ptr<C_FireRateSpeed<double>>  fire_rate_speed;
     std::shared_ptr<C_Range<int>>  range;
-    std::shared_ptr<Entity> new_entity;
-    std::vector<std::shared_ptr<Entity>> temp_entities;
+    std::shared_ptr<IEntity> new_entity;
+    std::vector<std::shared_ptr<IEntity>> temp_entities;
     std::pair<double, double> direction;
     double length;
 
-    for (const std::shared_ptr<Entity>& entity1 : arg_scene->entities_) {
-        for (const std::shared_ptr<Entity>& entity2 : arg_scene->entities_) {
+    for (const std::shared_ptr<IEntity>& entity1 : arg_scene->entities_) {
+        for (const std::shared_ptr<IEntity>& entity2 : arg_scene->entities_) {
             if (entity1 == entity2)
                 continue;
 
@@ -113,7 +113,7 @@ void S_Target::Execute(
             }
         }
     }
-    for (const std::shared_ptr<Entity>& temp_entity : temp_entities) {
+    for (const std::shared_ptr<IEntity>& temp_entity : temp_entities) {
         arg_scene->entities_.push_back(temp_entity);
     }
 }

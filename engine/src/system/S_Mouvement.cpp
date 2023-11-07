@@ -1,9 +1,9 @@
 #include "system/S_Mouvement.hpp"
 
-std::vector<std::shared_ptr<Entity>> S_Mouvement::Filter(const std::vector<std::shared_ptr<Entity>>& arg_entities) {
-    std::vector<std::shared_ptr<Entity>> filtered_entities;
+std::vector<std::shared_ptr<IEntity>> S_Mouvement::Filter(const std::vector<std::shared_ptr<IEntity>>& arg_entities) {
+    std::vector<std::shared_ptr<IEntity>> filtered_entities;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         if (entity->HasComponent(typeid(C_Direction<std::pair<double, double>>)) &&
             entity->HasComponent(typeid(C_Position<std::pair<double, double>>)) &&
             entity->HasComponent(typeid(C_Speed<double>)) &&
@@ -17,14 +17,14 @@ std::vector<std::shared_ptr<Entity>> S_Mouvement::Filter(const std::vector<std::
 void S_Mouvement::Execute(
         int arg_is_server,
         Scene * arg_scene) {
-    std::vector<std::shared_ptr<Entity>> arg_entities =  Filter(arg_scene->entities_);
+    std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
     std::shared_ptr<C_Direction<std::pair<double, double>>> direction;
     std::shared_ptr<C_Position<std::pair<double, double>>> position;
     std::shared_ptr<C_Speed<double>> speed;
     std::shared_ptr<C_EntityMovementClock<sf::Clock>> entities_clock;
     std::shared_ptr<C_IsAutoMove<bool>> is_auto_move;
 
-    for (const std::shared_ptr<Entity>& entity : arg_entities) {
+    for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         entities_clock = entity->template GetComponent<C_EntityMovementClock<sf::Clock>>();
         sf::Time elapsed = entities_clock->getValue().getElapsedTime();
         direction = entity->template GetComponent<C_Direction<std::pair<double, double>>>();
