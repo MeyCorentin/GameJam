@@ -39,6 +39,78 @@
                         "x": 1600,
                         "y": 894
                     }
+                },{
+                    "entity_id": 9,
+                    "position": {
+                        "x": 1022,
+                        "y": 935
+                    }
+                },{
+                    "entity_id": 9,
+                    "position": {
+                        "x": 1065,
+                        "y": 935
+                    }
+                },{
+                    "entity_id": 9,
+                    "position": {
+                        "x": 1108,
+                        "y": 935
+                    }
+                },{
+                    "entity_id": 9,
+                    "position": {
+                        "x": 400,
+                        "y": 935
+                    }
+                },{
+                    "entity_id": 9,
+                    "position": {
+                        "x": 443,
+                        "y": 935
+                    }
+                },{
+                    "entity_id": 3,
+                    "position": {
+                        "x": 500,
+                        "y": 855
+                    }
+                },{
+                    "entity_id": 3,
+                    "position": {
+                        "x": 1500,
+                        "y": 300
+                    }
+                },{
+                    "entity_id": 3,
+                    "position": {
+                        "x": 1000,
+                        "y": 100
+                    }
+                },{
+                    "entity_id": 3,
+                    "position": {
+                        "x": 100,
+                        "y": 500
+                    }
+                },{
+                    "entity_id": 4,
+                    "position": {
+                        "x": 500,
+                        "y": 600
+                    }
+                },{
+                    "entity_id": 4,
+                    "position": {
+                        "x": 1100,
+                        "y": 400
+                    }
+                },{
+                    "entity_id": 4,
+                    "position": {
+                        "x": 1400,
+                        "y": 600
+                    }
                 }
             ]
         }
