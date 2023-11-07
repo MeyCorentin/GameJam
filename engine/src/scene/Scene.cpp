@@ -287,20 +287,20 @@ void Scene::LoadTimeline(
     for (const auto& timeline : data_["timeline"]) {
         if (timeline.find(timeline_id) != timeline.end()) {
             timeline_file_path = directory + "/" + timeline[timeline_id].get<std::string>();
+            std::ifstream timeline_file(timeline_file_path);
+            json timeline_data;
+            timeline_file >> timeline_data;
+            timeline_file.close();
+
+            spawn_index_ = CreateMap(timeline_data["spawn"]);
+            jump_index_ = CreateJump(timeline_data["spawn"]);
+            total_ticks_ = 0;
+            second_clock_->restart();
+            id_store_ = 0;
+            entities_.clear();
             break;
         }
     }
-    std::ifstream timeline_file(timeline_file_path);
-    json timeline_data;
-    timeline_file >> timeline_data;
-    timeline_file.close();
-
-    spawn_index_ = CreateMap(timeline_data["spawn"]);
-    jump_index_ = CreateJump(timeline_data["spawn"]);
-    total_ticks_ = 0;
-    second_clock_->restart();
-    id_store_ = 0;
-    entities_.clear();
 }
 
 std::shared_ptr<IEntity> Scene::createEntity(
