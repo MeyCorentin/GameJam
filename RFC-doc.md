@@ -86,23 +86,6 @@ void UDPClient::send(BinaryProtocole::BinaryMessage msg)
 | `301` | Release Shoot |
 | `1000` | Client ID |
 
-
-## Communication Examples
-
-1. **Client Connection**:
-
-Client: `100\n`
-
-Server: `101 [ID_CLIENT]\n` (where `[ID_CLIENT]` is a unique ID assigned to the client)
-
-2. **Move Up**:
-
-Client: `200\n`
-
-3. **Shoot**:
-
-Client: `300\n`
-
 ## Conclusion
 
 This protocol is designed to be straightforward and direct. The command codes allow for quick identification of the desired action.

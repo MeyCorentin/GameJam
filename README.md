@@ -9,6 +9,7 @@
 - [Engine Documentation](engine/docs/DOCUMENTATION.md)
 - [Client Documentation](client/docs/DOCUMENTATION.md)
 - [Server Documentation](server/docs/DOCUMENTATION.md)
+- [RFC Documentation](RFC-doc.md)
 
 ### How to build project ?
 
@@ -17,18 +18,32 @@ cd B-CPP-500-LYN-5-1-rtype-keziah.picq
 
 sudo pacman -Syu cmake
 
-mkdir client/build server/build
+mkdir client/build server/build engine/build
+
+
+##### Build Engine:
+
+cd engine/build
+cmake ..
+make
+
 
 ##### Build client:
 
 cd client/build
 cmake ..
 make
-./r-type_client
+
+**Run Game Solo**
+./r-type_client {GAME_PATH}
+
+
+**Run Game Multiplayer**
+./r-type_client {SERVER_IP} {PORT} {GAME_PATH}
 
 ##### Build server:
 
 cd server/build
 cmake ..
 make
-./r-type_server
+./r-type_server {PORT} {GAME_PATG}
