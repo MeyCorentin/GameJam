@@ -28,18 +28,29 @@ struct BinaryMessage {
 };
 ```
 
-type =  0: Player, 1: Other
-id   =  Id of element
-x    =  X position
-y    =  position
-data =  Message codes
+| Value | Description |
+|------|-------------|
+| `type` | 0: Player, 1: Other |
+| `id` | Client id |
+| `x` | X Position |
+| `y` | Y Position |
+| `data` | Message codes |
 
 
-*Exemple for connection:*
+
+**Exemple for connection:**
+
 ```
 BinaryProtocole::BinaryMessage initial_msg;
 initial_msg = {0, 0, 0, 0, 100};
 send(initial_msg);
+```
+
+```
+void UDPClient::send(BinaryProtocole::BinaryMessage msg)
+{
+    this->socket_.send_to(boost::asio::buffer(protocole.ValueToBin(msg)), server_endpoint_);
+}
 ```
 
 ## Command Codes
