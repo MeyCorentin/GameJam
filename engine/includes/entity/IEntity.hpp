@@ -26,12 +26,15 @@ class IEntity {
 
         template <class ComponentType>
         std::shared_ptr<ComponentType> GetComponent() const {
-            for (const auto& component : components_) {
-                auto casted_component = std::dynamic_pointer_cast<ComponentType>(component);
-                if (casted_component) {
-                    return casted_component;
-                }
+            auto it = std::find_if(components_.begin(), components_.end(), [](const auto& component) {
+                return std::dynamic_pointer_cast<ComponentType>(component) != nullptr;
+            });
+
+            if (it != components_.end()) {
+                auto casted_component = std::dynamic_pointer_cast<ComponentType>(*it);
+                return casted_component;
             }
+
             return nullptr;
         }
 };
