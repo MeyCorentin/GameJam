@@ -964,10 +964,6 @@
                     "value": "../../sprites/pumpkin.png"
                 },
                 {
-                    "component_id": 6,
-                    "value": { "x": 257, "y": 262 }
-                },
-                {
                     "component_id": 51,
                     "value": true
                 },
@@ -1017,15 +1013,31 @@
                 },
                 {
                     "component_id": 33,
-                    "value": false
+                    "value": true
+                },
+                {
+                    "component_id": 44,
+                    "value": 0
+                },
+                {
+                    "component_id": 45,
+                    "value": "../../sounds/Intro.mp3"
+                },
+                {
+                    "component_id": 46,
+                    "value": true   
                 },
                 {
                     "component_id": 58,
-                    "value": 0
+                    "value": 62
                 },
                 {
                     "component_id": 60,
                     "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "12"
                 }
             ]
         },
@@ -1043,10 +1055,6 @@
                 {
                     "component_id": 50,
                     "value": "../../sprites/pumpkin.png"
-                },
-                {
-                    "component_id": 6,
-                    "value": { "x": 201, "y": 193 }
                 },
                 {
                     "component_id": 51,
@@ -1126,10 +1134,6 @@
                     "value": "../../sprites/pumpkin.png"
                 },
                 {
-                    "component_id": 6,
-                    "value": { "x": 201, "y": 183 }
-                },
-                {
                     "component_id": 51,
                     "value": true
                 },
@@ -1205,10 +1209,6 @@
                 {
                     "component_id": 50,
                     "value": "../../sprites/pumpkin.png"
-                },
-                {
-                    "component_id": 6,
-                    "value": { "x": 201, "y": 183 }
                 },
                 {
                     "component_id": 51,
@@ -1288,10 +1288,6 @@
                     "value": "../../sprites/pumpkin.png"
                 },
                 {
-                    "component_id": 6,
-                    "value": { "x": 201, "y": 183 }
-                },
-                {
                     "component_id": 51,
                     "value": true
                 },
@@ -1341,15 +1337,31 @@
                 },
                 {
                     "component_id": 33,
-                    "value": false
+                    "value": true
+                },
+                {
+                    "component_id": 44,
+                    "value": 0
+                },
+                {
+                    "component_id": 45,
+                    "value": "../../sounds/End.mp3"
+                },
+                {
+                    "component_id": 46,
+                    "value": true   
                 },
                 {
                     "component_id": 58,
-                    "value": 0
+                    "value": 24
                 },
                 {
                     "component_id": 60,
                     "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "12"
                 }
             ]
         },
@@ -1367,10 +1379,6 @@
                 {
                     "component_id": 50,
                     "value": "../../sprites/pumpkin.png"
-                },
-                {
-                    "component_id": 6,
-                    "value": { "x": 201, "y": 183 }
                 },
                 {
                     "component_id": 51,
@@ -1450,10 +1458,6 @@
                     "value": "../../sprites/pumpkin.png"
                 },
                 {
-                    "component_id": 6,
-                    "value": { "x": 201, "y": 183 }
-                },
-                {
                     "component_id": 51,
                     "value": true
                 },
@@ -1529,10 +1533,6 @@
                 {
                     "component_id": 50,
                     "value": "../../sprites/pumpkin.png"
-                },
-                {
-                    "component_id": 6,
-                    "value": { "x": 201, "y": 183 }
                 },
                 {
                     "component_id": 51,
@@ -1665,7 +1665,7 @@
                 },
                 {
                     "component_id": 83,
-                    "value": "1"
+                    "value": "12"
                 }
             ]
         },
@@ -3088,11 +3088,310 @@
                     "value": "11"
                 }
             ]
+        },
+        {
+            "id": 50,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/message_box.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/message_box.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 1000, "height": 251}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 1000, "y": 251, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0.5
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },        {
+            "id": 51,
+            "components": [
+                {
+                    "component_id": 55,
+                    "value": 0
+                },
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/pumpy_reverse.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/pumpy_reverse.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 125, "y": 125 }
+                },
+                {
+                    "component_id": 4,
+                    "value": 0
+                },
+                {
+                    "component_id": 5,
+                    "value": 0
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 60, "y": 72 }
+                },
+                {
+                    "component_id": 9,
+                    "value": true
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 0, "height": 0}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 0, "y": 0, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 24,
+                    "value": 0
+                },
+                {
+                    "component_id": 25,
+                    "value": false
+                },
+                {
+                    "component_id": 26,
+                    "value": false
+                },
+                {
+                    "component_id": 31,
+                    "value": false
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 37,
+                    "value": false
+                },
+                {
+                    "component_id": 39,
+                    "value": []
+                },
+                {
+                    "component_id": 40,
+                    "value": {"x": -1, "y": -1}
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 52,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/door.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/door.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 46, "y": 67 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 14, "top": 14, "width": 46, "height": 67}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 46, "y": 67, "start_x": 14, "start_y": 14}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 32,
+                    "value": 53
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 53,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/door.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/door.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 46, "y": 67 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 468, "top": 17, "width": 46, "height": 67}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 46, "y": 67, "start_x": 468, "start_y": 17}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 44,
+                    "value": 0
+                },
+                {
+                    "component_id": 45,
+                    "value": "../../sounds/door.wav"
+                },
+                {
+                    "component_id": 46,
+                    "value": true   
+                },
+                {
+                    "component_id": 58,
+                    "value": 0.5
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "13"
+                }
+            ]
         }
     ],
     "timeline": [
         {
-            "1": "piano.json"
+            "1": "intro.json"
         },
         {
             "2": "aquarium.json"
@@ -3123,7 +3422,14 @@
         },
         {
             "11": "couloir_top.json"
+        },
+        {
+            "12": "enter.json"
+        },
+        {
+            "13": "end.json"
         }
+
     ]
 }
 
