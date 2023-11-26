@@ -1,0 +1,100 @@
+{
+    "spawn": [
+        {
+            "tick": 0,
+            "mob_id": [
+                {
+                    "entity_id": 6,
+                    "position": {
+                        "x": 0,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 5,
+                    "position": {
+                        "x": -800,
+                        "y": 600
+                    }
+                },
+                {
+                    "entity_id": 5,
+                    "position": {
+                        "x": 1400,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 5,
+                    "position": {
+                        "x": 1000,
+                        "y": 1000
+                    }
+                },
+                {
+                    "entity_id": 5,
+                    "position": {
+                        "x": 0,
+                        "y": 1000
+                    }
+                },
+                {
+                    "entity_id": 8,
+                    "position": {
+                        "x": 170,
+                        "y": -730
+                    }
+                },
+                {
+                    "entity_id": 7,
+                    "position": {
+                        "x": -800,
+                        "y": 370
+                    }
+                },
+                {
+                    "entity_id": 7,
+                    "position": {
+                        "x": 170,
+                        "y": 100
+                    }
+                },
+                {
+                    "entity_id": 8,
+                    "position": {
+                        "x": 1140,
+                        "y": -900
+                    }
+                },
+                {
+                    "entity_id": 33,
+                    "position": {
+                        "x": 0,
+                        "y": 470
+                    }
+                },
+                {
+                    "entity_id": 34,
+                    "position": {
+                        "x": 170,
+                        "y": 290
+                    }
+                },
+                {
+                    "entity_id": 36,
+                    "position": {
+                        "x": 1250,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 1,
+                    "position": {
+                        "x": 1250,
+                        "y": 100
+                    }
+                }
+            ]
+        }
+    ]
+}

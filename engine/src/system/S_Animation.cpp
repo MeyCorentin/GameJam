@@ -6,7 +6,7 @@ std::vector<std::shared_ptr<IEntity>> S_Animation::Filter(const std::vector<std:
         if (entity->HasComponent(typeid(C_Sprite<sf::Sprite>)) &&
             entity->HasComponent(typeid(C_Clock<sf::Clock>)) &&
             entity->HasComponent(typeid(C_SpriteRect<sf::IntRect>)) &&
-            !entity->HasComponent(typeid(C_IsMoving<bool>)) &&
+            // !entity->HasComponent(typeid(C_IsMoving<bool>)) &&
             entity->HasComponent(typeid(C_UniqueAnimation<bool>)) &&
             entity->HasComponent(typeid(C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>)) &&
             entity->HasComponent(typeid(C_ClockSpeed<double>)) &&
