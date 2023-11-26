@@ -38,7 +38,7 @@ void S_MakeBaby::Execute(
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
             sprite->getValue().setTextureRect(rect->getValue());
-            position_new->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second));
+            position_new->setValue(std::make_pair(position_comp->getValue().first - position_new->getValue().first, position_comp->getValue().second - position_new->getValue().second));
             arg_scene->entities_.push_back(new_entity);
             }
         }
