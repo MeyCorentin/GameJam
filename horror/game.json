@@ -486,7 +486,7 @@
                 },
                 {
                     "component_id": 47,
-                    "value": "../../sounds/lost-soul.mp3"
+                    "value": "../../sounds/this-is-halloween.mp3"
                 },
                 {
                     "component_id": 48,
@@ -1654,6 +1654,79 @@
                 {
                     "component_id": 45,
                     "value": "../../sounds/miaou.wav"
+                },
+                {
+                    "component_id": 46,
+                    "value": true   
+                },   
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "12"
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/screamer.jpg"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/screamer.jpg"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 1600, "y": 100 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 1920, "height": 1278}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 1920, "y": 1278, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 44,
+                    "value": 0
+                },
+                {
+                    "component_id": 45,
+                    "value": "../../sounds/hurlement.wav"
                 },
                 {
                     "component_id": 46,
@@ -3674,11 +3747,92 @@
                     "value": "12"
                 }
             ]
+        },
+        {
+            "id": 58,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 800 }
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/ghost.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/ghost.png"
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 70, "y": 75 }
+                },
+                {
+                    "component_id": 51,
+                    "value": true
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 95, "top": 15, "width": 66, "height": 75}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 394, "y": 75, "start_x": 95, "start_y": 15}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 20
+                },
+                {
+                    "component_id": 32,
+                    "value": 21
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                }
+            ]
         }
     ],
     "timeline": [
         {
-            "1": "enter.json"
+            "1": "intro.json"
         },
         {
             "2": "aquarium.json"
