@@ -426,7 +426,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 60, "y": 72 }
+                    "value": { "x": 50, "y": 55 }
                 },
                 {
                     "component_id": 9,
@@ -438,11 +438,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 66, "top": 0, "width": 60, "height": 72}
+                    "value": { "left": 70, "top": 10, "width": 60, "height": 72}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 420, "y": 72, "start_x": 66, "start_y": 0}
+                    "value": { "x": 420, "y": 72, "start_x": 70, "start_y": 10}
                 },
                 {
                     "component_id": 14,
@@ -486,7 +486,7 @@
                 },
                 {
                     "component_id": 47,
-                    "value": "../../sounds/lost-soul.mp3"
+                    "value": "../../sounds/lavender.mp3"
                 },
                 {
                     "component_id": 48,
@@ -603,10 +603,6 @@
                     "value": { "x": 1000, "y": 1000 }
                 },
                 {
-                    "component_id": 25,
-                    "value": true
-                },
-                {
                     "component_id": 51,
                     "value": true
                 },
@@ -651,6 +647,10 @@
                     "value": false
                 },
                 {
+                    "component_id": 57,
+                    "value": true
+                },
+                {
                     "component_id": 58,
                     "value": 0
                 },
@@ -669,11 +669,11 @@
                 },
                 {
                     "component_id": 1,
-                    "value": "../../sprites/blue.jpg"
+                    "value": "../../sprites/moquette.png"
                 },
                 {
                     "component_id": 50,
-                    "value": "../../sprites/blue.jpg"
+                    "value": "../../sprites/moquette.png"
                 },
                 {
                     "component_id": 25,
@@ -720,6 +720,10 @@
                     "value": 5000
                 },
                 {
+                    "component_id": 29,
+                    "value": true
+                },
+                {
                     "component_id": 33,
                     "value": false
                 },
@@ -751,10 +755,6 @@
                 {
                     "component_id": 6,
                     "value": { "x": 1000, "y": 30 }
-                },
-                {
-                    "component_id": 25,
-                    "value": true
                 },
                 {
                     "component_id": 51,
@@ -801,6 +801,10 @@
                     "value": false
                 },
                 {
+                    "component_id": 57,
+                    "value": true
+                },
+                {
                     "component_id": 58,
                     "value": 0
                 },
@@ -828,10 +832,6 @@
                 {
                     "component_id": 6,
                     "value": { "x": 30, "y": 1000 }
-                },
-                {
-                    "component_id": 25,
-                    "value": true
                 },
                 {
                     "component_id": 51,
@@ -876,6 +876,10 @@
                 {
                     "component_id": 33,
                     "value": false
+                },
+                {
+                    "component_id": 57,
+                    "value": true
                 },
                 {
                     "component_id": 58,
@@ -1654,6 +1658,79 @@
                 {
                     "component_id": 45,
                     "value": "../../sounds/miaou.wav"
+                },
+                {
+                    "component_id": 46,
+                    "value": true   
+                },   
+                {
+                    "component_id": 58,
+                    "value": 1
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "12"
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "components": [
+                {
+                    "component_id": 61,
+                    "value": -1
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/screamer.jpg"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/screamer.jpg"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 1600, "y": 100 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 1920, "height": 1278}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 1920, "y": 1278, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 49,
+                    "value": 0
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 44,
+                    "value": 0
+                },
+                {
+                    "component_id": 45,
+                    "value": "../../sounds/hurlement.wav"
                 },
                 {
                     "component_id": 46,
@@ -3672,6 +3749,87 @@
                 {
                     "component_id": 83,
                     "value": "12"
+                }
+            ]
+        },
+        {
+            "id": 58,
+            "components": [
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 800 }
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/ghost.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/ghost.png"
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 20, "y": 60 }
+                },
+                {
+                    "component_id": 51,
+                    "value": true
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 95, "top": 15, "width": 66, "height": 75}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 394, "y": 75, "start_x": 95, "start_y": 15}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 16,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 1
+                },
+                {
+                    "component_id": 19,
+                    "value": 0
+                },
+                {
+                    "component_id": 20,
+                    "value": 20
+                },
+                {
+                    "component_id": 32,
+                    "value": 21
+                },
+                {
+                    "component_id": 21,
+                    "value": 5000
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
                 }
             ]
         }
