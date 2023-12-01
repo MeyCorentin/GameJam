@@ -31,7 +31,7 @@ void S_WriteText::Execute(
         my_text->getValue().setPosition(position->getValue().first, position->getValue().second);
 
         std::shared_ptr<sf::Font> font = std::shared_ptr<sf::Font>(new sf::Font());
-        font->loadFromFile("../../rtype/sources/fonts/r-type.ttf");
+        font->loadFromFile("../../pokemon/sources/fonts/r-type.ttf");
         my_text->getValue().setFont(*font);
         my_text->getValue().setFillColor(sf::Color::Cyan);
         my_text->getValue().setCharacterSize(10);

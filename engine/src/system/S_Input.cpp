@@ -370,7 +370,7 @@ void S_Input::Execute(
         Scene * arg_scene)  {
     std::vector<std::shared_ptr<IEntity>> arg_entities =  Filter(arg_scene->entities_);
     sf::Font font_arg_;
-    font_arg_.loadFromFile("../../rtype/sources/fonts/arial.ttf");
+    font_arg_.loadFromFile("../../pokemon/sources/fonts/arial.ttf");
     sf::Text entity_id;
     std::shared_ptr<C_PlayerMovementClock<sf::Clock>> player_movement_clock;
     entity_id.setFillColor(sf::Color::Magenta);

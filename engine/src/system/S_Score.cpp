@@ -26,7 +26,7 @@ void S_Score::Execute(
                 score_text_->getValue().setString(std::to_string(score_->getValue()));
                 score_text_->getValue().setPosition(arg_scene->window_->getSize().x/2,0);
                 std::shared_ptr<sf::Font> font = std::shared_ptr<sf::Font>(new sf::Font());
-                font->loadFromFile("../../rtype/sources/fonts/r-type.ttf");
+                font->loadFromFile("../../pokemon/sources/fonts/r-type.ttf");
                 score_text_->getValue().setFont(*font);
                 score_text_->getValue().setFillColor(sf::Color::Cyan);
                 score_text_->getValue().setCharacterSize(10);

@@ -104,7 +104,7 @@ Scene::Scene( std::vector<std::shared_ptr<ISystem>> arg_system_list,
         second_clock_ = std::shared_ptr<sf::Clock>(new sf::Clock());
         entities_nbr_ = std::shared_ptr<sf::Text>(new sf::Text());
         font_ = std::shared_ptr<sf::Font>(new sf::Font());
-        font_->loadFromFile("../../rtype/sources/fonts/r-type.ttf");
+        font_->loadFromFile("../../pokemon/sources/fonts/r-type.ttf");
         tick_ = std::shared_ptr<sf::Text>(new sf::Text());
         tick_->setPosition(0, 0);
         tick_->setFillColor(sf::Color::White);

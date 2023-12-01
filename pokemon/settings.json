@@ -1,0 +1,9 @@
+{
+    "settings": {
+        "name" : "pokemon",
+        "window": {
+            "x" : 1920,
+            "y" : 1080
+        }
+    }
+}

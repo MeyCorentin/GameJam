@@ -1,0 +1,23 @@
+{
+    "spawn": [
+        {
+            "tick": 0,
+            "mob_id": [
+                {
+                    "entity_id": 1,
+                    "position": {
+                        "x": 1000,
+                        "y": 800
+                    }
+                },
+                {
+                    "entity_id": 19,
+                    "position": {
+                        "x": 0,
+                        "y": 1010
+                    }
+                }
+            ]
+        }
+    ]
+}
