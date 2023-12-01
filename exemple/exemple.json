@@ -1,8 +1,0 @@
-{
-    "window": {
-        "height": 1000,
-        "width" : 1000,
-        "name" : "Exemple",
-        "scene_start" : "scene_start"
-    }
-}
