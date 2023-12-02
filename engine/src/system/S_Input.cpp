@@ -403,9 +403,9 @@ void S_Input::CheckTouchReleased(
     if (event_->type == sf::Event::KeyReleased) {
         if (event_->key.code == sf::Keyboard::Up) {
             arg_scene->inputs_[0] = 0;
-            moving->getValue() = false;
-            rect->getValue().left = size->getValue().second.first;
-            sprite->getValue().setTextureRect(rect->getValue());
+            // moving->getValue() = false;
+            // rect->getValue().left = size->getValue().second.first;
+            // sprite->getValue().setTextureRect(rect->getValue());
         }
         if (event_->key.code == sf::Keyboard::Num1) {
             arg_scene->need_switch_ = true;
@@ -431,9 +431,9 @@ void S_Input::CheckTouchReleased(
             arg_scene->inputs_[1] = 0;
         if (event_->key.code == sf::Keyboard::Down) {
             arg_scene->inputs_[2] = 0;
-            moving->getValue() = false;
-            rect->getValue().left = size->getValue().second.first;
-            sprite->getValue().setTextureRect(rect->getValue());
+            // moving->getValue() = false;
+            // rect->getValue().left = size->getValue().second.first;
+            // sprite->getValue().setTextureRect(rect->getValue());
         }
         if (event_->key.code == sf::Keyboard::Right)
             arg_scene->inputs_[3] = 0;

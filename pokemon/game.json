@@ -412,11 +412,11 @@
                 },
                 {
                     "component_id": 1,
-                    "value": "../../sprites/steve.png"
+                    "value": "../../sprites/player.png"
                 },
                 {
                     "component_id": 50,
-                    "value": "../../sprites/steve.png"
+                    "value": "../../sprites/player.png"
                 },
                 {
                     "component_id": 2,
@@ -436,7 +436,7 @@
                 },
                 {
                     "component_id": 6,
-                    "value": { "x": 34, "y": 32 }
+                    "value": { "x": 48, "y": 64 }
                 },
                 {
                     "component_id": 9,
@@ -448,11 +448,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 0, "top": 0, "width": 34, "height": 32}
+                    "value": { "left": 17, "top": 134, "width": 48, "height": 64}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 136, "y": 32, "start_x": 0, "start_y": 0}
+                    "value": { "x": 144, "y": 64, "start_x": 17, "start_y": 134}
                 },
                 {
                     "component_id": 14,
