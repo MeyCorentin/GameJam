@@ -18,6 +18,7 @@
 #include "../components/C_Player.hpp"
 #include "../components/C_SpriteRect.hpp"
 #include "../components/C_Inventory.hpp"
+#include "../components/C_Button.hpp"
 #include "../entity/EntityBuilder.hpp"
 #include "../components/C_Life.hpp"
 #include "../components/C_Weapon.hpp"

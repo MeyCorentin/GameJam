@@ -48,6 +48,15 @@ void DrawEntityHitbox(
     arg_window->draw(hitbox);
 }
 
+bool checkCollision(std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox1, std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox2) {
+    if (hitbox1->getValue().first < hitbox2->getValue().first + hitbox2->getValue().second &&
+        hitbox1->getValue().first + hitbox1->getValue().first > hitbox2->getValue().first &&
+        hitbox1->getValue().second < hitbox2->getValue().second + hitbox2->getValue().second &&
+        hitbox1->getValue().second + hitbox1->getValue().second > hitbox2->getValue().second) {
+        return true;
+    }
+    return false;
+}
 
 void S_Input::Move(
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp, 
@@ -63,22 +72,98 @@ void S_Input::Move(
     int movement_elapsed = 5 * elapsed.asMilliseconds() / 30;
     if (arg_scene->inputs_[0] == 1)
     {
-        if (position_comp->getValue().second > movement_elapsed)
+        bool collission = false;
+        for (const std::shared_ptr<IEntity>& entity_check : arg_entities) {
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_check = entity_check->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_check = entity_check->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+            std::shared_ptr<C_Button<bool>> is_button = entity_check->template GetComponent<C_Button<bool>>();
+            if (is_button)
+                continue;
+            if (!position_check || !hitbox_check)
+                continue;
+            if (entity_check ==  entity)
+                continue;
+            if (position_comp->getValue().first < position_check->getValue().first + hitbox_check->getValue().first &&
+                position_comp->getValue().first + hitbox_size->getValue().first > position_check->getValue().first  &&
+                position_comp->getValue().second - movement_elapsed < position_check->getValue().second + hitbox_check->getValue().second &&
+                position_comp->getValue().second - movement_elapsed + hitbox_size->getValue().second > position_check->getValue().second)  {
+                collission = true;
+                break;
+            }
+        }
+        if (position_comp->getValue().second > movement_elapsed && collission == false)
             position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second - movement_elapsed));
     }
     if (arg_scene->inputs_[1] == 1)
     {
-        if (position_comp->getValue().first > movement_elapsed)
+        bool collission = false;
+        for (const std::shared_ptr<IEntity>& entity_check : arg_entities) {
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_check = entity_check->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_check = entity_check->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+            std::shared_ptr<C_Button<bool>> is_button = entity_check->template GetComponent<C_Button<bool>>();
+            if (is_button)
+                continue;
+            if (!position_check || !hitbox_check)
+                continue;
+            if (entity_check ==  entity)
+                continue;
+            if (position_comp->getValue().first - movement_elapsed < position_check->getValue().first + hitbox_check->getValue().first &&
+                position_comp->getValue().first - movement_elapsed + hitbox_size->getValue().first > position_check->getValue().first  &&
+                position_comp->getValue().second < position_check->getValue().second + hitbox_check->getValue().second &&
+                position_comp->getValue().second + hitbox_size->getValue().second > position_check->getValue().second)  {
+                collission = true;
+                continue;
+            }
+        }
+        if (position_comp->getValue().first > movement_elapsed && !collission)
             position_comp->setValue(std::make_pair(position_comp->getValue().first - movement_elapsed, position_comp->getValue().second));
     }
     if (arg_scene->inputs_[2] == 1)
     {
-        if (position_comp->getValue().second < arg_scene->window_->getSize().y - movement_elapsed - hitbox_size->getValue().second)
+        bool collission = false;
+        for (const std::shared_ptr<IEntity>& entity_check : arg_entities) {
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_check = entity_check->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_check = entity_check->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+            std::shared_ptr<C_Button<bool>> is_button = entity_check->template GetComponent<C_Button<bool>>();
+            if (is_button)
+                continue;
+            if (!position_check || !hitbox_check)
+                continue;
+            if (entity_check ==  entity)
+                continue;
+            if (position_comp->getValue().first < position_check->getValue().first + hitbox_check->getValue().first &&
+                position_comp->getValue().first + hitbox_size->getValue().first > position_check->getValue().first  &&
+                position_comp->getValue().second + movement_elapsed < position_check->getValue().second + hitbox_check->getValue().second &&
+                position_comp->getValue().second + movement_elapsed + hitbox_size->getValue().second > position_check->getValue().second)  {
+                collission = true;
+                continue;
+            }
+        }
+        if (position_comp->getValue().second < arg_scene->window_->getSize().y - movement_elapsed - hitbox_size->getValue().second && !collission)
             position_comp->setValue(std::make_pair(position_comp->getValue().first, position_comp->getValue().second  + movement_elapsed));
     }
     if (arg_scene->inputs_[3] == 1)
     {
-        if (position_comp->getValue().first < arg_scene->window_->getSize().x - movement_elapsed- hitbox_size->getValue().first)
+        bool collission = false;
+        for (const std::shared_ptr<IEntity>& entity_check : arg_entities) {
+            std::shared_ptr<C_Position<std::pair<double, double>>> position_check = entity_check->template GetComponent<C_Position<std::pair<double, double>>>();
+            std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_check = entity_check->template GetComponent<C_Hitbox<std::pair<int, int>>>();
+            std::shared_ptr<C_Button<bool>> is_button = entity_check->template GetComponent<C_Button<bool>>();
+            if (is_button)
+                continue;
+            if (!position_check || !hitbox_check)
+                continue;
+            if (entity_check ==  entity)
+                continue;
+            if (position_comp->getValue().first + movement_elapsed < position_check->getValue().first + hitbox_check->getValue().first &&
+                position_comp->getValue().first + movement_elapsed + hitbox_size->getValue().first > position_check->getValue().first  &&
+                position_comp->getValue().second < position_check->getValue().second + hitbox_check->getValue().second &&
+                position_comp->getValue().second + hitbox_size->getValue().second > position_check->getValue().second)  {
+                collission = true;
+                continue;
+            }
+        }
+        if (position_comp->getValue().first < arg_scene->window_->getSize().x - movement_elapsed - hitbox_size->getValue().first && !collission)
             position_comp->setValue(std::make_pair(position_comp->getValue().first + movement_elapsed, position_comp->getValue().second));
     }
     if (arg_scene->inputs_[5] == 1)
@@ -104,7 +189,6 @@ void S_Input::Move(
             DrawEntityHitbox(arg_scene->window_, entity, outlineColor);
             DrawEntityID(arg_scene->window_, entity, arg_font, arg_entity_id);
         }
-
     }
 }
 
