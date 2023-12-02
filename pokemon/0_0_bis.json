@@ -7,7 +7,7 @@
                     "entity_id": 1,
                     "position": {
                         "x": 1000,
-                        "y": 100
+                        "y": 400
                     }
                 },
                 {
@@ -22,6 +22,55 @@
                     "position": {
                         "x": 0,
                         "y": 0
+                    }
+                },
+                {
+                    "entity_id": 300,
+                    "position": {
+                        "x": 510,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 300,
+                    "position": {
+                        "x": 1400,
+                        "y": 0
+                    }
+                },
+                {
+                    "entity_id": 301,
+                    "position": {
+                        "x": -965,
+                        "y": 145
+                    }
+                },
+                {
+                    "entity_id": 301,
+                    "position": {
+                        "x": 1060,
+                        "y": 145
+                    }
+                },
+                {
+                    "entity_id": 300,
+                    "position": {
+                        "x": 945,
+                        "y": -1770
+                    }
+                },
+                {
+                    "entity_id": 300,
+                    "position": {
+                        "x": 1060,
+                        "y": -1770
+                    }
+                },
+                {
+                    "entity_id": 301,
+                    "position": {
+                        "x": 0,
+                        "y": 975
                     }
                 }
             ]
