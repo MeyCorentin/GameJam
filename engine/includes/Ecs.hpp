@@ -32,6 +32,7 @@
 #include "../includes/components/C_Direction.hpp"
 #include "../includes/components/C_Speed.hpp"
 #include "../includes/components/C_Mana.hpp"
+#include "../includes/components/C_Grass.hpp"
 #include "../includes/components/C_Button.hpp"
 #include "../includes/components/C_Shoot.hpp"
 #include "../includes/components/C_Target.hpp"
