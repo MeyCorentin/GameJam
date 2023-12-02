@@ -444,11 +444,11 @@
                 },
                 {
                     "component_id": 12,
-                    "value": { "left": 17, "top": 134, "width": 48, "height": 64}
+                    "value": { "left": 17, "top": 134, "width": 49, "height": 64}
                 },
                 {
                     "component_id": 13,
-                    "value": { "x": 144, "y": 64, "start_x": 17, "start_y": 134}
+                    "value": { "x": 147, "y": 64, "start_x": 17, "start_y": 134}
                 },
                 {
                     "component_id": 14,
@@ -500,7 +500,76 @@
                 },
                 {
                     "component_id": 58,
+                    "value": 0.1
+                },
+                {
+                    "component_id": 60,
                     "value": 0
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/miew.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/miew.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 125, "y": 125 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 15, "y": 28 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 16, "top": 8, "width": 16, "height": 28}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 32, "y": 28, "start_x": 16, "start_y": 8}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 15,
+                    "value": true
+                },
+                {
+                    "component_id": 17,
+                    "value": 0
+                },
+                {
+                    "component_id": 25,
+                    "value": false
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 38,
+                    "value": { "x": -20, "y": 0 }
+                },
+                {
+                    "component_id": 58,
+                    "value": 0.2
                 },
                 {
                     "component_id": 60,
