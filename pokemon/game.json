@@ -1,10 +1,6 @@
 {
     "systems": [
         {
-            "id": 4,
-            "type": "InputSystem"
-        },
-        {
             "id": 2,
             "type": "PositionSystem"
         },
@@ -59,6 +55,10 @@
         {
             "id": 17,
             "type": "InputFromPlayer"
+        },
+        {
+            "id": 4,
+            "type": "InputSystem"
         }
     ],
     "components": [
@@ -390,6 +390,11 @@
         {
             "id": 100,
             "type": "Button",
+            "value_type": "Bool"
+        },
+        {
+            "id": 101,
+            "type": "Grass",
             "value_type": "Bool"
         }
     ],
@@ -2357,6 +2362,342 @@
                 {
                     "component_id": 6,
                     "value": { "x": 200, "y": 200 }
+                }
+            ]
+        },
+        {
+            "id": 51,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 200, "y": 200 }
+                },
+                {
+                    "component_id": 100,
+                    "value": true
+                },
+                {
+                    "component_id": 101,
+                    "value": true
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 201,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_1.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_1.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 202,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_2.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_2.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 203,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_3.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_3.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 204,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_4.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_4.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 205,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_5.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_5.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 206,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_6.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_6.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 207,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_7.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_7.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 208,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_8.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_8.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 209,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_9.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_9.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 210,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_10.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_10.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 40,
+            "components": [
+                {
+                    "component_id": 100,
+                    "value": true
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 1920, "height": 10}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 1920, "y": 10, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": true
+                },
+                {
+                    "component_id": 44,
+                    "value": 0
+                },
+                {
+                    "component_id": 45,
+                    "value": "../../sounds/tp.wav"
+                },
+                {
+                    "component_id": 46,
+                    "value": true   
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 83,
+                    "value": "12"
                 }
             ]
         }
