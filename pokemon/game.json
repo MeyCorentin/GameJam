@@ -2741,11 +2741,40 @@
                     "value": { "x": 1920, "y": 50}
                 }
             ]
+        },
+        {
+            "id": 401,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 200, "y": 100 }
+                },
+                {
+                    "component_id": 100,
+                    "value": true
+                },
+                {
+                    "component_id": 101,
+                    "value": true
+                },
+                {
+                    "component_id": 25,
+                    "value": true
+                }
+            ]
         }
     ],
     "timeline": [
         {
-            "1": "0_0.json"
+            "1": "0_1.json"
         },
         {
             "2": "0_1.json"
