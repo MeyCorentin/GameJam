@@ -25,10 +25,6 @@
             "type" : "S_Target"
         },
         {
-            "id": 10,
-            "type" : "KillEntity"
-        },
-        {
             "id": 11,
             "type" : "ParallaxSystem"
         },
@@ -2645,59 +2641,104 @@
             ]
         },
         {
-            "id": 40,
+            "id": 300,
             "components": [
                 {
-                    "component_id": 100,
-                    "value": true
+                    "component_id": 2,
+                    "value": 1
                 },
                 {
                     "component_id": 3,
                     "value": { "x": 0, "y": 0 }
                 },
                 {
-                    "component_id": 11,
-                    "value": 0
+                    "component_id": 6,
+                    "value": { "x": 10, "y": 1920 }
+                }
+            ]
+        },
+        {
+            "id": 301,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
                 },
                 {
-                    "component_id": 12,
-                    "value": { "left": 0, "top": 0, "width": 1920, "height": 10}
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
                 },
                 {
-                    "component_id": 13,
-                    "value": { "x": 1920, "y": 10, "start_x": 0, "start_y": 0}
+                    "component_id": 6,
+                    "value": { "x": 1920, "y": 10 }
+                }
+            ]
+        },
+        {
+            "id": 302,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
                 },
                 {
-                    "component_id": 14,
-                    "value": true
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
                 },
                 {
-                    "component_id": 33,
-                    "value": true
+                    "component_id": 6,
+                    "value": { "x": 25, "y": 1920 }
+                }
+            ]
+        },
+        {
+            "id": 303,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
                 },
                 {
-                    "component_id": 44,
-                    "value": 0
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
                 },
                 {
-                    "component_id": 45,
-                    "value": "../../sounds/tp.wav"
+                    "component_id": 6,
+                    "value": { "x": 1920, "y": 25}
+                }
+            ]
+        },
+        {
+            "id": 304,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
                 },
                 {
-                    "component_id": 46,
-                    "value": true   
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
                 },
                 {
-                    "component_id": 58,
-                    "value": 0
+                    "component_id": 6,
+                    "value": { "x": 140, "y": 25}
+                }
+            ]
+        },
+        {
+            "id": 305,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
                 },
                 {
-                    "component_id": 60,
-                    "value": 0
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
                 },
                 {
-                    "component_id": 83,
-                    "value": "12"
+                    "component_id": 6,
+                    "value": { "x": 1920, "y": 50}
                 }
             ]
         }
