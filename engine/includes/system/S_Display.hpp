@@ -4,6 +4,7 @@
 #include "../components/C_Position.hpp"
 #include "../components/C_Background.hpp"
 #include "../components/C_Texture.hpp"
+#include "../components/C_IsFighting.hpp"
 
 /**
  * @class S_Display
