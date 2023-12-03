@@ -24,6 +24,8 @@ void S_SpawnPokemon::Execute(
     std::shared_ptr<C_Position<std::pair<double, double>>> spawn_position;
     spawn_position->SetValue(std::pair(500,500));
 
+    int level = 0;
+
     for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         std::shared_ptr<C_Hitbox<std::pair<int, int>>> hitbox_size = entity->template GetComponent<C_Hitbox<std::pair<int, int>>>();
@@ -50,9 +52,25 @@ void S_SpawnPokemon::Execute(
                                 std::cout << " spawn " << std::endl;
                                 is_fighting->setValue(true);
                                 spawn_id.push_back(501);
+                                spawn_id.push_back(502);
                                 spawn_id.push_back(601);
-                                spawn_id.push_back( 1000 + (rand() % 151));
-                                spawn_clock->getValue().restart();
+                                spawn_id.push_back(602);
+                                for (const std::shared_ptr<IEntity>& mew : arg_scene->entities_) {
+                                    if (mew->GetBaseId() == 5)
+                                    {
+                                        std::shared_ptr<C_Position<std::pair<double, double>>> mew_pos = mew->template GetComponent<C_Position<std::pair<double, double>>>();
+                                        std::pair<double, double> pos =std::make_pair(300,300);
+                                        mew_pos->setValue(pos);
+                                        std::shared_ptr<C_Experience<int>> xp = mew->template GetComponent<C_Experience<int>>();
+                                        level = (xp->getValue() / 100);
+                                    }
+                                }
+                                spawn_id.push_back(1000 + (rand() % 151));
+                                spawn_id.push_back(503);
+                                spawn_id.push_back(505);
+                                spawn_id.push_back(504);
+                                spawn_id.push_back(506);
+                                spawn_id.push_back(507);
                             }
                         }
                     break;
@@ -62,6 +80,50 @@ void S_SpawnPokemon::Execute(
             {
                 arg_scene->createEntity(arg_scene->entities_, id, position_comp);
             }
+            for (const std::shared_ptr<IEntity>& entity_mob : arg_scene->entities_) {
+                if (entity_mob->GetId() > 1000 && entity_mob->GetId() < 1152)
+                {
+                    std::shared_ptr<C_Experience<int>> xp = entity_mob->template GetComponent<C_Experience<int>>();
+                    if (xp->getValue() < 100)
+                    {
+                        xp->setValue((level + rand() % 5 ) * 100);
+                        std::cout << "level: " << xp->getValue() / 100 << std::endl;
+                    }
+                }
+            }
         spawn_id.clear();
+    }
+    for (const std::shared_ptr<IEntity>& entity_mob : arg_scene->entities_) {
+        if (entity_mob->GetBaseId() == 5)
+        {
+            std::shared_ptr<C_Experience<int>> xp = entity_mob->template GetComponent<C_Experience<int>>();
+            level = (xp->getValue() / 100);
+        }
+        // std::cout << "test" << std::endl;
+        // std::cout << entity_mob->GetId()<< std::endl;
+        // std::cout << entity_mob->GetBaseId()<< std::endl;
+        //     std::cout << "test" << std::endl;
+        if (entity_mob->GetBaseId() > 1000 && entity_mob->GetBaseId() < 1152)
+        {
+            std::shared_ptr<C_TextMessage<std::string>> name = entity_mob->template GetComponent<C_TextMessage<std::string>>();
+            std::shared_ptr<C_Experience<int>> xp = entity_mob->template GetComponent<C_Experience<int>>();
+            for (const std::shared_ptr<IEntity>& entity_mob_2 : arg_scene->entities_) {
+                if (entity_mob_2->GetBaseId() == 502)
+                {
+                    std::shared_ptr<C_TextMessage<std::string>> display_name = entity_mob_2->template GetComponent<C_TextMessage<std::string>>();
+                    display_name->setValue(name->getValue());
+                }
+                if (entity_mob_2->GetBaseId() == 507)
+                {
+                    std::shared_ptr<C_TextMessage<std::string>> display_level = entity_mob_2->template GetComponent<C_TextMessage<std::string>>();
+                    display_level->setValue("Lv" + std::to_string(xp->getValue() / 100));
+                }
+            }
+        }
+        if (entity_mob->GetBaseId() == 506)
+        {
+            std::shared_ptr<C_TextMessage<std::string>> display_level = entity_mob->template GetComponent<C_TextMessage<std::string>>();
+            display_level->setValue("Lv" + std::to_string(level));
+        }
     }
 }

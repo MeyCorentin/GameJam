@@ -6,6 +6,9 @@
 #include "../components/C_Player.hpp"
 #include "../components/C_SpawnClock.hpp"
 #include "../components/C_IsFighting.hpp"
+#include "../components/C_Text.hpp"
+#include "../components/C_TextMessage.hpp"
+#include "../components/C_Experience.hpp"
 
 
 class S_SpawnPokemon : public ISystem {

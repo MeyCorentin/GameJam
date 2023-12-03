@@ -686,6 +686,68 @@
                 }
             ]
         },
+
+        {
+            "id": 5,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/pokemon/152.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/pokemon/152.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 100
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 300, "y": 300} 
+                }, 
+                {
+                    "component_id": 11,
+                    "value": 0
+                }, 
+                {
+                    "component_id": 12,
+                     "value":{"left": 0, "top": 0, "width": 560, "height": 560}
+                }, 
+                {
+                    "component_id": 13,
+                     "value":{"x": 560, "y": 560, "start_x": 0, "start_y": 0}
+                }, 
+                {
+                    "component_id": 14,
+                     "value": false
+                }, 
+                {
+                    "component_id": 33,
+                     "value": false
+                },
+                 {
+                    "component_id": 58,
+                     "value": 0
+                },
+                 {
+                    "component_id": 60,
+                     "value": 0
+                },
+                 {
+                    "component_id": 80,
+                     "value": 0
+                },
+                 {
+                    "component_id": 104,
+                     "value": 100
+                },
+                 {
+                    "component_id": 105,
+                     "value": 100
+                }
+            ]
+        },
         {
             "id": 10,
             "components": [
@@ -2978,12 +3040,65 @@
             "id": 502,
             "components": [
                 {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 293, "y": 142 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 16, "top": 8, "width": 16, "height": 28}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 32, "y": 28, "start_x": 16, "start_y": 8}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0.2
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 80,
+                    "value": 0
+                },
+                {
+                    "component_id": 81,
+                    "value": "Mew"
+                },
+                {
+                    "component_id": 104,
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": 503,
+            "components": [
+                {
                     "component_id": 1,
-                    "value": "../../sprites/fight_scene.png"
+                    "value": "../../sprites/fight_banner.png"
                 },
                 {
                     "component_id": 50,
-                    "value": "../../sprites/fight_scene.png"
+                    "value": "../../sprites/fight_banner.png"
                 },
                 {
                     "component_id": 2,
@@ -2992,10 +3107,186 @@
                 {
                     "component_id": 3,
                     "value": { "x": 0, "y": 0 }
+                }
+            ]
+        },
+        {
+            "id": 504,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": -1
                 },
                 {
-                    "component_id": 29,
+                    "component_id": 3,
+                    "value": { "x": 1126, "y": 540 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 16, "top": 8, "width": 16, "height": 28}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 32, "y": 28, "start_x": 16, "start_y": 8}
+                },
+                {
+                    "component_id": 14,
                     "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0.2
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 80,
+                    "value": 0
+                },
+                {
+                    "component_id": 81,
+                    "value": "Mew"
+                },
+                {
+                    "component_id": 104,
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": 505,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/fight_stats.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/fight_stats.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 425, "y": 88 }
+                }
+            ]
+        },
+        {
+            "id": 506,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 1526, "y": 540 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 16, "top": 8, "width": 16, "height": 28}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 32, "y": 28, "start_x": 16, "start_y": 8}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0.2
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 80,
+                    "value": 0
+                },
+                {
+                    "component_id": 81,
+                    "value": "Mew"
+                },
+                {
+                    "component_id": 104,
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": 507,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 693, "y": 142 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 16, "top": 8, "width": 16, "height": 28}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 32, "y": 28, "start_x": 16, "start_y": 8}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0.2
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 80,
+                    "value": 0
+                },
+                {
+                    "component_id": 81,
+                    "value": "Mew"
+                },
+                {
+                    "component_id": 104,
+                    "value": 5
                 }
             ]
         },
@@ -3025,6 +3316,47 @@
                 {
                     "component_id": 6,
                     "value": { "x": 120, "y": 50 }
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 1920, "height": 10}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 120, "y": 50, "start_x": 1450, "start_y": 950}
+                },
+                {
+                    "component_id": 82,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 602,
+            "components": [
+                {
+                    "component_id": 100,
+                    "value": true
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/png.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/png.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 1050, "y": 950 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 300, "y": 50 }
                 },
                 {
                     "component_id": 12,

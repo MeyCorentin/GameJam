@@ -497,7 +497,7 @@ void S_Input::Execute(
                         if (is_clickable->getValue() == true) {
                             std::shared_ptr<C_Position<std::pair<double, double>>> position_target = my_entity->template GetComponent<C_Position<std::pair<double, double>>>();
                             std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = my_entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
-                            if (next_timeline) {
+                            if (next_timeline && entity->GetBaseId() == 601) {
                                 if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
                                     arg_scene->need_switch_ = true;
                                     arg_scene->next_timeline_ = next_timeline->getValue();
@@ -505,9 +505,64 @@ void S_Input::Execute(
                                 }
                             }
                             if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
-                                is_fighting->getValue() = false;
-                                std::set<int> temp_entity = {601, 501};
+                                if (my_entity->GetBaseId() == 601)
+                                {
+                                    is_fighting->getValue() = false;
+                                }
+                                if (my_entity->GetBaseId() == 602) {
+                                    if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
+                                        int current_level = 0;
+                                        int enemy_level = 0;
+                                        for (const std::shared_ptr<IEntity>& entity_mob : arg_scene->entities_) {
+                                            if (entity_mob->GetBaseId() == 5)
+                                            {
+                                                std::shared_ptr<C_Experience<int>> xp = entity_mob->template GetComponent<C_Experience<int>>();
+                                                current_level = xp->getValue();
+                                            }
+                                            if (entity_mob->GetBaseId() > 1000 && entity_mob->GetBaseId() < 1152)
+                                            {
+                                                std::shared_ptr<C_Experience<int>> xp = entity_mob->template GetComponent<C_Experience<int>>();
+                                                enemy_level = xp->getValue();
+                                            }
+                                        }
+                                        int result = rand() % enemy_level;
+                                        if (result > current_level)
+                                        {
+                                            std::cout << "loose" << std::endl;
+                                            for (const std::shared_ptr<IEntity>& entity_mob : arg_scene->entities_) {
+                                                if (entity_mob->GetBaseId() == 5)
+                                                {
+                                                    std::shared_ptr<C_Experience<int>> xp = entity_mob->template GetComponent<C_Experience<int>>();
+                                                    xp->setValue(xp->getValue() - (rand() % 300));
+                                                }
+                                            }
+                                        } else
+                                        {
+                                            std::cout << "win" << std::endl;
+                                            for (const std::shared_ptr<IEntity>& entity_mob : arg_scene->entities_) {
+                                                if (entity_mob->GetBaseId() == 5)
+                                                {
+                                                    std::shared_ptr<C_Experience<int>> xp = entity_mob->template GetComponent<C_Experience<int>>();
+                                                    xp->setValue((xp->getValue() + (rand() % 100)));
+                                                }
+                                            }
+                                        }
+                                        is_fighting->getValue() = false;
+                                    }
+                                }
+                                std::set<int> temp_entity = {601, 602, 501, 502, 503, 504, 505, 506, 507};
                                 for (const std::shared_ptr<IEntity>& temp : arg_scene->entities_) {
+                                    if (temp->GetBaseId() == 1)
+                                    {
+                                        std::shared_ptr<C_SpawnClock<sf::Clock>> spawn_clock = temp->template GetComponent<C_SpawnClock<sf::Clock>>();
+                                        spawn_clock->getValue().restart();
+                                    }
+                                    if (temp->GetBaseId() == 5)
+                                    {
+                                        std::shared_ptr<C_Position<std::pair<double, double>>> mew_pos = temp->template GetComponent<C_Position<std::pair<double, double>>>();
+                                        std::pair<double, double> pos =std::make_pair(1000,1000);
+                                        mew_pos->setValue(pos);
+                                    }
                                     if (temp->id_ > 1000 && temp->id_ < 1152)
                                         temp->is_dead_ = true;
                                     if (temp_entity.find(temp->id_) != temp_entity.end())

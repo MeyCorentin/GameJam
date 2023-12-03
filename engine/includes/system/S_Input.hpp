@@ -39,6 +39,8 @@
 #include "../scene/SceneBuilder.hpp"
 #include "../components/C_Grounded.hpp"
 #include "../components/C_IsFighting.hpp"
+#include "../components/C_Experience.hpp"
+#include "../components/C_SpawnClock.hpp"
 
 class S_Input : public ISystem {
     private:
