@@ -466,12 +466,13 @@ void S_Input::Execute(
     for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
+        std::shared_ptr<C_IsFighting<bool>> is_fight =  entity->template GetComponent<C_IsFighting<bool>>();
         player_movement_clock = entity->template GetComponent<C_PlayerMovementClock<sf::Clock>>();
         sf::Time elapsed = player_movement_clock->getValue().getElapsedTime();
 
         if (arg_is_server == 1)
             continue;
-        if (!player_id)
+        if (!player_id || !is_fight)
             continue;
         if (&entity != &arg_entities.front())
             continue;
@@ -479,8 +480,14 @@ void S_Input::Execute(
         while (arg_scene->window_->pollEvent(*arg_scene->event_)) {
             if (arg_scene->event_->type == sf::Event::Closed)
                 arg_scene->window_->close();
-            CheckTouchPressed(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
-            CheckTouchReleased(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
+            if (is_fight->getValue() == false)
+            {
+                CheckTouchPressed(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
+                CheckTouchReleased(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
+            } else
+            {
+                arg_scene->inputs_ = {0,0,0,0,0};
+            }
             sf::Vector2i position = sf::Mouse::getPosition(*arg_scene->window_);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 for (const std::shared_ptr<IEntity>& my_entity : arg_scene->entities_) {
