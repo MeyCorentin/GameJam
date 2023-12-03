@@ -20,6 +20,7 @@ void S_Display::Execute(
     std::shared_ptr<C_Texture<sf::Texture>>texture_comp;
     std::shared_ptr<C_Position<std::pair<double, double>>> position_comp;
     std::shared_ptr<C_Background<bool>> is_background;
+    std::shared_ptr<C_IsFighting<bool>> is_fighting;
     float x_position;
     float y_position;
     for (const std::shared_ptr<IEntity>& entity : arg_entities) {
@@ -47,6 +48,12 @@ void S_Display::Execute(
         is_background = entity->template GetComponent<C_Background<bool>>();
         if (is_background)
             continue;
+        is_fighting = entity->template GetComponent<C_IsFighting<bool>>();
+        if (is_fighting)
+        {
+            if (is_fighting->getValue() == true)
+                continue;
+        }
         sprite_comp = entity->template GetComponent<C_Sprite<sf::Sprite>>();
         position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         texture_comp = entity->template GetComponent<C_Texture<sf::Texture>>();

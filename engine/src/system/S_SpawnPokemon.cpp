@@ -43,7 +43,7 @@ void S_SpawnPokemon::Execute(
                     position_comp->getValue().first + hitbox_size->getValue().first > position_check->getValue().first  &&
                     position_comp->getValue().second < position_check->getValue().second + hitbox_check->getValue().second &&
                     position_comp->getValue().second + hitbox_size->getValue().second > position_check->getValue().second)  {
-                        if (spawn_clock->getValue().getElapsedTime().asSeconds() >= 1)
+                        if (spawn_clock->getValue().getElapsedTime().asSeconds() >= 3)
                         {
                             if (rand() % 3 == 0)
                             {
