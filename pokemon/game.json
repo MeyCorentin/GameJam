@@ -2993,6 +2993,71 @@
                     "value": true
                 }
             ]
+        },
+        {
+            "id": 1001,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/pokemon/1.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/pokemon/1.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 45
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 125, "y": 125 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 560, "height": 560}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 560, "y": 560, "start_x": 0, "start_y": 0}
+                },
+                {
+                    "component_id": 14,
+                    "value": false
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 80,
+                    "value": 0
+                },
+                {
+                    "component_id": 81,
+                    "value": "Bulbizarre"
+                },
+                {
+                    "component_id": 104,
+                    "value": 49
+                },
+                {
+                    "component_id": 105,
+                    "value": 45
+                }
+            ]
         }
     ],
     "timeline": [
