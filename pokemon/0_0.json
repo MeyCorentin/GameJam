@@ -4,9 +4,16 @@
             "tick": 0,
             "mob_id": [
                 {
+                    "entity_id": 2004,
+                    "position": {
+                        "x": 650,
+                        "y": 550
+                    }
+                },
+                {
                     "entity_id": 1,
                     "position": {
-                        "x": 1000,
+                        "x": 900,
                         "y": 400
                     }
                 },
@@ -14,13 +21,6 @@
                     "entity_id": 2,
                     "position": {
                         "x": 1100,
-                        "y": 400
-                    }
-                },
-                {
-                    "entity_id": 3,
-                    "position": {
-                        "x": 1300,
                         "y": 400
                     }
                 },
@@ -92,6 +92,48 @@
                     "position": {
                         "x": 965,
                         "y": 20
+                    }
+                },
+                {
+                    "entity_id": 2000,
+                    "position": {
+                        "x": 950,
+                        "y": 500
+                    }
+                },
+                {
+                    "entity_id": 2001,
+                    "position": {
+                        "x": 950,
+                        "y": 630
+                    }
+                },
+                {
+                    "entity_id": 2002,
+                    "position": {
+                        "x": 1050,
+                        "y": 220
+                    }
+                },
+                {
+                    "entity_id": 2003,
+                    "position": {
+                        "x": 1050,
+                        "y": 320
+                    }
+                },
+                {
+                    "entity_id": 2002,
+                    "position": {
+                        "x": 650,
+                        "y": 220
+                    }
+                },
+                {
+                    "entity_id": 2003,
+                    "position": {
+                        "x": 650,
+                        "y": 320
                     }
                 }
             ]

@@ -39,28 +39,29 @@ void S_SpawnPokemon::Execute(
                 continue;
             if (entity_check ==  entity)
                 continue;
-            if (position_comp->getValue().first < position_check->getValue().first + hitbox_check->getValue().first &&
-                position_comp->getValue().first + hitbox_size->getValue().first > position_check->getValue().first  &&
-                position_comp->getValue().second < position_check->getValue().second + hitbox_check->getValue().second &&
-                position_comp->getValue().second + hitbox_size->getValue().second > position_check->getValue().second)  {
-                    if (spawn_clock->getValue().getElapsedTime().asSeconds() >= 1)
-                    {
-                        if (rand() % 3 == 0)
+                if (position_comp->getValue().first < position_check->getValue().first + hitbox_check->getValue().first &&
+                    position_comp->getValue().first + hitbox_size->getValue().first > position_check->getValue().first  &&
+                    position_comp->getValue().second < position_check->getValue().second + hitbox_check->getValue().second &&
+                    position_comp->getValue().second + hitbox_size->getValue().second > position_check->getValue().second)  {
+                        if (spawn_clock->getValue().getElapsedTime().asSeconds() >= 1)
                         {
-                            std::cout << " spawn " << std::endl;
-                            is_fighting->setValue(true);
-                            spawn_id.push_back(501);
-                            spawn_id.push_back(601);
-                            spawn_clock->getValue().restart();
+                            if (rand() % 3 == 0)
+                            {
+                                std::cout << " spawn " << std::endl;
+                                is_fighting->setValue(true);
+                                spawn_id.push_back(501);
+                                spawn_id.push_back(601);
+                                spawn_id.push_back(1001);
+                                spawn_clock->getValue().restart();
+                            }
                         }
-                    }
-                break;
+                    break;
+                }
             }
-        }
-        for (int id: spawn_id)
-        {
-            arg_scene->createEntity(arg_scene->entities_, id, position_comp);
-        }
+            for (int id: spawn_id)
+            {
+                arg_scene->createEntity(arg_scene->entities_, id, position_comp);
+            }
         spawn_id.clear();
     }
 }
