@@ -60,7 +60,7 @@ void S_Target::Execute(
             if (follow &&
                 position_comp_1 &&
                 position_comp_2 &&
-                target->getValue() == entity2->GetId())
+                target->getValue() == entity2->GetBaseId())
             {
                 if (follow->getValue() == true)
                 {

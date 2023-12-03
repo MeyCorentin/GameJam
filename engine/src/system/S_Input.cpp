@@ -466,20 +466,28 @@ void S_Input::Execute(
     for (const std::shared_ptr<IEntity>& entity : arg_entities) {
         std::shared_ptr<C_Position<std::pair<double, double>>> position_comp = entity->template GetComponent<C_Position<std::pair<double, double>>>();
         std::shared_ptr<C_Player<int>> player_id =  entity->template GetComponent<C_Player<int>>();
+        std::shared_ptr<C_IsFighting<bool>> is_fight =  entity->template GetComponent<C_IsFighting<bool>>();
         player_movement_clock = entity->template GetComponent<C_PlayerMovementClock<sf::Clock>>();
         sf::Time elapsed = player_movement_clock->getValue().getElapsedTime();
 
         if (arg_is_server == 1)
             continue;
-        if (!player_id)
+        if (!player_id || !is_fight)
             continue;
         if (&entity != &arg_entities.front())
             continue;
+        std::shared_ptr<C_IsFighting<bool>> is_fighting =  entity->template GetComponent<C_IsFighting<bool>>();
         while (arg_scene->window_->pollEvent(*arg_scene->event_)) {
             if (arg_scene->event_->type == sf::Event::Closed)
                 arg_scene->window_->close();
-            CheckTouchPressed(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
-            CheckTouchReleased(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
+            if (is_fight->getValue() == false)
+            {
+                CheckTouchPressed(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
+                CheckTouchReleased(entity, arg_scene->entities_, position_comp, arg_scene->event_, arg_scene);
+            } else
+            {
+                arg_scene->inputs_ = {0,0,0,0,0};
+            }
             sf::Vector2i position = sf::Mouse::getPosition(*arg_scene->window_);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 for (const std::shared_ptr<IEntity>& my_entity : arg_scene->entities_) {
@@ -487,12 +495,21 @@ void S_Input::Execute(
                     std::shared_ptr<C_NextTimeline<std::string>> next_timeline =  my_entity->template GetComponent<C_NextTimeline<std::string>>();
                     if (is_clickable) {
                         if (is_clickable->getValue() == true) {
+                            std::shared_ptr<C_Position<std::pair<double, double>>> position_target = my_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                            std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = my_entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
                             if (next_timeline) {
-                                std::shared_ptr<C_Position<std::pair<double, double>>> position_target = my_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                                std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = my_entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
                                 if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
                                     arg_scene->need_switch_ = true;
                                     arg_scene->next_timeline_ = next_timeline->getValue();
+                                    is_fighting->getValue() = false;
+                                }
+                            }
+                            if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
+                                is_fighting->getValue() = false;
+                                std::set<int> temp_entity = {601, 501, 1001};
+                                for (const std::shared_ptr<IEntity>& temp : arg_scene->entities_) {
+                                    if (temp_entity.find(temp->id_) != temp_entity.end())
+                                        temp->is_dead_ = true;
                                 }
                             }
                         }
@@ -504,5 +521,3 @@ void S_Input::Execute(
         player_movement_clock->getValue().restart();
     }
 }
-
-// 604361

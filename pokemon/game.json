@@ -398,6 +398,11 @@
             "value_type": "String"
         },
         {
+            "id": 82,
+            "type": "IsClickable",
+            "value_type": "Bool"
+        },
+        {
             "id": 90,
             "type": "Breakable",
             "value_type": "Bool"
@@ -596,7 +601,7 @@
                 },
                 {
                     "component_id": 17,
-                    "value": 0
+                    "value": 1
                 },
                 {
                     "component_id": 25,
@@ -2991,6 +2996,144 @@
                 {
                     "component_id": 29,
                     "value": true
+                }
+            ]
+        },
+        {
+            "id": 601,
+            "components": [
+                {
+                    "component_id": 100,
+                    "value": true
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/png.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/png.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 1450, "y": 950 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 120, "y": 50 }
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 1920, "height": 10}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 120, "y": 50, "start_x": 1450, "start_y": 950}
+                },
+                {
+                    "component_id": 82,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 2000,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_1_1.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_1_1.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                }
+            ]
+        },
+        {
+            "id": 2001,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 294, "y": 100    }
+                }
+            ]
+        },
+        {
+            "id": 2002,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_1_3.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_1_3.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                }
+            ]
+        },
+        {
+            "id": 2003,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 190, "y": 70    }
+                }
+            ]
+        },
+        {
+            "id": 2004,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_1_2.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_1_2.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
                 }
             ]
         },
