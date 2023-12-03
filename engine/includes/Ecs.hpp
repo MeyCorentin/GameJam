@@ -8,6 +8,7 @@
 #include "../includes/system/S_BasicInput.hpp"
 #include "../includes/system/S_InputFromPlayer.hpp"
 #include "../includes/system/S_Mana.hpp"
+#include "../includes/system/S_SpawnPokemon.hpp"
 #include "../includes/system/S_Collision.hpp"
 #include "../includes/system/S_Mouvement.hpp"
 #include "../includes/system/S_Animation.hpp"
@@ -23,6 +24,7 @@
 #include "../includes/system/S_WriteText.hpp"
 #include "../includes/system/S_Score.hpp"
 
+#include "../includes/components/C_IsFighting.hpp"
 #include "../includes/components/C_Life.hpp"
 #include "../includes/components/C_JumpHeight.hpp"
 #include "../includes/components/C_Player.hpp"
@@ -32,6 +34,7 @@
 #include "../includes/components/C_Direction.hpp"
 #include "../includes/components/C_Speed.hpp"
 #include "../includes/components/C_Mana.hpp"
+#include "../includes/components/C_SpawnClock.hpp"
 #include "../includes/components/C_Grass.hpp"
 #include "../includes/components/C_Button.hpp"
 #include "../includes/components/C_Shoot.hpp"

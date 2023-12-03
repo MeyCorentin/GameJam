@@ -21,6 +21,7 @@ void Ecs::Create(int arg_is_server, char *game_path)
     SystemRegistry::Instance().RegisterSystem("S_Animation", []() { return std::make_shared<S_Animation>(); });
     SystemRegistry::Instance().RegisterSystem("DisplaySystem", []() { return std::make_shared<S_Display>(); });
     SystemRegistry::Instance().RegisterSystem("ManaSystem", []() { return std::make_shared<S_Mana>(); });
+    SystemRegistry::Instance().RegisterSystem("SpawnPokemon", []() { return std::make_shared<S_SpawnPokemon>(); });
     SystemRegistry::Instance().RegisterSystem("MouvementSystem", []() { return std::make_shared<S_Mouvement>(); });
     SystemRegistry::Instance().RegisterSystem("S_Target", []() { return std::make_shared<S_Target>(); });
     SystemRegistry::Instance().RegisterSystem("KillEntity", []() { return std::make_shared<S_KillEntity>(); });
@@ -34,6 +35,8 @@ void Ecs::Create(int arg_is_server, char *game_path)
     SystemRegistry::Instance().RegisterSystem("WriteText", []() { return std::make_shared<S_WriteText>(); });
     SystemRegistry::Instance().RegisterSystem("Score", []() { return std::make_shared<S_Score>(); });
 
+    ComponentRegistry::Instance().RegisterComponent("SpawnClock", []() { return std::make_shared<C_SpawnClock<sf::Clock>>(); });
+    ComponentRegistry::Instance().RegisterComponent("IsFighting", []() { return std::make_shared<C_IsFighting<bool>>(); });
     ComponentRegistry::Instance().RegisterComponent("PlayerMovementClock", []() { return std::make_shared<C_PlayerMovementClock<sf::Clock>>(); });
     ComponentRegistry::Instance().RegisterComponent("EntityMovementClock", []() { return std::make_shared<C_EntityMovementClock<sf::Clock>>(); });
     ComponentRegistry::Instance().RegisterComponent("Texture", []() { return std::make_shared<C_Texture<sf::Texture>>(); });

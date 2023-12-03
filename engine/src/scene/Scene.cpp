@@ -316,15 +316,14 @@ std::shared_ptr<IEntity> Scene::createEntity(
     file.close();
     for (const auto& entity_config : data["entities"]) {
         if (entity_config["id"] == id) {
-
             new_entity = CreateEntityFromConfig(entity_config, data["components"]);
             new_entity->SetBaseId(entity_config["id"]);
             position_new = new_entity->template GetComponent<C_Position<std::pair<double, double>>>();
             std::shared_ptr<C_PositionShot<std::pair<double, double>>> position_shot = new_entity->template GetComponent<C_PositionShot<std::pair<double, double>>>();
             std::shared_ptr<C_SpriteRect<sf::IntRect>> rect = new_entity->template GetComponent<C_SpriteRect<sf::IntRect>>();
             std::shared_ptr<C_Sprite<sf::Sprite>> sprite = new_entity->template GetComponent<C_Sprite<sf::Sprite>>();
-            sprite->getValue().setTextureRect(rect->getValue());
-            position_new->setValue(std::make_pair(arg_position_comp->getValue().first + position_shot->getValue().first, arg_position_comp->getValue().second + position_shot->getValue().second));
+            // sprite->getValue().setTextureRect(rect->getValue());
+            // position_new->setValue(std::make_pair(arg_position_comp->getValue().first + position_shot->getValue().first, arg_position_comp->getValue().second + position_shot->getValue().second));
             arg_all_entities.push_back(new_entity);
         }
     }
