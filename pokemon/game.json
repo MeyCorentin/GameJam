@@ -2995,6 +2995,103 @@
             ]
         },
         {
+            "id": 2000,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_1_1.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_1_1.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                }
+            ]
+        },
+        {
+            "id": 2001,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 294, "y": 100    }
+                }
+            ]
+        },
+        {
+            "id": 2002,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_1_3.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_1_3.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                }
+            ]
+        },
+        {
+            "id": 2003,
+            "components": [
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 190, "y": 70    }
+                }
+            ]
+        },
+        {
+            "id": 2004,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/map_1_2.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/map_1_2.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": 1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 0, "y": 0 }
+                }
+            ]
+        },
+        {
             "id": 1001,
             "components": [
                 {
