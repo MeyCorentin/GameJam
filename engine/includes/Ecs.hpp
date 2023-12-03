@@ -95,6 +95,8 @@
 #include "../includes/components/C_Point.hpp"
 #include "../includes/components/C_Score.hpp"
 #include "../includes/components/C_ScoreText.hpp"
+#include "../includes/components/C_Attack.hpp"
+#include "../includes/components/C_Experience.hpp"
 
 #include "../includes/components/C_Text.hpp"
 #include "../includes/components/C_TextMessage.hpp"

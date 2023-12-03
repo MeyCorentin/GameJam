@@ -111,6 +111,8 @@ void Ecs::Create(int arg_is_server, char *game_path)
     ComponentRegistry::Instance().RegisterComponent("Score", []() { return std::make_shared<C_Score<int>>(); });
     ComponentRegistry::Instance().RegisterComponent("Point", []() { return std::make_shared<C_Point<int>>(); });
     ComponentRegistry::Instance().RegisterComponent("ScoreText", []() { return std::make_shared<C_ScoreText<sf::Text>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Attack", []() { return std::make_shared<C_Attack<int>>(); });
+    ComponentRegistry::Instance().RegisterComponent("Experience", []() { return std::make_shared<C_Experience<int>>(); });
 
     std::cout << "[ECS] start create scene" << std::endl;
 

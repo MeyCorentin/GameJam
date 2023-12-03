@@ -59,6 +59,10 @@
         {
             "id": 2,
             "type": "SpawnPokemon"
+        },
+        {
+            "id": 18,
+            "type": "WriteText"
         }
     ],
     "components": [
@@ -378,6 +382,17 @@
             "value_type": "PairDouble"
         },
         {
+            "id": 80,
+            "type": "Text",
+            "value_type": "Text"
+        },
+        {
+            "id": 81,
+            "type": "TextMessage",
+            "value_type": "String"
+        },
+
+        {
             "id": 83,
             "type": "NextTimeline",
             "value_type": "String"
@@ -406,6 +421,16 @@
             "id": 103,
             "type": "IsFighting",
             "value_type": "Bool"
+        },
+        {
+            "id": 104,
+            "type": "Attack",
+            "value_type": "Int"
+        },
+        {
+            "id": 105,
+            "type": "Experience",
+            "value_type": "Int"
         }
     ],
     "entities": [
@@ -592,6 +617,67 @@
                 {
                     "component_id": 60,
                     "value": 0
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "components": [
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/miew.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/miew.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 125, "y": 125 }
+                },
+                {
+                    "component_id": 11,
+                    "value": 0
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 16, "top": 8, "width": 16, "height": 28}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 32, "y": 28, "start_x": 16, "start_y": 8}
+                },
+                {
+                    "component_id": 14,
+                    "value": true
+                },
+                {
+                    "component_id": 33,
+                    "value": false
+                },
+                {
+                    "component_id": 58,
+                    "value": 0.2
+                },
+                {
+                    "component_id": 60,
+                    "value": 0
+                },
+                {
+                    "component_id": 80,
+                    "value": 0
+                },
+                {
+                    "component_id": 81,
+                    "value": "Mew"
+                },
+                {
+                    "component_id": 104,
+                    "value": 5
                 }
             ]
         },

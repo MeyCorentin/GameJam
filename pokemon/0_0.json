@@ -18,6 +18,13 @@
                     }
                 },
                 {
+                    "entity_id": 3,
+                    "position": {
+                        "x": 1300,
+                        "y": 400
+                    }
+                },
+                {
                     "entity_id": 201,
                     "position": {
                         "x": 0,
