@@ -506,8 +506,10 @@ void S_Input::Execute(
                             }
                             if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
                                 is_fighting->getValue() = false;
-                                std::set<int> temp_entity = {601, 501, 1001};
+                                std::set<int> temp_entity = {601, 501};
                                 for (const std::shared_ptr<IEntity>& temp : arg_scene->entities_) {
+                                    if (temp->id_ > 1000 && temp->id_ < 1152)
+                                        temp->is_dead_ = true;
                                     if (temp_entity.find(temp->id_) != temp_entity.end())
                                         temp->is_dead_ = true;
                                 }
