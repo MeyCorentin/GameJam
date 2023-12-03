@@ -38,6 +38,7 @@
 #include "../scene/ComponentRegister.hpp"
 #include "../scene/SceneBuilder.hpp"
 #include "../components/C_Grounded.hpp"
+#include "../components/C_IsFighting.hpp"
 
 class S_Input : public ISystem {
     private:

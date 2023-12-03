@@ -398,6 +398,11 @@
             "value_type": "String"
         },
         {
+            "id": 82,
+            "type": "IsClickable",
+            "value_type": "Bool"
+        },
+        {
             "id": 90,
             "type": "Breakable",
             "value_type": "Bool"
@@ -2990,6 +2995,47 @@
                 },
                 {
                     "component_id": 29,
+                    "value": true
+                }
+            ]
+        },
+        {
+            "id": 601,
+            "components": [
+                {
+                    "component_id": 100,
+                    "value": true
+                },
+                {
+                    "component_id": 1,
+                    "value": "../../sprites/png.png"
+                },
+                {
+                    "component_id": 50,
+                    "value": "../../sprites/png.png"
+                },
+                {
+                    "component_id": 2,
+                    "value": -1
+                },
+                {
+                    "component_id": 3,
+                    "value": { "x": 1450, "y": 950 }
+                },
+                {
+                    "component_id": 6,
+                    "value": { "x": 120, "y": 50 }
+                },
+                {
+                    "component_id": 12,
+                    "value": { "left": 0, "top": 0, "width": 1920, "height": 10}
+                },
+                {
+                    "component_id": 13,
+                    "value": { "x": 120, "y": 50, "start_x": 1450, "start_y": 950}
+                },
+                {
+                    "component_id": 82,
                     "value": true
                 }
             ]
