@@ -50,6 +50,7 @@ void S_SpawnPokemon::Execute(
                                 std::cout << " spawn " << std::endl;
                                 is_fighting->setValue(true);
                                 spawn_id.push_back(501);
+                                spawn_id.push_back(601);
                                 spawn_id.push_back(1001);
                                 spawn_clock->getValue().restart();
                             }

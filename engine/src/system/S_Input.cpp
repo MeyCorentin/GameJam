@@ -475,6 +475,7 @@ void S_Input::Execute(
             continue;
         if (&entity != &arg_entities.front())
             continue;
+        std::shared_ptr<C_IsFighting<bool>> is_fighting =  entity->template GetComponent<C_IsFighting<bool>>();
         while (arg_scene->window_->pollEvent(*arg_scene->event_)) {
             if (arg_scene->event_->type == sf::Event::Closed)
                 arg_scene->window_->close();
@@ -487,12 +488,21 @@ void S_Input::Execute(
                     std::shared_ptr<C_NextTimeline<std::string>> next_timeline =  my_entity->template GetComponent<C_NextTimeline<std::string>>();
                     if (is_clickable) {
                         if (is_clickable->getValue() == true) {
+                            std::shared_ptr<C_Position<std::pair<double, double>>> position_target = my_entity->template GetComponent<C_Position<std::pair<double, double>>>();
+                            std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = my_entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
                             if (next_timeline) {
-                                std::shared_ptr<C_Position<std::pair<double, double>>> position_target = my_entity->template GetComponent<C_Position<std::pair<double, double>>>();
-                                std::shared_ptr<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>> size = my_entity->template GetComponent<C_Size<std::pair<std::pair<int, int>, std::pair<int, int>>>>();
                                 if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
                                     arg_scene->need_switch_ = true;
                                     arg_scene->next_timeline_ = next_timeline->getValue();
+                                    is_fighting->getValue() = false;
+                                }
+                            }
+                            if ((position.x > position_target->getValue().first && position.x < position_target->getValue().first + size->getValue().first.first) && (position.y > position_target->getValue().second && position.y < position_target->getValue().second + size->getValue().first.second)) {
+                                is_fighting->getValue() = false;
+                                std::set<int> temp_entity = {601, 501, 1001};
+                                for (const std::shared_ptr<IEntity>& temp : arg_scene->entities_) {
+                                    if (temp_entity.find(temp->id_) != temp_entity.end())
+                                        temp->is_dead_ = true;
                                 }
                             }
                         }
@@ -504,5 +514,3 @@ void S_Input::Execute(
         player_movement_clock->getValue().restart();
     }
 }
-
-// 604361
