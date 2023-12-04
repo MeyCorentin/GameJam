@@ -97,7 +97,8 @@ void S_SpawnPokemon::Execute(
         if (entity_mob->GetBaseId() == 5)
         {
             std::shared_ptr<C_Experience<int>> xp = entity_mob->template GetComponent<C_Experience<int>>();
-            level = (xp->getValue() / 100);
+            if (xp)
+                level = (xp->getValue() / 100);
         }
         // std::cout << "test" << std::endl;
         // std::cout << entity_mob->GetId()<< std::endl;
